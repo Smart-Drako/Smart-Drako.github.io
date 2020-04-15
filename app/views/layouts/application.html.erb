@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Pideloencasa</title>
+    <title>Pidelo en Casa</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <%= yield %>
+    <%= insert_paloma_hook %>
   </body>
+  <script>
+    $(document).ready(function(){
+      Paloma.start();
+    });
+  </script>
 </html>
