@@ -47,6 +47,7 @@ gem 'paloma'
 # Gem for notifications
 gem 'exception_notification'
 #Generar QR
+gem "bulma-rails", "~> 0.8.0"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

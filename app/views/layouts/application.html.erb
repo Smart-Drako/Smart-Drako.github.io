@@ -1,15 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html class="has-navbar-fixed-top">
   <head>
     <title>Pidelo en Casa</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/df3792df37.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar is-white is-fixed-top is-spaced" style="border-bottom:3px solid #f5f5f5">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+          <img src="https://i.ibb.co/ZfKd1kW/logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="190" height="40">
+        </a>
+      </div>
+
+      <div id="navbarExampleTransparentExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item is-hidden" href="/registro">
+            Home
+          </a>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="field is-grouped">
+            <p class="control">
+              <span class="navbar-item">¿Deseas Recibir Pedidos?</span>
+            </p>
+              <p class="control">
+                <a class="button is-danger" href="/registro">
+                  <span>Regístrate Gratis</span>
+                  <span class="icon is-hidden">
+                    <i class="fas fa-rocket"></i>
+                  </span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container is-fluid" style="padding-top:30px;">
+        <%= yield %>
+    </div>
+    <footer class="footer footer-custom">
+      <div class="content has-text-centered">
+        <div class="columns">
+          <div class="column">
+            © 2020 Pídelo en Casa
+          </div>
+          <div class="column">
+            <img src="https://bulma.io/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
+          </div>
+        </div>
+      </div>
+    </footer>
     <%= insert_paloma_hook %>
   </body>
   <script>

@@ -1,0 +1,41 @@
+@import "bulma";
+
+@media screen and (min-width: 1024px) {
+  .navbar.is-spaced {
+    padding: 0rem 4rem !important;
+  }
+}
+
+.img-cat {
+  border-radius: 15px;
+  width: 128px !important;
+  height: 128px !important;
+}
+
+.footer-custom {
+  margin-top: 8rem;
+  border-top: 3px solid #f5f5f5;
+}
+
+.hover01 figure img {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+}
+
+.hover01 figure:hover img {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.hero-gradient {
+  background: #cc2b5e;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #753a88, #cc2b5e);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
