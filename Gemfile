@@ -46,8 +46,10 @@ gem 'figaro'
 gem 'paloma'
 # Gem for notifications
 gem 'exception_notification'
-#Generar QR
+#Bulma.io
 gem "bulma-rails", "~> 0.8.0"
+#Devise
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
