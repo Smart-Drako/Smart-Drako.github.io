@@ -1,26 +1,40 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<section class="hero is-light is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-tablet is-5-desktop is-4-widescreen">
+          <h1 class="title is-1">Login</h1>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'box', autocomplete: "off"} )  do |f| %>
+            <div class="field">
+              <label for="" class="label">Correo</label>
+              <div class="control has-icons-left">
+                <%= f.email_field :email, autofocus: true, required:"required", class:"input" %>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="" class="label">Contraseña</label>
+              <div class="control has-icons-left">
+                <%= f.password_field :password, autocomplete: "current-password", required:"required", class:"input" %>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field has-text-centered">
+              <button type="submit" class="button is-success">
+                Iniciar Sesión
+              </button>
+            </div>
+            <div class="field has-text-centered">
+              <a class="is-spaced" href="/registro">¿No tienes cuenta? Regístrate</a>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</section>
 
-<%= render "devise/shared/links" %>

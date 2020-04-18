@@ -14,7 +14,7 @@
   <body>
     <nav class="navbar is-white is-fixed-top is-spaced" style="border-bottom:3px solid #f5f5f5">
       <div class="navbar-brand">
-        <a class="navbar-item" href="https://bulma.io">
+        <a class="navbar-item" href="/">
           <img src="https://i.ibb.co/ZfKd1kW/logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="190" height="40">
         </a>
       </div>
@@ -29,25 +29,59 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="field is-grouped">
-            <p class="control">
-              <span class="navbar-item">¿Deseas Recibir Pedidos?</span>
-            </p>
-              <p class="control">
-                <a class="button is-danger" href="/registro">
-                  <span>Regístrate Gratis</span>
-                  <span class="icon is-hidden">
-                    <i class="fas fa-rocket"></i>
-                  </span>
-                </a>
-              </p>
+              <%if !user_signed_in? %>
+                <p class="control">
+                  <span class="navbar-item">¿Deseas Recibir Pedidos?</span>
+                </p>
+              <%end%>
+                <%if !user_signed_in? %>
+                  <p class="control">
+                    <a class="button is-danger" href="/registro">
+                      <span>Regístrate Gratis</span>
+                      <span class="icon is-hidden">
+                        <i class="fas fa-rocket"></i>
+                      </span>
+                    </a>
+                  </p>
+                  <p class="control">
+                    <a class="button is-info" href="/login">
+                      <span>Entrar</span>
+                      <span class="icon is-hidden">
+                        <i class="fas fa-rocket"></i>
+                      </span>
+                    </a>
+                  </p>
+                <%else%>
+                  <p class="control">
+                    <%= link_to destroy_user_session_path , :method => :delete, :class => "button is-danger" do %>
+                      <span>Cerrar Sesión</span>
+                    <% end %>
+                  </p>
+                <%end%>
             </div>
           </div>
         </div>
       </div>
     </nav>
     <div class="container is-fluid" style="padding-top:30px;">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+        <%if notice.present?%>
+          <div class="container is-hidden">
+            <div class="notification is-success alert">
+              <button class="delete"></button>
+              <%= notice %>
+            </div>
+            <br>
+          </div>
+        <%end%>
+        <%if alert.present?%>
+          <div class="container">
+            <div class="notification is-danger alert">
+              <button class="delete"></button>
+              <%= alert %>
+            </div>
+            <br>
+          </div>
+        <%end%>
         <%= yield %>
     </div>
     <footer class="footer footer-custom">
@@ -67,6 +101,10 @@
   <script>
     $(document).ready(function(){
       Paloma.start();
+      // Ocultar Alertas
+      $( ".delete" ).click(function() {
+        $(this).parent().parent().hide()
+      });
     });
   </script>
 </html>
