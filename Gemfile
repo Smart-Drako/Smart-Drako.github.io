@@ -46,8 +46,6 @@ gem 'figaro'
 gem 'paloma'
 # Gem for notifications
 gem 'exception_notification'
-#Bulma.io
-gem "bulma-rails", "~> 0.8.0"
 #Devise
 gem 'devise'
 
