@@ -22,8 +22,8 @@ class HomeController < ApplicationController
   def cuenta
     @config_user = ConfigUser.find_or_create_by(user_id: current_user.id)
     @categorias = Category.all.order("name")
-    @formas_pago = [["Efectivo", "Efectivo"] , ["Tarjetas", "Tarjetas"], ["Efectivo y Tarjetas", "Efectivo y Tarjetas"]]
-    @tipos_entrega = [["A domicilio", "A domicilio"] , ["Para recoger", "Para recoger"], ["A domicilio y recoger", "A domicilio y recoger"]]
+    @formas_pago = [["Efectivo", "1"] , ["Tarjetas", "2"], ["Efectivo y Tarjetas", "3"]]
+    @tipos_entrega = [["A domicilio", "1"] , ["Para recoger", "2"], ["A domicilio y recoger", "3"]]
     @facturacion = [["Si", "Si"] , ["No", "No"]]
   end
 end

@@ -21,7 +21,13 @@
             <p class="card-text mb-0"><%= neg.descripcion %></p>
           </div>
           <div class="card-footer text-right">
+            <% if neg.metodo_pago == "3"%>
             Tarjetas <i class="far fa-credit-card"></i> | Efectivo <i class="fas fa-money-bill-alt"></i>
+            <% elsif neg.metodo_pago == "2"%>
+            Tarjetas <i class="far fa-credit-card"></i>
+            <% else %>
+            Efectivo <i class="fas fa-money-bill-alt"></i>
+            <% end %>
           </div>
         </div>
       <%end%>
