@@ -10,7 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_175327) do
+ActiveRecord::Schema.define(version: 2020_04_23_052133) do
+
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "config_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "category_id"
+    t.string "nombre"
+    t.string "slogan"
+    t.string "descripcion"
+    t.string "direccion"
+    t.string "pagina"
+    t.string "facebook"
+    t.string "whatsapp"
+    t.string "telefono"
+    t.string "horario"
+    t.text "condiciones_higiene"
+    t.string "tipo_entrega"
+    t.string "costo_envio"
+    t.string "compra_minima"
+    t.string "metodo_pago"
+    t.string "factura"
+    t.string "logo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_config_users_on_category_id"
+    t.index ["user_id"], name: "index_config_users_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,4 +57,6 @@ ActiveRecord::Schema.define(version: 2020_04_15_175327) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "config_users", "categories"
+  add_foreign_key "config_users", "users"
 end

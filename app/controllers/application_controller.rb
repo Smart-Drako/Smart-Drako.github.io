@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
       user.permit(:nombre, :email, :password, :password_confirmation)
     end
   end
+
+  def after_sign_in_path_for(resource)
+    stored_location_for(resource) || me_path
+  end
 end

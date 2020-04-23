@@ -1,0 +1,103 @@
+<div class="container">
+
+  <div class="row mt-20 mb-20">
+    <h2>Configuración</h2>
+  </div>
+
+  <div class="row">
+    <div class="col mb-100">
+      <%= form_for @config_user, url: "/config_users/#{@config_user.id}", html: { id: "config_cliente_form", class:"" }, method: :put do |f| %>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">Nombre Comercial</label>
+          <%= f.text_field :nombre, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputEmail4">Categoría</label>
+          <%= f.select(:category_id, options_from_collection_for_select(@categorias, "id", "name", @config_user.category_id), {:include_blank => 'Seleccionar...'}, :class => 'form-control', ) %>
+        </div>
+        <div class="form-group col-md-5">
+          <label for="inputPassword4">Slogan</label>
+          <%= f.text_field :slogan, class:"form-control" %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-7">
+          <label for="inputAddress">Descripción</label>
+          <%= f.text_field :descripcion, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-5">
+          <label for="inputAddress2">Dirección</label>
+          <%= f.text_field :direccion, class:"form-control" %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="inputCity">Página web</label>
+          <%= f.text_field :pagina, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputState">Facebook <i class="fab fa-facebook"></i></label>
+          <%= f.text_field :facebook, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Whatsapp <i class="fab fa-whatsapp"></i></label>
+          <%= f.text_field :whatsapp, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Horario</label>
+          <%= f.text_field :horario, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Realiza Facturación</label>
+          <%= f.select(:factura, options_for_select(@facturacion,@config_user.factura), {:include_blank => 'Seleccionar...' }, :class => 'form-control') %>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-7">
+          <label for="inputZip">Condiciones de Higiene</label>
+          <%= f.text_area :condiciones_higiene, class:"form-control" %>
+        </div>
+        <div class="col-md-5">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputZip">Tipo de entrega</label>
+              <%= f.select(:tipo_entrega, options_for_select(@tipos_entrega,@config_user.tipo_entrega), {:include_blank => 'Seleccionar...' }, :class => 'form-control') %>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputZip">Costo de envío</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">$</span>
+                </div>
+                <%= f.text_field :costo_envio, class:"form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputZip">Compra mínima</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">$</span>
+                </div>
+                <%= f.text_field :compra_minima, class:"form-control" %>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputZip">Forma de pago</label>
+              <%= f.select(:metodo_pago, options_for_select(@formas_pago,@config_user.metodo_pago), {:include_blank => 'Seleccionar...' }, :class => 'form-control') %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center form-group">
+        <button class="btn btn-success btn-lg" type="submit">Actualizar</button>
+      </div>
+      <%end%>
+    </div>
+  </div>
+
+</div>
