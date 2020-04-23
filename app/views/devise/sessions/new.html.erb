@@ -1,40 +1,28 @@
-<section class="hero is-light is-bold">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-5-tablet is-5-desktop is-4-widescreen">
-          <h1 class="title is-1">Login</h1>
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'box', autocomplete: "off"} )  do |f| %>
-            <div class="field">
-              <label for="" class="label">Correo</label>
-              <div class="control has-icons-left">
-                <%= f.email_field :email, autofocus: true, required:"required", class:"input" %>
-                <span class="icon is-small is-left">
-                  <i class="fa fa-envelope"></i>
-                </span>
-              </div>
-            </div>
-            <div class="field">
-              <label for="" class="label">Contraseña</label>
-              <div class="control has-icons-left">
-                <%= f.password_field :password, autocomplete: "current-password", required:"required", class:"input" %>
-                <span class="icon is-small is-left">
-                  <i class="fa fa-lock"></i>
-                </span>
-              </div>
-            </div>
-            <div class="field has-text-centered">
-              <button type="submit" class="button is-success">
-                Iniciar Sesión
-              </button>
-            </div>
-            <div class="field has-text-centered">
-              <a class="is-spaced" href="/registro">¿No tienes cuenta? Regístrate</a>
-            </div>
-          <% end %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-signin', autocomplete: "off"} )  do |f| %>
+  <h1 class="h3 mb-3 font-weight-normal">Inicio de Sesión</h1>
+  <div class="form-group">
+    <label for="user_email">Correo</label>
+    <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-user"></i></div>
         </div>
-      </div>
+        <%= f.email_field :email, autofocus: true, required:"required", class:"form-control" %>
+    </div>
+  <div>
+  <div class="form-group">
+    <label for="user_password">Contraseña</label>
+    <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-envelope"></i></div>
+        </div>
+        <%= f.password_field :password, autocomplete: "current-password", required:"required", class:"form-control" %>
     </div>
   </div>
-</section>
+  <div class="text-center form-group">
+    <button class="btn btn-success" type="submit">Iniciar sesión</button>
+  </div>
+  <div class="text-center form-group">
+    <a data-turbolink="false" href="/registro">¿No tienes cuenta? Regístrate</a>
+  </div>
+<% end %>
 
