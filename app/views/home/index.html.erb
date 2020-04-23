@@ -1,93 +1,48 @@
-<div class="container">
-  <div class="columns">
-    <div class="column">
-      <h1 class="title is-1 is-spaced">Realiza tus pedidos a diferentes proveedores locales</h1>
-      <h2 class="subtitle is-32">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid molestias quam tempore aliquam doloribus, beatae aperiam, distinctio porro obcaecati cum facilis perspiciatis rerum unde sint dolorum, delectus et nostrum alias?</h2>
-    </div>
-  </div>
-</div>
 
+<nav class="navbar navbar-expand sticky-top" id="cat-nav">
+  <ul class="navbar-nav scrollable-content d-flex h-100">
+    <% @categorias.each do |key, value|%>
+      <li class="nav-item ilb">
+        <a data-turbolinks="false" class="nav-link" href="#<%= key %>"><%= value %></a>
+      </li>
+    <%end%>
+  </ul>
+</nav>
 
-
-  <div class="container has-background-light" style="margin-top: 80px;">
-    <div class="columns is-mobile">
-      
-      
-
-      <div class="column has-text-centered">
-        <a href="#" class="hover01">
-          <figure class="image is-128x128 is-inline-block">
-            <img class="img-cat" src="https://i.ibb.co/Bcjm7Yp/aba.png">
-          </figure>
-          <p class="subtitle is-5">Abarrotes</p>
-        </a>
+<% @categorias.each do |key, value|%>
+  <div class="container cont-cat" id="<%= key %>">
+    <h2><%= value %></h2>
+    <div class="card-columns">
+      <div class="card">
+        <img class="card-img-top" src="https://picsum.photos/250/100" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title mb-0">Steak&Cheese ( Anáhuac)</h5>
+          <p class="card-text mb-0">Descripción corta...</p>
+        </div>
+        <div class="card-footer text-right">
+          Tarjetas <i class="far fa-credit-card"></i> | Efectivo <i class="fas fa-money-bill-alt"></i>
+        </div>
       </div>
-      <div class="column has-text-centered">
-        <a href="#" class="hover01">
-          <figure class="image is-128x128 is-inline-block">
-            <img class="img-cat" src="https://i.ibb.co/c39SQzx/Screen-Shot-2020-04-14-at-23-01-00.png">
-          </figure>
-          <p class="subtitle is-5">Repostería</p>
-        </a>
+      <div class="card">
+        <img class="card-img-top" src="https://picsum.photos/250/101" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title mb-0">Asadero 3 Villas</h5>
+          <p class="card-text mb-0 ">Descripción corta...</p>
+        </div>
+        <div class="card-footer text-right">
+          Efectivo <i class="fas fa-money-bill-alt"></i>
+        </div>
       </div>
-      <div class="column has-text-centered">
-        <a href="#" class="hover01">
-          <figure class="image is-128x128 is-inline-block">
-            <img class="img-cat" src="https://i.ibb.co/68mwQRm/ferrete.png">
-          </figure>
-          <p class="subtitle is-5">Ferretería</p>
-        </a>
-      </div>
-      <div class="column has-text-centered">
-        <a href="#" class="hover01">
-          <figure class="image is-128x128 is-inline-block">
-            <img class="img-cat" src="https://i.ibb.co/XX59DHC/estetica.png">
-          </figure>
-          <p class="subtitle is-5">Estéticas</p>
-        </a>
-      </div>
-      <div class="column has-text-centered">
-        <a href="#" class="hover01">
-          <figure class="image is-128x128 is-inline-block">
-            <img class="img-cat" src="https://i.ibb.co/ZNyMRkq/botanas.png">
-          </figure>
-          <p class="subtitle is-5">Snacks</p>
-        </a>
-      </div>
-    </div>
-        <div class="columns is-mobile">
-      <div class="column has-text-centered">
-        <a href="#" class="hover01">
-          <figure class="image is-128x128 is-inline-block">
-            <img class="img-cat" src="https://i.ibb.co/n3ByCw9/farm.png">
-          </figure>
-          <p class="subtitle is-5">Farmacia</p>
-        </a>
-      </div>
-      <div class="column has-text-centered">
-        <a href="#" class="hover01">
-          <figure class="image is-128x128 is-inline-block">
-            <img class="img-cat" src="https://placeimg.com/150/150">
-          </figure>
-          <p class="subtitle is-5">Otra Cat</p>
-        </a>
-      </div>
-      <div class="column has-text-centered">
-        <a href="#" class="hover01">
-          <figure class="image is-128x128 is-inline-block">
-            <img class="img-cat" src="https://placeimg.com/160/160">
-          </figure>
-          <p class="subtitle is-5">Otra</p>
-        </a>
-      </div>
-      <div class="column has-text-centered">
-        <a href="#" class="hover01">
-          <figure class="image is-128x128 is-inline-block">
-            <img class="img-cat" src="https://placeimg.com/140/140">
-          </figure>
-          <p class="subtitle is-5">Otra Cat</p>
-        </a>
+      <div class="card">
+        <img class="card-img-top" src="https://picsum.photos/250/99" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title mb-0">Happy Salads</h5>
+          <p class="card-text mb-0">Descripción corta...</p>
+        </div>
+        <div class="card-footer text-right">
+          Tarjetas <i class="far fa-credit-card"></i> | Efectivo <i class="fas fa-money-bill-alt"></i>
+        </div>
       </div>
     </div>
   </div>
-
+<%end%>

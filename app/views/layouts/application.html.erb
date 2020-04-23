@@ -1,101 +1,98 @@
 <!DOCTYPE html>
-<html class="has-navbar-fixed-top">
+<html lang="es">
   <head>
     <title>Pidelo en Casa</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/df3792df37.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <nav class="navbar is-white is-fixed-top is-spaced" style="border-bottom:3px solid #f5f5f5">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <img src="https://i.ibb.co/ZfKd1kW/logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="190" height="40">
-        </a>
-      </div>
-
-      <div id="navbarExampleTransparentExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item is-hidden" href="/registro">
-            Home
-          </a>
-        </div>
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="field is-grouped">
-              <%if !user_signed_in? %>
-                <p class="control">
-                  <span class="navbar-item">¿Deseas Recibir Pedidos?</span>
-                </p>
-              <%end%>
-                <%if !user_signed_in? %>
-                  <p class="control">
-                    <a class="button is-danger" href="/registro">
-                      <span>Regístrate Gratis</span>
-                      <span class="icon is-hidden">
-                        <i class="fas fa-rocket"></i>
-                      </span>
-                    </a>
-                  </p>
-                  <p class="control">
-                    <a class="button is-info" href="/login">
-                      <span>Entrar</span>
-                      <span class="icon is-hidden">
-                        <i class="fas fa-rocket"></i>
-                      </span>
-                    </a>
-                  </p>
-                <%else%>
-                  <p class="control">
-                    <%= link_to destroy_user_session_path , :method => :delete, :class => "button is-danger" do %>
-                      <span>Cerrar Sesión</span>
-                    <% end %>
-                  </p>
-                <%end%>
-            </div>
-          </div>
-        </div>
+  <body data-spy="scroll" data-target=".navbar" data-offset="80">
+    <nav class="navbar navbar-light bg-light minav">
+      <a data-turbolinks="false" class="navbar-brand" href="/">
+        <img src="https://getbootstrap.com/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+        Pidelo en Casa
+      </a>
+      <div class="form-inline">
+        <a data-turbolinks="false" class="btn btn-outline-dark my-2 my-sm-0" href="/login">Iniciar sesión</a>
+        <button data-toggle="offcanvas" title="Ver Pedido" type="button" class="btn btn-dark my-2 my-sm-0 ml-10 d-none d-md-block">
+          <i class="fas fa-shopping-cart"></i> <span class="badge badge-success" id="total-items-btn">1</span>
+        </button>
       </div>
     </nav>
-    <div class="container is-fluid" style="padding-top:30px;">
-        <%if notice.present?%>
-          <div class="container is-hidden">
-            <div class="notification is-success alert">
-              <button class="delete"></button>
-              <%= notice %>
+
+    <button id="btn-cart_float" data-toggle="offcanvas" title="Ver Pedido" type="button" class="btn btn-dark my-2 my-sm-0 ml-10 d-none">
+          <i class="fas fa-shopping-cart"></i> <span class="badge badge-success" id="total-items-btn">1</span>
+    </button>
+
+
+     <div class="cart-sidebar">
+      <div class="cart-sidebar-header">
+         <h5>
+            Mi Pedido <span class="text-success">(1)</span> <a data-turbolinks="false" data-toggle="offcanvas" class="float-right" href="#"><i class="fas fa-times"></i>
+            </a>
+         </h5>
+      </div>
+      <div class="cart-sidebar-body">
+         <div class="cart-list-product">
+            <span class="float-right">$125.00</span>
+            <h5><a>Galon de leche</a></h5>
+            <h6 class="mb-0 d-inline-block">$62.50</h6>
+            <div class="float-right">
+              <a  class="btn btn-sm btn-outline-secondary btn-circle btn-circle-sm"><i class="fas fa-minus"></i></a>  <a  class="btn btn-sm btn-outline-secondary btn-circle btn-circle-sm"><i class="fas fa-plus"></i></a>
             </div>
-            <br>
+         </div>
+
+
+      </div>
+      <div class="cart-sidebar-footer">
+         <div class="cart-store-details">
+            <p>Total <strong class="float-right">$245.00</strong></p>
+            <!-- <strong>Delivery Charges <strong class="float-right text-danger">+ $29.69</strong></p>
+            <h6>Your total savings <strong class="float-right text-danger">$55 (42.31%)</strong></h6> -->
+         </div>
+         <a href="#"><button class="btn btn-success btn-block text-left" type="button"><span
+                  class="float-left"><i class="fas fa-shopping-cart"></i> Procesar Pedido </span><span
+                  class="float-right"><strong>$245.00</strong> <i class="fas fa-chevron-right"></i></span></button></a>
+      </div>
+   </div>
+
+    <div class="navbar navbar-light fixed-bottom bg-dark d-block d-md-none carbar">
+      <a href="#" data-turbolinks="false" data-toggle="offcanvas">
+        <div class="container d-flex h-100">
+          <div class="col-3 justify-content-center align-self-center c-white">
+            <span id="total-items-bar" class="btn btn-sm btn-success btn-circle btn-circle-sm">1</span>
           </div>
-        <%end%>
-        <%if alert.present?%>
-          <div class="container">
-            <div class="notification is-danger alert">
-              <button class="delete"></button>
-              <%= alert %>
-            </div>
-            <br>
+          <div class="col-6 justify-content-center align-self-center c-white">
+            <span>Ver pedido</span>
           </div>
-        <%end%>
-        <%= yield %>
-    </div>
-    <footer class="footer footer-custom">
-      <div class="content has-text-centered">
-        <div class="columns">
-          <div class="column">
-            © 2020 Pídelo en Casa
-          </div>
-          <div class="column">
-            <img src="https://bulma.io/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
+          <div class="col-3 justify-content-center align-self-center c-white">
+            <span id="total-pagar-bar">$245.00</span>
           </div>
         </div>
-      </div>
+      </a>
+    </div>
+    <%= yield %>
+
+    <footer class="page-footer d-none d-md-block">
+      <p>Pidelo en Casa &copy; 2020 </p>
+      <p>
+        <a data-turbolinks="false" href="#">Ir arriba</a>
+      </p>
     </footer>
+    
     <%= insert_paloma_hook %>
   </body>
   <script>
@@ -105,6 +102,59 @@
       $( ".delete" ).click(function() {
         $(this).parent().parent().hide()
       });
+
+      $('[data-toggle="offcanvas"]').on('click', function () {
+        $('body').toggleClass('toggled');
+        $('.carbar').toggleClass('d-none');
+        $('.carbar').toggleClass('d-block');
+      });
+
+      $(window).on("activate.bs.scrollspy", function () {
+        var x = $("#cat-nav > ul > li > a.active");
+        $('#cat-nav').scrollTo(x,100);
+      });
+
+      $(window).unbind('scroll').on("scroll", function () {
+        sticky($("#cat-nav"));
+      });
+
+      function sticky(obj) {
+
+        bar = obj.offset().top
+        if ($(window).scrollTop() >=72 ) {
+          if (obj.hasClass("sticky-custom") == false) {
+            obj.addClass("sticky-custom");
+            $(window).scrollTop(73)
+            $("#btn-cart_float").addClass("d-md-block");
+          }
+        } else {
+          
+          if (obj.hasClass("sticky-custom")) {
+            obj.removeClass("sticky-custom");
+            $("#btn-cart_float").removeClass("d-md-block");
+          }
+        }
+      }
+
+      $("#cat-nav ul li a[href^='#']").on('click', function(e) {
+
+       // prevent default anchor click behavior
+       console.log("Asasd");
+       e.preventDefault();
+
+       // animate
+       $('html, body').animate({
+           scrollTop: $(this.hash).offset().top-30
+         }, 300, function(){
+   
+           // when done, add hash to url
+           // (default click behaviour)
+          //  window.location.hash = this.hash;
+         });
+
+    });
+      
+
     });
   </script>
 </html>
