@@ -31,6 +31,20 @@
           </div>
         </div>
       <%end%>
+      <% if cat[:negocios].count < 3 %>
+        <% (3-cat[:negocios].count).times do %>
+          <div class="card d-none d-md-inline-block">
+            <img class="card-img-top img-cover" src="https://image.freepik.com/vector-gratis/ilustracion-concepto-vacio_114360-1188.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title mb-0">Proximamente...</h5>
+              <p class="card-text mb-0">Se iran agregando mas negocios a la lista</p>
+            </div>
+            <div class="card-footer text-right">
+              Tarjetas <i class="far fa-credit-card"></i> | Efectivo <i class="fas fa-money-bill-alt"></i>
+            </div>
+          </div>
+        <% end %>
+      <%end%>
     </div>
   </div>
 <%end%>
