@@ -1,48 +1,30 @@
 
 <nav class="navbar navbar-expand sticky-top" id="cat-nav">
   <ul class="navbar-nav scrollable-content d-flex h-100">
-    <% @categorias.each do |key, value|%>
+    <% @categorias.each do |cat|%>
       <li class="nav-item ilb">
-        <a data-turbolinks="false" class="nav-link" href="#<%= key %>"><%= value %></a>
+        <a data-turbolinks="false" class="nav-link" href="#cat_<%= cat.id %>"><%= cat.name %></a>
       </li>
     <%end%>
   </ul>
 </nav>
 
-<% @categorias.each do |key, value|%>
-  <div class="container cont-cat" id="<%= key %>">
-    <h2><%= value %></h2>
+<% @negocios.each do |cat|%>
+  <div class="container cont-cat" id="cat_<%= cat[:id] %>">
+    <h2><%= cat[:nombre] %></h2>
     <div class="card-columns">
-      <div class="card">
-        <img class="card-img-top" src="https://picsum.photos/250/100" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title mb-0">Steak&Cheese ( Anáhuac)</h5>
-          <p class="card-text mb-0">Descripción corta...</p>
+      <% cat[:negocios].each do |neg| %> 
+        <div class="card">
+          <img class="card-img-top img-cover" src="<%= neg.logo %>" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title mb-0"><%= neg.nombre %></h5>
+            <p class="card-text mb-0"><%= neg.descripcion %></p>
+          </div>
+          <div class="card-footer text-right">
+            Tarjetas <i class="far fa-credit-card"></i> | Efectivo <i class="fas fa-money-bill-alt"></i>
+          </div>
         </div>
-        <div class="card-footer text-right">
-          Tarjetas <i class="far fa-credit-card"></i> | Efectivo <i class="fas fa-money-bill-alt"></i>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="https://picsum.photos/250/101" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title mb-0">Asadero 3 Villas</h5>
-          <p class="card-text mb-0 ">Descripción corta...</p>
-        </div>
-        <div class="card-footer text-right">
-          Efectivo <i class="fas fa-money-bill-alt"></i>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="https://picsum.photos/250/99" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title mb-0">Happy Salads</h5>
-          <p class="card-text mb-0">Descripción corta...</p>
-        </div>
-        <div class="card-footer text-right">
-          Tarjetas <i class="far fa-credit-card"></i> | Efectivo <i class="fas fa-money-bill-alt"></i>
-        </div>
-      </div>
+      <%end%>
     </div>
   </div>
 <%end%>

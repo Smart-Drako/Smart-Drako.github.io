@@ -3,16 +3,20 @@ class HomeController < ApplicationController
   before_action :authenticate_user!, :except => [:index]
 
   def index
-    @categorias = {
-      "cat-1" => "Asadero",
-      "cat-2" => "Barbería",
-      "cat-3" => "Abarrotes",
-      "cat-4" => "Pizzas",
-      "cat-5" => "Sushi",
-      "cat-6" => "Ferretería",
-      "cat-7" => "Postres",
-      "cat-8" => "Botanas",
-    }
+    @negocios = Array.new
+    cats = ConfigUser.distinct.pluck(:category_id)
+    @categorias = Category.where(id: cats)
+    
+    @categorias.each do |cat|
+      lista = Hash.new
+      negocios = ConfigUser.where(category_id: cat.id)
+      item = {
+        id: cat.id,
+        nombre: cat.name,
+        negocios: negocios
+      }
+      @negocios.push(item)
+    end
   end
 
   def cuenta
