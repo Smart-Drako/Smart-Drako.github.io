@@ -1,0 +1,48 @@
+
+<div class="container">
+  <div class="row">
+    <h2>Productos
+      <%= link_to(new_producto_path, :class => 'btn btn-sm btn-success', title:"Nuevo Producto") do %>
+              <i class="fas fa-plus"></i>
+      <% end %>
+    </h2>
+    <table class="table table-sm table-hover table-bordered" style="width:100% !important;">
+      <thead>
+        <tr>
+          <th>Codigo</th>
+          <th>Nombre</th>
+          <th>Categoria</th>
+          <th>Unidad</th>
+          <th>Precio</th>
+          <th>Impuesto</th>
+          <th>Inventario</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @productos.each do |producto| %>
+          <tr>
+            <td><%= producto.codigo %></td>
+            <td><%= producto.descripcion %></td>
+            <td><%= producto.categoria %></td>
+            <td><%= producto.unidad %></td>
+            <td><%= producto.precio %></td>
+            <td><%= producto.impuesto %></td>
+            <td><%= producto.inventario %></td>
+            <td>
+              <%= link_to(edit_producto_path(producto), :class => 'btn btn-sm btn-warning') do %>
+                <i class="fas fa-edit"></i> Editar
+              <% end %>
+            </td>
+            <td>
+              <%= link_to(producto, class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: 'Seguro de Eliminar?' }) do %>
+                <i class="fas fa-trash"></i> Eliminar
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

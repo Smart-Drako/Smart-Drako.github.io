@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row mt-20 mb-20">
+    <h2>Editar Producto</h2>
+  </div>
+  <%= render 'form', producto: @producto %>
+  <div class="row">
+    <div class="col-12 text-center">
+      <%= link_to 'Cancelar', productos_path, class:"btn btn-sm btn-secondary" %>
+    </div>
+  </div>
+</div>

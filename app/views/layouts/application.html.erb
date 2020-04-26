@@ -17,13 +17,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <!-- Owl carousel-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
   </head>
 
   <body data-spy="scroll" data-target=".navbar" data-offset="80">
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light navbar-primary">
   <a data-turbolinks="false" class="navbar-brand" href="/">
-        <img src="https://i.ibb.co/7SkTLB0/logo-fina.png width="122" height="50" class="d-inline-block align-top" alt="">
+        <img src="https://i.ibb.co/7SkTLB0/logo-fina.png" width="122" height="50" class="d-inline-block align-top" alt="">
   </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
@@ -47,11 +54,12 @@
         <i class="fas fa-sign-out-alt"></i></a>
       <% end %>
     <%else%>
-      <a data-turbolinks="false" class="btn btn-outline-dark my-2 my-sm-0" href="/login">Iniciar sesión</a>
+      <a data-turbolinks="false" class="btn btn-pink my-2 my-sm-0 d-none d-md-block" href="/registro">VENDE DESDE CASA</a>
+      <a data-turbolinks="false" class="btn btn-outline-pink my-2 my-sm-0 ml-10" href="/login">INICIA SESIÓN</a>
     <%end%>
     
-    <button data-toggle="offcanvas" title="Ver Pedido" type="button" class="btn btn-dark my-2 my-sm-0 ml-10 d-none d-md-block">
-      <i class="fas fa-shopping-cart"></i> <span class="badge badge-success" id="total-items-btn">1</span>
+    <button data-toggle="offcanvas" title="Ver Pedido" type="button" class="btn btn-cart box-shadow-btn my-2 my-sm-0 ml-10 d-none d-md-block">
+      <i class="fas fa-lg fa-shopping-cart"></i> <span class="badge badge-success d-none" id="total-items-btn">1</span>
     </button>
   </div>
   <%if user_signed_in?%>
@@ -63,8 +71,8 @@
 </nav>
 
 
-    <button id="btn-cart_float" data-toggle="offcanvas" title="Ver Pedido" type="button" class="btn btn-dark my-2 my-sm-0 ml-10 d-none">
-          <i class="fas fa-shopping-cart"></i> <span class="badge badge-success" id="total-items-btn">1</span>
+    <button id="btn-cart_float" data-toggle="offcanvas" title="Ver Pedido" type="button" class="btn btn-cart box-shadow-btn my-2 my-sm-0 ml-10 d-none">
+          <i class="fas fa-shopping-cart"></i> <span class="badge badge-success d-none" id="total-items-btn">1</span>
     </button>
 
 
@@ -114,7 +122,9 @@
         </div>
       </a>
     </div>
-    <%= yield %>
+    <div class="container cont-principal">
+      <%= yield %>
+    </div>
 
     <!-- <footer class="page-footer d-none d-md-block"> -->
     <footer class="page-footer">
@@ -153,10 +163,10 @@
       function sticky(obj) {
 
         bar = obj.offset().top
-        if ($(window).scrollTop() >=72 ) {
+        if ($(window).scrollTop() >=bar ) {
           if (obj.hasClass("sticky-custom") == false) {
             obj.addClass("sticky-custom");
-            $(window).scrollTop(73)
+            $(window).scrollTop(bar+1)
             $("#btn-cart_float").addClass("d-md-block");
           }
         } else {
@@ -175,17 +185,38 @@
        e.preventDefault();
 
        // animate
-       $('html, body').animate({
-           scrollTop: $(this.hash).offset().top-30
+      $('html, body').animate({
+        scrollTop: $(this.hash).offset().top-30
          }, 300, function(){
    
            // when done, add hash to url
            // (default click behaviour)
           //  window.location.hash = this.hash;
-         });
+         });  
+      });
 
-    });
-      
+
+      $('.owl-carousel').owlCarousel({
+    margin:20,
+    // smartSpeed: 100 ,
+    responsive:{
+        0:{
+            items:1,
+            margin:10,
+            stagePadding: 20,
+            dots: true
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:3,
+            margin:30,
+            dots: false,
+            stagePadding: 50,
+        }
+    }
+})
 
     });
   </script>
