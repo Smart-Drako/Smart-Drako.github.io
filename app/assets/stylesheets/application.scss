@@ -44,11 +44,9 @@
 .carbar {
   font-size: 2.2vh;
   color: white;
-  height: 7vh;
-  width: 94vw;
-  left: 3vw;
-  bottom: 1vh;
-  border-radius: 8px;
+  height: 8vh;
+  width: 100vw;
+  bottom: 0vh;
 }
 
 .c-white {
@@ -404,9 +402,15 @@ body {
 }
 
 .btn-pink {
-  background-color: #EF2275;
+  background-color: #EF2275 !important;
   color: #FFFFFF;
 }
+
+.btn-aqua {
+  background-color: #1AD4D8 !important;
+  color: #FFFFFF;
+}
+
 
 .btn-pink:hover {
   background-color: #d72477;
