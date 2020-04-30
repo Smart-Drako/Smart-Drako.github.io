@@ -1,0 +1,68 @@
+<!-- Navbar Principal -->
+<nav class="navbar navbar-expand-lg navbar-light navbar-primary">
+  <a data-turbolinks="false" class="navbar-brand" href="/">
+    <img src="https://i.ibb.co/7SkTLB0/logo-fina.png" width="122" height="50" class="d-inline-block align-top" alt="">
+  </a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <%if user_signed_in?%>
+      <li class="nav-item active">
+        <a class="nav-link" href="/me">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/pedidos">Mis Pedidos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/productos">Productos</a>
+      </li>
+      <%end%>
+    </ul>
+  </div>
+  <div class="form-inline">
+    <%if user_signed_in?%>
+    <a data-turbolinks="false" title="Mi Cuenta" class="btn btn-outline-success my-2 my-sm-0" href="/me"><i
+        class="fas fa-user"></i></a>
+    <%= link_to destroy_user_session_path , :method => :delete, :class => "btn btn-outline-danger my-2 my-sm-0 ml-10" do %>
+    <i class="fas fa-sign-out-alt"></i></a>
+    <% end %>
+    <%else%>
+    <a data-turbolinks="false" class="btn btn-pink my-2 my-sm-0 d-none d-md-block" href="/registro">REGÍSTRATE Y
+      VENDE</a>
+    <a data-turbolinks="false" id="btn_login" class="btn btn-outline-pink my-2 my-sm-0 ml-10" href="/login">INICIA
+      SESIÓN</a>
+    <%end%>
+
+    <button data-toggle="offcanvas" title="Ver Pedido" type="button"
+      class="btn btn-cart box-shadow-btn my-2 my-sm-0 ml-10 d-none d-md-block">
+      <i class="fas fa-lg fa-shopping-cart"></i> <span class="badge btn-pink total-items">0</span>
+    </button>
+  </div>
+  <%if user_signed_in?%>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <%end%>
+</nav>
+
+<!-- Navbar Movil -->
+<div class="navbar navbar-light fixed-bottom bg-dark d-block d-md-none carbar btn-aqua">
+  <a href="#" data-turbolinks="false" data-toggle="offcanvas">
+    <div class="container d-flex h-100">
+      <div class="col-3 justify-content-center align-self-center c-white">
+        <span class="btn btn-sm btn-pink btn-circle btn-circle-sm total-items">0</span>
+      </div>
+      <div class="col-6 justify-content-center align-self-center c-white">
+        <span>Ver pedido</span>
+      </div>
+      <div class="col-3 justify-content-center align-self-center c-white">
+        <span class="total-pedido"></span>
+      </div>
+    </div>
+  </a>
+</div>
+
+<!-- Carrito Flotante -->
+<button id="btn-cart_float" data-toggle="offcanvas" title="Ver Pedido" type="button" class="btn btn-cart box-shadow-btn my-2 my-sm-0 ml-10 d-none">
+  <i class="fas fa-shopping-cart"></i> <span class="badge btn-pink total-items">0</span>
+</button>

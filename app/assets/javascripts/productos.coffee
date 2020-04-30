@@ -3,7 +3,11 @@ Paloma.controller 'Productos', tienda: ->
   cargar_productos()
   eventos()
 
-@cargar_productos = ->
+Paloma.controller 'Home', index: ->
+  cargar_productos()
+  eventos()
+
+cargar_productos = ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
   total_pedido = localStorage.getItem("total_pedido") || "0"
 
@@ -11,9 +15,14 @@ Paloma.controller 'Productos', tienda: ->
   $(".total-items").text(productos.length)
   $(".total-pedido").text(number_to_currency(total_pedido))
   handlebars_productos()
+  if productos.length == 0
+    $(".carbar").css('visibility', 'hidden');
+  else
+    $(".carbar").css('visibility', 'visible');
 
 
 eventos = ->
+  #Productos y carrito
   $('.btn-cart-item').unbind("click").click ->
     agregar_producto($(this))
     
@@ -21,6 +30,41 @@ eventos = ->
     localStorage.removeItem("total_pedido")
     localStorage.removeItem("productos")
     cargar_productos()
+  
+  #Scroolspy y Side cart
+  $('[data-toggle="offcanvas"]').on 'click', ->
+    $('body').toggleClass 'toggled'
+    $('.carbar').toggleClass 'd-none'
+    $('.carbar').toggleClass 'd-block'
+    return
+  #Scroll sticky
+  $(window).unbind('scroll').on 'scroll', ->
+    sticky $('#cat-nav')
+    return
+  #Scroll al hacer clic en item navbar
+  $('#cat-nav ul li a[href^=\'#\']').on 'click', (e) ->
+    e.preventDefault()
+    $('html, body').animate scrollTop: $(@hash).offset().top - 30
+    return
+  $(window).on 'activate.bs.scrollspy', ->
+    x = $('#cat-nav > ul > li > a.active')
+    $('#cat-nav').scrollTo x, 100
+    return
+  # Owl carousel
+  $('.owl-carousel').owlCarousel
+    margin: 20
+    responsive:
+      0:
+        items: 1
+        margin: 10
+        stagePadding: 20
+        dots: true
+      600: items: 3
+      1000:
+        items: 3
+        margin: 30
+        dots: true
+        stagePadding: 50
   
 handlebars_productos = ->
     productos = JSON.parse(localStorage.getItem("productos") || "[]")
@@ -57,9 +101,9 @@ agregar_producto = (producto) ->
   localStorage.setItem("productos", JSON.stringify(productos))
   cargar_productos()
 
-  #Utilidades
 
-@number_to_currency = (number, options) ->
+#Utilidades
+number_to_currency = (number, options) ->
   `var options`
   try
     options = options or {}
@@ -84,4 +128,17 @@ number_with_delimiter = (number, delimiter, separator) ->
     return parts.join(separator)
   catch e
     return number
+  return
+
+sticky = (obj) ->
+  bar = obj.offset().top
+  if $(window).scrollTop() >= bar
+    if obj.hasClass('sticky-custom') == false
+      obj.addClass 'sticky-custom'
+      $(window).scrollTop bar + 1
+      $('#btn-cart_float').addClass 'd-md-block'
+  else
+    if obj.hasClass('sticky-custom')
+      obj.removeClass 'sticky-custom'
+      $('#btn-cart_float').removeClass 'd-md-block'
   return
