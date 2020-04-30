@@ -1,0 +1,44 @@
+<div class="hero-image col-12"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<%=@negocio.logo%>');">
+  <div class="hero-text">
+    <h2><%=@negocio.nombre%></h2>
+    <p><%=@negocio.descripcion%></p>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand sticky-top" id="cat-nav">
+  <ul class="navbar-nav scrollable-content d-flex h-100">
+    <% @categorias.each_with_index do |cat,i|%>
+      <li class="nav-item ilb">
+        <a data-turbolinks="false" class="<%=i == 0 ? 'nav-link active' : 'nav-link' %>" href="#cat_<%= cat %>"><%= cat.upcase %></a>
+      </li>
+    <%end%>
+  </ul>
+</nav>
+
+<% @prods.each do |cat|%>
+  <div class="container cont-cat" id="cat_<%=cat[:id]%>">
+    <h2><%= cat[:nombre].capitalize%></h2>
+    <table class="table table-sm table-responsive" style="width:100%;">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Unidad</th>
+          <th>Precio</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% cat[:productos].each do |prod|%>
+          <tr>
+            <td><%=prod.descripcion%></td>
+            <td><%=prod.unidad%></td>
+            <td><%=number_to_currency(prod.precio)%></td>
+            <td><button type="button" data-id="<%=prod.id%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>" class="btn btn-sm btn-aqua btn-cart-item"><i class="fas fa-cart-plus"></i></button></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+<%end%>
+

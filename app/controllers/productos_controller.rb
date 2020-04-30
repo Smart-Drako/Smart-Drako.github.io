@@ -1,6 +1,6 @@
 class ProductosController < ApplicationController
   before_action :set_producto, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:tienda]
 
   # GET /productos
   # GET /productos.json
@@ -20,6 +20,31 @@ class ProductosController < ApplicationController
 
   # GET /productos/1/edit
   def edit
+  end
+
+  def tienda
+    id = params[:id].to_i
+    @prods = Array.new
+    
+    if params[:buscar].present?
+      descr = Producto.arel_table[:descripcion]
+      query = params[:buscar]
+      @productos = Producto.where(descr.matches("%#{query}%"))
+    else
+      @productos = Producto.where(user_id: id)
+    end
+    @negocio = ConfigUser.find(id)
+    @categorias = @productos.pluck(:categoria).uniq.compact
+    
+    @categorias.each_with_index do |cat, index|
+      productos = @productos.where(user_id: id, categoria: cat)
+      item = {
+        id: cat,
+        nombre: cat,
+        productos: productos
+      }
+      @prods.push(item)
+    end
   end
 
   # POST /productos

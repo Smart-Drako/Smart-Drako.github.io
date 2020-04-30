@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     get "/registro" => "devise/registrations#new" # custom path to sign_up/registration
   end
   get "/me", to: "home#cuenta"
+  get "socios/:id", to: "productos#tienda"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

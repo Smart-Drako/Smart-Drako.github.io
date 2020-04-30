@@ -1,0 +1,13 @@
+<script id="handlebars_carrito_item" type="text/x-handlebars-template">
+  {{#each productos}}
+  <div class="cart-list-product">
+    <span class="float-right">{{subtotal_string}}</span>
+    <h5><a>{{nombre}}</a></h5>
+    <h6 class="mb-0 d-inline-block">{{precio_string}}</h6>
+    <div class="float-right">
+      <a  class="btn btn-sm btn-outline-secondary btn-circle btn-circle-sm"><i class="fas fa-minus"></i></a>  <a  class="btn btn-sm btn-outline-secondary btn-circle btn-circle-sm"><i class="fas fa-plus"></i></a>
+    </div>
+  </div>
+  {{/each}}
+  
+</script>

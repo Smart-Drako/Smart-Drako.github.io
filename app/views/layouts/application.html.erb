@@ -15,6 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+    <!-- handlebars -->
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <!-- Fuentes -->
@@ -27,6 +29,9 @@
   </head>
 
   <body data-spy="scroll" data-target=".navbar" data-offset="80">
+
+  <input type="hidden" value="0" id="total_items">
+  <input type="hidden" value="0" id="total_pedido">
 
   <nav class="navbar navbar-expand-lg navbar-light navbar-primary">
   <a data-turbolinks="false" class="navbar-brand" href="/">
@@ -54,12 +59,12 @@
         <i class="fas fa-sign-out-alt"></i></a>
       <% end %>
     <%else%>
-      <a data-turbolinks="false" class="btn btn-pink my-2 my-sm-0 d-none d-md-block" href="/registro">VENDE DESDE CASA</a>
-      <a data-turbolinks="false" class="btn btn-outline-pink my-2 my-sm-0 ml-10" href="/login">INICIA SESIÓN</a>
+      <a data-turbolinks="false" class="btn btn-pink my-2 my-sm-0 d-none d-md-block" href="/registro">REGÍSTRATE Y VENDE</a>
+      <a data-turbolinks="false" id="btn_login" class="btn btn-outline-pink my-2 my-sm-0 ml-10" href="/login">INICIA SESIÓN</a>
     <%end%>
     
     <button data-toggle="offcanvas" title="Ver Pedido" type="button" class="btn btn-cart box-shadow-btn my-2 my-sm-0 ml-10 d-none d-md-block">
-      <i class="fas fa-lg fa-shopping-cart"></i> <span class="badge badge-success d-none" id="total-items-btn">1</span>
+      <i class="fas fa-lg fa-shopping-cart"></i> <span class="badge btn-pink total-items">0</span>
     </button>
   </div>
   <%if user_signed_in?%>
@@ -72,38 +77,28 @@
 
 
     <button id="btn-cart_float" data-toggle="offcanvas" title="Ver Pedido" type="button" class="btn btn-cart box-shadow-btn my-2 my-sm-0 ml-10 d-none">
-          <i class="fas fa-shopping-cart"></i> <span class="badge badge-success d-none" id="total-items-btn">1</span>
+          <i class="fas fa-shopping-cart"></i> <span class="badge badge-success d-none total-items">0</span>
     </button>
 
 
      <div class="cart-sidebar">
       <div class="cart-sidebar-header">
          <h5>
-            Mi Pedido <span class="text-success">(1)</span> <a data-turbolinks="false" data-toggle="offcanvas" class="float-right" href="#"><i class="fas fa-times"></i>
+            Mi Pedido <span class="btn btn-sm btn-pink btn-circle btn-circle-sm total-items"></span> <a data-turbolinks="false" data-toggle="offcanvas" class="float-right" href="#"><i class="fas fa-times"></i>
             </a>
          </h5>
       </div>
-      <div class="cart-sidebar-body">
-         <div class="cart-list-product">
-            <span class="float-right">$125.00</span>
-            <h5><a>Galon de leche</a></h5>
-            <h6 class="mb-0 d-inline-block">$62.50</h6>
-            <div class="float-right">
-              <a  class="btn btn-sm btn-outline-secondary btn-circle btn-circle-sm"><i class="fas fa-minus"></i></a>  <a  class="btn btn-sm btn-outline-secondary btn-circle btn-circle-sm"><i class="fas fa-plus"></i></a>
-            </div>
-         </div>
-
-
+      <div class="cart-sidebar-body" id="carrito_items">
       </div>
       <div class="cart-sidebar-footer">
          <div class="cart-store-details">
-            <p>Total <strong class="float-right">$245.00</strong></p>
+            <p>Total <strong class="float-right total-pedido"></strong></p>
             <!-- <strong>Delivery Charges <strong class="float-right text-danger">+ $29.69</strong></p>
             <h6>Your total savings <strong class="float-right text-danger">$55 (42.31%)</strong></h6> -->
          </div>
-         <a href="#"><button class="btn btn-pink btn-block text-left" type="button"><span
+         <button type="button" class="btn btn-pink btn-block text-left" type="button" id="btn-procesar"><span
                   class="float-left"><i class="fas fa-shopping-cart"></i> Procesar Pedido </span><span
-                  class="float-right"><strong>$245.00</strong> <i class="fas fa-chevron-right"></i></span></button></a>
+                  class="float-right"><strong class="total-pedido"></strong> <i class="fas fa-chevron-right"></i></span></button>
       </div>
    </div>
 
@@ -111,13 +106,13 @@
       <a href="#" data-turbolinks="false" data-toggle="offcanvas">
         <div class="container d-flex h-100">
           <div class="col-3 justify-content-center align-self-center c-white">
-            <span id="total-items-bar" class="btn btn-sm btn-pink btn-circle btn-circle-sm">1</span>
+            <span class="btn btn-sm btn-pink btn-circle btn-circle-sm total-items">0</span>
           </div>
           <div class="col-6 justify-content-center align-self-center c-white">
             <span>Ver pedido</span>
           </div>
           <div class="col-3 justify-content-center align-self-center c-white">
-            <span id="total-pagar-bar">$245.00</span>
+            <span class="total-pedido"></span>
           </div>
         </div>
       </a>
@@ -144,6 +139,11 @@
       $( ".delete" ).click(function() {
         $(this).parent().parent().hide()
       });
+
+      // $( ".btn-cart-item" ).click(function() {
+      //   $(this).addClass("animated zoomOutDown")
+      // });
+      cargar_productos();
 
       $('[data-toggle="offcanvas"]').on('click', function () {
         $('body').toggleClass('toggled');
@@ -212,7 +212,7 @@
         1000:{
             items:3,
             margin:30,
-            dots: false,
+            dots: true,
             stagePadding: 50,
         }
     }
@@ -220,4 +220,6 @@
 
     });
   </script>
+  <%= render "/shared/plantillas" %> 
+
 </html>

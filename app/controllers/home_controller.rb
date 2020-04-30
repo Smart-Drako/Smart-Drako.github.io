@@ -8,7 +8,6 @@ class HomeController < ApplicationController
     @categorias = Category.where(id: cats)
     
     @categorias.each do |cat|
-      lista = Hash.new
       negocios = ConfigUser.where(category_id: cat.id)
       item = {
         id: cat.id,

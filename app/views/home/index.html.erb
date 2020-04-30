@@ -46,7 +46,7 @@
     <h2><%= cat[:nombre] %></h2>
     <div class="owl-carousel owl-theme">
       <% cat[:negocios].each do |neg| %> 
-        <div class="card product-card effect7">
+        <div class="card product-card">
           <a href="/socios/<%= neg.id %>-<%= neg.nombre.to_s.parameterize %>" class="stretched-link"></a>
           <img class="card-background img-cover" src="<%= neg.logo %>" alt="Card image cap">
           <div class="card-body card-top">
