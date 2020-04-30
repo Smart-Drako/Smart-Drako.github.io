@@ -12,6 +12,5 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require paloma
 //= require_tree .
