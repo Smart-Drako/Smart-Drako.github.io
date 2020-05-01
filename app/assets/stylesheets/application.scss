@@ -64,10 +64,12 @@ body.toggled::after {
   content: "";
   left: 0;
   opacity: 0.7;
-  position: absolute;
-  right: 0;
-  z-index: 9;
+  position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
 }
 
 [aria-hidden="true"] {
@@ -386,7 +388,16 @@ body {
 .btn-cart {
   background-color: #1AD4D8;
   color: #FFFFFF;
+}
 
+.btn-cart:hover {
+  background-color: #1AD4D8;
+  color: #FFFFFF;
+}
+
+.btn-cart-item:hover {
+  background-color: #1AD4D8;
+  color: #FFFFFF;
 }
 
 .box-shadow-btn {

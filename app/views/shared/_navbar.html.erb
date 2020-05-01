@@ -34,7 +34,8 @@
 
     <button data-toggle="offcanvas" title="Ver Pedido" type="button"
       class="btn btn-cart box-shadow-btn my-2 my-sm-0 ml-10 d-none d-md-block">
-      <i class="fas fa-lg fa-shopping-cart"></i> <span class="badge btn-pink total-items">0</span>
+      <span class="total-pedido"></span>
+      <i class="fas fa-shopping-cart"></i> <span class="badge btn-pink total-items">0</span>
     </button>
   </div>
   <%if user_signed_in?%>
@@ -64,5 +65,6 @@
 
 <!-- Carrito Flotante -->
 <button id="btn-cart_float" data-toggle="offcanvas" title="Ver Pedido" type="button" class="btn btn-cart box-shadow-btn my-2 my-sm-0 ml-10 d-none">
+  <span class="total-pedido"></span>
   <i class="fas fa-shopping-cart"></i> <span class="badge btn-pink total-items">0</span>
 </button>
