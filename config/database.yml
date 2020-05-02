@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: pideloencasa_production
-  username: pideloencasa
+  database: pideloencasa
+  username: deploy
   password: <%= ENV['PIDELOENCASA_DATABASE_PASSWORD'] %>
