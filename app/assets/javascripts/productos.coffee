@@ -9,22 +9,74 @@ Paloma.controller 'Home', index: ->
 
 cargar_productos = ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
-  total_pedido = localStorage.getItem("total_pedido") || "0"
+  totales = calcular_totales()
+  localStorage.setItem("total_pedido", totales.total_pedido)
 
   #Mostrar items en badges y total $
-  $(".total-items").text(productos.length)
-  $(".total-pedido").text(number_to_currency(total_pedido))
+  $(".total-items").text(totales.total_item)
+  $(".total-pedido").text(number_to_currency(totales.total_pedido))
   handlebars_productos()
   if productos.length == 0
-    $(".carbar").css('visibility', 'hidden');
+    $(".carbar").css('visibility', 'hidden')
+    $("#btn-procesar").prop("disabled",true)
   else
-    $(".carbar").css('visibility', 'visible');
+    $(".carbar").css('visibility', 'visible')
+    $("#btn-procesar").prop("disabled",false)
+
+calcular_totales = ->
+  total = 0
+  total_items = 0
+  productos = JSON.parse(localStorage.getItem("productos") || "[]")
+  productos.forEach (prod) ->
+    prod.subtotal = prod.cantidad * prod.precio
+    total_items = total_items + prod.cantidad
+    total = total + prod.subtotal
+    return
+  datos =
+    total_item: total_items
+    total_pedido: total
+  datos
+
+eventos_handlebars = ->
+  $('.eliminar-item').unbind("click").click ->
+    id = $(this).data("id")
+    borrar_producto(id)
+  
+  $('.sumar-item').unbind("click").click ->
+    id = $(this).data("id")
+    sumar_restar_producto(id, true)
+  
+  $('.restar-item').unbind("click").click ->
+    id = $(this).data("id")
+    sumar_restar_producto(id, false)
+
+sumar_restar_producto = (id, sumar) ->
+  productos = JSON.parse(localStorage.getItem("productos") || "[]")
+  cantidad = null
+  productos.forEach (prod) ->
+    if prod.id == id
+      if sumar == true
+        prod.cantidad = prod.cantidad + 1
+      else
+        prod.cantidad = prod.cantidad - 1
+      prod.subtotal = prod.cantidad * prod.precio
+      total_pedido = total_pedido + prod.precio
+      prod.subtotal_string = number_to_currency(prod.subtotal)
+      cantidad = prod.cantidad
+    return
+  localStorage.setItem("productos", JSON.stringify(productos))
+  animate($(".total-items"), "wobble")
+  if cantidad == 0
+    borrar_producto(id)
+  else
+    cargar_productos()
 
 
 eventos = ->
   #Productos y carrito
   $('.btn-cart-item').unbind("click").click ->
     agregar_producto($(this))
+  
   
   # $('.btn-cart-item').hover ->
   #   animate($(this), "bounceIn")
@@ -81,6 +133,16 @@ handlebars_productos = ->
     source = $("#handlebars_carrito_item").html()
     template = Handlebars.compile(source)
     $('#carrito_items').html(template(productos: productos))
+    eventos_handlebars()
+
+borrar_producto = (id) ->
+  productos = JSON.parse(localStorage.getItem("productos") || "[]")
+  productos.forEach (item, index, object) ->
+    if item.id == id
+      object.splice index, 1
+    return
+  localStorage.setItem("productos", JSON.stringify(productos))
+  cargar_productos()
 
 agregar_producto = (producto) ->
   #Cantidad de productos
@@ -93,7 +155,6 @@ agregar_producto = (producto) ->
   if productos.length == 0 
     total_pedido = precio
     productos.push({id: id, nombre: nombre, precio: precio, cantidad: 1 , subtotal: precio, precio_string: number_to_currency(precio), subtotal_string: number_to_currency(precio)})
-    animate($(".total-items"), "wobble")
   else
     existe = false
     productos.forEach (prod) ->
@@ -107,10 +168,9 @@ agregar_producto = (producto) ->
     if existe == false
       productos.push({id: id, nombre: nombre, precio: precio, cantidad: 1 , subtotal: precio, precio_string: number_to_currency(precio), subtotal_string: number_to_currency(precio)})
       total_pedido = total_pedido + precio
-      animate($(".total-items"), "wobble")
-
   localStorage.setItem("total_pedido", total_pedido)
   localStorage.setItem("productos", JSON.stringify(productos))
+  animate($(".total-items"), "wobble")
   cargar_productos()
 
 #Enviar al controller el json del pedido
