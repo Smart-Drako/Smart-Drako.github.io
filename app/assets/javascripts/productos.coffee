@@ -156,12 +156,13 @@ agregar_producto = (producto) ->
 
   precio = parseInt(producto.data("precio"))
   nombre = producto.data("nombre")
+  unidad = producto.data("unidad")
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
   total_pedido = parseFloat(localStorage.getItem("total_pedido") || 0 )
 
   if productos.length == 0 
     total_pedido = precio
-    productos.push({id: id, nombre: nombre, precio: precio, cantidad: 1 , subtotal: precio, precio_string: number_to_currency(precio), subtotal_string: number_to_currency(precio)})
+    productos.push({id: id, nombre: nombre, precio: precio, unidad: unidad, cantidad: 1 , subtotal: precio, precio_string: number_to_currency(precio), subtotal_string: number_to_currency(precio)})
   else
     existe = false
     productos.forEach (prod) ->
@@ -173,7 +174,7 @@ agregar_producto = (producto) ->
         prod.subtotal_string = number_to_currency(prod.subtotal)
       return
     if existe == false
-      productos.push({id: id, nombre: nombre, precio: precio, cantidad: 1 , subtotal: precio, precio_string: number_to_currency(precio), subtotal_string: number_to_currency(precio)})
+      productos.push({id: id, nombre: nombre, precio: precio, unidad: unidad, cantidad: 1 , subtotal: precio, precio_string: number_to_currency(precio), subtotal_string: number_to_currency(precio)})
       total_pedido = total_pedido + precio
   localStorage.setItem("total_pedido", total_pedido)
   localStorage.setItem("negocio_id", negocio)
@@ -183,17 +184,21 @@ agregar_producto = (producto) ->
 
 #Enviar al controller el json del pedido
 procesar_pedido = ->
-  productos = JSON.parse(localStorage.getItem("productos") || "[]")
-  negocio_id = parseInt(localStorage.getItem("negocio_id") || 0
+  productos = localStorage.getItem("productos") || "[]"
+  negocio_id = localStorage.getItem("negocio_id") || 0
+  total= localStorage.getItem("total_pedido") || 0
   $.ajax
     type: 'POST'
     url: '/generar_pedido'
-    data: { negocio_id: negocio_id, productos: productos } 
+    data: { negocio_id: negocio_id, productos: productos, total: total } 
     dataType: 'json'
     beforeSend: ->
       console.log "Generando pedido"
     success: (data) ->
-      console.log data
+      if data.error == false
+        borrar_pedido()
+      else
+        console.log "Ocurrió un error al generar el pedido"
 
 #Borrar el pedido
 borrar_pedido = ->
