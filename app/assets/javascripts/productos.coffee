@@ -150,7 +150,7 @@ agregar_producto = (producto) ->
   negocio = parseInt(producto.data("negocio-id"))
   negocio_actual = parseInt(localStorage.getItem("negocio_id") || 0)
 
-  if negocio !=0 && negocio != negocio_actual
+  if negocio_actual !=0 && negocio != negocio_actual
     $("#notifModal").modal()
     return
 

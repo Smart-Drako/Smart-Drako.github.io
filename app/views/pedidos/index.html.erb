@@ -15,10 +15,10 @@
       <% @pedidos.each do |p|%>
       <tr>
         <td><%= p.fecha %></td>
-        <td><%= "P-#{p.id}" %></td>
+        <td><a class="link" href="/pedido/<%=p.id%>" target="_blank" rel="noopener noreferrer"><%= "P-#{p.id}" %></a></td>
         <td><%= p.cliente_nombre %></td>
         <td><%= p.area_entrega %></td>
-        <td><%= p.total %></td>
+        <td><%= number_to_currency(p.total, :precision => 2) %></td>
         <td><%= p.estatus %></td>
       </tr>
       <%end%>

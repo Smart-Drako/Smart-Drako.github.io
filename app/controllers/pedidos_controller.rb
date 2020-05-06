@@ -15,7 +15,7 @@ class PedidosController < ApplicationController
       pedido.user_id = negocio_id
       pedido.estatus = "Nuevo"
       pedido.total = total
-      pedido.fecha = Time.now.strftime("%d/%m/%Y")
+      pedido.fecha = Time.now.strftime("%d/%m/%y")
       pedido.cliente_nombre = "Manuel Pruebas"
       pedido.area_entrega = "Area entra prueba"
       if pedido.save

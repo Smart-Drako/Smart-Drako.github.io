@@ -159,7 +159,7 @@ body.toggled::after {
   font-size: 11px;
 }
 
-.cart-list-product > h6 span {
+.cart-list-product>h6 span {
   color: #e96125;
 }
 
@@ -262,17 +262,17 @@ li.ilb {
   padding-right: 0px;
 }
 
-#cat-nav > ul > li > a.active {
+#cat-nav>ul>li>a.active {
   border-bottom: 2px solid #03dac5;
   font-weight: bolder;
   color: #333 !important;
 }
 
-#cat-nav > ul > li > a {
+#cat-nav>ul>li>a {
   border-bottom: none;
 }
 
-#cat-nav > ul > li > a:hover {
+#cat-nav>ul>li>a:hover {
   color: #333 !important;
   border: none !important;
 }
@@ -364,6 +364,7 @@ body {
 }
 
 @media (min-width: 1200px) {
+
   .container,
   .container-lg,
   .container-md,
@@ -563,6 +564,11 @@ body {
   width: 33px;
   text-align: center;
 }
+
 .row-product-title {
   margin-bottom: 5px;
+}
+
+a.link {
+  color: #d72477
 }
