@@ -1,7 +1,7 @@
 class CreatePedidos < ActiveRecord::Migration[5.2]
   def change
     create_table :pedidos do |t|
-      t.references :user, foreign_key: true
+      t.references :user, foreign_key: false
       t.integer :cliente_id
       t.string :cliente_nombre
       t.string :cliente_telefono

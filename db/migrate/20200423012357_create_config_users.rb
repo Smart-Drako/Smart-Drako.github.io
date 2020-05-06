@@ -1,8 +1,8 @@
 class CreateConfigUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :config_users do |t|
-      t.references :user, foreign_key: true
-      t.references :category, foreign_key: true
+      t.references :user, foreign_key: false
+      t.references :category, foreign_key: false
       t.string :nombre
       t.string :slogan
       t.string :descripcion

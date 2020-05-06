@@ -1,0 +1,27 @@
+<div class="container cont-cat">
+  <h2>Pedidos</h2>
+  <table class="table table-sm" style="width:100%;">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>#Pedido</th>
+        <th>Cliente</th>
+        <th>Area Entrega</th>
+        <th>Total</th>
+        <th>Estatus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pedidos.each do |p|%>
+      <tr>
+        <td><%= p.fecha %></td>
+        <td><%= "P-#{p.id}" %></td>
+        <td><%= p.cliente_nombre %></td>
+        <td><%= p.area_entrega %></td>
+        <td><%= p.total %></td>
+        <td><%= p.estatus %></td>
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>

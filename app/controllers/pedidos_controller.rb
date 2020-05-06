@@ -1,4 +1,10 @@
 class PedidosController < ApplicationController
+  before_action :authenticate_user!, :except => [:generar]
+
+  def index
+    @pedidos = Pedido.where(user_id: current_user.id)
+  end
+
   def generar
     params.permit(:negocio_id, :productos, :total)
     negocio_id = params[:negocio_id].to_i
@@ -7,7 +13,11 @@ class PedidosController < ApplicationController
     if negocio_id.present? && productos.present?
       pedido = Pedido.new
       pedido.user_id = negocio_id
+      pedido.estatus = "Nuevo"
       pedido.total = total
+      pedido.fecha = Time.now.strftime("%d/%m/%Y")
+      pedido.cliente_nombre = "Manuel Pruebas"
+      pedido.area_entrega = "Area entra prueba"
       if pedido.save
         productos.each do |p|
           item = ProductoPedido.new
@@ -24,6 +34,8 @@ class PedidosController < ApplicationController
       else
         render json: {error: true, mensaje: "Ocurrio un error al procesar el pedido"} and return
       end
+    else
+      render json: {error: true, mensaje: "Ocurrio un error al procesar el pedido"} and return
     end
   end
 end
