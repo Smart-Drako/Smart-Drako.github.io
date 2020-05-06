@@ -34,7 +34,7 @@
             <td><%=prod.descripcion%></td>
             <td><%=prod.unidad%></td>
             <td><%=number_to_currency(prod.precio)%></td>
-            <td><button type="button" data-id="<%=prod.id%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>" class="btn btn-sm btn-aqua btn-cart-item"><i class="fas fa-cart-plus"></i></button></td>
+            <td><button type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>" class="btn btn-sm btn-aqua btn-cart-item"><i class="fas fa-cart-plus"></i></button></td>
           </tr>
         <%end%>
       </tbody>

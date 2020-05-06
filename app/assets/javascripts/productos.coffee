@@ -78,8 +78,8 @@ eventos = ->
     agregar_producto($(this))
   
   
-  # $('.btn-cart-item').hover ->
-  #   animate($(this), "bounceIn")
+  $('#btn_vaciar_agregar').unbind("click").click ->
+    borrar_pedido()
   
   
   $('#btn_vaciar_agregar').unbind("click").click ->
@@ -147,6 +147,13 @@ borrar_producto = (id) ->
 agregar_producto = (producto) ->
   #Cantidad de productos
   id = producto.data("id")
+  negocio = parseInt(producto.data("negocio-id"))
+  negocio_actual = parseInt(localStorage.getItem("negocio_id") || 0)
+
+  if negocio !=0 && negocio != negocio_actual
+    $("#notifModal").modal()
+    return
+
   precio = parseInt(producto.data("precio"))
   nombre = producto.data("nombre")
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
@@ -169,6 +176,7 @@ agregar_producto = (producto) ->
       productos.push({id: id, nombre: nombre, precio: precio, cantidad: 1 , subtotal: precio, precio_string: number_to_currency(precio), subtotal_string: number_to_currency(precio)})
       total_pedido = total_pedido + precio
   localStorage.setItem("total_pedido", total_pedido)
+  localStorage.setItem("negocio_id", negocio)
   localStorage.setItem("productos", JSON.stringify(productos))
   animate($(".total-items"), "wobble")
   cargar_productos()
@@ -177,6 +185,14 @@ agregar_producto = (producto) ->
 procesar_pedido = ->
   localStorage.removeItem("total_pedido")
   localStorage.removeItem("productos")
+  localStorage.removeItem("negocio_id")
+  cargar_productos()
+
+#Borrar el pedido
+borrar_pedido = ->
+  localStorage.removeItem("total_pedido")
+  localStorage.removeItem("productos")
+  localStorage.removeItem("negocio_id")
   cargar_productos()
 
 #Utilidades
