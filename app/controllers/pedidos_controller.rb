@@ -5,6 +5,16 @@ class PedidosController < ApplicationController
     @pedidos = Pedido.where(user_id: current_user.id)
   end
 
+  def show
+    @pedido = Pedido.find_by(id: params[:id])
+    if @pedido.present?
+      @productos = ProductoPedido.where(pedido_id: @pedido.id)
+      redirect_to pedidos_path and return if @pedido.user_id != current_user.id
+    else
+      redirect_to pedidos_path and return
+    end
+  end
+
   def generar
     params.permit(:negocio_id, :productos, :total)
     negocio_id = params[:negocio_id].to_i

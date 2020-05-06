@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   get "socios/:id", to: "productos#tienda"
   post "generar_pedido", to:"pedidos#generar"
   get "pedidos", to: "pedidos#index"
+  get "pedido/:id", to: "pedidos#show"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

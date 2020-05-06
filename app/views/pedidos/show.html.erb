@@ -1,0 +1,41 @@
+<div class="container cont-cat">
+<h4>Pedido: P-<%= @pedido.id%></h4>
+<h4>Fecha: <%= @pedido.fecha%></h4>
+<h4>Cliente: <%= @pedido.cliente_nombre%></h4>
+<h4>Area Entrega: <%= @pedido.area_entrega%></h4>
+<h4>Total: <%= number_to_currency(@pedido.total, :precision => 2) %></h4>
+<h4>Estatus: <%= @pedido.estatus%></h4>
+
+
+<div class="container cont-cat">
+<h4>Lista del pedido</h4>
+  <table class="table table-sm" style="width:100%;">
+    <thead>
+      <tr>
+        <th class="text-center">Nombre</th>
+        <th class="text-center">Unidad</th>
+        <th class="text-center">Precio</th>
+        <th class="text-center">Cantidad</th>
+        <th class="text-center">Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @productos.each do |p|%>
+      <tr>
+        <td><%= p.nombre %></td>
+        <td class="text-center"><%= p.unidad %></td>
+        <td class="text-center"><%= number_to_currency(p.precio, :precision => 2) %></td>
+        <td class="text-center"><%= p.cantidad %></td>
+        <td class="text-right"><%= number_to_currency(p.subtotal, :precision => 2) %></td>
+      </tr>
+      <%end%>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3"></td>
+        <td class="text-right">Total:</td>
+        <td class="text-right"><%= number_to_currency(@pedido.total, :precision => 2) %></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
