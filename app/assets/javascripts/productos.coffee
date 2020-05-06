@@ -183,10 +183,17 @@ agregar_producto = (producto) ->
 
 #Enviar al controller el json del pedido
 procesar_pedido = ->
-  localStorage.removeItem("total_pedido")
-  localStorage.removeItem("productos")
-  localStorage.removeItem("negocio_id")
-  cargar_productos()
+  productos = JSON.parse(localStorage.getItem("productos") || "[]")
+  negocio_id = parseInt(localStorage.getItem("negocio_id") || 0
+  $.ajax
+    type: 'POST'
+    url: '/generar_pedido'
+    data: { negocio_id: negocio_id, productos: productos } 
+    dataType: 'json'
+    beforeSend: ->
+      console.log "Generando pedido"
+    success: (data) ->
+      console.log data
 
 #Borrar el pedido
 borrar_pedido = ->

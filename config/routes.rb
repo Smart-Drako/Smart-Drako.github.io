@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   end
   get "/me", to: "home#cuenta"
   get "socios/:id", to: "productos#tienda"
+  post "generar_pedido", to:"pedidos#generar"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
