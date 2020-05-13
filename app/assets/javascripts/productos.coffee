@@ -3,6 +3,10 @@ Paloma.controller 'Productos', tienda: ->
   cargar_productos()
   eventos()
 
+Paloma.controller 'Pedidos', new: ->
+  cargar_productos()
+
+
 Paloma.controller 'Home', index: ->
   cargar_productos()
   eventos()
@@ -18,10 +22,10 @@ cargar_productos = ->
   handlebars_productos()
   if productos.length == 0
     $(".carbar").css('visibility', 'hidden')
-    $("#btn-procesar").prop("disabled",true)
+    $("#btn-confirmar").prop("disabled",true)
   else
     $(".carbar").css('visibility', 'visible')
-    $("#btn-procesar").prop("disabled",false)
+    $("#btn-confirmar").prop("disabled",false)
 
 calcular_totales = ->
   total = 0
@@ -80,7 +84,11 @@ eventos = ->
   
   $('#btn_vaciar_agregar').unbind("click").click ->
     borrar_pedido()
+
   
+  $('#btn-procesar').unbind("click").click ->
+    $("#btn-procesar").hide()
+    $("#btn-confirmar").show()
   
   $('#btn_vaciar_agregar').unbind("click").click ->
     localStorage.removeItem("total_pedido");
@@ -90,8 +98,10 @@ eventos = ->
     cargar_productos()
   
   #Procesar Pedido al controlador
-  $('#btn-procesar').unbind("click").click ->
+  $('#btn-confirmar').unbind("click").click ->
     procesar_pedido()
+    $("#btn-procesar").show()
+    $("#btn-confirmar").hide()
   
   #Scroolspy y Side cart
   $('[data-toggle="offcanvas"]').on 'click', ->

@@ -8,12 +8,40 @@
   </div>
   <div class="cart-sidebar-body" id="carrito_items">
   </div>
+  <div class="cart-sidebar-body" style="display:none" id="datos_cliente">
+    <div class="col mb-100">
+      <form id="datos">
+        <div class="form-row">
+          <div class="form-group col-12">
+            <label for="inputPassword4">Nombre</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-12">
+            <label for="inputPassword4">Teléfono</label>
+            <input type="number" class="form-control">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-12">
+            <label for="inputPassword4">Dirección</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </form>
+      </div>
+  </div>
   <div class="cart-sidebar-footer">
     <div class="cart-store-details">
       <p>Total <strong class="float-right total-pedido"></strong></p>
     </div>
     <button type="button" class="btn btn-pink btn-block text-left" type="button" id="btn-procesar"><span
         class="float-left"><i class="fas fa-shopping-cart"></i> Procesar Pedido </span><span class="float-right"><strong
+          class="total-pedido"></strong> <i class="fas fa-chevron-right"></i></span></button>
+
+    <button type="button" class="btn btn-pink btn-block text-left" style="display:none;" type="button" id="btn-confirmar"><span
+        class="float-left"><i class="fas fa-shopping-cart"></i> Confirmar Pedido </span><span class="float-right"><strong
           class="total-pedido"></strong> <i class="fas fa-chevron-right"></i></span></button>
   </div>
 </div>
