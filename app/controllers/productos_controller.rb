@@ -8,6 +8,11 @@ class ProductosController < ApplicationController
     @productos = Producto.where(user_id: current_user.id)
   end
 
+  def importar
+    Producto.importar(params[:file], current_user)
+    redirect_to productos_path and return
+  end
+
   # GET /productos/1
   # GET /productos/1.json
   def show

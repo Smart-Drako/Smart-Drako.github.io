@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :productos
+  resources :productos do
+    collection {post :importar}
+  end
   resources :config_users
   devise_for :users
   root to: "home#index"
