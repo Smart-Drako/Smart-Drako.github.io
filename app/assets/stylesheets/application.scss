@@ -331,6 +331,10 @@ li.ilb {
   margin-bottom: 100px;
 }
 
+.mb-0 {
+  margin-bottom: 0px;
+}
+
 .mt-20 {
   margin-top: 20px;
 }
@@ -575,4 +579,25 @@ body {
 
 a.link {
   color: #d72477
+}
+
+.owl-carousel .owl-item img {
+  height: 300px;
+  object-fit: cover;
+}
+
+.owl-carousel .owl-item .card-body {
+  height: 85px;
+}
+
+@media (max-width: 575.98px) {
+  p.card-text {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 576px) {
+  p.card-text {
+    font-size: 1.1rem;
+  }
 }

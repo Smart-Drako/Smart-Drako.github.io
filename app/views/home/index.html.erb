@@ -45,20 +45,15 @@
   <div class="container cont-cat" id="cat_<%= cat[:id] %>">
     <h2><%= cat[:nombre] %></h2>
     <div class="owl-carousel owl-theme">
-      <% cat[:negocios].each do |neg| %> 
-        <div class="card product-card">
-          <a href="/socios/<%= neg.id %>-<%= neg.nombre.to_s.parameterize %>" class="stretched-link"></a>
-          <img class="card-background img-cover" src="<%= neg.logo %>" alt="Card image cap">
-          <div class="card-body card-top">
-            <h5 class="card-title mb-0"><%= neg.nombre %></h5>
-            <h6 class="mb-0 subtitulo">4.5 Estrellas</h6>
-          </div>
-          <div class="card-footer card-bottom overflow">
-            <p>
-              <%= neg.descripcion %>
-            </p>
-          </div>
+      <% cat[:negocios].each do |neg| %>
+      <div class="card">
+        <a href="/socios/<%= neg.id %>-<%= neg.nombre.to_s.parameterize %>" class="stretched-link"></a>
+        <img src="<%= neg.logo %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title mb-0"><strong><%= neg.nombre %></strong></h5>
+          <p class="card-text"><%= neg.descripcion %></p>
         </div>
+      </div>
       <%end%>
     </div>
   </div>

@@ -10,6 +10,8 @@ class PedidoMailer < ApplicationMailer
     @info_cliente = "Informacion del cliente (nombre, dir, telefono ,etc."
     @info_proveedor = "Informacion del proveedor (nombre, dir, telefono ,etc."
 
+    @lista_pedido = ProductoPedido.where(pedido_id: 1)
+
     mail(from: I18n.transliterate("#{@empresa} <pideloencasamx@gmail.com>"), to: I18n.transliterate(destinatario), subject: asunto,  reply_to: '<pideloencasamx@gmail.com>')
   end
 end
