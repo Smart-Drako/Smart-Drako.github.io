@@ -43,7 +43,7 @@
 
 <% @negocios.each do |cat|%>
   <div class="container cont-cat" id="cat_<%= cat[:id] %>">
-    <h2><%= cat[:nombre] %></h2>
+    <h4><%= cat[:nombre] %></h4>
     <div class="owl-carousel owl-theme">
       <% cat[:negocios].each do |neg| %>
       <div class="card">
