@@ -133,7 +133,7 @@ eventos = ->
         dots: true
       600: items: 3
       1000:
-        items: 3
+        items: 4
         margin: 30
         dots: true
         stagePadding: 50
