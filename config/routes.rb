@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   post "generar_pedido", to:"pedidos#generar"
   get "pedidos", to: "pedidos#index"
   get "pedido/:id", to: "pedidos#show"
+  get "/pedido", to: "pedidos#new"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

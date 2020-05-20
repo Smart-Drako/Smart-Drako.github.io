@@ -4,7 +4,23 @@ Paloma.controller 'Productos', tienda: ->
   eventos()
 
 Paloma.controller 'Pedidos', new: ->
-  cargar_productos()
+  productos = JSON.parse(localStorage.getItem("productos") || "[]")
+  if productos.length == 0
+    window.location.href = "/"
+  else
+    cargar_productos()
+    $("#cliente_nombre").focus()
+    $("#form-botones").hide()
+    $("#cliente_rfc, #cliente_uso").prop("disabled",true).val("")
+    $("#cliente_factura").change ->
+      mostrar = $(this).val()
+      if mostrar == "Si"
+        $("#cliente_rfc, #cliente_uso").prop("disabled",false).val("")
+      else
+        $("#cliente_rfc, #cliente_uso").prop("disabled",true).val("")
+
+    $('#btn-confirmar').unbind("click").click ->
+      procesar_pedido()
 
 
 Paloma.controller 'Home', index: ->
@@ -16,16 +32,17 @@ cargar_productos = ->
   totales = calcular_totales()
   localStorage.setItem("total_pedido", totales.total_pedido)
 
+  handlebars_productos()
+  handlebars_productos_detalle()
   #Mostrar items en badges y total $
   $(".total-items").text(totales.total_item)
   $(".total-pedido").text(number_to_currency(totales.total_pedido))
-  handlebars_productos()
   if productos.length == 0
     $(".carbar").css('visibility', 'hidden')
-    $("#btn-confirmar").prop("disabled",true)
+    $("#btn-procesar").prop("disabled",true)
   else
     $(".carbar").css('visibility', 'visible')
-    $("#btn-confirmar").prop("disabled",false)
+    $("#btn-procesar").prop("disabled",false)
 
 calcular_totales = ->
   total = 0
@@ -87,8 +104,7 @@ eventos = ->
 
   
   $('#btn-procesar').unbind("click").click ->
-    $("#btn-procesar").hide()
-    $("#btn-confirmar").show()
+    window.location.href = "/pedido"
   
   $('#btn_vaciar_agregar').unbind("click").click ->
     localStorage.removeItem("total_pedido");
@@ -96,13 +112,7 @@ eventos = ->
     localStorage.removeItem("vendedor");
     $("#notifModal").modal('hide')
     cargar_productos()
-  
-  #Procesar Pedido al controlador
-  $('#btn-confirmar').unbind("click").click ->
-    procesar_pedido()
-    $("#btn-procesar").show()
-    $("#btn-confirmar").hide()
-  
+    
   #Scroolspy y Side cart
   $('[data-toggle="offcanvas"]').on 'click', ->
     $('body').toggleClass 'toggled'
@@ -139,11 +149,18 @@ eventos = ->
         stagePadding: 50
   
 handlebars_productos = ->
-    productos = JSON.parse(localStorage.getItem("productos") || "[]")
-    source = $("#handlebars_carrito_item").html()
-    template = Handlebars.compile(source)
-    $('#carrito_items').html(template(productos: productos))
-    eventos_handlebars()
+  productos = JSON.parse(localStorage.getItem("productos") || "[]")
+  source = $("#handlebars_carrito_item").html()
+  template = Handlebars.compile(source)
+  $('#carrito_items').html(template(productos: productos))
+  eventos_handlebars()
+
+handlebars_productos_detalle = ->
+  productos = JSON.parse(localStorage.getItem("productos") || "[]")
+  source = $("#handlebars_carrito_item_detalle").html()
+  template = Handlebars.compile(source)
+  $('#carrito_items_detalle').html(template(productos: productos))
+  eventos_handlebars()
 
 borrar_producto = (id) ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
@@ -164,7 +181,7 @@ agregar_producto = (producto) ->
     $("#notifModal").modal()
     return
 
-  precio = parseInt(producto.data("precio"))
+  precio = parseFloat(producto.data("precio"))
   nombre = producto.data("nombre")
   unidad = producto.data("unidad")
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
@@ -179,13 +196,13 @@ agregar_producto = (producto) ->
       if prod.id == id
         existe = true
         prod.cantidad = prod.cantidad + 1
-        prod.subtotal = prod.cantidad * prod.precio
-        total_pedido = total_pedido + prod.precio
+        prod.subtotal = parseFloat(prod.cantidad * prod.precio)
+        total_pedido = parseFloat(total_pedido + prod.precio)
         prod.subtotal_string = number_to_currency(prod.subtotal)
       return
     if existe == false
       productos.push({id: id, nombre: nombre, precio: precio, unidad: unidad, cantidad: 1 , subtotal: precio, precio_string: number_to_currency(precio), subtotal_string: number_to_currency(precio)})
-      total_pedido = total_pedido + precio
+      total_pedido = parseFloat(total_pedido + precio)
   localStorage.setItem("total_pedido", total_pedido)
   localStorage.setItem("negocio_id", negocio)
   localStorage.setItem("productos", JSON.stringify(productos))
@@ -197,16 +214,18 @@ procesar_pedido = ->
   productos = localStorage.getItem("productos") || "[]"
   negocio_id = localStorage.getItem("negocio_id") || 0
   total= localStorage.getItem("total_pedido") || 0
+  cliente = JSON.stringify( objectifyForm($("#datos_cliente_form").serializeArray()) )
   $.ajax
     type: 'POST'
     url: '/generar_pedido'
-    data: { negocio_id: negocio_id, productos: productos, total: total } 
+    data: { negocio_id: negocio_id, productos: productos, total: total, cliente: cliente } 
     dataType: 'json'
     beforeSend: ->
       console.log "Generando pedido"
     success: (data) ->
       if data.error == false
         borrar_pedido()
+        window.location.href = "/"
       else
         console.log "Ocurrió un error al generar el pedido"
 
@@ -231,6 +250,15 @@ number_to_currency = (number, options) ->
   catch e
     return number
   return
+
+objectifyForm = (formArray) ->
+  #serialize data function
+  returnArray = {}
+  i = 0
+  while i < formArray.length
+    returnArray[formArray[i]['name']] = formArray[i]['value']
+    i++
+  returnArray
 
 number_with_delimiter = (number, delimiter, separator) ->
   `var delimiter`

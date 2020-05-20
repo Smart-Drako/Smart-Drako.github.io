@@ -32,3 +32,45 @@
   </div>
   {{/each}}
 </script>
+
+<script id="handlebars_carrito_item_detalle" type="text/x-handlebars-template">
+  {{#each productos}}
+  <li class="list-group-item" style="padding: 0.25rem 0.5rem;">
+  <div class="cart-list-product" style="border:none;padding:0px">
+    <div class="row row-product-title">
+      <div class="col-11">
+        <p class="mb-0">{{nombre}}</p>
+      </div>
+      <div class="col-1">
+        <a data-turbolinks="false" data-id="{{id}}" class="float-right eliminar-item" href="#"><i class="far fa-trash-alt"></i></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <p class="mb-0">{{precio_string}}</p>
+      </div>
+      <div class="col-4">
+        <div class="input-group input-group-sm" style="width: auto;">
+          <div class="input-group-prepend">
+            <button data-id="{{id}}" class="btn-pink btn btn-sm restar-item"><i class="fas fa-minus"></i></button>
+          </div>
+          <input type="text" class="form-control input-cantidad input-sm" value="{{cantidad}}">
+          <div class="input-group-append">
+            <button data-id="{{id}}" class="btn-pink btn btn-sm sumar-item"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+        <!-- <a  class="btn btn-sm btn-outline-secondary btn-circle btn-circle-sm"><i class="fas fa-minus"></i></a> {{cantidad}} <a  class="btn btn-sm btn-outline-secondary btn-circle btn-circle-sm"><i class="fas fa-plus"></i></a> -->
+      </div>
+      <div class="col-4 text-right" >
+        <strong>{{subtotal_string}}</strong>
+      </div>
+    </div>
+  </div>
+  </li>
+
+  {{/each}}
+  <li class="list-group-item d-flex justify-content-between" style="padding: 1.0rem 0.5rem;">
+    <span style="font-size: 1.2rem;">Total</span>
+    <strong><span class="total-pedido" style="font-size: 1.2rem;">0</span></strong>
+  </li>
+</script>

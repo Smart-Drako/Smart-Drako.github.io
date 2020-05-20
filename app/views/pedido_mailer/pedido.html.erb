@@ -319,7 +319,7 @@
 														Total:</p>
 													<p
 														style="font-size: 14px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 21px; margin: 0;">
-														<strong><%=@pedido_total%></strong></p>
+														<strong><%=number_to_currency(@pedido_total, :precision => 2)%></strong></p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
@@ -729,7 +729,7 @@
 													style="font-size: 14px; line-height: 1.2; color: #ffffff; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 17px;">
 													<p
 														style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: right; mso-line-height-alt: 17px; margin: 0;">
-														<strong><%=@pedido_total%></strong></p>
+														<strong><%=number_to_currency(@pedido_total, :precision => 2)%></strong></p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->

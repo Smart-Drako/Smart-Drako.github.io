@@ -18,7 +18,7 @@
       <%end%>
     </ul>
   </div>
-  <div class="form-inline">
+  <div class="form-inline"  id="form-botones">
     <%if user_signed_in?%>
     <a data-turbolinks="false" title="Mi Cuenta" class="btn btn-outline-success my-2 my-sm-0" href="/me"><i
         class="fas fa-user"></i></a>
@@ -26,9 +26,9 @@
     <i class="fas fa-sign-out-alt"></i></a>
     <% end %>
     <%else%>
-    <a data-turbolinks="false" class="btn btn-pink my-2 my-sm-0 d-none d-md-block" href="/registro">REGÍSTRATE GRATIS</a>
+    <!-- <a data-turbolinks="false" class="btn btn-pink my-2 my-sm-0 d-none d-md-block" href="/registro">REGÍSTRATE GRATIS</a>
     <a data-turbolinks="false" id="btn_login" class="btn btn-outline-pink my-2 my-sm-0 ml-10" href="/login">INICIA
-      SESIÓN</a>
+      SESIÓN</a> -->
     <%end%>
 
     <button data-toggle="offcanvas" title="Ver Pedido" type="button"
