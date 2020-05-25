@@ -35,7 +35,7 @@ cargar_productos = ->
   handlebars_productos()
   handlebars_productos_detalle()
   #Mostrar items en badges y total $
-  $(".total-items").text(totales.total_item)
+  $(".total-items").text(productos.length)
   $(".total-pedido").text(number_to_currency(totales.total_pedido))
   if productos.length == 0
     $(".carbar").css('visibility', 'hidden')
@@ -70,6 +70,33 @@ eventos_handlebars = ->
   $('.restar-item').unbind("click").click ->
     id = $(this).data("id")
     sumar_restar_producto(id, false)
+  
+  $('.input-cantidad').focusout ->
+    id = $(this).data("id")
+    valor = $(this).val()
+    cantidad_producto(id, valor)
+
+cantidad_producto = (id, valor) ->
+  productos = JSON.parse(localStorage.getItem("productos") || "[]")
+  cantidad = null
+  productos.forEach (prod) ->
+    if prod.id == id
+      prod.cantidad = parseFloat(valor).round(2)
+      prod.subtotal = parseFloat(prod.cantidad * prod.precio)
+      total_pedido = parseFloat(total_pedido + prod.precio)
+      prod.subtotal_string = number_to_currency(prod.subtotal)
+      cantidad = parseFloat(prod.cantidad)
+    return
+  localStorage.setItem("productos", JSON.stringify(productos))
+  animate($(".total-items"), "wobble")
+  if cantidad < 0
+    borrar_producto(id)
+  else
+    cargar_productos()
+
+Number::round = (p) ->
+  p = p or 10
+  parseFloat @toFixed(p)
 
 sumar_restar_producto = (id, sumar) ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
@@ -77,17 +104,17 @@ sumar_restar_producto = (id, sumar) ->
   productos.forEach (prod) ->
     if prod.id == id
       if sumar == true
-        prod.cantidad = prod.cantidad + 1
+        prod.cantidad = parseFloat(prod.cantidad + 1).round(2)
       else
-        prod.cantidad = prod.cantidad - 1
-      prod.subtotal = prod.cantidad * prod.precio
-      total_pedido = total_pedido + prod.precio
+        prod.cantidad = parseFloat(prod.cantidad - 1).round(2)
+      prod.subtotal = parseFloat(prod.cantidad * prod.precio)
+      total_pedido = parseFloat(total_pedido + prod.precio)
       prod.subtotal_string = number_to_currency(prod.subtotal)
-      cantidad = prod.cantidad
+      cantidad = parseFloat(prod.cantidad).round(2)
     return
   localStorage.setItem("productos", JSON.stringify(productos))
   animate($(".total-items"), "wobble")
-  if cantidad == 0
+  if cantidad < 0
     borrar_producto(id)
   else
     cargar_productos()
@@ -98,11 +125,9 @@ eventos = ->
   $('.btn-cart-item').unbind("click").click ->
     agregar_producto($(this))
   
-  
   $('#btn_vaciar_agregar').unbind("click").click ->
     borrar_pedido()
 
-  
   $('#btn-procesar').unbind("click").click ->
     window.location.href = "/pedido"
   

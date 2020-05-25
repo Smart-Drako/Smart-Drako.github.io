@@ -568,8 +568,8 @@ body {
 }
 
 .input-cantidad {
-  max-width: 33px !important;
-  width: 33px;
+  max-width: 60px !important;
+  width: 60px;
   text-align: center;
 }
 
@@ -610,4 +610,16 @@ a.link {
   .owl-carousel .owl-item .card-body {
     height: 65px;
   }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
