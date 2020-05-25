@@ -225,7 +225,7 @@ procesar_pedido = ->
     success: (data) ->
       if data.error == false
         borrar_pedido()
-        window.location.href = "/"
+        $("#notifPedidoModal").modal()
       else
         console.log "Ocurrió un error al generar el pedido"
 
