@@ -434,6 +434,22 @@ body {
   color: #ffffff;
 }
 
+.cond-item {
+  border-radius: 0.25rem;
+  border: solid 1px #ef2275;
+  width: 100%;
+  padding: 10px;
+  color: #ef2275;
+}
+
+.color-pink {
+  color: #ef2275;
+}
+
+.color-wa {
+  color: #00bb2d;
+}
+
 .btn-aqua {
   background-color: #1ad4d8 !important;
   color: #ffffff;
@@ -622,4 +638,37 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+
+.btn-wa,
+.btn-wa:hover,
+.btn-wa:focus,
+.btn-wa:active {
+  text-decoration: none;
+  color: #00bb2d;
+}
+
+.btn-fb,
+.btn-fb:hover,
+.btn-fb:focus,
+.btn-fb:active {
+  text-decoration: none;
+  color: #3b5998;
+}
+
+.btn-ph,
+.btn-ph:hover,
+.btn-ph:focus,
+.btn-ph:active {
+  text-decoration: none;
+  color: #e91e63;
+}
+
+.pl-0 {
+  padding-left: 0px;
+}
+
+.mt-10 {
+  margin-top: 10px;
 }

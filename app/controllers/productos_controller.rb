@@ -40,6 +40,8 @@ class ProductosController < ApplicationController
     end
     @negocio = ConfigUser.find(id)
     @categorias = @productos.pluck(:categoria).uniq.compact
+    @higiene = @negocio.condiciones_higiene.split(/\s*,\s*/)
+    @horario = @negocio.horario.split(/\s*,\s*/)
     
     @categorias.each_with_index do |cat, index|
       productos = @productos.where(user_id: id, categoria: cat)
