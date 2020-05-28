@@ -17,22 +17,22 @@
     </div>
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Datos del cliente</h4>
-      <form id="datos_cliente_form" autocomplete="off">
+      <form id="datos_cliente_form" autocomplete="off" method="POST" action="/">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="cliente_nombre">Nombre</label>
-            <input type="text" class="form-control" id="cliente_nombre" name="nombre"  >
+            <input type="text" class="form-control" id="cliente_nombre" name="nombre">
           </div>
           <div class="col-md-6 mb-3">
             <label for="cliente_telefono">Teléfono</label>
-            <input type="text" class="form-control" id="cliente_telefono" name="telefono" >
+            <input type="number" class="form-control positive-integer" id="cliente_telefono" name="telefono" onKeyPress="if(this.value.length==10) return false;" required>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-8 mb-3">
             <label for="cliente_direccion">Dirección</label>
-            <input type="text" class="form-control" id="cliente_direccion" name="direccion">
+            <input type="text" class="form-control" id="cliente_direccion" name="direccion" required>
           </div>
           <div class="col-md-4 mb-3">
             <label for="cliente_pago">Forma de Pago</label>
@@ -46,15 +46,15 @@
         <div class="row">
           <div class="col-md-4 mb-3">
             <label for="cliente_area">Area de Entrega</label>
-            <input type="text" class="form-control" id="cliente_area" name="area">
+            <input type="text" class="form-control" id="cliente_area" name="area" required>
           </div>
-          <div class="col-md-4 mb-3">
+          <div class="col-md-4 mb-3 d-none">
             <label for="cliente_horario">Horario de Entrega</label>
             <input type="text" class="form-control" id="cliente_horario" name="horario">
           </div>
           <div class="col-md-4 mb-3">
             <label for="cliente_correo">Correo Electrónico</label>
-            <input type="email" class="form-control" id="cliente_correo" name="correo" >
+            <input type="email" class="form-control" id="cliente_correo" name="correo" required>
           </div>
         </div>
         <div class="row">
@@ -99,7 +99,7 @@
           </div>
         </div>
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" id="btn-confirmar" type="button">Colocar Pedido</button>
+        <button class="btn btn-primary btn-lg btn-block" id="" type="submit">Confirmar Pedido</button>
       </form>
     </div>
   </div>

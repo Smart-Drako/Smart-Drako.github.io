@@ -7,6 +7,11 @@ Paloma.controller 'Productos', tienda: ->
   eventos_negocio()
 
 Paloma.controller 'Pedidos', new: ->
+
+  $('.positive-integer').numeric
+    decimal: false
+    negative: false
+
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
   if productos.length == 0
     window.location.href = "/"
@@ -22,7 +27,8 @@ Paloma.controller 'Pedidos', new: ->
       else
         $("#cliente_rfc, #cliente_uso").prop("disabled",true).val("")
 
-    $('#btn-confirmar').unbind("click").click ->
+    $('#datos_cliente_form').on 'submit', (e) ->
+      e.preventDefault()
       procesar_pedido()
 
 
