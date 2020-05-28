@@ -213,6 +213,7 @@ handlebars_productos_detalle = ->
 
 borrar_producto = (id) ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
+  $("#btn_add_#{id}").removeClass("btn-pink").addClass("btn-aqua")
   productos.forEach (item, index, object) ->
     if item.id == id
       object.splice index, 1
