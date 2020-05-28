@@ -17,6 +17,7 @@ Paloma.controller 'Pedidos', new: ->
     window.location.href = "/"
   else
     cargar_productos()
+    $(".carbar").css('visibility', 'hidden')
     $("#cliente_nombre").focus()
     $("#form-botones").hide()
     $("#cliente_rfc, #cliente_uso").prop("disabled",true).val("")
