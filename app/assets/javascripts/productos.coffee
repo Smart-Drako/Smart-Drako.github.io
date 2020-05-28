@@ -146,6 +146,8 @@ eventos = ->
   #Productos y carrito
   $('.btn-cart-item').unbind("click").click ->
     agregar_producto($(this))
+    #Mostrar que se producto se agrego
+    $(this).removeClass("btn-aqua").addClass("btn-pink")
   
   $('#btn_vaciar_agregar').unbind("click").click ->
     borrar_pedido()
