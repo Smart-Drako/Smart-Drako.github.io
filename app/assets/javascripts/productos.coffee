@@ -77,7 +77,7 @@ eventos_negocio = ->
       $(".div-cat").fadeIn()
       $("#info_proveedor").fadeOut()
       $("#ver_prod_movil, #ver_prod_web").addClass("active")
-      $("#ver_prod_movil").html("Ver información <i class='fas fa-chevron-up'></i>")
+      $("#ver_prod_movil").html("Ver proveedor <i class='fas fa-chevron-up'></i>")
       $("#ver_prod_web").html("Ver información del proveedor <i class='fas fa-chevron-up'></i>")
 
 eventos_handlebars = ->
