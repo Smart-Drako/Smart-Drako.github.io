@@ -1,7 +1,10 @@
 Paloma.controller 'Productos', tienda: ->
+  $("#cat-nav").hide()
+  $(".div-cat").hide()
   #Cargarlos si estan ya en localStorage
   cargar_productos()
   eventos()
+  eventos_negocio()
 
 Paloma.controller 'Pedidos', new: ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
@@ -57,6 +60,25 @@ calcular_totales = ->
     total_item: total_items
     total_pedido: total
   datos
+
+
+eventos_negocio = ->
+  $("#ver_prod_movil, #ver_prod_web").click ->
+    
+    if $(this).hasClass("active")
+      $("#cat-nav").fadeOut()
+      $(".div-cat").fadeOut()
+      $("#info_proveedor").fadeIn()
+      $("#ver_prod_movil, #ver_prod_web").removeClass("active")
+      $("#ver_prod_web").html("Ver todos los productos <i class='fas fa-chevron-down'></i>")
+      $("#ver_prod_movil").html("Ver productos <i class='fas fa-chevron-down'></i>")
+    else
+      $("#cat-nav").fadeIn()
+      $(".div-cat").fadeIn()
+      $("#info_proveedor").fadeOut()
+      $("#ver_prod_movil, #ver_prod_web").addClass("active")
+      $("#ver_prod_movil").html("Ver información <i class='fas fa-chevron-up'></i>")
+      $("#ver_prod_web").html("Ver información del proveedor <i class='fas fa-chevron-up'></i>")
 
 eventos_handlebars = ->
   $('.eliminar-item').unbind("click").click ->

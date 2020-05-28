@@ -647,6 +647,7 @@ input[type=number] {
 .btn-wa:active {
   text-decoration: none;
   color: #00bb2d;
+  margin-right: 5px;
 }
 
 .btn-fb,
@@ -655,6 +656,7 @@ input[type=number] {
 .btn-fb:active {
   text-decoration: none;
   color: #3b5998;
+  margin-right: 5px;
 }
 
 .btn-ph,
@@ -671,4 +673,8 @@ input[type=number] {
 
 .mt-10 {
   margin-top: 10px;
+}
+
+#ver_prod_movil {
+  width: 100%;
 }

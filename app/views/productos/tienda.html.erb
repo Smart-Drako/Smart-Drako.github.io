@@ -1,118 +1,124 @@
 <div class="col-12 pt-20">
   <div class="row">
-    <div class="col-5 col-md-2 align-self-center">
+    <div class="col-6 col-md-2 align-self-center">
       <img src="<%=@negocio.logo%>" class="img-thumbnail img-fluid">
+      <button type="button" id="ver_prod_movil" class="btn btn-outline-danger mt-10 d-block d-md-none">Ver productos <i class="fas fa-chevron-down"></i></button>
     </div>
-    <div class="col-7 col-md-10 align-self-center">
+    <div class="col-6 col-md-10 align-self-center">
       <h5><%=@negocio.nombre%></h5>
       <p><%=@negocio.direccion%></p>
-      <a href="<%=@negocio.facebook%>" class="btn-fb" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
-      <a href="https://api.whatsapp.com/send?phone=52<%=@negocio.whatsapp%>" class="btn-wa" target="_blank"><i class="fab fa-whatsapp-square fa-2x"></i></a>
-      <a href="tel:+52<%=@negocio.whatsapp%>" class="btn-ph" targer="_blank"><i class="fas fa-phone-square fa-2x"></i></a>
+      <div class="align-self-bottom">
+        <a href="<%=@negocio.facebook%>" class="btn-fb" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
+        <a href="https://api.whatsapp.com/send?phone=52<%=@negocio.whatsapp%>" class="btn-wa" target="_blank"><i class="fab fa-whatsapp-square fa-2x"></i></a>
+        <a href="tel:+52<%=@negocio.whatsapp%>" class="btn-ph" targer="_blank"><i class="fas fa-phone-square fa-2x"></i></a>
+      </div>
+      <div class="row mt-10 d-none d-md-block">
+        <button type="button" id="ver_prod_web" class="btn btn-outline-danger">Ver todos los productos <i class="fas fa-chevron-down"></i></button>
+      </div>
     </div>
   </div>
 </div>
 <hr>
 
-<div class="container cont-cat">
-<div class="card-deck">
-  <div class="card">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-2 align-self-center">
-          <img src="https://image.flaticon.com/icons/svg/815/815062.svg" class="img-fluid">
+<div class="container cont-cat" id="info_proveedor">
+  <div class="card-deck">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-2 align-self-center">
+            <img src="https://image.flaticon.com/icons/svg/815/815062.svg" class="img-fluid">
+          </div>
+          <div class="col-10 align-self-center">
+            <h5 class="card-title mb-0">Condiciones de Entrega</h5>
+          </div>
         </div>
-        <div class="col-10 align-self-center">
-          <h5 class="card-title mb-0">Condiciones de Entrega</h5>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col-12 mt-20">
-        <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 1%>
-          <div class="cond-item col-12">
-            <div class="row">
-              <div class="col-3 align-self-center">
-                <i class="fas fa-car-side fa-2x"></i>
-              </div>
-              <div class="col-9 align-self-center text-center">
-                <h5 class="mb-0">Entrega a domicilio</h5>
-                <h6 class="mb-0" style="color:#333"> Costo de envío: <%= number_to_currency(@negocio.costo_envio, :precision => 2) %></h6>
-              </div>
-            </div>
-          </div>
-        <%end%>
-        <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 2%>
-          <div class="cond-item col-12 mt-10">
-            <div class="row">
-              <div class="col-3 align-self-center">
-                <i class="fas fa-store fa-2x"></i>
-              </div>
-              <div class="col-9 align-self-center text-center">
-                <h5 class="mb-0">Pasar y recoger</h5>
+        <div class="row">
+          <div class="col-12 mt-20">
+          <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 1%>
+            <div class="cond-item col-12">
+              <div class="row">
+                <div class="col-3 align-self-center">
+                  <i class="fas fa-car-side fa-2x"></i>
+                </div>
+                <div class="col-9 align-self-center text-center">
+                  <h5 class="mb-0">Entrega a domicilio</h5>
+                  <h6 class="mb-0" style="color:#333"> Costo de envío: <%= number_to_currency(@negocio.costo_envio, :precision => 2) %></h6>
+                </div>
               </div>
             </div>
+          <%end%>
+          <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 2%>
+            <div class="cond-item col-12 mt-10">
+              <div class="row">
+                <div class="col-3 align-self-center">
+                  <i class="fas fa-store fa-2x"></i>
+                </div>
+                <div class="col-9 align-self-center text-center">
+                  <h5 class="mb-0">Pasar y recoger</h5>
+                </div>
+              </div>
+            </div>
+          <%end%>
           </div>
-        <%end%>
-        </div>
-        <div class="col-12 text-center mt-10">
-          <h6><strong>Horario de atención:</strong></h6>
-          <p><%= @negocio.horario%></p>
+          <div class="col-12 text-center mt-10">
+            <h6><strong>Horario de atención:</strong></h6>
+            <p><%= @negocio.horario%></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <div class="row ">
-        <div class="col-2 align-self-center">
-          <img src="https://image.flaticon.com/icons/png/512/2947/2947916.png" class="img-fluid">
+    <div class="card">
+      <div class="card-body">
+        <div class="row ">
+          <div class="col-2 align-self-center">
+            <img src="https://image.flaticon.com/icons/png/512/2947/2947916.png" class="img-fluid">
+          </div>
+          <div class="col-10 align-self-center">
+            <h5 class="card-title mb-0">Medidas de Higiene</h5>
+          </div>
         </div>
-        <div class="col-10 align-self-center">
-          <h5 class="card-title mb-0">Medidas de Higiene</h5>
+        <div class="row">
+          <div class="col-12 mt-20">
+            <ol>
+            <% @higiene.each do |h|%>
+              <li><%= h %>.</li>
+            <%end%>
+            </ol>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12 mt-20">
-          <ol>
-          <% @higiene.each do |h|%>
-            <li><%= h %>.</li>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-2 align-self-center">
+            <img src=" https://image.flaticon.com/icons/png/512/2856/2856192.png" class="img-fluid">
+          </div>
+          <div class="col-10 align-self-center">
+            <h5 class="card-title mb-0">Condiciones de Compra</h5>
+          </div>
+        </div>
+        <div class="mt-20 text-center">
+          <p>Compra mínima: <%= number_to_currency(@negocio.compra_minima, :precision => 2) %></p>
+          <p class="mb-0">Métodos de pago aceptados:</p>
+          <ul style="list-style-type: none;">
+            <% if @negocio.metodo_pago.to_i == 3%>
+              <li>Efectivo <i class="fas fa-money-bill color-wa"></i></li>
+              <li>Tarjeta <i class="far fa-credit-card color-pink"></i></li>
+            <%elsif @negocio.metodo_pago.to_i == 2%>
+              <li>Tarjeta <i class="far fa-credit-card color-pink"></i></li>
+            <%else%>
+              <li>Efectivo <i class="fas fa-money-bill color-wa"></i></li>
+            <%end%>
+          </ul>
+          <% if @negocio.factura == "Si"%>
+            <p>Facturación disponible <i class="far fa-file-alt color-pink"></i></p>
           <%end%>
-          </ol>
         </div>
       </div>
     </div>
   </div>
-  <div class="card">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-2 align-self-center">
-          <img src=" https://image.flaticon.com/icons/png/512/2856/2856192.png" class="img-fluid">
-        </div>
-        <div class="col-10 align-self-center">
-          <h5 class="card-title mb-0">Condiciones de Compra</h5>
-        </div>
-      </div>
-      <div class="mt-20 text-center">
-        <p>Compra mínima: <%= number_to_currency(@negocio.compra_minima, :precision => 2) %></p>
-        <p class="mb-0">Métodos de pago aceptados:</p>
-        <ul style="list-style-type: none;">
-          <% if @negocio.metodo_pago.to_i == 3%>
-            <li>Efectivo <i class="fas fa-money-bill color-wa"></i></li>
-            <li>Tarjeta <i class="far fa-credit-card color-pink"></i></li>
-          <%elsif @negocio.metodo_pago.to_i == 2%>
-            <li>Tarjeta <i class="far fa-credit-card color-pink"></i></li>
-          <%else%>
-            <li>Efectivo <i class="fas fa-money-bill color-wa"></i></li>
-          <%end%>
-        </ul>
-        <% if @negocio.factura == "Si"%>
-          <p>Facturación disponible <i class="far fa-file-alt color-pink"></i></p>
-        <%end%>
-      </div>
-    </div>
-  </div>
-</div>
 </div>
 
 <nav class="navbar navbar-expand sticky-top" id="cat-nav">
@@ -126,7 +132,7 @@
 </nav>
 
 <% @prods.each do |cat|%>
-  <div class="container cont-cat" id="cat_<%=cat[:id]%>">
+  <div class="container cont-cat div-cat" id="cat_<%=cat[:id]%>">
     <h2><%= cat[:nombre].capitalize%></h2>
     <table class="table table-sm" style="width:100%;">
       <thead>
