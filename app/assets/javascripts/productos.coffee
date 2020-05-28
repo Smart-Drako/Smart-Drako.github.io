@@ -136,7 +136,7 @@ sumar_restar_producto = (id, sumar) ->
     return
   localStorage.setItem("productos", JSON.stringify(productos))
   animate($(".total-items"), "wobble")
-  if cantidad < 0
+  if cantidad <= 0
     borrar_producto(id)
   else
     cargar_productos()
