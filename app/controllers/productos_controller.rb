@@ -13,6 +13,15 @@ class ProductosController < ApplicationController
     redirect_to productos_path and return
   end
 
+  # Se exporta con Axlsx, template view en: admin/empresas_productos/exportar.xlsx.axlsx
+  def exportar
+    @productos = Producto.where(user_id: current_user.id)
+    respond_to do |format|
+      format.html
+      format.xlsx { response.headers['Content-Disposition'] = 'attachment; filename="listado_productos.xlsx"' }
+    end
+  end
+
   # GET /productos/1
   # GET /productos/1.json
   def show

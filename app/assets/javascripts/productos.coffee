@@ -6,6 +6,14 @@ Paloma.controller 'Productos', tienda: ->
   eventos()
   eventos_negocio()
 
+Paloma.controller 'Productos', index: ->
+  $("#btn_importar").prop("disabled",true)
+  $('#file').change ->
+    if $(this).val()
+      $("#btn_importar").prop("disabled",false)
+    else 
+      $("#btn_importar").prop("disabled",true)
+
 Paloma.controller 'Pedidos', new: ->
 
   $('.positive-integer').numeric
