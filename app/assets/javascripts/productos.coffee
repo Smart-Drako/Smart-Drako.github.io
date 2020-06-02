@@ -1,6 +1,7 @@
 Paloma.controller 'Productos', tienda: ->
   $("#cat-nav").hide()
   $(".div-cat").hide()
+  $(".item-cantidades").hide()
   #Cargarlos si estan ya en localStorage
   cargar_productos()
   eventos()
@@ -120,7 +121,7 @@ eventos_handlebars = ->
     id = $(this).data("id")
     sumar_restar_producto(id, false)
   
-  $('.input-cantidad').focusout ->
+  $('.input-cantidad, .input-cantidad-list').focusout ->
     id = $(this).data("id")
     valor = $(this).val()
     cantidad_producto(id, valor)
@@ -138,7 +139,7 @@ cantidad_producto = (id, valor) ->
     return
   localStorage.setItem("productos", JSON.stringify(productos))
   animate($(".total-items"), "wobble")
-  if cantidad < 0
+  if cantidad <= 0
     borrar_producto(id)
   else
     cargar_productos()
@@ -160,6 +161,7 @@ sumar_restar_producto = (id, sumar) ->
       total_pedido = parseFloat(total_pedido + prod.precio)
       prod.subtotal_string = number_to_currency(prod.subtotal)
       cantidad = parseFloat(prod.cantidad).round(2)
+      $("#input_cant_#{id}").val(prod.cantidad)
     return
   localStorage.setItem("productos", JSON.stringify(productos))
   animate($(".total-items"), "wobble")
@@ -172,9 +174,8 @@ sumar_restar_producto = (id, sumar) ->
 eventos = ->
   #Productos y carrito
   $('.btn-cart-item').unbind("click").click ->
+    $(this).hide()
     agregar_producto($(this))
-    #Mostrar que se producto se agrego
-    $(this).removeClass("btn-aqua").addClass("btn-pink")
   
   $('#btn_vaciar_agregar').unbind("click").click ->
     borrar_pedido()
@@ -229,6 +230,12 @@ handlebars_productos = ->
   source = $("#handlebars_carrito_item").html()
   template = Handlebars.compile(source)
   $('#carrito_items').html(template(productos: productos))
+  #Cargar vista principal
+  productos.forEach (item, index, object) ->
+    $("#input_cant_#{item.id}").val(item.cantidad)
+    if parseFloat(item.cantidad) > 0
+      $("#input_cant_#{item.id}").parent().fadeIn()
+      $("#btn_add_#{item.id}").hide()
   eventos_handlebars()
 
 handlebars_productos_detalle = ->
@@ -236,11 +243,18 @@ handlebars_productos_detalle = ->
   source = $("#handlebars_carrito_item_detalle").html()
   template = Handlebars.compile(source)
   $('#carrito_items_detalle').html(template(productos: productos))
+  #Cargar vista principal
+  productos.forEach (item, index, object) ->
+    $("#input_cant_#{item.id}").val(item.cantidad)
+    if parseFloat(item.cantidad) > 0
+      $("#input_cant_#{item.id}").parent().fadeIn()
+      $("#btn_add_#{item.id}").hide()
   eventos_handlebars()
 
 borrar_producto = (id) ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
-  $("#btn_add_#{id}").removeClass("btn-pink").addClass("btn-aqua")
+  $("#input_cant_#{id}").parent().hide()
+  $("#btn_add_#{id}").fadeIn()
   productos.forEach (item, index, object) ->
     if item.id == id
       object.splice index, 1
@@ -266,6 +280,7 @@ agregar_producto = (producto) ->
 
   if productos.length == 0 
     total_pedido = precio
+    $("#input_cant_#{id}").val(1)
     productos.push({id: id, nombre: nombre, precio: precio, unidad: unidad, cantidad: 1 , subtotal: precio, precio_string: number_to_currency(precio), subtotal_string: number_to_currency(precio)})
   else
     existe = false
@@ -273,11 +288,13 @@ agregar_producto = (producto) ->
       if prod.id == id
         existe = true
         prod.cantidad = prod.cantidad + 1
+        $("#input_cant_#{id}").val(prod.cantidad)
         prod.subtotal = parseFloat(prod.cantidad * prod.precio)
         total_pedido = parseFloat(total_pedido + prod.precio)
         prod.subtotal_string = number_to_currency(prod.subtotal)
       return
     if existe == false
+      $("#input_cant_#{id}").val(1)
       productos.push({id: id, nombre: nombre, precio: precio, unidad: unidad, cantidad: 1 , subtotal: precio, precio_string: number_to_currency(precio), subtotal_string: number_to_currency(precio)})
       total_pedido = parseFloat(total_pedido + precio)
   localStorage.setItem("total_pedido", total_pedido)
