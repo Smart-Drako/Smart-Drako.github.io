@@ -45,7 +45,7 @@ class ProductosController < ApplicationController
       query = params[:buscar]
       @productos = Producto.where(descr.matches("%#{query}%"))
     else
-      @productos = Producto.where(user_id: id)
+      @productos = Producto.where(user_id: id).order('categoria, descripcion')
     end
     @negocio = ConfigUser.find(id)
     @categorias = @productos.pluck(:categoria).uniq.compact
