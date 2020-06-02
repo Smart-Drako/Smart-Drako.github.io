@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_023445) do
+ActiveRecord::Schema.define(version: 2020_06_02_053536) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_05_06_023445) do
     t.string "area_entrega"
     t.string "cliente_horario"
     t.string "cliente_metodo_pago"
+    t.string "cliente_tipo_envio"
     t.boolean "cliente_factura"
     t.string "cliente_rfc"
     t.string "cliente_uso_cfdi"

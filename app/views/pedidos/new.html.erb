@@ -45,12 +45,15 @@
 
         <div class="row">
           <div class="col-md-4 mb-3">
+            <label for="cliente_horario">Tipo de Envío</label>
+            <select class="custom-select d-block w-100" id="cliente_tipo_envio" name="tipo_envio">
+              <option value="A Domicilio">A Domicilio</option>
+              <option value="Para Recoger">Para Recoger</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
             <label for="cliente_area">Area de Entrega <span class="required"><i class="fas fa-asterisk fa-xs"></i></span></label>
             <input type="text" class="form-control" id="cliente_area" name="area" required>
-          </div>
-          <div class="col-md-4 mb-3 d-none">
-            <label for="cliente_horario">Horario de Entrega</label>
-            <input type="text" class="form-control" id="cliente_horario" name="horario">
           </div>
           <div class="col-md-4 mb-3">
             <label for="cliente_correo">Correo Electrónico <span class="required"><i class="fas fa-asterisk fa-xs"></i></span></label>

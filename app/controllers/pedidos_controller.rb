@@ -39,6 +39,7 @@ class PedidosController < ApplicationController
       pedido.cliente_horario = cliente["horario"] if cliente["horario"].present?
       pedido.cliente_metodo_pago = cliente["pago"] if cliente["pago"].present?
       pedido.cliente_factura = cliente["factura"] if cliente["factura"].present?
+      pedido.cliente_tipo_envio = cliente["tipo_envio"] if cliente["tipo_envio"].present?
       pedido.cliente_rfc = cliente["rfc"] if cliente["rfc"].present?
       pedido.cliente_uso_cfdi = cliente["uso_cfdi"] if cliente["uso_cfdi"].present?
       pedido.cliente_email = cliente["correo"] if cliente["correo"].present?

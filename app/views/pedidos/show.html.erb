@@ -1,64 +1,94 @@
 <div class="container cont-cat pt-50 pb-50">
   <div class="pedido">
 
-  <div class="col-12">
-    <div class="row">
-      <div class="col-5 col-md-2 col-pad-5">
-        <img src="<%=@negocio.logo%>" class="img-thumbnail img-fluid">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-5 col-md-2 col-pad-5 align-self-center">
+          <img src="<%=@negocio.logo%>" class="img-thumbnail img-fluid">
+        </div>
+        <div class="col-7 col-md-3 col-pad-5 align-self-center">
+          <h5><%=@negocio.nombre%></h5>
+          <span class="ped-numero color-pink d-block d-md-none">Pedido #<%= @pedido.id.to_s.rjust(6, "0")%></span>
+          <p class="ped-numero d-block d-md-none mb-0">Fecha: <%= @pedido.fecha%></p>
+          <label class="d-none d-md-block mb-0 mt-20" for="estatus">Estatus Pedido:</label>
+          <%= select_tag("estatus", options_for_select(@estatus_list, @pedido.estatus), { :include_blank => false, :class => 'form-control'}) %>
+        </div>
+        <div class="col-md-7 d-none d-md-block text-right align-self-center">
+          <p class="ped-numero color-pink"><strong>Pedido #<%= @pedido.id.to_s.rjust(6, "0")%></strong></p>
+          <p class="ped-numero">Fecha: <%= @pedido.fecha%></p>
+        </div>
       </div>
-      <div class="col-7 col-md-3 col-pad-5">
-        <h5><%=@negocio.nombre%></h5>
-        <span class="ped-numero color-pink d-block d-md-none">Pedido #<%= @pedido.id.to_s.rjust(6, "0")%></span>
-        <label class="d-none d-md-block mb-0 mt-20" for="estatus">Estatus Pedido:</label>
-        <%= select_tag("estatus", options_for_select(@estatus_list, @pedido.estatus), { :include_blank => false, :class => 'form-control'}) %>
-      </div>
-      <div class="col-md-7 d-none d-md-block text-right">
-        <p class="ped-numero color-pink"><strong>Pedido #<%= @pedido.id.to_s.rjust(6, "0")%></strong></p>
-        <p class="ped-numero">Fecha: <%= @pedido.fecha%></p>
+      <hr>
+    </div>
+
+    <div class="col-12 pt-20">
+      <div class="row">
+        <div class="col-12 col-md-6 mt-10">
+          <div class="datos">
+            <h5 class="color-pink">Datos del Cliente</h5>
+            <p>Nombre: <strong><%= @pedido.cliente_nombre%></strong></p>
+            <p>Teléfono: <strong><%= @pedido.cliente_telefono%></strong></p>
+            <p>Correo: <strong><%= @pedido.cliente_email%></strong></p>
+            <p>Dirección: <strong><%= @pedido.cliente_direccion%></strong></p>
+            <p>Area de Entrega: <strong><%= @pedido.area_entrega%></strong></p>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 mt-10">
+          <div class="datos">
+            <h5 class="color-pink">Detalles del Pedido</h5>
+            <p>Tipo de Envío: <strong><%= @pedido.cliente_tipo_envio%></strong></p>
+            <p>Forma de pago: <strong><%= @pedido.cliente_metodo_pago%></strong></p>
+            <p>Requiere Factura: <strong><%= (@pedido.cliente_factura == true ? "Si" : "No") %></strong></p>
+            <% if @pedido.cliente_factura == true%>
+            <p>RFC: <strong><%= @pedido.cliente_rfc%></strong></p>
+            <p>Uso CFDI: <strong><%= @pedido.cliente_uso_cfdi%></strong></p>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-    <h4>Pedido: P-<%= @pedido.id%></h4>
-    <h4>Fecha: <%= @pedido.fecha%></h4>
-    <h4>Cliente: <%= @pedido.cliente_nombre%></h4>
-    <h4>Area Entrega: <%= @pedido.area_entrega%></h4>
-    <h4>Total: <%= number_to_currency(@pedido.total, :precision => 2) %></h4>
-    <h4>Estatus: <%= @pedido.estatus%></h4>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12  pt-40">
+          <h5 class="color-pink text-center">Lista del pedido</h5>
+          <div class="table-responsive">
+            <table class="table table-sm table-hover" style="width:100%;">
+              <thead>
+                <tr>
+                  <th class="text-center">Cantidad</th>
+                  <th class="text-center">Producto</th>
+                  <th class="text-center">Unidad</th>
+                  <th class="text-center">Precio</th>
+                  <th class="text-center">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @productos.each do |p|%>
+                <tr>
+                  <td class="text-center"><%= p.cantidad %></td>
+                  <td><%= p.nombre %></td>
+                  <td class="text-center"><%= p.unidad %></td>
+                  <td class="text-center"><%= number_to_currency(p.precio, :precision => 2) %></td>
+                  <td class="text-right"><%= number_to_currency(p.subtotal, :precision => 2) %></td>
+                </tr>
+                <%end%>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3"></td>
+                  <td class="text-right ped-total"><strong>Total:</strong></td>
+                  <td class="text-right ped-total"><%= number_to_currency(@pedido.total, :precision => 2) %></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
 
-
-    <h4>Lista del pedido</h4>
-    <div class="table-responsive">
-        <table class="table table-sm table-hover" style="width:100%;">
-      <thead>
-        <tr>
-          <th class="text-center">Cantidad</th>
-          <th class="text-center">Producto</th>
-          <th class="text-center">Unidad</th>
-          <th class="text-center">Precio</th>
-          <th class="text-center">Subtotal</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @productos.each do |p|%>
-        <tr>
-          <td class="text-center"><%= p.cantidad %></td>
-          <td><%= p.nombre %></td>
-          <td class="text-center"><%= p.unidad %></td>
-          <td class="text-center"><%= number_to_currency(p.precio, :precision => 2) %></td>
-          <td class="text-right"><%= number_to_currency(p.subtotal, :precision => 2) %></td>
-        </tr>
-        <%end%>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="3"></td>
-          <td class="text-right ped-total"><strong>Total:</strong></td>
-          <td class="text-right ped-total"><%= number_to_currency(@pedido.total, :precision => 2) %></td>
-        </tr>
-      </tfoot>
-    </table>
+        </div>
+      </div>
     </div>
+
+
 
   </div>
 </div>

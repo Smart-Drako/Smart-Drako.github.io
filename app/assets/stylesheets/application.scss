@@ -335,6 +335,10 @@ li.ilb {
   margin-bottom: 0px;
 }
 
+.mt-10 {
+  margin-top: 10px;
+}
+
 .mt-20 {
   margin-top: 20px;
 }
@@ -345,6 +349,10 @@ li.ilb {
 
 .pt-20 {
   padding-top: 20px;
+}
+
+.pt-10 {
+  padding-top: 10px;
 }
 
 .img-cover {
@@ -721,4 +729,10 @@ div.pedido {
 .col-pad-5 {
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.datos {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px 15px;
 }
