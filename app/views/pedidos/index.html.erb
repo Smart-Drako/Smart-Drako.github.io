@@ -4,8 +4,8 @@
     <table class="table table-sm" style="width:100%;">
       <thead>
         <tr>
-          <th>Fecha</th>
           <th>#Pedido</th>
+          <th>Fecha</th>
           <th>Cliente</th>
           <th>Area Entrega</th>
           <th>Total</th>
@@ -15,8 +15,8 @@
       <tbody>
         <% @pedidos.each do |p|%>
         <tr>
-          <td><%= p.fecha %></td>
           <td><a class="link" href="/pedido/<%=p.id%>"><%= "##{p.id.to_s.rjust(6, "0")}" %></a></td>
+          <td><%= p.fecha %></td>
           <td><%= p.cliente_nombre %></td>
           <td><%= p.area_entrega %></td>
           <td><%= number_to_currency(p.total, :precision => 2) %></td>
