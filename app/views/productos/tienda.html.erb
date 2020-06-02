@@ -13,7 +13,7 @@
         <a href="tel:+52<%=@negocio.whatsapp%>" class="btn-ph" targer="_blank"><i class="fas fa-phone-square fa-2x"></i></a>
       </div>
       <div class="row mt-10 d-none d-md-block">
-        <button type="button" id="ver_prod_web" class="btn btn-outline-danger">Ver todos los productos <i class="fas fa-chevron-down"></i></button>
+        <button type="button" id="ver_prod_web" class="btn btn-pink">Ver todos los productos <i class="fas fa-chevron-down"></i></button>
       </div>
     </div>
   </div>
@@ -29,39 +29,33 @@
             <img src="https://image.flaticon.com/icons/svg/815/815062.svg" class="img-fluid">
           </div>
           <div class="col-10 align-self-center">
-            <h5 class="card-title mb-0">Condiciones de Entrega</h5>
+            <h5 class="card-title mb-0 color-pink">Condiciones de Entrega</h5>
           </div>
         </div>
 
         <div class="row">
           <div class="col-12 mt-20">
           <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 1%>
-            <div class="cond-item col-12">
+            <div class="col-12">
               <div class="row">
-                <div class="col-3 align-self-center">
-                  <i class="fas fa-car-side fa-2x"></i>
-                </div>
-                <div class="col-9 align-self-center text-center">
-                  <h5 class="mb-0">Entrega a domicilio</h5>
+                <div class="col-12 align-self-center text-center">
+                  <h5 class="mb-0">Entrega a domicilio <i class="fas fa-car-side fa-xs color-pink"></i></h5>
                   <h6 class="mb-0" style="color:#333"> Costo de envío: <%= number_to_currency(@negocio.costo_envio, :precision => 2) %></h6>
                 </div>
               </div>
             </div>
           <%end%>
           <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 2%>
-            <div class="cond-item col-12 mt-10">
+            <div class="col-12 mt-10">
               <div class="row">
-                <div class="col-3 align-self-center">
-                  <i class="fas fa-store fa-2x"></i>
-                </div>
-                <div class="col-9 align-self-center text-center">
-                  <h5 class="mb-0">Pasar y recoger</h5>
+                <div class="col-12 align-self-center text-center">
+                  <h5 class="mb-0">Pasar y recoger <i class="fas fa-store fa-xs color-pink"></i></h5>
                 </div>
               </div>
             </div>
           <%end%>
           </div>
-          <div class="col-12 text-center mt-10">
+          <div class="col-12 text-center mt-20">
             <h6><strong>Horario de atención:</strong></h6>
             <p><%= @negocio.horario%></p>
           </div>
@@ -75,7 +69,7 @@
             <img src="https://image.flaticon.com/icons/png/512/2947/2947916.png" class="img-fluid">
           </div>
           <div class="col-10 align-self-center">
-            <h5 class="card-title mb-0">Medidas de Higiene</h5>
+            <h5 class="card-title mb-0 color-pink">Medidas de Higiene</h5>
           </div>
         </div>
         <div class="row">
@@ -96,7 +90,7 @@
             <img src=" https://image.flaticon.com/icons/png/512/2856/2856192.png" class="img-fluid">
           </div>
           <div class="col-10 align-self-center">
-            <h5 class="card-title mb-0">Condiciones de Compra</h5>
+            <h5 class="card-title mb-0 color-pink">Condiciones de Compra</h5>
           </div>
         </div>
         <div class="mt-20 text-center">
