@@ -12,6 +12,8 @@ class PedidosController < ApplicationController
     @pedido = Pedido.find_by(id: params[:id])
     if @pedido.present?
       @productos = ProductoPedido.where(pedido_id: @pedido.id)
+      @negocio = ConfigUser.find_by(user_id: @pedido.user_id)
+      @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
       redirect_to pedidos_path and return if @pedido.user_id != current_user.id
     else
       redirect_to pedidos_path and return
