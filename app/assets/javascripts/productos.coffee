@@ -94,8 +94,8 @@ eventos_negocio = ->
   $("#ver_prod_movil, #ver_prod_web").click ->
     
     if $(this).hasClass("active")
-      $("#cat-nav").fadeOut()
-      $(".div-cat").fadeOut()
+      $("#cat-nav").hide()
+      $(".div-cat").hide()
       $("#info_proveedor").fadeIn()
       $("#ver_prod_movil, #ver_prod_web").removeClass("active")
       $("#ver_prod_web").html("Ver todos los productos <i class='fas fa-chevron-down'></i>")
@@ -103,7 +103,7 @@ eventos_negocio = ->
     else
       $("#cat-nav").fadeIn()
       $(".div-cat").fadeIn()
-      $("#info_proveedor").fadeOut()
+      $("#info_proveedor").hide()
       $("#ver_prod_movil, #ver_prod_web").addClass("active")
       $("#ver_prod_movil").html("Ver proveedor <i class='fas fa-chevron-up'></i>")
       $("#ver_prod_web").html("Ver información del proveedor <i class='fas fa-chevron-up'></i>")
@@ -125,6 +125,14 @@ eventos_handlebars = ->
     id = $(this).data("id")
     valor = $(this).val()
     cantidad_producto(id, valor)
+  
+  $('.input-cantidad').on 'keyup', (e) ->
+    if e.keyCode == 13
+      id = $(this).data("id")
+      valor = $(this).val()
+      cantidad_producto(id, valor)
+      $(this).blur()
+    return
 
 cantidad_producto = (id, valor) ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
@@ -179,6 +187,14 @@ eventos = ->
   
   $('#btn_vaciar_agregar').unbind("click").click ->
     borrar_pedido()
+  
+  $('.input-cantidad-list').on 'keyup', (e) ->
+    if e.keyCode == 13
+      id = $(this).data("id")
+      valor = $(this).val()
+      cantidad_producto(id, valor)
+      $(this).blur()
+    return
 
   $('#btn-procesar').unbind("click").click ->
     window.location.href = "/pedido"
