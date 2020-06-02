@@ -2,10 +2,30 @@ class PedidosController < ApplicationController
   before_action :authenticate_user!, :except => [:generar, :new]
 
   def index
-    @pedidos = Pedido.where(user_id: current_user.id)
+    @pedidos = Pedido.where(user_id: current_user.id).order(id: :desc)
+    @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
   end
 
   def new
+  end
+
+  def actualizar_estatus
+    pedido_id = params[:pedido_id].to_i
+    estatus = params[:estatus]
+    pedido = Pedido.find(pedido_id)
+
+    if pedido.present?
+      render json: {error: true, mensaje: "No tiene permiso para editar ese pedido"} and return if pedido.user_id != current_user.id
+      pedido.estatus = estatus
+      if pedido.save!
+        render json: {error: false, mensaje: "Pedido actualizado correctamente"} and return
+      else
+        render json: {error: true, mensaje: "Ocurrió un error al actualizar el pedido"} and return
+      end
+    else
+      render json: {error: true, mensaje: "No se encontró el pedido"} and return
+    end
+
   end
 
   def show

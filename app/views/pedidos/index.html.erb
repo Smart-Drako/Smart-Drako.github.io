@@ -1,27 +1,29 @@
 <div class="container cont-cat">
   <h2>Pedidos</h2>
-  <table class="table table-sm" style="width:100%;">
-    <thead>
-      <tr>
-        <th>Fecha</th>
-        <th>#Pedido</th>
-        <th>Cliente</th>
-        <th>Area Entrega</th>
-        <th>Total</th>
-        <th>Estatus</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @pedidos.each do |p|%>
-      <tr>
-        <td><%= p.fecha %></td>
-        <td><a class="link" href="/pedido/<%=p.id%>"><%= "P-#{p.id}" %></a></td>
-        <td><%= p.cliente_nombre %></td>
-        <td><%= p.area_entrega %></td>
-        <td><%= number_to_currency(p.total, :precision => 2) %></td>
-        <td><%= p.estatus %></td>
-      </tr>
-      <%end%>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table table-sm" style="width:100%;">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>#Pedido</th>
+          <th>Cliente</th>
+          <th>Area Entrega</th>
+          <th>Total</th>
+          <th>Estatus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pedidos.each do |p|%>
+        <tr>
+          <td><%= p.fecha %></td>
+          <td><a class="link" href="/pedido/<%=p.id%>"><%= "##{p.id.to_s.rjust(6, "0")}" %></a></td>
+          <td><%= p.cliente_nombre %></td>
+          <td><%= p.area_entrega %></td>
+          <td><%= number_to_currency(p.total, :precision => 2) %></td>
+          <td><%= select_tag("pedido_estatus", options_for_select(@estatus_list, p.estatus), { :include_blank => false, :class => 'form-control pedido_estatus',:id => nil, :data => {"pedido-id": p.id}}) %></td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -14,6 +14,18 @@ Paloma.controller 'Productos', index: ->
     else 
       $("#btn_importar").prop("disabled",true)
 
+Paloma.controller 'Pedidos', show: ->
+  $("#pedido_estatus").change ->
+    pedido_id = $(this).data("pedido-id")
+    estatus = $(this).val()
+    cambiar_estatus_pedido(pedido_id, estatus)
+
+Paloma.controller 'Pedidos', index: ->
+  $(".pedido_estatus").change ->
+    pedido_id = $(this).data("pedido-id")
+    estatus = $(this).val()
+    cambiar_estatus_pedido(pedido_id, estatus)
+
 Paloma.controller 'Pedidos', new: ->
 
   $('.positive-integer').numeric
@@ -300,6 +312,20 @@ borrar_pedido = ->
   localStorage.removeItem("productos")
   localStorage.removeItem("negocio_id")
   cargar_productos()
+
+#Actualizar estatus pedido
+cambiar_estatus_pedido = (id, estatus) ->
+  $.ajax
+    type: 'POST'
+    url: '/pedido/actualizar_estatus'
+    data: { pedido_id: id, estatus: estatus}
+    beforeSend: ->
+      console.log "Actualizando estatus del pedido..."
+    success: (data) ->
+      if data.error == false
+        console.log "Se actualizó el estatus a #{estatus}."
+      else
+        console.log "Ocurrió un error al actualizar el estatus del pedido."
 
 #Utilidades
 number_to_currency = (number, options) ->

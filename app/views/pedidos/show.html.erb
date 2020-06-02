@@ -11,7 +11,7 @@
           <span class="ped-numero color-pink d-block d-md-none">Pedido #<%= @pedido.id.to_s.rjust(6, "0")%></span>
           <p class="ped-numero d-block d-md-none mb-0">Fecha: <%= @pedido.fecha%></p>
           <label class="d-none d-md-block mb-0 mt-20" for="estatus">Estatus Pedido:</label>
-          <%= select_tag("estatus", options_for_select(@estatus_list, @pedido.estatus), { :include_blank => false, :class => 'form-control'}) %>
+          <%= select_tag("pedido_estatus", options_for_select(@estatus_list, @pedido.estatus), { :include_blank => false, :class => 'form-control', :data => {"pedido-id": @pedido.id}}) %>
         </div>
         <div class="col-md-7 d-none d-md-block text-right align-self-center">
           <p class="ped-numero color-pink"><strong>Pedido #<%= @pedido.id.to_s.rjust(6, "0")%></strong></p>
