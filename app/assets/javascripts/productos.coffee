@@ -121,18 +121,18 @@ eventos_handlebars = ->
     id = $(this).data("id")
     sumar_restar_producto(id, false)
   
-  $('.input-cantidad, .input-cantidad-list').focusout ->
-    id = $(this).data("id")
-    valor = $(this).val()
-    cantidad_producto(id, valor)
-  
-  $('.input-cantidad').on 'keyup', (e) ->
+  $('.input-cantidad, .input-cantidad-list').unbind().keyup (e) ->
     if e.keyCode == 13
       id = $(this).data("id")
       valor = $(this).val()
       cantidad_producto(id, valor)
       $(this).blur()
     return
+  
+  $('.input-cantidad, .input-cantidad-list').unbind("focusout").focusout ->
+    id = $(this).data("id")
+    valor = $(this).val()
+    cantidad_producto(id, valor)
 
 cantidad_producto = (id, valor) ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
@@ -187,14 +187,6 @@ eventos = ->
   
   $('#btn_vaciar_agregar').unbind("click").click ->
     borrar_pedido()
-  
-  $('.input-cantidad-list').on 'keyup', (e) ->
-    if e.keyCode == 13
-      id = $(this).data("id")
-      valor = $(this).val()
-      cantidad_producto(id, valor)
-      $(this).blur()
-    return
 
   $('#btn-procesar').unbind("click").click ->
     window.location.href = "/pedido"
