@@ -134,11 +134,13 @@
     <h4><%= cat[:nombre].capitalize%></h4>
     <% cat[:productos].each do |prod|%>
       <div class="lista-item row borders-item">
-        <div class="col-7 col-md-10">
+        <div class="col-12">
           <p class="mb-0"><%=prod.descripcion%></p>
-          <p class="mb-0"><%=number_to_currency(prod.precio)%><span class="text-secondary">/<%=prod.unidad%></span></p>
         </div>
-        <div class="col-5 col-md-2 align-self-center text-right">
+        <div class="col-6 col-md-10 align-self-center">
+          <p class="mb-0"><strong><%=number_to_currency(prod.precio)%><span class=""> / <%=prod.unidad%></span></strong></p>
+        </div>
+        <div class="col-6 col-md-2 text-right">
           <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>" data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>" class="btn btn-sm btn-aqua btn-cart-item btn-block">Agregar</button>
           <div class="item-cantidades input-group input-group-sm" style="width: auto;">
             <div class="input-group-prepend">
@@ -148,22 +150,12 @@
             <div class="input-group-append">
               <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm sumar-item"><i class="fas fa-plus"></i></button>
             </div>
-          </div>
-          <div class="input-group mb-3 d-none">
-            <div class="input-group-prepend">
-              <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm restar-item"><i class="fas fa-minus"></i></button>
-            </div>
-            <input id="input_cant_<%=prod.id%>" data-id="<%=prod.id%>" type="number" class="form-control input-cantidad-list input-sm" value="">
-            <div class="input-group-append">
-              <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm sumar-item"><i class="fas fa-plus"></i></button>
+            <div class="align-self-center d-none" style="padding-left: 2px;">
+              <span> <%=prod.unidad%></span>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12"></div>
-      </div>
-
     <%end%>
   </div>
 <%end%>
