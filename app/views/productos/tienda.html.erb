@@ -123,14 +123,14 @@
   <ul class="navbar-nav scrollable-content d-flex h-100">
     <% @categorias.each_with_index do |cat,i|%>
       <li class="nav-item ilb">
-        <a data-turbolinks="false" class="<%=i == 0 ? 'nav-link active' : 'nav-link' %>" href="#cat_<%= cat %>"><%= cat.upcase %></a>
+        <a data-turbolinks="false" class="<%=i == 0 ? 'nav-link active' : 'nav-link' %>" href="#cat_<%= cat.delete(' ') %>"><%= cat.upcase %></a>
       </li>
     <%end%>
   </ul>
 </nav>
 
 <% @prods.each do |cat|%>
-  <div class="container cont-cat div-cat" id="cat_<%=cat[:id]%>">
+  <div class="container cont-cat div-cat" id="cat_<%=cat[:id].delete(' ')%>">
     <h4><%= cat[:nombre].capitalize%></h4>
     <% cat[:productos].each do |prod|%>
       <div class="lista-item row borders-item">
