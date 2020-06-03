@@ -1,7 +1,7 @@
 Paloma.controller 'Productos', tienda: ->
   # $("#cat-nav").hide()
   # $(".div-cat").hide()
-  $(".item-cantidades").hide()
+  $(".item-cantidades, .span-unidad").hide()
   #Cargarlos si estan ya en localStorage
   cargar_productos()
   eventos()
@@ -240,6 +240,7 @@ handlebars_productos = ->
     $("#input_cant_#{item.id}").val(item.cantidad)
     if parseFloat(item.cantidad) > 0
       $("#input_cant_#{item.id}").parent().fadeIn()
+      $("#span_unidad_#{item.id}").fadeIn()
       $("#btn_add_#{item.id}").hide()
   eventos_handlebars()
 
@@ -253,12 +254,14 @@ handlebars_productos_detalle = ->
     $("#input_cant_#{item.id}").val(item.cantidad)
     if parseFloat(item.cantidad) > 0
       $("#input_cant_#{item.id}").parent().fadeIn()
+      $("#span_unidad_#{item.id}").fadeIn()
       $("#btn_add_#{item.id}").hide()
   eventos_handlebars()
 
 borrar_producto = (id) ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
   $("#input_cant_#{id}").parent().hide()
+  $("#span_unidad_#{id}").hide()
   $("#btn_add_#{id}").fadeIn()
   productos.forEach (item, index, object) ->
     if item.id == id
