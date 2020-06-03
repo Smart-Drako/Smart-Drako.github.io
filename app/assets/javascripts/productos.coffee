@@ -213,7 +213,7 @@ eventos = ->
     $(".nav-link").removeClass("active")
     $(this).addClass("active")
     e.preventDefault()
-    $('html, body').animate scrollTop: $(@hash).offset().top - 30
+    $('html, body').animate scrollTop: $(@hash).offset().top
     return
   $(window).on 'activate.bs.scrollspy', ->
     x = $('#cat-nav > ul > li > a.active')
