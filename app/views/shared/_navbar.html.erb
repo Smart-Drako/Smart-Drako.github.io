@@ -6,13 +6,13 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <%if user_signed_in?%>
-      <li class="nav-item active">
+      <li class="nav-item <%=current_class?("/me")%>">
         <a class="nav-link" href="/me">Configuración</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/pedidos">Mis Pedidos</a>
+      <li class="nav-item <%=current_class?("/pedidos")%>">
+        <a class="nav-link" href="/pedidos">Pedidos de Clientes</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item <%=current_class?("/productos")%>">
         <a class="nav-link" href="/productos">Productos</a>
       </li>
       <%end%>

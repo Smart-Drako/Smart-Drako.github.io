@@ -443,6 +443,17 @@ body {
   color: #ffffff;
 }
 
+.btn-pink-alt {
+  background-color: #ef2275 !important;
+  color: #ffffff;
+  background: #ec008c;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #fc6767, #ec008c);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #fc6767, #ec008c);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
 .cond-item {
   border-radius: 0.25rem;
   border: solid 1px #ef2275;
@@ -755,4 +766,20 @@ div.pedido {
 
 .lista-item {
   font-size: 0.9rem;
+}
+
+li.nav-item.active {
+  background: #ec008c;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #fc6767, #ec008c);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #fc6767, #ec008c);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  color: #fff !important;
+  border-radius: 5px;
+}
+
+li.nav-item.active>.nav-link {
+  color: #fff !important;
 }
