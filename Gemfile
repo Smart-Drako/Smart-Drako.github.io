@@ -53,6 +53,8 @@ gem "roo", "~> 2.8.0"
 #Generar xlsx
 gem 'caxlsx'
 gem 'caxlsx_rails'
+# Gem for useragent
+gem 'browser'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

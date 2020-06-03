@@ -225,9 +225,9 @@ a {
 }
 
 .btn-circle-sm {
-  width: 25px;
-  height: 25px;
-  line-height: 25px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
   font-size: 0.9rem;
 }
 
@@ -260,6 +260,7 @@ li.ilb {
   z-index: 3;
   padding-left: 0px;
   padding-right: 0px;
+  position: -webkit-sticky !important;
 }
 
 #cat-nav>ul>li>a.active {
@@ -761,11 +762,12 @@ div.pedido {
 .borders-item {
   border: 1px solid #ddd;
   border-radius: 5px;
-  margin: 3px 2px;
+  margin: 6px 2px;
 }
 
 .lista-item {
   font-size: 0.9rem;
+  padding: 5px 0px;
 }
 
 li.nav-item.active {
@@ -782,4 +784,18 @@ li.nav-item.active {
 
 li.nav-item.active>.nav-link {
   color: #fff !important;
+}
+
+.sticky-top {
+  @supports (position: sticky) or (position: -webkit-sticky) {
+    position: -webkit-sticky !important;
+    position: sticky;
+    top: 0;
+    z-index: 333;
+  }
+}
+
+.total-pedido {
+  font-weight: bolder;
+  font-size: 1.15rem;
 }
