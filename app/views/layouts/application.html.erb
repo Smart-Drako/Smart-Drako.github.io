@@ -55,18 +55,22 @@
   <%= render "/shared/plantillas" %>
 
   <script>
-  window.onscroll = function() {myFunction()};
+  $(document).ready(function(){
+    window.onscroll = function() {myFunction()};
 
-  var navbar = document.getElementById("cat-nav");
-  var sticky = navbar.offsetTop;
+    var navbar = document.getElementById("cat-nav");
+    var sticky = navbar.offsetTop;
 
-  function myFunction() {
-    if (window.pageYOffset >= sticky) {
-      navbar.classList.add("sticky-ios")
-    } else {
-      navbar.classList.remove("sticky-ios");
+    function myFunction() {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky-ios")
+        console.log("sticky");
+      } else {
+        navbar.classList.remove("sticky-ios");
+        console.log("No sticky");
+      }
     }
-  }
+  });
   </script>
 
 </html>

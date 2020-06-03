@@ -1,6 +1,6 @@
 Paloma.controller 'Productos', tienda: ->
-  $("#cat-nav").hide()
-  $(".div-cat").hide()
+  # $("#cat-nav").hide()
+  # $(".div-cat").hide()
   $(".item-cantidades").hide()
   #Cargarlos si estan ya en localStorage
   cargar_productos()
@@ -92,21 +92,19 @@ calcular_totales = ->
 
 eventos_negocio = ->
   $("#ver_prod_movil, #ver_prod_web").click ->
-    
-    if $(this).hasClass("active")
-      $("#cat-nav").hide()
-      $(".div-cat").hide()
-      $("#info_proveedor").fadeIn()
-      $("#ver_prod_movil, #ver_prod_web").removeClass("active")
-      $("#ver_prod_web").html("Ver todos los productos <i class='fas fa-chevron-down'></i>")
-      $("#ver_prod_movil").html("Ver productos <i class='fas fa-chevron-down'></i>")
-    else
-      $("#cat-nav").fadeIn()
-      $(".div-cat").fadeIn()
-      $("#info_proveedor").hide()
-      $("#ver_prod_movil, #ver_prod_web").addClass("active")
-      $("#ver_prod_movil").html("Ver proveedor <i class='fas fa-chevron-up'></i>")
-      $("#ver_prod_web").html("Ver información del proveedor <i class='fas fa-chevron-up'></i>")
+    console.log "x"
+    # if $(this).hasClass("active")
+    #   #No ocultar solo mover
+    #   $('body').scrollTo $("#cat-nav")
+    #   $("#info_proveedor").fadeIn()
+    #   $("#ver_prod_movil, #ver_prod_web").removeClass("active")
+    #   $("#ver_prod_web").html("Ver todos los productos <i class='fas fa-chevron-down'></i>")
+    #   $("#ver_prod_movil").html("Ver productos <i class='fas fa-chevron-down'></i>")
+    # else
+    #   $('body').scrollTo($("#cat-nav"),{margin: true})
+    #   $("#ver_prod_movil, #ver_prod_web").addClass("active")
+    #   $("#ver_prod_movil").html("Ver proveedor <i class='fas fa-chevron-up'></i>")
+    #   $("#ver_prod_web").html("Ver información del proveedor <i class='fas fa-chevron-up'></i>")
 
 eventos_handlebars = ->
   $('.eliminar-item').unbind("click").click ->
