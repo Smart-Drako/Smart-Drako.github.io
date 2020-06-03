@@ -260,7 +260,6 @@ li.ilb {
   z-index: 3;
   padding-left: 0px;
   padding-right: 0px;
-  position: -webkit-sticky !important;
 }
 
 #cat-nav>ul>li>a.active {
@@ -798,6 +797,12 @@ li.nav-item.active>.nav-link {
     top: 0;
     z-index: 333;
   }
+}
+
+.sticky-ios {
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .total-pedido {

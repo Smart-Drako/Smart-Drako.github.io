@@ -204,10 +204,7 @@ eventos = ->
     $('.carbar').toggleClass 'd-none'
     $('.carbar').toggleClass 'd-block'
     return
-  #Scroll sticky
-  # $(window).unbind('scroll').on 'scroll', ->
-  #   sticky $('#cat-nav')
-  #   return
+  
   #Scroll al hacer clic en item navbar
   $('#cat-nav ul li a[href^=\'#\']').on 'click', (e) ->
     e.preventDefault()
@@ -389,19 +386,6 @@ number_with_delimiter = (number, delimiter, separator) ->
     return parts.join(separator)
   catch e
     return number
-  return
-
-sticky = (obj) ->
-  bar = obj.offset().top
-  if $(window).scrollTop() >= bar
-    if obj.hasClass('sticky-custom') == false
-      obj.addClass 'sticky-custom'
-      $(window).scrollTop bar + 1
-      $('#btn-cart_float').addClass 'd-md-block'
-  else
-    if obj.hasClass('sticky-custom')
-      obj.removeClass 'sticky-custom'
-      $('#btn-cart_float').removeClass 'd-md-block'
   return
 
 animate = (item, efecto) ->

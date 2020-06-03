@@ -37,8 +37,6 @@
 
   <body data-spy="scroll" data-target=".navbar" data-offset="80">
 
-    <%= browser.platform%>
-
     <%= render "/shared/navbar" %>
     <%= render "/shared/cart_sidebar" %>  
     <div class="container cont-principal">
@@ -54,6 +52,21 @@
       Paloma.start();
     });
   </script>
-  <%= render "/shared/plantillas" %> 
+  <%= render "/shared/plantillas" %>
+
+  <script>
+  window.onscroll = function() {myFunction()};
+
+  var navbar = document.getElementById("cat-nav");
+  var sticky = navbar.offsetTop;
+
+  function myFunction() {
+    if (window.pageYOffset >= sticky) {
+      navbar.classList.add("sticky-ios")
+    } else {
+      navbar.classList.remove("sticky-ios");
+    }
+  }
+  </script>
 
 </html>
