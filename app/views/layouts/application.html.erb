@@ -54,23 +54,27 @@
   </script>
   <%= render "/shared/plantillas" %>
 
-  <script>
-  $(document).ready(function(){
-    window.onscroll = function() {myFunction()};
+  <% if browser.platform.ios? %>
+    <script>
+      $(document).ready(function(){
+        window.onscroll = function() {myFunction()};
 
-    var navbar = document.getElementById("cat-nav");
-    var sticky = navbar.offsetTop;
+        var navbar = document.getElementById("cat-nav");
+        var sticky = navbar.offsetTop;
 
-    function myFunction() {
-      if (window.pageYOffset >= sticky) {
-        navbar.classList.add("sticky-ios")
-        console.log("sticky");
-      } else {
-        navbar.classList.remove("sticky-ios");
-        console.log("No sticky");
-      }
-    }
-  });
-  </script>
+        function myFunction() {
+          if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky-ios")
+            console.log("sticky");
+          } else {
+            navbar.classList.remove("sticky-ios");
+            console.log("No sticky");
+          }
+        }
+      });
+    </script>
+  <%end%>
+
+
 
 </html>
