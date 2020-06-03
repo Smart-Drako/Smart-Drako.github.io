@@ -210,6 +210,8 @@ eventos = ->
     return
   #Scroll al hacer clic en item navbar
   $('#cat-nav ul li a[href^=\'#\']').on 'click', (e) ->
+    $(".nav-link").removeClass("active")
+    $(this).addClass("active")
     e.preventDefault()
     $('html, body').animate scrollTop: $(@hash).offset().top - 30
     return
