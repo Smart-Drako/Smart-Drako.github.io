@@ -217,7 +217,7 @@ eventos = ->
     return
   $(window).on 'activate.bs.scrollspy', ->
     x = $('#cat-nav > ul > li > a.active')
-    $('#cat-nav').scrollTo x, 100
+    $('#cat-nav').scrollTo x
     return
   # Owl carousel
   $('.owl-carousel').owlCarousel
