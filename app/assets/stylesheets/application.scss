@@ -264,7 +264,6 @@ li.ilb {
 }
 
 #cat-nav>ul>li>a.active {
-  border-bottom: 2px solid #03dac5;
   font-weight: bolder;
   color: #03dac5 !important;
 }
@@ -274,8 +273,8 @@ li.ilb {
 }
 
 #cat-nav>ul>li>a:hover {
-  color: #333 !important;
-  border: none !important;
+  font-weight: bolder;
+  color: #03dac5 !important;
 }
 
 // .sticky-custom {

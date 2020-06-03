@@ -205,15 +205,15 @@ eventos = ->
     $('.carbar').toggleClass 'd-block'
     return
   #Scroll sticky
-  $(window).unbind('scroll').on 'scroll', ->
-    sticky $('#cat-nav')
-    return
+  # $(window).unbind('scroll').on 'scroll', ->
+  #   sticky $('#cat-nav')
+  #   return
   #Scroll al hacer clic en item navbar
   $('#cat-nav ul li a[href^=\'#\']').on 'click', (e) ->
+    e.preventDefault()
+    $('html, body').animate scrollTop: $(@hash).offset().top-50
     $(".nav-link").removeClass("active")
     $(this).addClass("active")
-    e.preventDefault()
-    $('html, body').animate scrollTop: $(@hash).offset().top
     return
   $(window).on 'activate.bs.scrollspy', ->
     x = $('#cat-nav > ul > li > a.active')
