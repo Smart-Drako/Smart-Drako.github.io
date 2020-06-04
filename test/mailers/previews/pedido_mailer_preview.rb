@@ -3,6 +3,6 @@ class PedidoMailerPreview < ActionMailer::Preview
   def pedido
     empresa  = ConfigUser.find(1)
     pedido = Pedido.find(47)
-    PedidoMailer.pedido("manrobless@gmail.com",pedido, empresa)
+    PedidoMailer.pedido("manrobless@gmail.com",pedido, empresa,false)
   end
 end
