@@ -2,8 +2,10 @@ class PedidoMailer < ApplicationMailer
   def pedido(destinatario, pedido, empresa, vendedor = true)
 
     @empresa = empresa.nombre
+    @pedido = pedido
+    @es_proveedor = vendedor
     if vendedor == true
-      @destinatario_mensaje = "Te realizaron un pedido a nombre de #{pedido.cliente_nombre}"
+      @destinatario_mensaje = "Tienes un nuevo pedido."
       @destinatario_nombre = @empresa
       asunto = "Nuevo pedido de #{pedido.cliente_nombre} (##{pedido.id})"
     else
@@ -13,7 +15,7 @@ class PedidoMailer < ApplicationMailer
     end
 
     #Variables
-    @pedido_numero = pedido.id
+    @pedido_numero = pedido.id.to_s.rjust(6, "0")
     @pedido_fecha = pedido.fecha
     @pedido_total = pedido.total
     @info_cliente = "Informacion del cliente (nombre, dir, telefono ,etc."
