@@ -4,7 +4,7 @@ wb.add_worksheet(name: "ListadoProductos") do |sheet|
   req = sheet.styles.add_style(b: true, fg_color: 'dc3545', sz: 14)
   titulo = sheet.styles.add_style(b: true, sz: 14)
   default = sheet.styles.add_style(b: false, sz: 12)
-  sheet.add_row ["ID","Artículo","Precio","Categoria","Descripción","Unidad","Impuesto","Inventario"], style: [titulo,titulo,req,req,req,req,titulo,titulo]
+  sheet.add_row ["ID","SKU","Precio","Categoría","Descripción","Unidad","Impuesto","Inventario"], style: [titulo,titulo,req,req,req,req,titulo,titulo]
   sheet.sheet_view.pane do |pane|
     pane.top_left_cell = "B2"
     pane.state = :frozen_split

@@ -3,18 +3,18 @@ class Producto < ApplicationRecord
 
   def self.importar(file, current_user)
     excel = abrir_excel(file)
-    header = excel.row(1)
+    header = excel.row(1).map{ |x| I18n.transliterate(x.downcase) }
     (2..excel.last_row).each do |i|
       row = Hash[[header, excel.row(i)].transpose]
-      prod = find_by(id: row["ID"], user_id: current_user.id) || new
+      prod = find_by(id: row["id"], user_id: current_user.id) || new
       prod.user_id = current_user.id
-      prod.codigo = row["Artículo"]
-      prod.inventario = row["Inventario"]
-      prod.categoria = row["Categoria"]
-      prod.descripcion = row["Descripción"]
-      prod.unidad = row["Unidad"]
-      prod.precio = row["Precio"]
-      prod.impuesto = row["Impuesto"]
+      prod.codigo = row["sku"]
+      prod.inventario = row["inventario"]
+      prod.categoria = row["categoria"]
+      prod.descripcion = row["descripcion"]
+      prod.unidad = row["unidad"]
+      prod.precio = row["precio"]
+      prod.impuesto = row["impuesto"]
       prod.save!
     end
   end
