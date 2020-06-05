@@ -57,18 +57,23 @@
   <% if browser.platform.ios? %>
     <script>
       $(document).ready(function(){
-        window.onscroll = function() {myFunction()};
 
-        var navbar = document.getElementById("cat-nav");
-        var sticky = navbar.offsetTop;
+        var cat_nav = $("#cat-nav").length
 
-        function myFunction() {
-          if (window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky-ios")
-            console.log("sticky");
-          } else {
-            navbar.classList.remove("sticky-ios");
-            console.log("No sticky");
+        if(cat_nav > 0){
+          window.onscroll = function() {myFunction()};
+
+          var navbar = document.getElementById("cat-nav");
+          var sticky = navbar.offsetTop;
+
+          function myFunction() {
+            if (window.pageYOffset >= sticky) {
+              navbar.classList.add("sticky-ios")
+              console.log("sticky");
+            } else {
+              navbar.classList.remove("sticky-ios");
+              console.log("No sticky");
+            }
           }
         }
       });

@@ -21,6 +21,10 @@ Paloma.controller 'Pedidos', show: ->
     estatus = $(this).val()
     cambiar_estatus_pedido(pedido_id, estatus)
 
+Paloma.controller 'Pedidos', ver_pedido: ->
+  $(".carbar").removeClass("d-block").hide()
+  $("#form-botones").hide()
+
 Paloma.controller 'Pedidos', index: ->
   $(".pedido_estatus").change ->
     pedido_id = $(this).data("pedido-id")

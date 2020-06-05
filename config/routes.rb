@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   post "/pedido/actualizar_estatus", to: "pedidos#actualizar_estatus"
   get "/pedido", to: "pedidos#new"
   get  "/exportar", to: "productos#exportar"
+  get "/ver_pedido/:id", to: "pedidos#ver_pedido"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

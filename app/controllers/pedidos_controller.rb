@@ -1,5 +1,5 @@
 class PedidosController < ApplicationController
-  before_action :authenticate_user!, :except => [:generar, :new]
+  before_action :authenticate_user!, :except => [:generar, :new, :ver_pedido]
 
   def index
     @pedidos = Pedido.where(user_id: current_user.id).order(id: :desc)
@@ -37,6 +37,18 @@ class PedidosController < ApplicationController
       redirect_to pedidos_path and return if @pedido.user_id != current_user.id
     else
       redirect_to pedidos_path and return
+    end
+  end
+
+  def ver_pedido
+    id = Base64.decode64(params[:id]).to_i
+    @pedido = Pedido.find_by(id: id)
+    if @pedido.present?
+      @productos = ProductoPedido.where(pedido_id: @pedido.id)
+      @negocio = ConfigUser.find_by(user_id: @pedido.user_id)
+      @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
+    else
+      redirect_to root_path and return
     end
   end
 
