@@ -24,6 +24,7 @@ Paloma.controller 'Pedidos', show: ->
 
 Paloma.controller 'Pedidos', ver_pedido: ->
   $(".carbar").removeClass("d-block").hide()
+  $("#btn-cart_float").removeClass("d-md-block")
   $("#form-botones").hide()
 
 Paloma.controller 'Pedidos', index: ->
