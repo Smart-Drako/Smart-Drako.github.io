@@ -321,6 +321,7 @@ li.ilb {
   position: fixed;
   bottom: 25px;
   right: 15px;
+  z-index: 333;
 }
 
 #config_user_condiciones_higiene {
@@ -402,12 +403,12 @@ body {
 }
 
 .btn-cart {
-  background-color: #1ad4d8;
+  background-color: #ef2275;
   color: #ffffff;
 }
 
 .btn-cart:hover {
-  background-color: #1ad4d8;
+  background-color: #ef2275;
   color: #ffffff;
 }
 

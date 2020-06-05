@@ -35,6 +35,8 @@ Paloma.controller 'Pedidos', index: ->
 
 Paloma.controller 'Pedidos', new: ->
 
+  $("#btn-cart_float").removeClass("d-md-block")
+
   $('.positive-integer').numeric
     decimal: false
     negative: false
@@ -50,7 +52,7 @@ Paloma.controller 'Pedidos', new: ->
     $("#cliente_rfc, #cliente_uso").prop("disabled",true).val("")
     $("#cliente_factura").change ->
       mostrar = $(this).val()
-      if mostrar == "Si"
+      if mostrar == "1"
         $("#cliente_rfc, #cliente_uso").prop("disabled",false).val("")
       else
         $("#cliente_rfc, #cliente_uso").prop("disabled",true).val("")
