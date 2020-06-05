@@ -35,11 +35,8 @@
             <input type="text" class="form-control" id="cliente_direccion" name="direccion" required>
           </div>
           <div class="col-md-4 mb-3">
-            <label for="cliente_pago">Forma de Pago</label>
-            <select class="custom-select d-block w-100" id="cliente_pago" name="pago">
-              <option value="Efectivo">Efectivo</option>
-              <option value="Tarjeta">Tarjeta</option>
-            </select>
+            <label for="cliente_area">Colonia <span class="required"><i class="fas fa-asterisk fa-xs"></i></span></label>
+            <input type="text" class="form-control" id="cliente_area" name="area" required>
           </div>
         </div>
 
@@ -52,8 +49,11 @@
             </select>
           </div>
           <div class="col-md-4 mb-3">
-            <label for="cliente_area">Area de Entrega <span class="required"><i class="fas fa-asterisk fa-xs"></i></span></label>
-            <input type="text" class="form-control" id="cliente_area" name="area" required>
+            <label for="cliente_pago">Forma de Pago</label>
+            <select class="custom-select d-block w-100" id="cliente_pago" name="pago">
+              <option value="Efectivo">Efectivo</option>
+              <option value="Tarjeta">Tarjeta</option>
+            </select>
           </div>
           <div class="col-md-4 mb-3">
             <label for="cliente_correo">Correo Electrónico <span class="required"><i class="fas fa-asterisk fa-xs"></i></span></label>
