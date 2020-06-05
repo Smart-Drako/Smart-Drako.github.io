@@ -825,5 +825,9 @@ li.nav-item.active>.nav-link {
 }
 
 .carousel-indicators li {
-  visibility: hidden;
+  border-bottom: none !important;
+}
+
+.carousel-indicators {
+  margin-bottom: 5px;
 }
