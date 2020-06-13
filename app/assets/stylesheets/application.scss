@@ -831,3 +831,27 @@ li.nav-item.active>.nav-link {
 .carousel-indicators {
   margin-bottom: 5px;
 }
+
+@media print {
+  .img-print {
+    width: 120px !important;
+    height: 120px !important;
+    opacity: 1.0 !important;
+    z-index: 333;
+    display: block;
+  }
+
+  .row-pdf {
+    margin: 10px auto !important;
+  }
+
+  .col-6 {
+    width: 49% !important;
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  p {
+    margin-bottom: 0px !important;
+  }
+}

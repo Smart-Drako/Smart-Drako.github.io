@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   get "/pedido", to: "pedidos#new"
   get  "/exportar", to: "productos#exportar"
   get "/ver_pedido/:id", to: "pedidos#ver_pedido"
+  post "descargar_pdf/:id/", to: "pedidos#descargar_pdf", as: "descargar_pdf"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

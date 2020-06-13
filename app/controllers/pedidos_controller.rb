@@ -28,8 +28,11 @@ class PedidosController < ApplicationController
 
   end
 
-  def show
-    @pedido = Pedido.find_by(id: params[:id])
+  def show(id = 0)
+    if id == 0
+      id = params[:id]
+    end
+    @pedido = Pedido.find_by(id: id)
     if @pedido.present?
       @productos = ProductoPedido.where(pedido_id: @pedido.id)
       @negocio = ConfigUser.find_by(user_id: @pedido.user_id)
@@ -38,6 +41,29 @@ class PedidosController < ApplicationController
     else
       redirect_to pedidos_path and return
     end
+  end
+
+  def descargar_pdf
+    pedido = Pedido.find_by(id: params[:id])
+    pdf = generar_pdf(pedido.id)
+
+    respond_to do |format|
+      format.html
+      format.pdf { send_data pdf, :filename => pedido.id.to_s.rjust(6, "0") + '.pdf', :disposition => "inline",:type => "application/pdf"}
+    end
+  end
+
+  def generar_pdf(id)
+    show(id)
+    pdf = WickedPdf.new.pdf_from_string(
+      render_to_string('pedidos/descargar.html.erb', :layout => 'pedido.html.erb'), print_media_type: true,
+      margin:  { top: 1, bottom: 10, left: 2, right: 2},
+      page_size: "Letter",
+      disable_smart_shrinking: false,
+      footer: {right: 'Pag. [page] de [topage]', font_size: 8 },
+      encoding: 'utf8'
+        )
+    pdf
   end
 
   def ver_pedido
