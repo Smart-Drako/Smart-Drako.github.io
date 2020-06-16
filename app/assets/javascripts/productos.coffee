@@ -16,6 +16,7 @@ Paloma.controller 'Productos', index: ->
       $("#btn_importar").prop("disabled",true)
 
 Paloma.controller 'Pedidos', show: ->
+  $("#nav-link-pedidos").addClass("active")
   $(".carbar").removeClass("d-block").hide()
   $("#pedido_estatus").change ->
     pedido_id = $(this).data("pedido-id")
