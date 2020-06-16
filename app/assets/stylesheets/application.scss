@@ -849,6 +849,27 @@ li.nav-item.active>.nav-link {
     width: 49% !important;
     display: inline-block;
     margin-top: 10px;
+    vertical-align: top;
+  }
+
+  .col-2 {
+    display: inline-block;
+    width: 16% !important;
+    vertical-align: top;
+  }
+
+  .col-10 {
+    display: inline-block;
+    width: 82% !important;
+    vertical-align: top;
+  }
+
+  .datos {
+    min-height: 160px;
+  }
+
+  .pedido {
+    border: none !important;
   }
 
   p {
