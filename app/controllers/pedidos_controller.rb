@@ -38,8 +38,27 @@ class PedidosController < ApplicationController
       @negocio = ConfigUser.find_by(user_id: @pedido.user_id)
       @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
       redirect_to pedidos_path and return if @pedido.user_id != current_user.id
+      @mensaje_wa = mensaje_whatsapp(@pedido)
+      @link_wa = "https://api.whatsapp.com/send?phone=52#{@pedido.cliente_telefono}&text=#{@mensaje_wa}"
     else
       redirect_to pedidos_path and return
+    end
+  end
+
+  def mensaje_whatsapp(pedido)
+    b64_id = Base64.encode64("#{pedido.id}-pideloencasa.mx")
+    if Rails.env.production?
+      link = "https://pideloencasa.mx/ver_pedido/#{b64_id}"
+    else
+      link = "http://localhost:3000/ver_pedido/#{b64_id}"
+    end
+    case pedido.estatus
+    when "Confirmado"
+      "Hola *#{pedido.cliente_nombre}* te confirmamos que hemos recibido tu pedido *#{pedido.id.to_s.rjust(6, "0")}*. En breve te lo tendremos listo. #{link}"
+    when "Entregado"
+      "Hola *#{pedido.cliente_nombre}* te informamos que tu pedido *#{pedido.id.to_s.rjust(6, "0")}* ha sido Entregado, muchas gracias por tu compra.. #{link}"
+    when "Cancelado"
+      "Hola *#{pedido.cliente_nombre}* lamentamos la cancelación de tu pedido, seguimos a tus órdenes. #{link}"
     end
   end
 

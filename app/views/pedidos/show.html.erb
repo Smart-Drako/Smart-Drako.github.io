@@ -12,9 +12,15 @@
           <p class="ped-numero d-block d-md-none mb-0" style="font-size:0.9rem;"><i class="far fa-clock color-pink"></i> <%= "#{@pedido.fecha} #{@pedido.created_at.strftime("%I:%M %p")}" %></p>
           <label class="d-none d-md-block mb-0 mt-20" for="estatus">Estatus Pedido:</label>
           <%= select_tag("pedido_estatus", options_for_select(@estatus_list, @pedido.estatus), { :include_blank => false, :class => 'form-control', :data => {"pedido-id": @pedido.id}}) %>
-          <%= link_to 'Generar PDF', descargar_pdf_path(:format => :pdf), :method => :get, :id =>"btn-pdf",target: "_blank", :class => "btn btn-pink mt-10" %>
+          <%= link_to 'PDF', descargar_pdf_path(:format => :pdf), :method => :get, :id =>"btn-pdf",target: "_blank", :class => "btn btn-pink mt-10" %>
         </div>
-        <div class="col-md-7 d-none d-md-block text-right align-self-center">
+        <div class="col-md-4 align-self-center text-center">
+        <%if @pedido.estatus != "Nuevo"%>
+          <textarea disabled class="form-control" id="texto_wa" cols="50" rows="5"><%=@mensaje_wa%></textarea>
+          <a href="<%=@link_wa%>" id="link_wa" target="_blank" class="btn btn-outline-pink no-hover mt-10">Avisar a Cliente <i class="fab btn-wa fa-whatsapp fa-lg"></i></a>
+        <%end%>
+        </div>
+        <div class="col-md-3 d-none d-md-block text-right align-self-center">
           <p class="ped-numero"><strong>Pedido <span class="color-pink">#<%= @pedido.id.to_s.rjust(6, "0")%></span></strong></p>
           <p class="ped-numero"><i class="far fa-clock color-pink"></i> <%= "#{@pedido.fecha} #{@pedido.created_at.strftime("%I:%M %p")}" %></p>
         </div>

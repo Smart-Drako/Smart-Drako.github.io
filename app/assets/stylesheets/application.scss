@@ -832,6 +832,11 @@ li.nav-item.active>.nav-link {
   margin-bottom: 5px;
 }
 
+.no-hover:hover {
+  background-color: white !important;
+  color: #ef2275;
+}
+
 @media print {
   .img-print {
     width: 120px !important;
