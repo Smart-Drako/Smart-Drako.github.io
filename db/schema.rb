@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_02_053536) do
+ActiveRecord::Schema.define(version: 2020_06_18_200521) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_06_02_053536) do
     t.string "metodo_pago"
     t.string "factura"
     t.string "logo"
+    t.boolean "activo", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_config_users_on_category_id"

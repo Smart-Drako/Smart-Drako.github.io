@@ -4,11 +4,11 @@ class HomeController < ApplicationController
 
   def index
     @negocios = Array.new
-    cats = ConfigUser.distinct.pluck(:category_id)
+    cats = ConfigUser.where(activo: 1).distinct.pluck(:category_id)
     @categorias = Category.where(id: cats)
     
     @categorias.each do |cat|
-      negocios = ConfigUser.where(category_id: cat.id)
+      negocios = ConfigUser.where(category_id: cat.id, activo: 1)
       item = {
         id: cat.id,
         nombre: cat.name,
