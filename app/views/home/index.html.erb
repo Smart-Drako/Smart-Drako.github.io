@@ -102,7 +102,7 @@
     <div class="owl-carousel owl-theme">
       <% cat[:negocios].each do |neg| %>
       <div class="card">
-        <a href="/socios/<%= neg.id %>-<%= neg.nombre.to_s.parameterize %>" class="stretched-link"></a>
+        <a href="/socios/<%= neg.slug.present? ? neg.slug : "#{neg.id}-#{neg.nombre.to_s.parameterize}"%>" class="stretched-link"></a>
         <img src="<%= neg.logo %>" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title mb-0"><strong><%= neg.nombre %></strong></h5>

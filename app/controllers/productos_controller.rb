@@ -38,22 +38,24 @@ class ProductosController < ApplicationController
 
   def tienda
     id = params[:id].to_i
+    slug = params[:id]
+    #Buscar por slug unico
+    if id == 0
+      @negocio = ConfigUser.find_by(slug: slug)
+      @productos = Producto.where(user_id: @negocio.user_id).order('categoria, descripcion')
+    else
+      @negocio = ConfigUser.find(id)
+      @productos = Producto.where(user_id: @negocio.user_id).order('categoria, descripcion')
+    end
+
     @prods = Array.new
     
-    if params[:buscar].present?
-      descr = Producto.arel_table[:descripcion]
-      query = params[:buscar]
-      @productos = Producto.where(descr.matches("%#{query}%"))
-    else
-      @productos = Producto.where(user_id: id).order('categoria, descripcion')
-    end
-    @negocio = ConfigUser.find(id)
     @categorias = @productos.pluck(:categoria).uniq.compact
     @higiene = @negocio.condiciones_higiene.split(/\s*,\s*/)
     @horario = @negocio.horario.split(/\s*,\s*/)
     
     @categorias.each_with_index do |cat, index|
-      productos = @productos.where(user_id: id, categoria: cat)
+      productos = @productos.where(user_id: @negocio.user_id, categoria: cat)
       item = {
         id: cat,
         nombre: cat,
@@ -61,6 +63,12 @@ class ProductosController < ApplicationController
       }
       @prods.push(item)
     end
+    #Busqueda de productos
+    # if params[:buscar].present?
+    #   descr = Producto.arel_table[:descripcion]
+    #   query = params[:buscar]
+    #   @productos = Producto.where(descr.matches("%#{query}%"))
+    # end
   end
 
   # POST /productos
