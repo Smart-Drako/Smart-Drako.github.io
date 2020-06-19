@@ -202,7 +202,7 @@ eventos = ->
   $('#btn_vaciar_agregar').unbind("click").click ->
     localStorage.removeItem("total_pedido");
     localStorage.removeItem("productos");
-    localStorage.removeItem("vendedor");
+    localStorage.removeItem("negocio_id");
     $("#notifModal").modal('hide')
     cargar_productos()
     
