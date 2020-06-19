@@ -3,6 +3,7 @@ class PedidoMailer < ApplicationMailer
 
     @empresa = empresa.nombre
     @pedido = pedido
+    usuario = User.find(empresa.user_id)
 
     b64_id = Base64.encode64("#{pedido.id}-pideloencasa.mx")
     if Rails.env.production?
@@ -31,6 +32,6 @@ class PedidoMailer < ApplicationMailer
 
     @lista_pedido = ProductoPedido.where(pedido_id: pedido.id)
 
-    mail(from: I18n.transliterate("#{@empresa} <pideloencasamx@gmail.com>"), to: I18n.transliterate(destinatario), subject: asunto,  reply_to: '<pideloencasamx@gmail.com>')
+    mail(from: I18n.transliterate("#{@empresa} <contacto@pideloencasa.mx>"), to: I18n.transliterate(destinatario), subject: asunto,  reply_to: "<#{usuario.email}>")
   end
 end
