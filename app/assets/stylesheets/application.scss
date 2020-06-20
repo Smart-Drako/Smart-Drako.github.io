@@ -890,6 +890,15 @@ li.nav-item.active>.nav-link {
 #btn_arriba {
   position: fixed;
   bottom: 25px;
-  left: 135px;
+  left: 15px;
   z-index: 333;
+}
+
+#btn_busqueda {
+  margin: 0px;
+  margin-bottom: 5px;
+}
+
+.buscador-div {
+  margin-bottom: 5px;
 }

@@ -49,7 +49,7 @@
 </nav>
 
 <!-- Navbar Movil -->
-<div class="navbar navbar-light fixed-bottom bg-dark d-block d-md-none carbar btn-pink">
+<div id="div_pedido" class="navbar navbar-light fixed-bottom bg-dark d-block d-md-none carbar btn-pink">
   <a href="#" data-turbolinks="false" data-toggle="offcanvas">
     <div class="container d-flex h-100">
       <div class="col-3 justify-content-center align-self-center c-white">
@@ -65,10 +65,32 @@
   </a>
 </div>
 
+<!-- Navbar Movil
+<div id="div_buscador" class="navbar navbar-light fixed-bottom bg-dark d-block d-md-none carbar btn-pink">
+  <a href="#" data-turbolinks="false" data-toggle="offcanvas">
+    <div class="container d-flex h-100">
+      <div class="col-3 justify-content-center align-self-center c-white">
+        <span class="btn btn-sm bg-white color-pink btn-circle btn-circle-sm total-items">0</span>
+      </div>
+      <div class="col-6 justify-content-center align-self-center c-white">
+        <span>Ver pedido</span>
+      </div>
+      <div class="col-3 justify-content-center align-self-center c-white">
+        <span class="total-pedido"></span>
+      </div>
+    </div>
+  </a>
+</div>  -->
+
 <!-- Carrito Flotante -->
-<div id="btn-cart_float" class="d-none d-md-block">
-  <input type="text" id="buscador" style="display:none;" class="form-control mb-10">
-  <button id="btn_busqueda" title="Buscar" class="btn btn-aqua btn-cart box-shadow-btn my-2 my-sm-0 ml-10"><i class="fas fa-search"></i></button>
+<div id="btn-cart_float" class="d-none d-md-block text-right">
+<div class="input-group buscador-div">
+  <input type="text" id="buscador" style="visibility:hidden;" class="form-control" placeholder="Buscar">
+  <div class="input-group-append">
+    <button id="btn_busqueda" title="Buscar" class="btn btn-aqua btn-cart box-shadow-btn my-2 my-sm-0 ml-10"><i class="fas fa-search"></i></button>
+  </div>
+</div>
+
   <button data-toggle="offcanvas" title="Ver Pedido" type="button" class="btn btn-cart box-shadow-btn my-2 my-sm-0 ml-10">
     <span class="total-pedido"></span>
     <i class="fas fa-shopping-cart"></i> <span class="badge bg-white color-pink total-items">0</span>
