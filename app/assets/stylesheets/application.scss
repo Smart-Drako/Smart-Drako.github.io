@@ -322,6 +322,7 @@ li.ilb {
   bottom: 25px;
   right: 15px;
   z-index: 333;
+  width: 200px
 }
 
 #config_user_condiciones_higiene {
@@ -884,4 +885,11 @@ li.nav-item.active>.nav-link {
   p {
     margin-bottom: 0px !important;
   }
+}
+
+#btn_arriba {
+  position: fixed;
+  bottom: 25px;
+  left: 135px;
+  z-index: 333;
 }

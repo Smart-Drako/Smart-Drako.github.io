@@ -137,10 +137,14 @@
     <% cat[:productos].each do |prod|%>
       <div class="lista-item row borders-item">
         <div class="col-12">
-          <p class="mb-0"><%=prod.descripcion%></p>
+          <p class="mb-0 prod-descr"><%=prod.descripcion%></p>
         </div>
         <div class="col-6 col-md-10 align-self-center">
+        <%if prod.precio.to_f <= 0%>
+          <p class="mb-0"><strong><%=prod.unidad%></span></strong></p>
+        <%else%>
           <p class="mb-0"><strong><%=number_to_currency(prod.precio)%><span class=""> / <%=prod.unidad%></span></strong></p>
+        <%end%>
         </div>
         <div class="col-6 col-md-2">
           <div class="row">

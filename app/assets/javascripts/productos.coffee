@@ -6,6 +6,7 @@ Paloma.controller 'Productos', tienda: ->
   cargar_productos()
   eventos()
   eventos_negocio()
+  eventos_buscador()
 
 Paloma.controller 'Productos', index: ->
   $("#btn_importar").prop("disabled",true)
@@ -103,6 +104,34 @@ calcular_totales = ->
     total_pedido: total
   datos
 
+eventos_buscador = ->
+
+  $("#btn_busqueda").unbind("click").click ->
+    $(this).toggleClass("activo")
+    if $(this).hasClass("activo")
+      $("#buscador").fadeIn().focus()
+      $(this).html("<i class='fas fa-times'></i>")
+    else
+      $("#buscador").fadeOut().val("")
+      $(".lista-item").show()
+      $(this).html("<i class='fas fa-search'></i>")
+  
+  $("#buscador").unbind().keyup (e) ->
+    nombres = $('.prod-descr')
+    buscando = $(this).val()
+    item = ''
+    i = 0
+    while i < nombres.length
+      item = $(nombres[i]).html().toLowerCase()
+      x = 0
+      while x < item.length
+        if buscando.length == 0 or item.indexOf(buscando) > -1
+          $(nombres[i]).parents('.lista-item').show()
+        else
+          $(nombres[i]).parents('.lista-item').hide()
+        x++
+      i++
+    return
 
 eventos_negocio = ->
   $("#ver_prod_movil, #ver_prod_web").click ->
@@ -308,7 +337,15 @@ agregar_producto = (producto) ->
   if productos.length == 0 
     total_pedido = precio
     $("#input_cant_#{id}").val(1)
-    productos.push({id: id, nombre: nombre, precio: precio, unidad: unidad, cantidad: 1 , subtotal: precio, precio_string: number_to_currency(precio), subtotal_string: number_to_currency(precio)})
+    
+    if precio <= 0
+      precio_format = ""
+      subtotal_format = ""
+    else
+      precio_format = "#{number_to_currency(precio)}/"
+      subtotal_format = number_to_currency(precio)
+
+    productos.push({id: id, nombre: nombre, precio: precio, unidad: unidad, cantidad: 1 , subtotal: precio, precio_string: precio_format, subtotal_string: subtotal_format})
   else
     existe = false
     productos.forEach (prod) ->
@@ -322,7 +359,13 @@ agregar_producto = (producto) ->
       return
     if existe == false
       $("#input_cant_#{id}").val(1)
-      productos.push({id: id, nombre: nombre, precio: precio, unidad: unidad, cantidad: 1 , subtotal: precio, precio_string: number_to_currency(precio), subtotal_string: number_to_currency(precio)})
+      if precio <= 0
+        precio_format = ""
+        subtotal_format = ""
+      else
+        precio_format = "#{number_to_currency(precio)}/"
+        subtotal_format = number_to_currency(precio)
+      productos.push({id: id, nombre: nombre, precio: precio, unidad: unidad, cantidad: 1 , subtotal: precio, precio_string: precio_format, subtotal_string: subtotal_format})
       total_pedido = parseFloat(total_pedido + precio)
   localStorage.setItem("total_pedido", total_pedido)
   localStorage.setItem("negocio_id", negocio)
