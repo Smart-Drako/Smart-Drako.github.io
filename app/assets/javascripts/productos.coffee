@@ -208,6 +208,7 @@ eventos = ->
     localStorage.removeItem("productos");
     localStorage.removeItem("negocio_id");
     localStorage.removeItem("negocio_factura");
+    $("#negocio_nombre_carrito").val("")
     $("#notifModal").modal('hide')
     cargar_productos()
     
@@ -296,6 +297,8 @@ agregar_producto = (producto) ->
     return
   negocio_factura = $("#negocio_factura").val()
   localStorage.setItem("negocio_factura", negocio_factura)
+  negocio_nombre = $("#negocio_nombre").val()
+  $("#negocio_nombre_carrito").text(negocio_nombre)
   precio = parseFloat(producto.data("precio"))
   nombre = producto.data("nombre")
   unidad = producto.data("unidad")
@@ -353,6 +356,7 @@ borrar_pedido = ->
   localStorage.removeItem("productos")
   localStorage.removeItem("negocio_id")
   localStorage.removeItem("negocio_factura");
+  $("#negocio_nombre_carrito").val("")
   cargar_productos()
 
 #Actualizar estatus pedido

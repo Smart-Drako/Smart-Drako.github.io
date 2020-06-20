@@ -21,7 +21,7 @@
   <div class="form-inline"  id="form-botones">
     <%if user_signed_in?%>
     <span class="navbar-text mr-10 text-dark">
-      Bievenido <strong><%= current_user.nombre %></strong>
+      <strong>Bievenido <%= "#{current_user.nombre} #{current_user.apellido}" %></strong>
     </span>
     <a data-turbolinks="false" title="Mi Cuenta" class="btn btn-outline-success my-2 my-sm-0" href="/me"><i
         class="fas fa-user"></i></a>
