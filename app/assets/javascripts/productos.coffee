@@ -39,6 +39,10 @@ Paloma.controller 'Pedidos', new: ->
 
   $("#btn-cart_float").removeClass("d-md-block")
 
+  negocio_factura = localStorage.getItem("negocio_factura")
+  if negocio_factura != "Si"
+    $("#row_factura").hide()
+
   $('.positive-integer').numeric
     decimal: false
     negative: false
@@ -203,6 +207,7 @@ eventos = ->
     localStorage.removeItem("total_pedido");
     localStorage.removeItem("productos");
     localStorage.removeItem("negocio_id");
+    localStorage.removeItem("negocio_factura");
     $("#notifModal").modal('hide')
     cargar_productos()
     
@@ -289,7 +294,8 @@ agregar_producto = (producto) ->
   if negocio_actual !=0 && negocio != negocio_actual
     $("#notifModal").modal()
     return
-
+  negocio_factura = $("#negocio_factura").val()
+  localStorage.setItem("negocio_factura", negocio_factura)
   precio = parseFloat(producto.data("precio"))
   nombre = producto.data("nombre")
   unidad = producto.data("unidad")
@@ -346,6 +352,7 @@ borrar_pedido = ->
   localStorage.removeItem("total_pedido")
   localStorage.removeItem("productos")
   localStorage.removeItem("negocio_id")
+  localStorage.removeItem("negocio_factura");
   cargar_productos()
 
 #Actualizar estatus pedido
