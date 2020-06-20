@@ -113,7 +113,7 @@ eventos_buscador = ->
       $(this).html("<i class='fas fa-times'></i>")
     else
       $("#buscador").fadeOut().val("")
-      $(".lista-item").show()
+      $(".lista-item, .div-cat").show()
       $(this).html("<i class='fas fa-search'></i>")
   
   $("#buscador").unbind().keyup (e) ->
@@ -127,11 +127,21 @@ eventos_buscador = ->
       while x < item.length
         if buscando.length == 0 or item.indexOf(buscando) > -1
           $(nombres[i]).parents('.lista-item').show()
+          $(nombres[i]).parents('.div-cat').show()
         else
           $(nombres[i]).parents('.lista-item').hide()
         x++
       i++
+    revisar_cats()
     return
+
+revisar_cats = ->
+  cats = $(".div-cat")
+  cats.each ->
+    if $(this).children('div:visible').length == 0
+      $(this).hide()
+    else
+      $(this).show()
 
 eventos_negocio = ->
   $("#ver_prod_movil, #ver_prod_web").click ->
