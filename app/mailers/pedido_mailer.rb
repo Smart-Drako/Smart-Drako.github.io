@@ -16,11 +16,11 @@ class PedidoMailer < ApplicationMailer
     if vendedor == true
       @destinatario_mensaje = "Tienes un nuevo pedido."
       @destinatario_nombre = @empresa
-      asunto = "Nuevo pedido de #{pedido.cliente_nombre} (##{pedido.id})"
+      asunto = "Nuevo pedido de #{pedido.cliente_nombre} (##{pedido.numero.to_s.rjust(4, "0")})"
     else
       @destinatario_mensaje = "Realizaste un pedido a #{@empresa}"
       @destinatario_nombre = pedido.cliente_nombre
-      asunto = "Pedido a #{@empresa} (##{pedido.id})"
+      asunto = "Pedido a #{@empresa} (##{pedido.numero.to_s.rjust(4, "0")})"
     end
 
     #Variables
