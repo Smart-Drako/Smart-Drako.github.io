@@ -8,7 +8,7 @@
         </div>
         <div class="col-7 col-md-3 col-pad-5 align-self-center">
           <h5><%=@negocio.nombre%></h5>
-          <span class="ped-numero d-block d-md-none">Pedido <span class="color-pink">#<%= @pedido.id.to_s.rjust(6, "0")%></span></span>
+          <span class="ped-numero d-block d-md-none">Pedido <span class="color-pink">#<%= @pedido.numero.to_s.rjust(4, "0")%></span></span>
           <p class="ped-numero d-block d-md-none mb-0" style="font-size:0.9rem;"><i class="far fa-clock color-pink"></i> <%= "#{@pedido.fecha} #{@pedido.created_at.strftime("%I:%M %p")}" %></p>
           <label class="d-none d-md-block mb-0 mt-20" for="estatus">Estatus Pedido:</label>
           <%= select_tag("pedido_estatus", options_for_select(@estatus_list, @pedido.estatus), { :include_blank => false, :class => 'form-control', :data => {"pedido-id": @pedido.id}}) %>
@@ -21,7 +21,7 @@
         <%end%>
         </div>
         <div class="col-md-3 d-none d-md-block text-right align-self-center">
-          <p class="ped-numero"><strong>Pedido <span class="color-pink">#<%= @pedido.id.to_s.rjust(6, "0")%></span></strong></p>
+          <p class="ped-numero"><strong>Pedido <span class="color-pink">#<%= @pedido.numero.to_s.rjust(4, "0")%></span></strong></p>
           <p class="ped-numero"><i class="far fa-clock color-pink"></i> <%= "#{@pedido.fecha} #{@pedido.created_at.strftime("%I:%M %p")}" %></p>
         </div>
       </div>

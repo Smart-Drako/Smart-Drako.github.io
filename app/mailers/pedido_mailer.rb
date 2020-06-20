@@ -24,7 +24,7 @@ class PedidoMailer < ApplicationMailer
     end
 
     #Variables
-    @pedido_numero = pedido.id.to_s.rjust(6, "0")
+    @pedido_numero = pedido.numero.to_s.rjust(4, "0")
     @pedido_fecha = pedido.fecha
     @pedido_total = pedido.total
     @info_cliente = "Informacion del cliente (nombre, dir, telefono ,etc."

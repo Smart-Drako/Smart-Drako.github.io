@@ -7,7 +7,7 @@
         </div>
         <div class="col-10 align-self-center">
           <h5><%=@negocio.nombre%></h5>
-          <span class="ped-numero d-block d-md-none">Pedido <span class="color-pink">#<%= @pedido.id.to_s.rjust(6, "0")%></span></span>
+          <span class="ped-numero d-block d-md-none">Pedido <span class="color-pink">#<%= @pedido.numero.to_s.rjust(4, "0")%></span></span>
           <p class="ped-numero d-block d-md-none mb-0" style="font-size:0.9rem;"><i class="far fa-clock color-pink"></i> <%= "#{@pedido.fecha} #{@pedido.created_at.strftime("%I:%M %p")}" %></p>
           <label class="d-none d-md-block mb-0 mt-20" for="estatus">Estatus Pedido:</label>
           <input type="text" style="width:20%;" class="form-control" value="<%=@pedido.estatus%>">

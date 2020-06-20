@@ -15,7 +15,7 @@
       <tbody>
         <% @pedidos.each do |p|%>
         <tr>
-          <td><a class="link" href="/pedido/<%=p.id%>"><%= "##{p.id.to_s.rjust(6, "0")}" %></a></td>
+          <td><a class="link" href="/pedido/<%=p.id%>"><%= "##{p.numero.to_s.rjust(4, "0")}" %></a></td>
           <td><%= "#{p.fecha} #{p.created_at.strftime("%I:%M %p")}" %></td>
           <td><%= p.cliente_nombre %></td>
           <td><%= p.area_entrega %></td>

@@ -54,9 +54,9 @@ class PedidosController < ApplicationController
     end
     case pedido.estatus
     when "Confirmado"
-      "Hola *#{pedido.cliente_nombre}* te confirmamos que hemos recibido tu pedido *#{pedido.id.to_s.rjust(6, "0")}*. En breve te lo tendremos listo. #{link}"
+      "Hola *#{pedido.cliente_nombre}* te confirmamos que hemos recibido tu pedido *#{pedido.numero.to_s.rjust(4, "0")}*. En breve te lo tendremos listo. #{link}"
     when "Entregado"
-      "Hola *#{pedido.cliente_nombre}* te informamos que tu pedido *#{pedido.id.to_s.rjust(6, "0")}* ha sido Entregado, muchas gracias por tu compra.. #{link}"
+      "Hola *#{pedido.cliente_nombre}* te informamos que tu pedido *#{pedido.numero.to_s.rjust(4, "0")}* ha sido Entregado, muchas gracias por tu compra.. #{link}"
     when "Cancelado"
       "Hola *#{pedido.cliente_nombre}* lamentamos la cancelación de tu pedido, seguimos a tus órdenes. #{link}"
     end
@@ -68,7 +68,7 @@ class PedidosController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.pdf { send_data pdf, :filename => pedido.id.to_s.rjust(6, "0") + '.pdf', :disposition => "inline",:type => "application/pdf"}
+      format.pdf { send_data pdf, :filename => pedido.numero.to_s.rjust(4, "0") + '.pdf', :disposition => "inline",:type => "application/pdf"}
     end
   end
 
@@ -106,6 +106,7 @@ class PedidosController < ApplicationController
     if negocio_id.present? && productos.present?
       pedido = Pedido.new
       pedido.user_id = negocio_id
+      pedido.numero = Pedido.proximo_pedido(negocio_id)
       pedido.estatus = "Nuevo"
       pedido.total = total
       pedido.fecha = Time.now.strftime("%d/%m/%Y")
