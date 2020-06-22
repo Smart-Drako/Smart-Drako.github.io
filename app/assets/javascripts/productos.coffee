@@ -8,14 +8,15 @@ Paloma.controller 'Productos', tienda: ->
   eventos_negocio()
   eventos_buscador()
 
-
 Paloma.controller 'Productos', new: ->
   $('#producto_foto').change ->
+    console.log "Select foto new"
     readURL this
     return
 
 Paloma.controller 'Productos', edit: ->
   $('#producto_foto').change ->
+    console.log "Select foto edit"
     readURL this
     return
 
