@@ -30,7 +30,7 @@
           <th>Impuesto</th>
           <th>Inventario</th>
           <th>Foto</th>
-          <th colspan="2"></th>
+          <th></th>
         </tr>
       </thead>
 
@@ -45,14 +45,12 @@
             <td><%= producto.impuesto %></td>
             <td><%= producto.inventario %></td>
             <td class="text-center"><img id="img_producto" src="<%= producto.foto %>" class="img-thumbnail foto-mini-lista"></td>
-            <td>
-              <%= link_to(edit_producto_path(producto), :class => 'btn btn-sm btn-warning') do %>
-                <i class="fas fa-edit"></i> Editar
+            <td class="text-center">
+              <%= link_to(edit_producto_path(producto), :class => 'btn btn-sm btn-warning', :data => {tooltip: "tooltip"}, :title => "Editar Producto") do %>
+                <i class="fas fa-edit"></i>
               <% end %>
-            </td>
-            <td>
-              <%= link_to(producto, class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: 'Seguro de Eliminar?' }) do %>
-                <i class="fas fa-trash"></i> Eliminar
+              <%= link_to(producto, class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: 'Seguro de Eliminar?', tooltip: "tooltip" },:title => "Eliminar Producto" ) do %>
+                <i class="fas fa-trash"></i>
               <% end %>
             </td>
           </tr>
