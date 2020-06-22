@@ -99,24 +99,24 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
-  # config.action_mailer.smtp_settings = {
-  #     address:              'smtp.sendgrid.net',
-  #     port:                 2525,
-  #     domain:               'pideloencasa.mx',
-  #     user_name:            'pideloencasa',
-  #     password:             'pidelo2020',
-  #     authentication:       'login',
-  #     enable_starttls_auto: true
-  # }
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'google.com',
-    user_name:            'pideloencasamx@gmail.com',
-    password:             'pidelo2020',
-    authentication:       'plain',
-    enable_starttls_auto: true
+      address:              'smtp.sendgrid.net',
+      port:                 2525,
+      domain:               'pideloencasa.mx',
+      user_name:            'pideloencasa',
+      password:             'pidelo2020',
+      authentication:       'login',
+      enable_starttls_auto: true
   }
+  # config.action_mailer.smtp_settings = {
+  #   address:              'smtp.gmail.com',
+  #   port:                 587,
+  #   domain:               'google.com',
+  #   user_name:            'pideloencasamx@gmail.com',
+  #   password:             'pidelo2020',
+  #   authentication:       'plain',
+  #   enable_starttls_auto: true
+  # }
 
   config.action_mailer.perform_caching = false
 
