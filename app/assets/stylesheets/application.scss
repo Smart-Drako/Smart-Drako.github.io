@@ -902,3 +902,33 @@ li.nav-item.active>.nav-link {
 .buscador-div {
   margin-bottom: 5px;
 }
+
+.img-prod {
+  width: 55px;
+  height: 55px;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.pad-5 {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.cont-cat:last-of-type {
+  padding-bottom: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  p.precio {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .lista-item {
+    width: 50%;
+  }
+}

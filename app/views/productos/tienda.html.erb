@@ -10,8 +10,10 @@
       <input type="hidden" id="negocio_nombre" value="<%=@negocio.nombre%>">
       <div class="align-self-bottom">
         <a href="<%=@negocio.facebook%>" class="btn-fb" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
-        <a href="https://api.whatsapp.com/send?phone=52<%=@negocio.whatsapp%>" class="btn-wa" target="_blank"><i class="fab fa-whatsapp-square fa-2x"></i></a>
-        <a href="tel:+52<%=@negocio.whatsapp%>" class="btn-ph" targer="_blank"><i class="fas fa-phone-square fa-2x"></i></a>
+        <a href="https://api.whatsapp.com/send?phone=52<%=@negocio.whatsapp%>" class="btn-wa" target="_blank"><i
+            class="fab fa-whatsapp-square fa-2x"></i></a>
+        <a href="tel:+52<%=@negocio.whatsapp%>" class="btn-ph" targer="_blank"><i
+            class="fas fa-phone-square fa-2x"></i></a>
       </div>
       <div class="row mt-10 d-none d-md-block">
         <a href="#cat-nav" id="ver_prod_web" class="btn btn-pink">Realizar Pedido</a>
@@ -41,17 +43,18 @@
 
         <div class="row">
           <div class="col-12 mt-20">
-          <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 1%>
+            <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 1%>
             <div class="col-12">
               <div class="row">
                 <div class="col-12 align-self-center text-center">
                   <h5 class="mb-0">Entrega a domicilio <i class="fas fa-car-side fa-xs color-pink"></i></h5>
-                  <h6 class="mb-0" style="color:#333"> Costo de envío: <%= number_to_currency(@negocio.costo_envio, :precision => 2) %></h6>
+                  <h6 class="mb-0" style="color:#333"> Costo de envío:
+                    <%= number_to_currency(@negocio.costo_envio, :precision => 2) %></h6>
                 </div>
               </div>
             </div>
-          <%end%>
-          <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 2%>
+            <%end%>
+            <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 2%>
             <div class="col-12 mt-10">
               <div class="row">
                 <div class="col-12 align-self-center text-center">
@@ -59,7 +62,7 @@
                 </div>
               </div>
             </div>
-          <%end%>
+            <%end%>
           </div>
           <div class="col-12 text-center mt-20">
             <h6><strong>Horario de atención:</strong></h6>
@@ -81,9 +84,9 @@
         <div class="row">
           <div class="col-12 mt-20">
             <ol>
-            <% @higiene.each do |h|%>
+              <% @higiene.each do |h|%>
               <li><%= h %>.</li>
-            <%end%>
+              <%end%>
             </ol>
           </div>
         </div>
@@ -104,16 +107,16 @@
           <p class="mb-0">Métodos de pago aceptados:</p>
           <ul style="list-style-type: none;">
             <% if @negocio.metodo_pago.to_i == 3%>
-              <li>Efectivo <i class="fas fa-money-bill color-wa"></i></li>
-              <li>Tarjeta <i class="far fa-credit-card color-pink"></i></li>
+            <li>Efectivo <i class="fas fa-money-bill color-wa"></i></li>
+            <li>Tarjeta <i class="far fa-credit-card color-pink"></i></li>
             <%elsif @negocio.metodo_pago.to_i == 2%>
-              <li>Tarjeta <i class="far fa-credit-card color-pink"></i></li>
+            <li>Tarjeta <i class="far fa-credit-card color-pink"></i></li>
             <%else%>
-              <li>Efectivo <i class="fas fa-money-bill color-wa"></i></li>
+            <li>Efectivo <i class="fas fa-money-bill color-wa"></i></li>
             <%end%>
           </ul>
           <% if @negocio.factura == "Si"%>
-            <p>Facturación disponible <i class="far fa-file-alt color-pink"></i></p>
+          <p>Facturación disponible <i class="far fa-file-alt color-pink"></i></p>
           <%end%>
         </div>
       </div>
@@ -124,51 +127,69 @@
 <nav class="navbar navbar-expand <%=  browser.platform.ios? ? '' : 'sticky-top'%>" id="cat-nav">
   <ul class="navbar-nav scrollable-content d-flex h-100">
     <% @categorias.each_with_index do |cat,i|%>
-      <li class="nav-item ilb">
-        <a data-turbolinks="false" class="<%=i == 0 ? 'nav-link active' : 'nav-link' %>" href="#cat_<%= I18n.transliterate(cat).delete(' ') %>"><%= cat.upcase %></a>
-      </li>
+    <li class="nav-item ilb">
+      <a data-turbolinks="false" class="<%=i == 0 ? 'nav-link active' : 'nav-link' %>"
+        href="#cat_<%= I18n.transliterate(cat).delete(' ') %>"><%= cat.upcase %></a>
+    </li>
     <%end%>
   </ul>
 </nav>
 
 <% @prods.each do |cat|%>
-  <div class="container cont-cat div-cat" id="cat_<%=I18n.transliterate(cat[:id]).delete(' ')%>">
-    <h4><%= cat[:nombre].capitalize%></h4>
-    <% cat[:productos].each do |prod|%>
-      <div class="lista-item row borders-item">
-        <div class="col-12">
-          <p class="mb-0 prod-descr"><%=prod.descripcion%></p>
+<div class="container cont-cat div-cat" id="cat_<%=I18n.transliterate(cat[:id]).delete(' ')%>">
+  <h4><%= cat[:nombre].capitalize%></h4>
+  <% cat[:productos].each do |prod|%>
+  <div class="lista-item row borders-item">
+    <div class="col-2 align-self-center" style="padding:3px">
+      <%if prod.foto.present?%>
+        <img src="<%= prod.foto %>" class="img-responsive img-prod">
+      <%else%>
+      <!-- <img src="https://cdn3.iconfinder.com/data/icons/online-states/150/Photos-512.png" class="img-responsive img-prod"> -->
+      <%end%>
+    </div>
+    <div class="col-10 align-self-center pad-5">
+      <div class="col-12 no-padding">
+        <p class="mb-0 prod-descr"><%=prod.descripcion%></p>
+      </div>
+      <div class="row">
+        <div class="col-5 col-md-8" style="padding-right:0px;">
+          <%if prod.precio.to_f <= 0%>
+          <p class="mb-0 precio"><strong><%=prod.unidad%></span></strong></p>
+          <%else%>
+          <p class="mb-0 precio"><strong><%=number_to_currency(prod.precio)%><span class=""> / <%=prod.unidad%></span></strong>
+          </p>
+          <%end%>
         </div>
-        <div class="col-6 col-md-10 align-self-center">
-        <%if prod.precio.to_f <= 0%>
-          <p class="mb-0"><strong><%=prod.unidad%></span></strong></p>
-        <%else%>
-          <p class="mb-0"><strong><%=number_to_currency(prod.precio)%><span class=""> / <%=prod.unidad%></span></strong></p>
-        <%end%>
-        </div>
-        <div class="col-6 col-md-2">
-          <div class="row">
-            <div class="col-9 col-md-9" style="padding-right:0px;">
-              <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>" data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>" class="btn btn-sm btn-aqua btn-cart-item btn-block">Agregar</button>
-              <div class="item-cantidades input-group input-group-sm" style="width: auto;">
-                <div class="input-group-prepend">
-                  <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm restar-item"><i class="fas fa-minus"></i></button>
-                </div>
-                <input onClick="this.select();" id="input_cant_<%=prod.id%>" data-id="<%=prod.id%>" type="number" class="form-control input-cantidad-list input-sm" value="">
-                <div class="input-group-append">
-                  <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm sumar-item"><i class="fas fa-plus"></i></button>
-                </div>
+      <div class="col-7 col-md-4">
+        <div class="row">
+          <div class="col-9 col-md-9" style="padding-right:0px;">
+            <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>"
+              data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>"
+              class="btn btn-sm btn-aqua btn-cart-item btn-block">Agregar</button>
+            <div class="item-cantidades input-group input-group-sm" style="width: auto;">
+              <div class="input-group-prepend">
+                <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm restar-item"><i
+                    class="fas fa-minus"></i></button>
+              </div>
+              <input onClick="this.select();" id="input_cant_<%=prod.id%>" data-id="<%=prod.id%>" type="number"
+                class="form-control input-cantidad-list input-sm" value="">
+              <div class="input-group-append">
+                <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm sumar-item"><i
+                    class="fas fa-plus"></i></button>
               </div>
             </div>
-            <div class="col-3 col-md-3 align-self-center" style="padding: 2px;">
-              <div class="align-self-center" style="padding-left: 2px; font-size: 0.8rem;">
-                <span id="span_unidad_<%=prod.id%>" class="span-unidad"> <%=prod.unidad%></span>
-              </div>
+          </div>
+          <div class="col-3 col-md-3 align-self-center" style="padding: 2px;">
+            <div class="align-self-center" style="padding-left: 2px; font-size: 0.8rem;">
+              <span id="span_unidad_<%=prod.id%>" class="span-unidad"> <%=prod.unidad%></span>
             </div>
           </div>
         </div>
       </div>
-    <%end%>
-  </div>
-<%end%>
+      </div>
 
+    </div>
+  </div>
+  <%end%>
+</div>
+<%end%>
