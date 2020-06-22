@@ -119,4 +119,13 @@ Rails.application.configure do
   }
 
   config.action_mailer.perform_caching = false
+
+  # Exceptions
+  config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[ERROR #{Rails.env.upcase} PideloenCasa] ",
+    :sender_address => %{"PideloenCasa" <no-replypideloencasa.mx>},
+    :exception_recipients => "manrobless@gmail.com"
+  }, ignore_exceptions: ExceptionNotifier.ignored_exceptions + ["ActionController::InvalidAuthenticityToken"]
+
 end
