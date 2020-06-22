@@ -16,7 +16,6 @@ class Producto < ApplicationRecord
       prod.unidad = row["unidad"]
       prod.precio = row["precio"]
       prod.impuesto = row["impuesto"]
-      prod.foto = row["foto"] if row["foto"].present?
       prod.save!
     end
   end

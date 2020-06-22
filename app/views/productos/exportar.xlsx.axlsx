@@ -4,7 +4,7 @@ wb.add_worksheet(name: "ListadoProductos") do |sheet|
   req = sheet.styles.add_style(b: true, fg_color: 'dc3545', sz: 14)
   titulo = sheet.styles.add_style(b: true, sz: 14)
   default = sheet.styles.add_style(b: false, sz: 12)
-  sheet.add_row ["ID","SKU","Precio","Categoría","Descripción","Unidad","Impuesto","Inventario","Foto"], style: [titulo,titulo,req,req,req,req,titulo,titulo,titulo]
+  sheet.add_row ["ID","SKU","Precio","Categoría","Descripción","Unidad","Impuesto","Inventario"], style: [titulo,titulo,req,req,req,req,titulo,titulo]
   sheet.sheet_view.pane do |pane|
     pane.top_left_cell = "B2"
     pane.state = :frozen_split
@@ -12,6 +12,6 @@ wb.add_worksheet(name: "ListadoProductos") do |sheet|
     pane.active_pane = :bottom_right
   end
   @productos.each do |prod|
-    sheet.add_row [prod.id, prod.codigo, prod.precio, prod.categoria, prod.descripcion, prod.unidad, prod.impuesto, prod.inventario, prod.foto], style: default
+    sheet.add_row [prod.id, prod.codigo, prod.precio, prod.categoria, prod.descripcion, prod.unidad, prod.impuesto, prod.inventario], style: default
   end
 end
