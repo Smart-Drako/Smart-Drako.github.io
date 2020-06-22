@@ -8,6 +8,29 @@ Paloma.controller 'Productos', tienda: ->
   eventos_negocio()
   eventos_buscador()
 
+
+Paloma.controller 'Productos', new: ->
+  $('#producto_foto').change ->
+    readURL this
+    return
+
+Paloma.controller 'Productos', edit: ->
+  $('#producto_foto').change ->
+    readURL this
+    return
+
+readURL = (input) ->
+  if input.files and input.files[0]
+    reader = new FileReader
+
+    reader.onload = (e) ->
+      $('#img_producto').attr 'src', e.target.result
+      return
+
+    reader.readAsDataURL input.files[0]
+    # convert to base64 string
+  return
+
 Paloma.controller 'Productos', index: ->
   $("#btn_importar").prop("disabled",true)
   $('#file').change ->

@@ -20,21 +20,31 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
           <%= form.label :precio %>
           <%= form.text_field :precio, class:"form-control" %>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
           <%= form.label :impuesto %>
           <%= form.text_field :impuesto, class:"form-control" %>
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-4">
           <%= form.label :inventario %>
           <%= form.text_field :inventario, class:"form-control" %>
         </div>
-        <div class="form-group col-md-4">
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-2">
+        </div>
+        <div class="from-group col-md-4">
           <%= form.label :foto %>
           <%= form.file_field :foto, class:"form-control" %>
+        </div>
+        <div class="from-group col-md-4 mb-20">
+          <%if !producto.foto.nil?%>
+              <img id="img_producto" src="<%= producto.foto %>" class="img-thumbnail foto-mini">
+          <%end%>
         </div>
       </div>
       <div class="text-center form-group">
