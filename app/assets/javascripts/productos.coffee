@@ -152,7 +152,7 @@ eventos_buscador = ->
   
   $("#buscador, #buscador_movil").unbind().keyup (e) ->
     nombres = $('.prod-descr')
-    buscando = $(this).val()
+    buscando = $(this).val().toLowerCase()
     item = ''
     i = 0
     while i < nombres.length
@@ -166,7 +166,7 @@ eventos_buscador = ->
           $(nombres[i]).parents('.lista-item').hide()
         x++
       i++
-    # revisar_cats()
+    revisar_cats()
     return
 
 revisar_cats = ->
