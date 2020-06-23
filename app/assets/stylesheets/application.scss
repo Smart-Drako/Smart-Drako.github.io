@@ -325,6 +325,15 @@ li.ilb {
   width: 200px
 }
 
+.buscador_movil {
+  position: fixed;
+  bottom: 65px;
+  right: 10px;
+  z-index: 333;
+  width: 200px
+}
+
+
 #config_user_condiciones_higiene {
   min-height: 135px;
 }
@@ -401,6 +410,7 @@ body {
   background-color: #ffffff;
   padding-right: 0px;
   padding-left: 0px;
+  padding-bottom: 50px;
 }
 
 .btn-cart {

@@ -140,6 +140,16 @@ eventos_buscador = ->
       $(".lista-item, .div-cat").show()
       $(this).html("<i class='fas fa-search'></i>")
   
+  $("#btn_busqueda_movil").unbind("click").click ->
+    $(this).toggleClass("activo")
+    if $(this).hasClass("activo")
+      $("#buscador_movil").fadeIn().css("visibility","visible").focus()
+      $(this).html("<i class='fas fa-times'></i>")
+    else
+      $("#buscador_movil").css("visibility","hidden").val("")
+      $(".lista-item, .div-cat").show()
+      $(this).html("<i class='fas fa-search'></i>")
+  
   $("#buscador, #buscador_movil").unbind().keyup (e) ->
     nombres = $('.prod-descr')
     buscando = $(this).val()
