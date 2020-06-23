@@ -23,8 +23,8 @@
       <thead>
         <tr>
           <th>SKU</th>
+          <th>Categoría</th>
           <th>Descripción</th>
-          <th>Categoria</th>
           <th>Unidad</th>
           <th>Precio</th>
           <th>Impuesto</th>
@@ -38,8 +38,8 @@
         <% @productos.each do |producto| %>
           <tr>
             <td><%= producto.codigo %></td>
-            <td><%= producto.descripcion %></td>
             <td><%= producto.categoria %></td>
+            <td><%= producto.descripcion %></td>
             <td><%= producto.unidad %></td>
             <td><%= producto.precio %></td>
             <td><%= producto.impuesto %></td>

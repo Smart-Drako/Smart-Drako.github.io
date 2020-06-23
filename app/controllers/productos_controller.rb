@@ -5,7 +5,7 @@ class ProductosController < ApplicationController
   # GET /productos
   # GET /productos.json
   def index
-    @productos = Producto.where(user_id: current_user.id)
+    @productos = Producto.where(user_id: current_user.id).order(categoria: :asc, descripcion: :asc)
   end
 
   def importar
