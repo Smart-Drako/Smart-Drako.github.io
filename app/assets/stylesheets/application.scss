@@ -159,7 +159,7 @@ body.toggled::after {
   font-size: 11px;
 }
 
-.cart-list-product>h6 span {
+.cart-list-product > h6 span {
   color: #e96125;
 }
 
@@ -262,17 +262,17 @@ li.ilb {
   padding-right: 0px;
 }
 
-#cat-nav>ul>li>a.active {
+#cat-nav > ul > li > a.active {
   font-weight: bolder;
   color: #03dac5 !important;
   border-bottom: solid 2px #03dac5;
 }
 
-#cat-nav>ul>li>a {
+#cat-nav > ul > li > a {
   border-bottom: none;
 }
 
-#cat-nav>ul>li>a:hover {
+#cat-nav > ul > li > a:hover {
   font-weight: bolder;
   color: #03dac5 !important;
 }
@@ -322,7 +322,7 @@ li.ilb {
   bottom: 25px;
   right: 15px;
   z-index: 333;
-  width: 200px
+  width: 200px;
 }
 
 .buscador_movil {
@@ -330,9 +330,8 @@ li.ilb {
   bottom: 65px;
   right: 10px;
   z-index: 333;
-  width: 200px
+  width: 200px;
 }
-
 
 #config_user_condiciones_higiene {
   min-height: 135px;
@@ -391,7 +390,6 @@ body {
 }
 
 @media (min-width: 1200px) {
-
   .container,
   .container-lg,
   .container-md,
@@ -427,7 +425,6 @@ body {
   background-color: #1ad4d8;
   color: #ffffff;
 }
-
 
 .box-shadow-btn {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
@@ -635,7 +632,7 @@ body {
 }
 
 a.link {
-  color: #d72477
+  color: #d72477;
 }
 
 .owl-carousel .owl-item img {
@@ -677,10 +674,9 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
-
 
 .btn-wa,
 .btn-wa:hover,
@@ -725,7 +721,7 @@ input[type=number] {
 }
 
 span.required {
-  color: #d72477
+  color: #d72477;
 }
 
 .pb-20 {
@@ -798,7 +794,7 @@ li.nav-item.active {
   border-radius: 5px;
 }
 
-li.nav-item.active>.nav-link {
+li.nav-item.active > .nav-link {
   color: #fff !important;
 }
 
@@ -856,7 +852,7 @@ li.nav-item.active>.nav-link {
   .img-print {
     width: 120px !important;
     height: 120px !important;
-    opacity: 1.0 !important;
+    opacity: 1 !important;
     z-index: 333;
     display: block;
   }
@@ -956,4 +952,9 @@ li.nav-item.active>.nav-link {
 .redondo {
   border-radius: 50% !important;
   width: 30px !important;
+}
+
+.agotado {
+  cursor: not-allowed;
+  opacity: 0.7;
 }
