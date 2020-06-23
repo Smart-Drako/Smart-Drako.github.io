@@ -32,6 +32,6 @@ class PedidoMailer < ApplicationMailer
 
     @lista_pedido = ProductoPedido.where(pedido_id: pedido.id)
 
-    mail(from: I18n.transliterate("#{@empresa} <desarrollo@pideloencasa.mx>"), to: I18n.transliterate(destinatario), subject: asunto,  reply_to: "<#{usuario.email}>")
+    mail(from: I18n.transliterate("#{@empresa} <no-reply@pideloencasa.mx>"), to: I18n.transliterate(destinatario), subject: asunto,  reply_to: "<#{usuario.email}>")
   end
 end
