@@ -145,10 +145,12 @@ eventos_buscador = ->
     if $(this).hasClass("activo")
       $("#buscador_movil").fadeIn().css("visibility","visible").focus()
       $(this).html("<i class='fas fa-times'></i>")
+      $("#info_proveedor").fadeOut()
     else
       $("#buscador_movil").css("visibility","hidden").val("")
       $(".lista-item, .div-cat").show()
       $(this).html("<i class='fas fa-search'></i>")
+      $("#info_proveedor").fadeIn()
   
   $("#buscador, #buscador_movil").unbind().keyup (e) ->
     nombres = $('.prod-descr')
