@@ -166,7 +166,7 @@ eventos_buscador = ->
           $(nombres[i]).parents('.lista-item').hide()
         x++
       i++
-    revisar_cats()
+    # revisar_cats()
     return
 
 revisar_cats = ->
