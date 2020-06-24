@@ -13,6 +13,7 @@ class Producto < ApplicationRecord
       prod.inventario = row["inventario"]
       prod.categoria = row["categoria"]
       prod.descripcion = row["descripcion"]
+      prod.descripcion2 = row["descripcion2"]
       prod.unidad = row["unidad"]
       prod.precio = row["precio"]
       prod.impuesto = row["impuesto"]
