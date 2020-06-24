@@ -157,6 +157,9 @@
     <div class="col-10 align-self-center pad-5">
       <div class="col-12 no-padding">
         <p class="mb-0 prod-descr"><%=prod.descripcion.titleize%></p>
+        <%if prod.descripcion2.present?%>
+          <p class="mb-0 prod-descr-2"><%=prod.descripcion2.titleize%></p>
+        <%end%>
       </div>
       <div class="row">
         <div class="col-5 col-md-8" style="padding-right:0px;">
