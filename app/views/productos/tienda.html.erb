@@ -111,10 +111,19 @@
             <li>Tarjeta <i class="far fa-credit-card color-pink"></i></li>
             <%elsif @negocio.metodo_pago.to_i == 2%>
             <li>Tarjeta <i class="far fa-credit-card color-pink"></i></li>
+            <%elsif @negocio.metodo_pago.to_i == 4%>
+              <li>Transferencia <i class="fas fa-wallet"></i></li>
             <%else%>
             <li>Efectivo <i class="fas fa-money-bill color-wa"></i></li>
             <%end%>
           </ul>
+          <% if @negocio.metodo_pago.to_i == 4%>
+            <ul style="list-style-type: none;">
+            <li>Beneficiario: <%=@negocio.beneficiario%> </li>
+            <li>CLABE: <%=@negocio.cuenta%></li>
+            <li>Banco: <%=@negocio.banco%></li>
+            </ul>
+          <%end%>
           <% if @negocio.factura == "Si"%>
           <p>Facturación disponible <i class="far fa-file-alt color-pink"></i></p>
           <%end%>

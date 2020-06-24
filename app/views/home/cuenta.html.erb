@@ -55,11 +55,11 @@
       </div>
 
       <div class="form-row">
-        <div class="form-group col-md-7">
+        <div class="form-group col-md-6">
           <label for="inputZip">Condiciones de Higiene</label>
           <%= f.text_area :condiciones_higiene, class:"form-control" %>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputZip">Tipo de entrega</label>
@@ -76,7 +76,7 @@
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 mb-0">
               <label for="inputZip">Compra mínima</label>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -85,9 +85,23 @@
                 <%= f.text_field :compra_minima, class:"form-control" %>
               </div>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 mb-0">
               <label for="inputZip">Forma de pago</label>
               <%= f.select(:metodo_pago, options_for_select(@formas_pago,@config_user.metodo_pago), {:include_blank => 'Seleccionar...' }, :class => 'form-control') %>
+            </div>
+          </div>
+          <div class="form-row" id="row_transferencia" style="display:none;">
+            <div class="form-group col-md-4">
+              <label for="inputZip">Beneficiario</label>
+                <%= f.text_field :beneficiario, class:"form-control" %>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputZip">CLABE</label>
+                <%= f.text_field :cuenta, class:"form-control" %>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputZip">Banco</label>
+                <%= f.select(:banco, options_for_select(@bancos,@config_user.banco), {:include_blank => 'Seleccionar...' }, :class => 'form-control') %>
             </div>
           </div>
         </div>
