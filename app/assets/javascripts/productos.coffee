@@ -65,6 +65,11 @@ Paloma.controller 'Pedidos', new: ->
   $("#btn-cart_float").removeClass("d-md-block")
 
   negocio_factura = localStorage.getItem("negocio_factura")
+  negocio_anuncio = localStorage.getItem("negocio_anuncio")
+
+  if negocio_anuncio != ""
+    $("#alert_aviso").html(negocio_anuncio).show()
+
   if negocio_factura != "Si"
     $("#row_factura").hide()
 
@@ -287,6 +292,7 @@ eventos = ->
     localStorage.removeItem("productos");
     localStorage.removeItem("negocio_id");
     localStorage.removeItem("negocio_factura");
+    localStorage.removeItem("negocio_anuncio");
     $("#negocio_nombre_carrito").val("")
     $("#notifModal").modal('hide')
     cargar_productos()
@@ -376,6 +382,8 @@ agregar_producto = (producto) ->
     return
   negocio_factura = $("#negocio_factura").val()
   localStorage.setItem("negocio_factura", negocio_factura)
+  negocio_anuncio = $("#negocio_anuncio").val()
+  localStorage.setItem("negocio_anuncio", negocio_anuncio)
   negocio_nombre = $("#negocio_nombre").val()
   $("#negocio_nombre_carrito").text(negocio_nombre)
   precio = parseFloat(producto.data("precio"))
@@ -449,6 +457,7 @@ borrar_pedido = ->
   localStorage.removeItem("productos")
   localStorage.removeItem("negocio_id")
   localStorage.removeItem("negocio_factura");
+  localStorage.removeItem("negocio_anuncio");
   $("#negocio_nombre_carrito").val("")
   cargar_productos()
 
