@@ -79,6 +79,10 @@
                 </tr>
               </tfoot>
             </table>
+          
+          <% if @negocio.comentario.present?%>
+            <div class="alert alert-warning" role="alert" id="alert_aviso"><%=@negocio.comentario%></div>
+          <%end%>
         </div>
       </div>
     </div>
