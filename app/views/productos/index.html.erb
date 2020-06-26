@@ -19,45 +19,47 @@
     </div>
   </div>
   <div class="row">
-    <table class="table table-sm table-hover table-bordered mt-10" style="width:100% !important;">
-      <thead>
-        <tr>
-          <th>SKU</th>
-          <th>Categoría</th>
-          <th>Descripción</th>
-          <th>Descripción 2</th>
-          <th>Unidad</th>
-          <th>Precio</th>
-          <th>Impuesto</th>
-          <th>Inventario</th>
-          <th>Foto</th>
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @productos.each do |producto| %>
+    <div class="table-wrap">
+      <table class="table table-sm table-hover table-bordered mt-10" style="width:100% !important;">
+        <thead>
           <tr>
-            <td><%= producto.codigo %></td>
-            <td><%= producto.categoria %></td>
-            <td><%= producto.descripcion %></td>
-            <td><%= producto.descripcion2 %></td>
-            <td><%= producto.unidad %></td>
-            <td><%= producto.precio %></td>
-            <td><%= producto.impuesto %></td>
-            <td><%= producto.inventario %></td>
-            <td class="text-center"><img id="img_producto" src="<%= producto.foto %>" class="img-thumbnail foto-mini-lista"></td>
-            <td class="text-center">
-              <%= link_to(edit_producto_path(producto), :class => 'btn btn-sm btn-warning', :data => {tooltip: "tooltip"}, :title => "Editar Producto") do %>
-                <i class="fas fa-edit"></i>
-              <% end %>
-              <%= link_to(producto, class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: 'Seguro de Eliminar?', tooltip: "tooltip" },:title => "Eliminar Producto" ) do %>
-                <i class="fas fa-trash"></i>
-              <% end %>
-            </td>
+            <th>SKU</th>
+            <th>Categoría</th>
+            <th>Descripción</th>
+            <th>Descripción 2</th>
+            <th>Unidad</th>
+            <th>Precio</th>
+            <th>Impuesto</th>
+            <th>Inventario</th>
+            <th>Foto</th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          <% @productos.each do |producto| %>
+            <tr>
+              <td><%= producto.codigo %></td>
+              <td><%= producto.categoria %></td>
+              <td><%= producto.descripcion %></td>
+              <td><%= producto.descripcion2 %></td>
+              <td><%= producto.unidad %></td>
+              <td><%= producto.precio %></td>
+              <td><%= producto.impuesto %></td>
+              <td><%= producto.inventario %></td>
+              <td class="text-center"><img id="img_producto" src="<%= producto.foto %>" class="img-thumbnail foto-mini-lista"></td>
+              <td class="text-center">
+                <%= link_to(edit_producto_path(producto), :class => 'btn btn-sm btn-warning', :data => {tooltip: "tooltip"}, :title => "Editar Producto") do %>
+                  <i class="fas fa-edit"></i>
+                <% end %>
+                <%= link_to(producto, class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: 'Seguro de Eliminar?', tooltip: "tooltip" },:title => "Eliminar Producto" ) do %>
+                  <i class="fas fa-trash"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

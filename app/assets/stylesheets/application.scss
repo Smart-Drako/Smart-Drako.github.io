@@ -972,3 +972,10 @@ li.nav-item.active>.nav-link {
 .nobreak {
   page-break-inside: avoid;
 }
+
+.table-wrap {
+  border: 1px solid #ddd;
+  width: 100%;
+  height: 600px;
+  overflow: auto;
+}
