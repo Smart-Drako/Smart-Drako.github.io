@@ -50,6 +50,9 @@
             <p>RFC: <strong><%= @pedido.cliente_rfc%></strong></p>
             <p>Uso CFDI: <strong><%= @pedido.cliente_uso_cfdi%></strong></p>
             <% end %>
+            <% if @pedido.comentario.present?%>
+              <p>Indicación especial: <strong><%= @pedido.comentario%></strong></p>
+            <%end%>
           </div>
         </div>
       </div>
@@ -72,7 +75,7 @@
               </thead>
               <tbody>
                 <% @productos.each do |p|%>
-                <tr>
+                <tr class="nobreak">
                   <td class="text-center"><%= p.cantidad %></td>
                   <td><%= p.nombre %></td>
                   <td class="text-center"><%= p.unidad %></td>

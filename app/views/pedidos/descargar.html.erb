@@ -38,6 +38,9 @@
             <p>RFC: <strong><%= @pedido.cliente_rfc%></strong></p>
             <p>Uso CFDI: <strong><%= @pedido.cliente_uso_cfdi%></strong></p>
             <% end %>
+            <% if @pedido.comentario.present?%>
+              <p>Indicación especial: <strong><%= @pedido.comentario%></strong></p>
+            <%end%>
           </div>
         </div>
       </div>
