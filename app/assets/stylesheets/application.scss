@@ -964,3 +964,11 @@ li.nav-item.active>.nav-link {
 .prod-descr-2 {
   font-size: 0.8rem;
 }
+
+.nobreak:before {
+  clear: both;
+}
+
+.nobreak {
+  page-break-inside: avoid;
+}
