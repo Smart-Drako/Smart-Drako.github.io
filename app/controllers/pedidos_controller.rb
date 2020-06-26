@@ -121,6 +121,7 @@ class PedidosController < ApplicationController
       pedido.cliente_rfc = cliente["rfc"] if cliente["rfc"].present?
       pedido.cliente_uso_cfdi = cliente["uso_cfdi"] if cliente["uso_cfdi"].present?
       pedido.cliente_email = cliente["correo"] if cliente["correo"].present?
+      pedido.comentario = cliente["comentario"] if cliente["comentario"].present?
 
       if pedido.save
         productos.each do |p|
