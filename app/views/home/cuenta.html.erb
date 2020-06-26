@@ -56,8 +56,22 @@
 
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="inputZip">Condiciones de Higiene</label>
-          <%= f.text_area :condiciones_higiene, class:"form-control" %>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="inputZip">Condiciones de Higiene</label>
+              <%= f.text_area :condiciones_higiene, class:"form-control" %>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputZip">Aviso para clientes</label>
+              <%= f.text_area :aviso, class:"form-control" %>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputZip">Comentarios en pedidos</label>
+              <%= f.text_area :comentario, class:"form-control" %>
+            </div>
+          </div>
         </div>
         <div class="col-md-6">
           <div class="form-row">
@@ -93,15 +107,15 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="inputZip">Beneficiario</label>
-                <%= f.text_field :beneficiario, class:"form-control" %>
+              <%= f.text_field :beneficiario, class:"form-control" %>
             </div>
             <div class="form-group col-md-4">
               <label for="inputZip">CLABE</label>
-                <%= f.text_field :cuenta, class:"form-control" %>
+              <%= f.text_field :cuenta, class:"form-control" %>
             </div>
             <div class="form-group col-md-4">
               <label for="inputZip">Banco</label>
-                <%= f.select(:banco, options_for_select(@bancos,@config_user.banco), {:include_blank => 'Seleccionar...' }, :class => 'form-control') %>
+              <%= f.select(:banco, options_for_select(@bancos,@config_user.banco), {:include_blank => 'Seleccionar...' }, :class => 'form-control') %>
             </div>
           </div>
         </div>

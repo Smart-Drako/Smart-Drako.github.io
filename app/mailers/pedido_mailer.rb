@@ -2,6 +2,7 @@ class PedidoMailer < ApplicationMailer
   def pedido(destinatario, pedido, empresa, vendedor = true)
 
     @empresa = empresa.nombre
+    @info_empresa = empresa
     @pedido = pedido
     usuario = User.find(empresa.user_id)
 
