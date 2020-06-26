@@ -101,19 +101,6 @@ Paloma.controller 'Home', cuenta: ->
 
   $("#btn-cart_float").removeClass("d-md-block")
 
-  if $("#config_user_metodo_pago").val() == "4"
-    $("#row_transferencia").fadeIn()
-
-  $("#config_user_metodo_pago").change ->
-    metodo = $(this).val()
-    if metodo  == "4"
-      $("#row_transferencia").fadeIn()
-      $("#config_user_beneficiario, #config_user_cuenta, #config_user_banco").prop("disabled",false).val("")
-      $("#config_user_beneficiario").focus()
-    else
-      $("#row_transferencia").fadeOut()
-      $("#config_user_beneficiario, #config_user_cuenta, #config_user_banco").prop("disabled",true).val("")
-
 cargar_productos = ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
   totales = calcular_totales()
