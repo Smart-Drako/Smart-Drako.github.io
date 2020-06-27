@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     get "/registro" => "devise/registrations#new" # custom path to sign_up/registration
   end
   get "/me", to: "home#cuenta"
-  get "socios/:id", to: "productos#tienda"
+  # get "socios/:id", to: "productos#tienda"
+  get "socios/:id", to: "home#index"
+  
   post "/generar_pedido", to:"pedidos#generar"
   get "/pedidos", to: "pedidos#index"
   get "/pedido/:id", to: "pedidos#show"
