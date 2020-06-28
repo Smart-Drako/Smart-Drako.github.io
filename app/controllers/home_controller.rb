@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  before_action :authenticate_user!, :except => [:index]
+  before_action :authenticate_user!, :except => [:index, :error]
 
   def index
     @negocios = Array.new
@@ -16,6 +16,10 @@ class HomeController < ApplicationController
       }
       @negocios.push(item)
     end
+  end
+
+  def error
+    render :layout => nil
   end
 
   def cuenta

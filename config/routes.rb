@@ -4,14 +4,13 @@ Rails.application.routes.draw do
   end
   resources :config_users
   devise_for :users
-  root to: "home#index"
+  root to: "home#error"
   devise_scope :user do
     get "/login" => "devise/sessions#new" # custom path to login/sign_in
     get "/registro" => "devise/registrations#new" # custom path to sign_up/registration
   end
   get "/me", to: "home#cuenta"
-  # get "socios/:id", to: "productos#tienda"
-  get "socios/:id", to: "home#index"
+  get "socios/:id", to: "productos#tienda"
   
   post "/generar_pedido", to:"pedidos#generar"
   get "/pedidos", to: "pedidos#index"
