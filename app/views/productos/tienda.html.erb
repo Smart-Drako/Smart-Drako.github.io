@@ -119,13 +119,6 @@
               <li>Transferencia <i class="fas fa-wallet color-wa"></i></li>
             <%end%>
           </ul>
-          <% if @negocio.beneficiario.present? && @negocio.cuenta.present? && @negocio.banco.present?%>
-            <ul style="list-style-type: none;">
-            <li>Beneficiario: <%=@negocio.beneficiario%> </li>
-            <li>CLABE: <%=@negocio.cuenta%></li>
-            <li>Banco: <%=@negocio.banco%></li>
-            </ul>
-          <%end%>
           <% if @negocio.factura == "Si"%>
           <p>Facturación disponible <i class="far fa-file-alt color-pink"></i></p>
           <%end%>
