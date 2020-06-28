@@ -42,11 +42,14 @@ class ProductosController < ApplicationController
     #Buscar por slug unico
     if id == 0
       @negocio = ConfigUser.find_by(slug: slug)
-      @productos = Producto.where(user_id: @negocio.user_id).order('categoria, descripcion')
+      @productos = Producto.where(user_id: @negocio.user_id).order('categoria, descripcion') if @negocio.present?
     else
-      @negocio = ConfigUser.find(id)
-      @productos = Producto.where(user_id: @negocio.user_id).order('categoria, descripcion')
+      @negocio = ConfigUser.find_by(id: id)
+      @productos = Producto.where(user_id: @negocio.user_id).order('categoria, descripcion') if @negocio.present?
     end
+
+    redirect_to '/' and return if @negocio.nil?
+    redirect_to '/' and return if @negocio.activo == 0
 
     @prods = Array.new
     
