@@ -19,7 +19,11 @@ class HomeController < ApplicationController
   end
 
   def error
-    render :layout => nil
+    if current_user.present? 
+      redirect_to me_path and return
+    else
+      render :layout => nil
+    end
   end
 
   def cuenta
