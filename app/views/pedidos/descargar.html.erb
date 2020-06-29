@@ -40,11 +40,13 @@
                 Banco: <%= @negocio.banco%>
               </p>
             <%end%>
-            <p>Requiere Factura: <strong><%= (@pedido.cliente_factura == true ? "Si" : "No") %></strong></p>
-            <% if @pedido.cliente_factura == true%>
-            <p>RFC: <strong><%= @pedido.cliente_rfc%></strong></p>
-            <p>Uso CFDI: <strong><%= @pedido.cliente_uso_cfdi%></strong></p>
-            <% end %>
+            <%if @negocio.factura == "Si"%>
+              <p>Requiere Factura: <strong><%= (@pedido.cliente_factura == true ? "Si" : "No") %></strong></p>
+              <% if @pedido.cliente_factura == true%>
+                <p>RFC: <strong><%= @pedido.cliente_rfc%></strong></p>
+                <p>Uso CFDI: <strong><%= @pedido.cliente_uso_cfdi%></strong></p>
+              <% end %>
+            <%end%>
             <% if @pedido.comentario.present?%>
               <p>Indicación especial: <strong><%= @pedido.comentario%></strong></p>
             <%end%>
