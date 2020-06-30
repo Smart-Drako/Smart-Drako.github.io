@@ -221,14 +221,20 @@ eventos_handlebars = ->
     if e.keyCode == 13
       id = $(this).data("id")
       valor = $(this).val()
-      cantidad_producto(id, valor)
+      if valor == ""
+        cantidad_producto(id, 1)
+      else
+        cantidad_producto(id, valor)
       $(this).blur()
     return
   
   $('.input-cantidad, .input-cantidad-list').unbind("focusout").focusout ->
     id = $(this).data("id")
     valor = $(this).val()
-    cantidad_producto(id, valor)
+    if valor == ""
+      cantidad_producto(id, 1)
+    else
+      cantidad_producto(id, valor)
 
 cantidad_producto = (id, valor) ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
