@@ -95,6 +95,7 @@ Paloma.controller 'Pedidos', new: ->
 
     $('#datos_cliente_form').on 'submit', (e) ->
       e.preventDefault()
+      $("#submit_pedido").attr("disabled", true)
       procesar_pedido()
 
 
@@ -451,6 +452,7 @@ procesar_pedido = ->
     beforeSend: ->
       console.log "Generando pedido"
     success: (data) ->
+      $("#submit_pedido").attr("disabled", false)
       if data.error == false
         borrar_pedido()
         $("#notifPedidoModal").modal()
