@@ -29,6 +29,37 @@
 </div>
 <hr>
 
+<div class="container cont-cat d-none">
+  <div class="owl-carousel owl-theme">
+    <div class="card condiciones">
+      <div class="row" style="margin:0px;height:100%;">
+        <div class="col-4 cond-dibujo-compra">
+          <img src="" class="cond-ilustracion">
+        </div>
+      <div class="col-8">
+        <h6 class="card-title mb-0">Condiciones de Compra</h6>
+      </div>
+      </div>
+    </div>
+    <div class="card condiciones">
+      <div class="row" style="margin:0px;height:100%;">
+        <div class="col-4 cond-dibujo-higiene">
+          <img src="" class="cond-ilustracion">
+        </div>
+      <div class="col-8">
+        <h6 class="card-title mb-0">Medidas de Higiene</h6>
+        <br>
+        <ol class="list-higiene">
+          <% @higiene.each do |h|%>
+          <li><%= h %>.</li>
+          <%end%>
+        </ol>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container cont-cat" id="info_proveedor">
   <div class="card-deck">
     <div class="card">
@@ -42,8 +73,11 @@
           </div>
         </div>
 
+
+
         <div class="row">
-          <div class="col-12 mt-20">
+
+          <div class="col-12 mt-20 d-none">
             <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 1%>
             <div class="col-12">
               <div class="row">
@@ -116,7 +150,7 @@
             <li>Efectivo <i class="fas fa-money-bill color-wa"></i></li>
             <%end%>
             <% if @negocio.beneficiario.present? && @negocio.cuenta.present? && @negocio.banco.present?%>
-              <li>Transferencia <i class="fas fa-wallet color-wa"></i></li>
+            <li>Transferencia <i class="fas fa-wallet color-wa"></i></li>
             <%end%>
           </ul>
           <% if @negocio.factura == "Si"%>
@@ -146,14 +180,14 @@
   <div class="lista-item row borders-item <%= prod.inventario.present? && prod.inventario.to_i == 0 ? "agotado" : ""%>">
     <div class="col-2 align-self-center" style="padding:3px">
       <%if prod.foto.present?%>
-        <img src="<%= prod.foto %>" class="img-responsive img-prod">
+      <img src="<%= prod.foto %>" class="img-responsive img-prod">
       <%end%>
     </div>
     <div class="col-10 align-self-center pad-5">
       <div class="col-12 no-padding">
         <p class="mb-0 prod-descr"><%=prod.descripcion.titleize%></p>
         <%if prod.descripcion2.present?%>
-          <p class="mb-0 prod-descr-2 text-muted"><%=prod.descripcion2.downcase%></p>
+        <p class="mb-0 prod-descr-2 text-muted"><%=prod.descripcion2.downcase%></p>
         <%end%>
       </div>
       <div class="row">
@@ -161,40 +195,41 @@
           <%if prod.precio.to_f <= 0%>
           <p class="mb-0 precio"><strong><%=prod.unidad%></span></strong></p>
           <%else%>
-          <p class="mb-0 precio"><strong><%=number_to_currency(prod.precio)%><span class=""> / <%=prod.unidad%></span></strong>
+          <p class="mb-0 precio"><strong><%=number_to_currency(prod.precio)%><span class=""> /
+                <%=prod.unidad%></span></strong>
           </p>
           <%end%>
         </div>
-      <div class="col-7 col-md-4">
-        <div class="row">
-          <div class="col-9 col-md-9" style="padding-right:0px;">
-            <%if prod.inventario.present? && prod.inventario.to_i == 0%>
+        <div class="col-7 col-md-4">
+          <div class="row">
+            <div class="col-9 col-md-9" style="padding-right:0px;">
+              <%if prod.inventario.present? && prod.inventario.to_i == 0%>
               <button type="button" disabled class="btn btn-sm btn-danger agotado btn-block">Agotado</button>
-            <%else%>
-            <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>"
-              data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>"
-              class="btn btn-sm btn-aqua btn-cart-item btn-block">Agregar</button>
-            <%end%>
-            <div class="item-cantidades input-group input-group-sm" style="width: auto;">
-              <div class="input-group-prepend">
-                <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm restar-item"><i
-                    class="fas fa-minus"></i></button>
-              </div>
-              <input onClick="this.select();" id="input_cant_<%=prod.id%>" data-id="<%=prod.id%>" type="number"
-                class="form-control input-cantidad-list input-sm" value="">
-              <div class="input-group-append">
-                <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm sumar-item"><i
-                    class="fas fa-plus"></i></button>
+              <%else%>
+              <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>"
+                data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>"
+                class="btn btn-sm btn-aqua btn-cart-item btn-block">Agregar</button>
+              <%end%>
+              <div class="item-cantidades input-group input-group-sm" style="width: auto;">
+                <div class="input-group-prepend">
+                  <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm restar-item"><i
+                      class="fas fa-minus"></i></button>
+                </div>
+                <input onClick="this.select();" id="input_cant_<%=prod.id%>" data-id="<%=prod.id%>" type="number"
+                  class="form-control input-cantidad-list input-sm" value="">
+                <div class="input-group-append">
+                  <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm sumar-item"><i
+                      class="fas fa-plus"></i></button>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-3 col-md-3 align-self-center" style="padding: 2px;">
-            <div class="align-self-center" style="padding-left: 2px; font-size: 0.8rem;">
-              <span id="span_unidad_<%=prod.id%>" class="span-unidad"> <%=prod.unidad[0..2]%></span>
+            <div class="col-3 col-md-3 align-self-center" style="padding: 2px;">
+              <div class="align-self-center" style="padding-left: 2px; font-size: 0.8rem;">
+                <span id="span_unidad_<%=prod.id%>" class="span-unidad"> <%=prod.unidad[0..2]%></span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
 
     </div>

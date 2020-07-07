@@ -995,3 +995,27 @@ li.nav-item.active>.nav-link {
 .carrito_mini {
   height: 20px;
 }
+
+.condiciones {
+  height: 300px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+}
+
+.cond-dibujo-compra {
+  background: #FFCEA0;
+}
+
+.cond-dibujo-higiene {
+  background: #E0F8FF;
+}
+
+.list-higiene {
+  font-size: 0.85rem;
+  padding-left: 12px;
+}
+
+.list-higiene>li {
+  line-height: 1.3;
+}
