@@ -231,6 +231,13 @@ a {
   font-size: 0.9rem;
 }
 
+.btn-circle-xs {
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 0.9rem;
+}
+
 li.ilb {
   display: inline-block;
   padding: 0px 15px;
@@ -715,6 +722,7 @@ input[type="number"] {
 
 #ver_prod_movil {
   width: 100%;
+  background: linear-gradient(90deg, #C4C4C4 -45%, #FFA450 -44.99%, #EC2976 98.97%);
 }
 
 #info_proveedor {
@@ -978,4 +986,12 @@ li.nav-item.active>.nav-link {
   width: 100%;
   height: 600px;
   overflow: auto;
+}
+
+.bg-pica {
+  background: linear-gradient(90deg, #C4C4C4 -45%, #FFA450 -44.99%, #EC2976 98.97%);
+}
+
+.carrito_mini {
+  height: 20px;
 }
