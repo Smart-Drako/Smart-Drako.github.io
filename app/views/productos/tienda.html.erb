@@ -204,7 +204,7 @@
           <div class="row">
             <div class="col-9 col-md-9" style="padding-right:0px;">
               <%if prod.inventario.present? && prod.inventario.to_i == 0%>
-              <button type="button" disabled class="btn btn-sm btn-danger agotado btn-block">Agotado</button>
+              <button type="button" disabled class="btn btn-sm btn-secondary agotado btn-block">Agotado</button>
               <%else%>
               <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>"
                 data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>"
