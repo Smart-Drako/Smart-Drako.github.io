@@ -52,3 +52,9 @@ production:
   database: pideloencasa
   username: deploy
   password: <%= ENV['PIDELOENCASA_DATABASE_PASSWORD'] %>
+
+staging:
+  <<: *default
+  database: pideloencasa
+  username: deploy
+  password: <%= ENV['PIDELOENCASA_DATABASE_PASSWORD'] %>
