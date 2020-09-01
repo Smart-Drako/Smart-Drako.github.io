@@ -47,7 +47,11 @@
               <td><%= producto.precio %></td>
               <td><%= producto.impuesto %></td>
               <td><%= producto.inventario %></td>
-              <td class="text-center"><img id="img_producto" src="<%= producto.foto[0] %>" class="img-thumbnail foto-mini-lista"></td>
+              <%if producto.foto.present?%>
+                <td class="text-center"><img id="img_producto" src="<%= producto.foto[0] %>" class="img-thumbnail foto-mini-lista"></td>
+              <%else%>
+                <td></td>
+              <%end%>
               <td class="text-center">
                 <%= link_to(edit_producto_path(producto), :class => 'btn btn-sm btn-warning', :data => {tooltip: "tooltip"}, :title => "Editar Producto") do %>
                   <i class="fas fa-edit"></i>
