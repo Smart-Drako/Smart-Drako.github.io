@@ -50,7 +50,7 @@
           <%if !producto.foto.nil?%>
               <%producto.foto.each do |foto|%>
                 <img src="<%= foto %>" class="img-thumbnail foto-mini"> 
-                <%= link_to "x", { action: "borrar_imagen", id: producto.id, index:foto.index }, data: {confirm: "Are you sure?"}, method: :post, class: "btn btn-sm btn-danger" %>
+                <%= link_to "x", { action: "borrar_imagen", id: producto.id, index:foto.index }, data: {confirm: "Seguro de eliminar?"}, method: :post, class: "btn btn-sm btn-danger" %>
               <%end%>
           <%end%>
         </div>
