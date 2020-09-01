@@ -112,14 +112,32 @@ class ProductosController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_producto
-      @producto = Producto.find(params[:id])
-    end
+  def borrar_imagen
+    index = params[:index].to_i
+    producto = Producto.find(params[:id].to_i)
+    remove_image_at_index(index, producto)
+    redirect_to productos_path
+  end
 
-    # Only allow a list of trusted parameters through.
-    def producto_params
-      params.require(:producto).permit(:user_id, :codigo, :inventario, :categoria, :descripcion, :descripcion2, :unidad, :precio, :impuesto, :foto)
+  private
+  def remove_image_at_index(index, producto)
+    remain_images = producto.foto
+    if index == 0 && producto.foto.size == 1
+      producto.remove_foto!
+    else
+      deleted_image = remain_images.delete_at(index) 
+      deleted_image.try(:remove!)
+      producto.foto = remain_images
     end
+    producto.save!
+  end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_producto
+    @producto = Producto.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def producto_params
+    params.require(:producto).permit(:user_id, :codigo, :inventario, :categoria, :descripcion, :descripcion2, :unidad, :precio, :impuesto, {foto: []})
+  end
 end

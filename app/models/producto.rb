@@ -1,6 +1,6 @@
 class Producto < ApplicationRecord
   belongs_to :user
-  mount_uploader :foto, FotoUploader
+  mount_uploaders :foto, FotoUploader
 
   def self.importar(file, current_user)
     excel = abrir_excel(file)

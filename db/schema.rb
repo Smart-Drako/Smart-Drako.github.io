@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_26_215047) do
+ActiveRecord::Schema.define(version: 2020_09_01_021551) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2020_06_26_215047) do
     t.string "unidad"
     t.string "precio"
     t.string "impuesto"
-    t.string "foto"
+    t.json "foto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_productos_on_user_id"

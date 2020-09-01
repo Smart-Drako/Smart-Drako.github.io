@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="form-row">
-      <div class="form-group col-md-3">
+        <div class="form-group col-md-3">
           <%= form.label :unidad %>
           <%= form.text_field :unidad, class:"form-control", maxLength: 3 %>
         </div>
@@ -39,15 +39,19 @@
       </div>
 
       <div class="form-row">
-        <div class="col-md-2">
-        </div>
         <div class="from-group col-md-4">
+          <% producto.foto.each do |foto| %>
+            <%= hidden_field :producto, :foto, multiple: true, value: foto.identifier, id: foto.identifier %>
+          <% end %>
           <%= form.label :foto %>
-          <%= form.file_field :foto, class:"form-control" %>
+          <%= form.file_field :foto, multiple: true , class:"form-control" %>
         </div>
-        <div class="from-group col-md-4 mb-20">
+        <div class="from-group col-md-8 mb-20">
           <%if !producto.foto.nil?%>
-              <img id="img_producto" src="<%= producto.foto %>" class="img-thumbnail foto-mini">
+              <%producto.foto.each do |foto|%>
+                <img src="<%= foto %>" class="img-thumbnail foto-mini"> 
+                <%= link_to "x", { action: "borrar_imagen", id: producto.id, index:foto.index }, data: {confirm: "Are you sure?"}, method: :post, class: "btn btn-sm btn-danger" %>
+              <%end%>
           <%end%>
         </div>
       </div>
