@@ -48,7 +48,7 @@
               <td><%= producto.impuesto %></td>
               <td><%= producto.inventario %></td>
               <%if producto.foto.present?%>
-                <td class="text-center"><img id="img_producto" src="<%= producto.foto[0] %>" class="img-thumbnail foto-mini-lista"></td>
+                <td class="text-center"><img id="img_producto" src="<%= producto.foto[0].thumb %>" class="img-thumbnail foto-mini-lista"></td>
               <%else%>
                 <td></td>
               <%end%>

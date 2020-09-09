@@ -180,7 +180,7 @@
   <div class="lista-item row borders-item <%= prod.inventario.present? && prod.inventario.to_i == 0 ? "agotado" : ""%>">
     <div class="col-2 align-self-center" style="padding:3px">
       <%if prod.foto.present?%>
-      <img src="<%= prod.foto[0] %>" class="img-responsive img-prod">
+      <img src="<%= prod.foto[0].thumb %>" class="img-responsive img-prod">
       <%end%>
     </div>
     <div class="col-10 align-self-center pad-5">

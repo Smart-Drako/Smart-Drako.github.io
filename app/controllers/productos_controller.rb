@@ -7,6 +7,18 @@ class ProductosController < ApplicationController
   def index
     @productos = Producto.where(user_id: current_user.id).order(categoria: :asc, descripcion: :asc)
   end
+  
+  def recrear_fotos
+    productos = Producto.all
+    productos.each do |pro|
+      if pro.foto.present? && pro.foto.class == Array
+        pro.foto.each do |foto|
+          foto.recreate_versions!
+        end
+      end
+    end
+    render plain: "Se recrearon versiones de fotos"
+  end
 
   def importar
     Producto.importar(params[:file], current_user)
