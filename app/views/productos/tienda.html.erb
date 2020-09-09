@@ -261,7 +261,7 @@
                       <%else%>
                         <div class="carousel-item">
                       <%end%>
-                        <a href="#" >
+                        <a href="#" class="pop">
                           <img src="<%= fot %>" class="img-responsive">
                         </a>
                       </div>
@@ -307,3 +307,28 @@
       </div>
   <%end%>
 <%end%>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="imagemodal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <img src="" id="imagepreview">
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>

@@ -190,6 +190,13 @@ revisar_cats = ->
       $(this).show()
 
 eventos_negocio = ->
+
+  $(".pop").unbind("click").click (e) ->
+    e.preventDefault()
+    imagen = $(this).children().attr('src')
+    $('#imagepreview').attr('src', imagen)
+    $('#imagemodal').modal('show')
+
   $("#ver_prod_movil, #ver_prod_web").click ->
     console.log "x"
     # if $(this).hasClass("active")
