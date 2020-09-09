@@ -18,7 +18,7 @@
         </div>
         <div class="form-group col-md-5">
           <label for="inputPassword4">Vista Cards</label>
-          <%= f.select(:vista_card, options_for_select(@vista,@config_user.vista_card), {:include_blank => nil }, :class => 'form-control', :disabled=> "disabled") %>
+          <%= f.select(:vista_card, options_for_select(@vista,@config_user.vista_card), {:include_blank => nil }, :class => 'form-control') %>
         </div>
       </div>
       <div class="form-row">
