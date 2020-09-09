@@ -1019,3 +1019,9 @@ li.nav-item.active>.nav-link {
 .list-higiene>li {
   line-height: 1.3;
 }
+
+.carousel-inner img {
+  object-fit: fill;
+  object-fit: cover;
+  height: 190px;
+}

@@ -174,66 +174,123 @@
 </nav>
 
 <% @prods.each do |cat|%>
-<div class="container cont-cat div-cat" id="cat_<%=I18n.transliterate(cat[:id]).delete(' ')%>">
-  <h4><%= cat[:nombre].capitalize%></h4>
-  <% cat[:productos].each do |prod|%>
-  <div class="lista-item row borders-item <%= prod.inventario.present? && prod.inventario.to_i == 0 ? "agotado" : ""%>">
-    <div class="col-2 align-self-center" style="padding:3px">
-      <%if prod.foto.present?%>
-      <img src="<%= prod.foto[0].thumb %>" class="img-responsive img-prod">
-      <%end%>
-    </div>
-    <div class="col-10 align-self-center pad-5">
-      <div class="col-12 no-padding">
-        <p class="mb-0 prod-descr"><%=prod.descripcion.titleize%></p>
-        <%if prod.descripcion2.present?%>
-        <p class="mb-0 prod-descr-2 text-muted"><%=prod.descripcion2.downcase%></p>
-        <%end%>
-      </div>
-      <div class="row">
-        <div class="col-5 col-md-8 align-self-end" style="padding-right:0px;">
-          <%if prod.precio.to_f <= 0%>
-          <p class="mb-0 precio"><strong><%=prod.unidad%></span></strong></p>
-          <%else%>
-          <p class="mb-0 precio"><strong><%=number_to_currency(prod.precio)%><span class=""> /
-                <%=prod.unidad%></span></strong>
-          </p>
-          <%end%>
-        </div>
-        <div class="col-7 col-md-4">
-          <div class="row">
-            <div class="col-9 col-md-9" style="padding-right:0px;">
-              <%if prod.inventario.present? && prod.inventario.to_i == 0%>
-              <button type="button" disabled class="btn btn-sm btn-secondary agotado btn-block">Agotado</button>
-              <%else%>
-              <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>"
-                data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>"
-                class="btn btn-sm btn-aqua btn-cart-item btn-block">Agregar</button>
+  <%if @negocio.vista_card == false%>
+    <div class="container cont-cat div-cat" id="cat_<%=I18n.transliterate(cat[:id]).delete(' ')%>">
+      <h4><%= cat[:nombre].capitalize%></h4>
+      <% cat[:productos].each do |prod|%>
+          <div class="lista-item row borders-item <%= prod.inventario.present? && prod.inventario.to_i == 0 ? "agotado" : ""%>">
+            <div class="col-2 align-self-center" style="padding:3px">
+              <%if prod.foto.present?%>
+              <img src="<%= prod.foto[0].thumb %>" class="img-responsive img-prod">
               <%end%>
-              <div class="item-cantidades input-group input-group-sm" style="width: auto;">
-                <div class="input-group-prepend">
-                  <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm restar-item"><i
-                      class="fas fa-minus"></i></button>
-                </div>
-                <input onClick="this.select();" id="input_cant_<%=prod.id%>" data-id="<%=prod.id%>" type="number"
-                  class="form-control input-cantidad-list input-sm" value="">
-                <div class="input-group-append">
-                  <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm sumar-item"><i
-                      class="fas fa-plus"></i></button>
-                </div>
-              </div>
             </div>
-            <div class="col-3 col-md-3 align-self-center" style="padding: 2px;">
-              <div class="align-self-center" style="padding-left: 2px; font-size: 0.8rem;">
-                <span id="span_unidad_<%=prod.id%>" class="span-unidad"> <%=prod.unidad[0..2]%></span>
+            <div class="col-10 align-self-center pad-5">
+              <div class="col-12 no-padding">
+                <p class="mb-0 prod-descr"><%=prod.descripcion.titleize%></p>
+                <%if prod.descripcion2.present?%>
+                <p class="mb-0 prod-descr-2 text-muted"><%=prod.descripcion2.downcase%></p>
+                <%end%>
               </div>
+              <div class="row">
+                <div class="col-5 col-md-8 align-self-end" style="padding-right:0px;">
+                  <%if prod.precio.to_f <= 0%>
+                  <p class="mb-0 precio"><strong><%=prod.unidad%></span></strong></p>
+                  <%else%>
+                  <p class="mb-0 precio"><strong><%=number_to_currency(prod.precio)%><span class=""> /
+                        <%=prod.unidad%></span></strong>
+                  </p>
+                  <%end%>
+                </div>
+                <div class="col-7 col-md-4">
+                  <div class="row">
+                    <div class="col-9 col-md-9" style="padding-right:0px;">
+                      <%if prod.inventario.present? && prod.inventario.to_i == 0%>
+                      <button type="button" disabled class="btn btn-sm btn-secondary agotado btn-block">Agotado</button>
+                      <%else%>
+                      <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>"
+                        data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>"
+                        class="btn btn-sm btn-aqua btn-cart-item btn-block">Agregar</button>
+                      <%end%>
+                      <div class="item-cantidades input-group input-group-sm" style="width: auto;">
+                        <div class="input-group-prepend">
+                          <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm restar-item"><i
+                              class="fas fa-minus"></i></button>
+                        </div>
+                        <input onClick="this.select();" id="input_cant_<%=prod.id%>" data-id="<%=prod.id%>" type="number"
+                          class="form-control input-cantidad-list input-sm" value="">
+                        <div class="input-group-append">
+                          <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm sumar-item"><i
+                              class="fas fa-plus"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-3 col-md-3 align-self-center" style="padding: 2px;">
+                      <div class="align-self-center" style="padding-left: 2px; font-size: 0.8rem;">
+                        <span id="span_unidad_<%=prod.id%>" class="span-unidad"> <%=prod.unidad[0..2]%></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
+      <%end%>
+    </div>
+  <%else%>
+      <div class="container cont-cat div-cat" id="cat_<%=I18n.transliterate(cat[:id]).delete(' ')%>">
+        <h4><%= cat[:nombre].capitalize%></h4>
+        <div class="row">
+          <% cat[:productos].each_with_index do |prod,ind_prod|%>
+            <div class="col-12 col-md-3">
+              <div class="card">
+                <div id="car<%=ind_prod%>" class="carousel slide card-img-top" data-ride="carousel">
+
+                  <!-- Indicators -->
+                  <ul class="carousel-indicators">
+                    <% prod.foto.each_with_index do |fot, fot_inx|%>
+                      <li data-target="#car<%=ind_prod%>" data-slide-to="<%=fot_inx%>"></li>
+                    <%end%>
+                  </ul>
+                  
+                  <!-- The slideshow -->
+                  <div class="carousel-inner">
+                    <% prod.foto.each_with_index do |fot, fot_inx|%>
+                      <%if fot_inx == 0%>
+                        <div class="carousel-item active">
+                      <%else%>
+                        <div class="carousel-item">
+                      <%end%>
+                        <a href="#" >
+                          <img src="<%= fot %>" class="img-responsive">
+                        </a>
+                      </div>
+                    <%end%>
+                  </div>
+                  
+                  <!-- Left and right controls -->
+                  <a class="carousel-control-prev" href="#car<%=ind_prod%>" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                  </a>
+                  <a class="carousel-control-next" href="#car<%=ind_prod%>" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"><%=prod.descripcion.titleize%></h5>
+                  <p class="card-text"><%=prod.descripcion2.titleize%></p>
+                  <%if prod.inventario.present? && prod.inventario.to_i == 0%>
+                      <button type="button" disabled class="btn btn-sm btn-secondary agotado btn-block">Agotado</button>
+                    <%else%>
+                      <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>"
+                              data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>"
+                              class="btn btn-sm btn-aqua btn-cart-item btn-block">Agregar</button>
+                  <%end%>
+                </div>
+              </div>
+            </div>
+          <%end%>
         </div>
       </div>
-
-    </div>
-  </div>
   <%end%>
-</div>
 <%end%>
