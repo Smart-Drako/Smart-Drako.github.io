@@ -17,8 +17,8 @@
           <%= f.select(:category_id, options_from_collection_for_select(@categorias, "id", "name", @config_user.category_id), {:include_blank => 'Seleccionar...'}, :class => 'form-control', ) %>
         </div>
         <div class="form-group col-md-5">
-          <label for="inputPassword4">Slogan</label>
-          <%= f.text_field :slogan, class:"form-control" %>
+          <label for="inputPassword4">Vista Cards</label>
+          <%= f.select(:vista_card, options_for_select(@vista,@config_user.vista_card), {:include_blank => nil }, :class => 'form-control', :disabled=> "disabled") %>
         </div>
       </div>
       <div class="form-row">

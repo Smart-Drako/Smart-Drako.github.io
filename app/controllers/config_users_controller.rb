@@ -15,6 +15,6 @@ class ConfigUsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def config_user_params
-      params.require(:config_user).permit(:user_id, :category_id, :nombre, :slogan, :descripcion, :direccion, :pagina, :facebook, :whatsapp, :telefono, :horario, :condiciones_higiene, :tipo_entrega, :costo_envio, :compra_minima, :metodo_pago, :factura, :beneficiario, :cuenta, :banco, :aviso, :comentario)
+      params.require(:config_user).permit(:user_id, :category_id, :nombre, :slogan, :descripcion, :direccion, :pagina, :facebook, :whatsapp, :telefono, :horario, :condiciones_higiene, :tipo_entrega, :costo_envio, :compra_minima, :metodo_pago, :factura, :beneficiario, :cuenta, :banco, :aviso, :comentario, :vista_card)
     end
 end
