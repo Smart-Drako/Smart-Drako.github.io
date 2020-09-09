@@ -287,6 +287,18 @@
                               data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>"
                               class="btn btn-sm btn-aqua btn-cart-item btn-block">Agregar</button>
                   <%end%>
+                  <div class="item-cantidades input-group input-group-sm" style="width: auto;">
+                        <div class="input-group-prepend">
+                          <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm restar-item"><i
+                              class="fas fa-minus"></i></button>
+                        </div>
+                        <input onClick="this.select();" id="input_cant_<%=prod.id%>" data-id="<%=prod.id%>" type="number"
+                          class="form-control input-cantidad-list input-sm" value="">
+                        <div class="input-group-append">
+                          <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm sumar-item"><i
+                              class="fas fa-plus"></i></button>
+                        </div>
+                      </div>
                 </div>
               </div>
             </div>
