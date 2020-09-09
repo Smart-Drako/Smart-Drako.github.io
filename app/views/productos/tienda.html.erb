@@ -244,12 +244,12 @@
           <% cat[:productos].each_with_index do |prod,ind_prod|%>
             <div class="col-12 col-md-3">
               <div class="card">
-                <div id="car<%=ind_prod%>" class="carousel slide card-img-top" data-ride="carousel">
+                <div id="<%= "#{cat[:nombre].capitalize}_#{ind_prod}"%>" class="carousel slide card-img-top" data-ride="carousel">
 
                   <!-- Indicators -->
                   <ul class="carousel-indicators">
                     <% prod.foto.each_with_index do |fot, fot_inx|%>
-                      <li data-target="#car<%=ind_prod%>" data-slide-to="<%=fot_inx%>"></li>
+                      <li data-target="#<%= "#{cat[:nombre].capitalize}_#{ind_prod}"%>" data-slide-to="<%=fot_inx%>"></li>
                     <%end%>
                   </ul>
                   
@@ -269,10 +269,10 @@
                   </div>
                   
                   <!-- Left and right controls -->
-                  <a class="carousel-control-prev" href="#car<%=ind_prod%>" data-slide="prev">
+                  <a class="carousel-control-prev" href="#<%= "#{cat[:nombre].capitalize}_#{ind_prod}"%>" data-slide="prev">
                     <span class="carousel-control-prev-icon"></span>
                   </a>
-                  <a class="carousel-control-next" href="#car<%=ind_prod%>" data-slide="next">
+                  <a class="carousel-control-next" href="#<%= "#{cat[:nombre].capitalize}_#{ind_prod}"%>" data-slide="next">
                     <span class="carousel-control-next-icon"></span>
                   </a>
                 </div>
