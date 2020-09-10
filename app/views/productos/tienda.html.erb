@@ -179,7 +179,7 @@
       <h4><%= cat[:nombre].capitalize%></h4>
       <% cat[:productos].each do |prod|%>
           <div class="lista-item row borders-item <%= prod.inventario.present? && prod.inventario.to_i == 0 ? "agotado" : ""%>">
-            <div class="col-2 align-self-center" style="padding:3px">
+            <div class="col-2 align-self-center" style="padding:7px">
               <%if prod.foto.present?%>
               <img src="<%= prod.foto[0].thumb %>" class="img-responsive img-prod">
               <%end%>
