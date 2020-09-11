@@ -655,12 +655,14 @@ a.link {
 @media (max-width: 575.98px) {
   p.card-text {
     font-size: 0.8rem;
+    margin-bottom: 0.3rem;
   }
 }
 
 @media (min-width: 576px) {
   p.card-text {
     font-size: 0.5rem;
+    margin-bottom: 0.3rem;
   }
 }
 
@@ -1031,4 +1033,12 @@ li.nav-item.active>.nav-link {
   object-fit: cover;
   height: 640;
   width: 100%;
+}
+
+.mb-25 {
+  margin-bottom: 25px;
+}
+
+.card-title {
+  margin-bottom: 0.5rem;
 }

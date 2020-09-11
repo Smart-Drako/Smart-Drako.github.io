@@ -240,10 +240,11 @@
   <%else%>
       <div class="container cont-cat div-cat" id="cat_<%=I18n.transliterate(cat[:id]).delete(' ')%>">
         <h4><%= cat[:nombre].capitalize%></h4>
+        <hr>
         <div class="row">
           <% cat[:productos].each_with_index do |prod,ind_prod|%>
             <div class="col-12 col-md-3">
-              <div class="card mb-10">
+              <div class="card mb-25">
                 <div id="<%= "#{cat[:nombre].capitalize}_#{ind_prod}"%>" class="carousel slide card-img-top" data-ride="carousel">
 
                   <!-- Indicators -->
@@ -289,7 +290,7 @@
                               class="btn btn-sm btn-aqua btn-cart-item">Agregar</button>
                   <%end%>
                   </div>
-                  <div class="item-cantidades input-group input-group-sm" style="width: auto;">
+                  <div class="item-cantidades input-group input-group-sm mx-auto" style="width: 40%">
                         <div class="input-group-prepend">
                           <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm restar-item"><i
                               class="fas fa-minus"></i></button>
