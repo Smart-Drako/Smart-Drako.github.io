@@ -280,13 +280,15 @@
                   <h5 class="card-title"><%=prod.descripcion.titleize%></h5>
                   <p class="card-text"><%=number_to_currency(prod.precio)%>/<%=prod.unidad%></p>
                   <p class="card-text"><%=prod.descripcion2.titleize%></p>
+                  <div class="card-text text-center">
                   <%if prod.inventario.present? && prod.inventario.to_i == 0%>
-                      <button type="button" disabled class="btn btn-sm btn-secondary agotado btn-block">Agotado</button>
+                      <button type="button" disabled class="btn btn-sm btn-secondary agotado">Agotado</button>
                     <%else%>
                       <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>"
                               data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>"
-                              class="btn btn-sm btn-aqua btn-cart-item btn-block">Agregar</button>
+                              class="btn btn-sm btn-aqua btn-cart-item">Agregar</button>
                   <%end%>
+                  </div>
                   <div class="item-cantidades input-group input-group-sm" style="width: auto;">
                         <div class="input-group-prepend">
                           <button data-id="<%=prod.id%>" class="btn-pink btn btn-sm restar-item"><i
