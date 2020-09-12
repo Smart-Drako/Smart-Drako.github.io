@@ -16,9 +16,18 @@
           <label for="inputEmail4">Categoría</label>
           <%= f.select(:category_id, options_from_collection_for_select(@categorias, "id", "name", @config_user.category_id), {:include_blank => 'Seleccionar...'}, :class => 'form-control', ) %>
         </div>
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-1">
           <label for="inputPassword4">Vista Cards</label>
           <%= f.select(:vista_card, options_for_select(@vista,@config_user.vista_card), {:include_blank => nil }, :class => 'form-control') %>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputPassword4">Logo</label>
+          <%= f.file_field :logo, class:"form-control" %>
+        </div>
+        <div class="form-group col-md-2">
+          <%if @config_user.logo.present?%>
+            <img src="<%=@config_user.logo%>" class="img-responsive img-config">
+          <%end%>
         </div>
       </div>
       <div class="form-row">
