@@ -52,6 +52,8 @@ class PedidosController < ApplicationController
     b64_id = Base64.encode64("#{pedido.id}-pideloencasa.mx")
     if Rails.env.production?
       link = "https://pideloencasa.mx/ver_pedido/#{b64_id}"
+    elsif Rails.env.staging?
+      link = "http://staging.pideloencasa.mx/ver_pedido/#{b64_id}"
     else
       link = "http://localhost:3000/ver_pedido/#{b64_id}"
     end
