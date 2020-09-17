@@ -46,7 +46,7 @@ Paloma.controller 'Pedidos', show: ->
   $("#pedido_estatus").change ->
     pedido_id = $(this).data("pedido-id")
     estatus = $(this).val()
-    cambiar_estatus_pedido(pedido_id, estatus)
+    cambiar_estatus_pedido(pedido_id, estatus, true)
 
 Paloma.controller 'Pedidos', ver_pedido: ->
   $(".carbar").removeClass("d-block").hide()
@@ -477,7 +477,7 @@ borrar_pedido = ->
   cargar_productos()
 
 #Actualizar estatus pedido
-cambiar_estatus_pedido = (id, estatus) ->
+cambiar_estatus_pedido = (id, estatus, refresh = false) ->
   $.ajax
     type: 'POST'
     url: '/pedido/actualizar_estatus'
@@ -485,6 +485,8 @@ cambiar_estatus_pedido = (id, estatus) ->
     beforeSend: ->
       console.log "Actualizando estatus del pedido..."
     success: (data) ->
+      if refresh == true
+        window.location.reload(true)
       if data.error == false
         console.log "Se actualizó el estatus a #{estatus}."
       else
