@@ -43,6 +43,8 @@ Paloma.controller 'Productos', index: ->
 Paloma.controller 'Pedidos', show: ->
   $("#nav-link-pedidos").addClass("active")
   $(".carbar").removeClass("d-block").hide()
+  $("#texto_wa").keyup (e)->
+    actualizar_link_wa()
   $("#pedido_estatus").change ->
     pedido_id = $(this).data("pedido-id")
     estatus = $(this).val()
@@ -535,3 +537,10 @@ animate = (item, efecto) ->
     item.removeClass(anim)
     return
   return
+
+actualizar_link_wa = ->
+  texto = $("#texto_wa").val()
+  link_pedido = $("#link_pedido").val()
+  link_wa_base = $("#link_wa_base").val()
+  link = "#{link_wa_base}#{texto}. #{link_pedido}"
+  $("#link_wa").attr("href", link)

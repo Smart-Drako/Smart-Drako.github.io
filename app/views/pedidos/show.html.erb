@@ -15,8 +15,10 @@
           <%= link_to 'PDF', descargar_pdf_path(:format => :pdf), :method => :get, :id =>"btn-pdf",target: "_blank", :class => "btn btn-pink mt-10" %>
         </div>
         <div class="col-md-4 align-self-center text-center">
+        <input type="hidden" id="link_pedido" value="<%=@link_pedido%>">
+        <input type="hidden" id="link_wa_base" value="<%=@link_wa_base%>">
         <%if @pedido.estatus != "Nuevo"%>
-          <textarea disabled class="form-control" id="texto_wa" cols="50" rows="5"><%=@mensaje_wa%></textarea>
+          <textarea class="form-control" id="texto_wa" cols="50" rows="5"><%=@mensaje_wa%></textarea>
           <a href="<%=@link_wa%>" id="link_wa" target="_blank" class="btn btn-outline-pink no-hover mt-10">Avisar a Cliente <i class="fab btn-wa fa-whatsapp fa-lg"></i></a>
         <%end%>
         </div>
