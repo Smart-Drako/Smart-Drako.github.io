@@ -645,7 +645,7 @@ a.link {
 
 .owl-carousel .owl-item img {
   height: 250px;
-  object-fit: cover;
+  object-fit: fill;
 }
 
 .owl-carousel .owl-item .card-body {
@@ -833,8 +833,8 @@ li.nav-item.active>.nav-link {
   margin-bottom: 10px;
 }
 
-.mb-5 {
-  margin-bottom: 10px;
+.mbt-5 {
+  margin-bottom: 5px;
 }
 
 .carousel-caption {
@@ -1050,6 +1050,6 @@ li.nav-item.active>.nav-link {
 
 @media (min-width: 1200px) {
   .owl-carousel .owl-item .card-body {
-    height: 90px;
+    height: 100px;
   }
 }
