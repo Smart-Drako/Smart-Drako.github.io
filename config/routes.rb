@@ -3,13 +3,15 @@ Rails.application.routes.draw do
     collection {post :importar}
   end
   resources :config_users
-  devise_for :users
   root to: "home#index"
   devise_scope :user do
     get "/login" => "devise/sessions#new" # custom path to login/sign_in
     get "/registro" => "devise/registrations#new" # custom path to sign_up/registration
   end
+
+  devise_for :users, :controllers => {:registrations => "registrations"}
   get "/me", to: "home#cuenta"
+  get "/plan", to: "home#plan"
   get "socios/:id", to: "productos#tienda"
   
   post "/generar_pedido", to:"pedidos#generar"

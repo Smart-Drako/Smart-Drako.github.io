@@ -35,4 +35,13 @@ class HomeController < ApplicationController
     @vista = [["Si", "true"] , ["No", "false"]]
     @bancos = [["Banco Azteca", "Banco Azteca"] , ["Banorte", "Banorte"], ["Bancoppel", "Bancoppel"], ["Banregio", "Banregio"], ["BBVA Bancomer", "BBVA Bancomer"], ["Citibanamex", "Citibanamex"], ["HSBC", "HSBC"], ["Santander", "Santander"], ["Scotiabank", "Scotiabank"]]
   end
+
+  def plan
+    @config_user = ConfigUser.find_by(user_id: current_user.id)
+
+    if @config_user.present?
+      @plan = Plan.find(@config_user.plan_id)
+      @estatus = @config_user.estatus == 1 ? "Vigente" : "Vencido"
+    end
+  end
 end
