@@ -15,11 +15,28 @@
         <li class="list-group-item">Inicio Mensualidad: <b><%=@config_user.fecha_inicio.strftime("%d/%m/%Y")%></b></li>
         <li class="list-group-item">Vencimiento: <b><%=@config_user.fecha_vencimiento.strftime("%d/%m/%Y")%></b></li>
         <%if @config_user.estatus == 1%>
-          <li class="list-group-item">Número de pedidos: <span class="badge badge-success">ilimitados</span></li>
+          <%if @plan.id == 2%>
+            <li class="list-group-item">Pedidos Restantes: <span class="badge badge-success">ilimitados</span></li>
+          <%else%>
+            <li class="list-group-item">Pedidos Restantes: <span class="badge badge-secondary"><%=@config_user.pedidos_restantes%></span></li>
+          <%end%>
         <%else%>
-          <li class="list-group-item">Número de pedidos: <span class="badge badge-danger">0</span></li>
+          <li class="list-group-item">Pedidos Restantes: <span class="badge badge-danger">0</span></li>
         <%end%>
       </ul>
+    </div>
+    <div class="col-12 col-md-6">
+      <p>
+        Instrucciones para Contratar <b>Plan Visionario</b>: <br>
+
+        Depositar a la cuenta BBVA XXXX a nombre de:  Efraín Sánchez Valois <br> <br>
+
+        Para 1 mes, $299.00 + IVA <br>
+
+        Para 1 año, $3,229.2 + IVA (10% Descuento) <br><br>
+
+        Mandar comprobante al whatsapp 686-262-3441 y se activará inmediatamente.
+      </p>
     </div>
   </div>
 </div>

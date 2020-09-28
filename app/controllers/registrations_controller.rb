@@ -18,6 +18,7 @@ class RegistrationsController < Devise::RegistrationsController
     c_usuario.fecha_registro = Time.now
     c_usuario.fecha_inicio = Time.now
     c_usuario.fecha_vencimiento = Time.now.to_date + plan_prueba.vigencia.to_i
+    c_usuario.pedidos_restantes = plan_prueba.no_pedidos
     if c_usuario.save!
       puts "Usuario Con plan gratis"
     end

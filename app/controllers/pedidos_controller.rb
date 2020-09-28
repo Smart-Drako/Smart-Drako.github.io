@@ -3,6 +3,10 @@ class PedidosController < ApplicationController
 
   def index
     @pedidos = Pedido.where(user_id: current_user.id).order(id: :desc)
+    usuario = ConfigUser.find_by(user_id: current_user.id)
+    @vencimiento = vencimiento_cuenta(usuario)
+    @pedidos_restantes = usuario.pedidos_restantes
+    @suspendida = cuenta_suspendida()
     @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
   end
 
@@ -29,6 +33,9 @@ class PedidosController < ApplicationController
   end
 
   def show(id = 0)
+    if cuenta_suspendida
+      redirect_to pedidos_path and return
+    end
     if id == 0
       id = params[:id]
     end
@@ -156,7 +163,8 @@ class PedidosController < ApplicationController
           item.save
         end
         empresa  = ConfigUser.find(negocio_id)
-        enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
+        restar_creditos(empresa)
+        #enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
         render json: {error: false, mensaje: "Pedido procesado correctamente"} and return
       else
         render json: {error: true, mensaje: "Ocurrio un error al procesar el pedido"} and return
@@ -166,6 +174,12 @@ class PedidosController < ApplicationController
     end
   end
   private
+
+  def restar_creditos(empresa)
+    empresa.pedidos_restantes = empresa.pedidos_restantes - 1
+    empresa.save!
+  end
+
   def enviar_correo(email, pedido, empresa)
     #Enviar a la empresa
     user = User.find(empresa.user_id)

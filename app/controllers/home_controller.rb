@@ -38,7 +38,7 @@ class HomeController < ApplicationController
 
   def plan
     @config_user = ConfigUser.find_by(user_id: current_user.id)
-
+    @suspendida = cuenta_suspendida()
     if @config_user.present?
       @plan = Plan.find(@config_user.plan_id)
       @estatus = @config_user.estatus == 1 ? "Vigente" : "Vencido"
