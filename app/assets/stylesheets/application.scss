@@ -1053,3 +1053,9 @@ li.nav-item.active>.nav-link {
     height: 120px;
   }
 }
+
+.card-disabled {
+  -webkit-filter: grayscale(100%);
+  /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
