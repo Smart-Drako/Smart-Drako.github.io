@@ -134,6 +134,17 @@
         <button class="btn btn-success btn-lg" type="submit">Actualizar</button>
       </div>
       <%end%>
+
+      <% if current_user.present? && (current_user.email == "manrobless@gmail.com" || current_user.email == "gustavomartinezserna47@hotmail.com" ) %>
+        <div class="text-center form-row">
+          <div class="col-0 col-md-4"></div>
+          <div class="col-12 col-md-4">
+            <p>Comparte tu link para recomendados:</p>
+            <input type="text" class="form-control" value="<%=@link_recomendado%>" id="link_recomendado" disabled> <br>
+            <button type="button" class="btn btn-sm btn-secondary" id="copiar_recomendado" onclick="copyRef()" onmouseout="outFuncRef()">Copiar link</button>
+          </div>
+        </div>
+      <%end%>
     </div>
   </div>
 

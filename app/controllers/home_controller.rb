@@ -29,6 +29,7 @@ class HomeController < ApplicationController
   def cuenta
     @config_user = ConfigUser.find_or_create_by(user_id: current_user.id)
     @categorias = Category.all.order("name")
+    @link_recomendado = generar_link_recomendado(@config_user)
     @formas_pago = [["Efectivo", "1"] , ["Tarjetas", "2"], ["Efectivo y Tarjetas", "3"]]
     @tipos_entrega = [["A domicilio", "1"] , ["Para recoger", "2"], ["A domicilio y recoger", "3"]]
     @facturacion = [["Si", "Si"] , ["No", "No"]]
@@ -43,5 +44,16 @@ class HomeController < ApplicationController
       @plan = Plan.find(@config_user.plan_id)
       @estatus = @config_user.estatus == 1 ? "Vigente" : "Vencido"
     end
+  end
+
+  private
+  def generar_link_recomendado(user)
+    b64_id = Base64.encode64("#{user.id}-pideloencasa.mx")
+    if Rails.env.production?
+      link = "https://pideloencasa.mx/registro?ref=#{b64_id}"
+    else
+      link = "http://localhost:3000/registro?ref=#{b64_id}"
+    end
+    return link
   end
 end

@@ -52,6 +52,26 @@
       Paloma.start();
       $('[data-tooltip="tooltip"]').tooltip()
     });
+
+    function copyRef() {
+
+      var copyText = $("#link_recomendado");
+      var $temp = $("<input>");
+      $("body").append($temp);
+      $temp.val(copyText.val()).select();
+      document.execCommand("copy");
+      $temp.remove();
+
+      
+      var tooltip = document.getElementById("copiar_recomendado");
+      tooltip.innerHTML = "Copiado: " + copyText.val();
+    }
+
+    function outFuncRef() {
+      var tooltip = document.getElementById("copiar_recomendado");
+      tooltip.innerHTML = "Copiar link";
+    }
+        
   </script>
   <%= render "/shared/plantillas" %>
 
