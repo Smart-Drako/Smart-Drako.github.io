@@ -164,7 +164,7 @@ class PedidosController < ApplicationController
         end
         empresa  = ConfigUser.find(negocio_id)
         restar_creditos(empresa)
-        #enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
+        enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
         render json: {error: false, mensaje: "Pedido procesado correctamente"} and return
       else
         render json: {error: true, mensaje: "Ocurrio un error al procesar el pedido"} and return
