@@ -119,6 +119,10 @@ class PedidosController < ApplicationController
       @productos = ProductoPedido.where(pedido_id: @pedido.id)
       @negocio = ConfigUser.find_by(user_id: @pedido.user_id)
       @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
+      @tags = {
+        title: @negocio.nombre,
+        description: @negocio.descripcion
+      }
     else
       redirect_to root_path and return
     end
