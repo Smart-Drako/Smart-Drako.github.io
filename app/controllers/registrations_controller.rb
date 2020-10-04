@@ -23,8 +23,15 @@ class RegistrationsController < Devise::RegistrationsController
     c_usuario.save!
   end
 
-  def guardar_referenciados(nuevo_user, referenciador_id)
-    referenciador_id = Base64.decode64(id).to_i
-    puts "Ref: #{referenciador_id}"
+  def guardar_referenciados(usuario, padre_id)
+    padre_id = Base64.decode64(padre_id).to_i
+    rec = Recomendado.new
+    rec.id_usuario = usuario.id
+    rec.id_padre = padre_id
+    abuelo = Recomendado.buscar_abuelo(padre_id)
+    if abuelo.present?
+      rec.id_abuelo = abuelo.id_padre.present?
+    end
+    rec.save!
   end
 end
