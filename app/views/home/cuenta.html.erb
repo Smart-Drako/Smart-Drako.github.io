@@ -4,6 +4,8 @@
     <h2>Configuración</h2>
   </div>
 
+  <input type="hidden" id="ciudad_user" value="<%=@config_user.ciudad%>">
+
   <div class="row">
     <div class="col mb-100">
       <%= form_for @config_user, url: "/config_users/#{@config_user.id}", html: { id: "config_cliente_form", class:"" }, method: :put do |f| %>
@@ -35,11 +37,27 @@
           <label for="inputAddress">Descripción</label>
           <%= f.text_field :descripcion, class:"form-control", maxLength: "100"  %>
         </div>
-        <div class="form-group col-md-5">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="inputCity">Estado</label>
+          <%= f.select(:estado, options_from_collection_for_select(@estados, "estado", "estado", @config_user.estado),{:include_blank => true}, {  :class => "form-control", :required => "required"}) %>	
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputState">Ciudad</label>
+          <select name="config_user[ciudad]" id="config_user_ciudad" class="form-control" required>
+            <option value=""></option>
+            <% @ciudades.each do |ci| %>
+              <option value="<%=ci.ciudad%>" data-estado="<%=ci.estado%>"><%=ci.ciudad%></option>
+            <%end%>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
           <label for="inputAddress2">Dirección</label>
           <%= f.text_field :direccion, class:"form-control" %>
         </div>
       </div>
+
       <div class="form-row">
         <div class="form-group col-md-3">
           <label for="inputCity">Página web</label>

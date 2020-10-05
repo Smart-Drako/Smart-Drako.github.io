@@ -107,7 +107,37 @@ Paloma.controller 'Home', index: ->
 
 Paloma.controller 'Home', cuenta: ->
 
+  cargar_selects()
+  eventos_selects()
   $("#btn-cart_float").removeClass("d-md-block")
+
+
+cargar_selects =->
+  #Ids config_user_estado,config_user_ciudad
+  estado = $("#config_user_estado").val()
+  ciudad = $("#ciudad_user").val()
+  $("#config_user_ciudad").val(ciudad)
+  opciones = $("#config_user_ciudad option")
+  opciones.each (index, element) =>
+    estado_ciudad = $(element).data("estado")
+    if estado_ciudad != estado
+      $(element).hide()
+    else
+      $(element).show()
+
+
+eventos_selects =->
+  $("#config_user_estado").change ->
+    estado = $(this).val()
+    $("#config_user_ciudad").val("")
+    opciones = $("#config_user_ciudad option")
+    opciones.each (index, element) =>
+      estado_ciudad = $(element).data("estado")
+      if estado_ciudad != estado
+        $(element).hide()
+      else
+        $(element).show()
+
 
 cargar_productos = ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")

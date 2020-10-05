@@ -34,6 +34,8 @@ class HomeController < ApplicationController
     @tipos_entrega = [["A domicilio", "1"] , ["Para recoger", "2"], ["A domicilio y recoger", "3"]]
     @facturacion = [["Si", "Si"] , ["No", "No"]]
     @vista = [["Si", "true"] , ["No", "false"]]
+    @estados = Estado.select(:estado).distinct.order(:estado)
+    @ciudades = Estado.all.order(:ciudad)
     @bancos = [["Banco Azteca", "Banco Azteca"] , ["Banorte", "Banorte"], ["Bancoppel", "Bancoppel"], ["Banregio", "Banregio"], ["BBVA Bancomer", "BBVA Bancomer"], ["Citibanamex", "Citibanamex"], ["HSBC", "HSBC"], ["Santander", "Santander"], ["Scotiabank", "Scotiabank"]]
   end
 
