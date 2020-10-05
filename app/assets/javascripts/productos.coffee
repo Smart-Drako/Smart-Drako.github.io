@@ -33,6 +33,8 @@ readURL = (input) ->
   return
 
 Paloma.controller 'Productos', index: ->
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+  $("#btn-cart_float").removeClass("d-md-block")
   $("#btn_importar").prop("disabled",true)
   $('#file').change ->
     if $(this).val()
@@ -56,7 +58,8 @@ Paloma.controller 'Pedidos', ver_pedido: ->
   $("#form-botones").hide()
 
 Paloma.controller 'Pedidos', index: ->
-  $(".carbar").removeClass("d-block").hide()
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+  $("#btn-cart_float").removeClass("d-md-block")
   $(".pedido_estatus").change ->
     pedido_id = $(this).data("pedido-id")
     estatus = $(this).val()
@@ -112,7 +115,19 @@ Paloma.controller 'Home', cuenta: ->
   cargar_selects()
   eventos_selects()
   $("#btn-cart_float").removeClass("d-md-block")
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
 
+Paloma.controller 'Home', plan: ->
+  $("#btn-cart_float").removeClass("d-md-block")
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+
+Paloma.controller 'Devise/Sessions', new: ->
+  $("#btn-cart_float").removeClass("d-md-block")
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+
+Paloma.controller 'Devise/Registrations', new: ->
+  $("#btn-cart_float").removeClass("d-md-block")
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
 
 cargar_selects =->
   #Ids config_user_estado,config_user_ciudad
