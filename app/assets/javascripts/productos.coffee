@@ -121,6 +121,14 @@ Paloma.controller 'Home', plan: ->
   $("#btn-cart_float").removeClass("d-md-block")
   $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
 
+Paloma.controller 'Devise/Sessions', new: ->
+  $("#btn-cart_float").removeClass("d-md-block")
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+
+Paloma.controller 'Devise/Registrations', new: ->
+  $("#btn-cart_float").removeClass("d-md-block")
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+
 cargar_selects =->
   #Ids config_user_estado,config_user_ciudad
   estado = $("#config_user_estado").val()
