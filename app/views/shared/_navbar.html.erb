@@ -26,10 +26,12 @@
     <select id="buscar_ciudad_select" class="form-control mr-sm-2">
       <option value="">Selecciona tu Ciudad</option>
       <% @ciudades_negocios.each do |ci| %>
-        <option value="<%=ci%>"><%=ci%></option>
+        <%if ci.present?%>
+          <option value="<%=ci%>"><%=ci%></option>
+        <%end%>
       <%end%>
+      <option value="">Todas</option>
     </select>
-    <button class="btn btn-outline-success my-2 my-sm-0" id="buscar_ciudad_btn" type="button">Aceptar</button>
   </form>
   <div class="form-inline"  id="form-botones">
     <%if user_signed_in?%>

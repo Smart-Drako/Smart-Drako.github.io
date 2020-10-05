@@ -329,8 +329,8 @@ eventos = ->
     $(this).hide()
     agregar_producto($(this))
   
-  $("#buscar_ciudad_btn").unbind("click").click ->
-    ciudad = $("#buscar_ciudad_select").val()
+  $("#buscar_ciudad_select").change ->
+    ciudad = $(this).val()
     if ciudad != ""
       window.location.href = "/?city=#{ciudad}"
     else
