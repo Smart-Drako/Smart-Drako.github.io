@@ -21,18 +21,20 @@
       <%end%>
     </ul>
   </div>
-  <form class="form-inline">
-    <input type="hidden" id="ciudad_seleccionada" value="<%= @ciudad%>">
-    <select id="buscar_ciudad_select" class="form-control mr-sm-2">
-      <option value="">Selecciona tu Ciudad</option>
-      <% @ciudades_negocios.each do |ci| %>
-        <%if ci.present?%>
-          <option value="<%=ci%>"><%=ci%></option>
+  <%if @ciudades_negocios.present?%>
+    <form class="form-inline">
+      <input type="hidden" id="ciudad_seleccionada" value="<%= @ciudad%>">
+      <select id="buscar_ciudad_select" class="form-control mr-sm-2">
+        <option value="">Selecciona tu Ciudad</option>
+        <% @ciudades_negocios.each do |ci| %>
+          <%if ci.present?%>
+            <option value="<%=ci%>"><%=ci%></option>
+          <%end%>
         <%end%>
-      <%end%>
-      <option value="">Todas</option>
-    </select>
-  </form>
+        <option value="">Todas</option>
+      </select>
+    </form>
+  <%end%>
   <div class="form-inline"  id="form-botones">
     <%if user_signed_in?%>
     <span class="navbar-text mr-10 text-dark">
