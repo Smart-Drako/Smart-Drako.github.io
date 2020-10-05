@@ -22,6 +22,7 @@
     </ul>
   </div>
   <%if @ciudades_negocios.present?%>
+    <%if !user_signed_in?%>
     <form class="form-inline">
       <input type="hidden" id="ciudad_seleccionada" value="<%= @ciudad%>">
       <select id="buscar_ciudad_select" class="form-control mr-sm-2">
@@ -34,6 +35,7 @@
         <option value="">Todas</option>
       </select>
     </form>
+    <%end%>
   <%end%>
   <div class="form-inline"  id="form-botones">
     <%if user_signed_in?%>
