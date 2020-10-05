@@ -104,6 +104,8 @@ Paloma.controller 'Pedidos', new: ->
 Paloma.controller 'Home', index: ->
   cargar_productos()
   eventos()
+  ciudad = $("#ciudad_seleccionada").val()
+  $("#buscar_ciudad_select").val(ciudad)
 
 Paloma.controller 'Home', cuenta: ->
 
@@ -326,6 +328,13 @@ eventos = ->
   $('.btn-cart-item').unbind("click").click ->
     $(this).hide()
     agregar_producto($(this))
+  
+  $("#buscar_ciudad_btn").unbind("click").click ->
+    ciudad = $("#buscar_ciudad_select").val()
+    if ciudad != ""
+      window.location.href = "/?city=#{ciudad}"
+    else
+      window.location.href = "/"
   
   $('#btn_vaciar_agregar').unbind("click").click ->
     borrar_pedido()

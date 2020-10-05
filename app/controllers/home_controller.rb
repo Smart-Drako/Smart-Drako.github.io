@@ -4,11 +4,21 @@ class HomeController < ApplicationController
 
   def index
     @negocios = Array.new
-    cats = ConfigUser.where(activo: 1).distinct.pluck(:category_id)
+    @ciudades_negocios = ConfigUser.where(activo: 1).distinct.pluck(:ciudad)
+    @ciudad = params[:city] if params[:city].present?
+    if @ciudad.present?
+      cats = ConfigUser.where(activo: 1, ciudad: @ciudad).distinct.pluck(:category_id)
+    else
+      cats = ConfigUser.where(activo: 1).distinct.pluck(:category_id)
+    end
     @categorias = Category.where(id: cats)
     
     @categorias.each do |cat|
-      negocios = ConfigUser.where(category_id: cat.id, activo: 1)
+      if @ciudad.present?
+        negocios = ConfigUser.where(category_id: cat.id, activo: 1, ciudad: @ciudad)
+      else
+        negocios = ConfigUser.where(category_id: cat.id, activo: 1)
+      end
       item = {
         id: cat.id,
         nombre: cat.name,
