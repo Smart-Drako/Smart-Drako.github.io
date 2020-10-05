@@ -104,10 +104,42 @@ Paloma.controller 'Pedidos', new: ->
 Paloma.controller 'Home', index: ->
   cargar_productos()
   eventos()
+  ciudad = $("#ciudad_seleccionada").val()
+  $("#buscar_ciudad_select").val(ciudad)
 
 Paloma.controller 'Home', cuenta: ->
 
+  cargar_selects()
+  eventos_selects()
   $("#btn-cart_float").removeClass("d-md-block")
+
+
+cargar_selects =->
+  #Ids config_user_estado,config_user_ciudad
+  estado = $("#config_user_estado").val()
+  ciudad = $("#ciudad_user").val()
+  $("#config_user_ciudad").val(ciudad)
+  opciones = $("#config_user_ciudad option")
+  opciones.each (index, element) =>
+    estado_ciudad = $(element).data("estado")
+    if estado_ciudad != estado
+      $(element).hide()
+    else
+      $(element).show()
+
+
+eventos_selects =->
+  $("#config_user_estado").change ->
+    estado = $(this).val()
+    $("#config_user_ciudad").val("")
+    opciones = $("#config_user_ciudad option")
+    opciones.each (index, element) =>
+      estado_ciudad = $(element).data("estado")
+      if estado_ciudad != estado
+        $(element).hide()
+      else
+        $(element).show()
+
 
 cargar_productos = ->
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
@@ -296,6 +328,13 @@ eventos = ->
   $('.btn-cart-item').unbind("click").click ->
     $(this).hide()
     agregar_producto($(this))
+  
+  $("#buscar_ciudad_select").change ->
+    ciudad = $(this).val()
+    if ciudad != ""
+      window.location.href = "/?city=#{ciudad}"
+    else
+      window.location.href = "/"
   
   $('#btn_vaciar_agregar').unbind("click").click ->
     borrar_pedido()

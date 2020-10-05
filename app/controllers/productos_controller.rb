@@ -63,6 +63,11 @@ class ProductosController < ApplicationController
     redirect_to '/' and return if @negocio.nil?
     redirect_to '/' and return if @negocio.activo == 0
 
+    @tags = {
+      title: @negocio.nombre,
+      description: @negocio.descripcion
+    }
+
     @prods = Array.new
     
     @categorias = @productos.pluck(:categoria).uniq.compact

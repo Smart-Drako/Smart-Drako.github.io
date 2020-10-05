@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_09_030029) do
+ActiveRecord::Schema.define(version: 2020_10_05_014016) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -45,12 +45,30 @@ ActiveRecord::Schema.define(version: 2020_09_09_030029) do
     t.string "logo"
     t.boolean "activo", default: true
     t.string "slug"
+    t.boolean "tipo_card", default: false
     t.boolean "vista_card", default: false, null: false
+    t.integer "estatus"
+    t.datetime "fecha_registro"
+    t.datetime "fecha_inicio"
+    t.datetime "fecha_vencimiento"
+    t.bigint "plan_id"
+    t.boolean "admin", default: false, null: false
+    t.integer "pedidos_restantes", default: 0, null: false
+    t.string "estado"
+    t.string "ciudad"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_config_users_on_category_id"
+    t.index ["plan_id"], name: "index_config_users_on_plan_id"
     t.index ["slug"], name: "index_config_users_on_slug", unique: true
     t.index ["user_id"], name: "index_config_users_on_user_id"
+  end
+
+  create_table "estados", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "estado"
+    t.string "ciudad"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pedidos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -75,6 +93,25 @@ ActiveRecord::Schema.define(version: 2020_09_09_030029) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_pedidos_on_user_id"
+  end
+
+  create_table "planes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "nombre"
+    t.integer "no_pedidos"
+    t.string "precio"
+    t.string "precio_iva"
+    t.integer "vigencia"
+    t.boolean "ilimitado"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "producto_fotos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "producto_id"
+    t.string "imagen"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["producto_id"], name: "index_producto_fotos_on_producto_id"
   end
 
   create_table "producto_pedidos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -104,6 +141,14 @@ ActiveRecord::Schema.define(version: 2020_09_09_030029) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_productos_on_user_id"
+  end
+
+  create_table "recomendados", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "id_usuario"
+    t.integer "id_padre"
+    t.integer "id_abuelo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
