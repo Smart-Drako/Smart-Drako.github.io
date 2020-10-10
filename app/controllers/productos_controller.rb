@@ -98,7 +98,7 @@ class ProductosController < ApplicationController
     @producto.user_id = current_user.id
     respond_to do |format|
       if @producto.save
-        format.html { redirect_to productos_path, notice: 'Producto was successfully created.' }
+        format.html { redirect_to edit_producto_path(@producto), notice: 'Producto was successfully created.' }
       else
         format.html { render :new }
       end
@@ -110,7 +110,7 @@ class ProductosController < ApplicationController
   def update
     respond_to do |format|
       if @producto.update(producto_params)
-        format.html { redirect_to productos_path, notice: 'Producto was successfully updated.' }
+        format.html { redirect_to edit_producto_path(@producto), notice: 'Producto was successfully updated.' }
         format.json { render :show, status: :ok, location: @producto }
       else
         format.html { render :edit }
@@ -133,7 +133,7 @@ class ProductosController < ApplicationController
     index = params[:index].to_i
     producto = Producto.find(params[:id].to_i)
     remove_image_at_index(index, producto)
-    redirect_to productos_path
+    redirect_to edit_producto_path(producto)
   end
 
   private
