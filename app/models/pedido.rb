@@ -1,5 +1,4 @@
 class Pedido < ApplicationRecord
-  belongs_to :user
 
   def self.proximo_pedido(user_id)
     pedido = Pedido.where(user_id: user_id).last

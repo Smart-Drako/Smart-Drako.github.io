@@ -42,9 +42,9 @@ class PedidosController < ApplicationController
     @pedido = Pedido.find_by(id: id)
     if @pedido.present?
       @productos = ProductoPedido.where(pedido_id: @pedido.id)
-      @negocio = ConfigUser.find_by(user_id: @pedido.user_id)
+      @negocio = ConfigUser.find(@pedido.user_id)
       @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
-      redirect_to pedidos_path and return if @pedido.user_id != current_user.id
+      redirect_to pedidos_path and return if @pedido.user_id != @negocio.id
       @mensaje_wa = mensaje_whatsapp(@pedido, false)
       @mensaje_wa_link = mensaje_whatsapp(@pedido, true)
       @link_pedido = link_pedido(@pedido)
