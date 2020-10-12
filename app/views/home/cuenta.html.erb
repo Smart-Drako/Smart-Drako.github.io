@@ -162,6 +162,15 @@
             <button type="button" class="btn btn-sm btn-secondary" id="copiar_recomendado" onclick="copyRef()" onmouseout="outFuncRef()">Copiar link</button>
           </div>
         </div>
+      <% else %>
+        <div class="text-center form-row">
+          <div class="col-0 col-md-4"></div>
+          <div class="col-12 col-md-4">
+            <p>Comparte tu link con tus clientes:</p>
+            <input type="text" class="form-control" value="<%=@link_compartir%>" id="link_recomendado" disabled> <br>
+            <button type="button" class="btn btn-sm btn-secondary" id="copiar_recomendado" onclick="copyRef()" onmouseout="outFuncRef()">Copiar link</button>
+          </div>
+        </div>
       <%end%>
     </div>
   </div>

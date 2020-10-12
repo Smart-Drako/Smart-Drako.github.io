@@ -49,6 +49,7 @@ class HomeController < ApplicationController
     @config_user = ConfigUser.find_or_create_by(user_id: current_user.id)
     @categorias = Category.all.order("name")
     @link_recomendado = generar_link_recomendado(@config_user)
+    @link_compartir = generar_link_compartir(@config_user)
     @formas_pago = [["Efectivo", "1"] , ["Tarjetas", "2"], ["Efectivo y Tarjetas", "3"]]
     @tipos_entrega = [["A domicilio", "1"] , ["Para recoger", "2"], ["A domicilio y recoger", "3"]]
     @facturacion = [["Si", "Si"] , ["No", "No"]]
@@ -74,6 +75,19 @@ class HomeController < ApplicationController
       link = "https://pideloencasa.mx/registro?ref=#{b64_id}"
     else
       link = "http://localhost:3000/registro?ref=#{b64_id}"
+    end
+    return link
+  end
+  def generar_link_compartir(user)
+    if user.slug.present?
+      socio = user.slug
+    else
+      socio = "#{user.id}-#{user.nombre.to_s.parameterize}"
+    end
+    if Rails.env.production?
+      link = "https://pideloencasa.mx/socios/#{socio}"
+    else
+      link = "http://localhost:3000/socios/#{socio}"
     end
     return link
   end
