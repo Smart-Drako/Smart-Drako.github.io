@@ -2,8 +2,8 @@ class PedidosController < ApplicationController
   before_action :authenticate_user!, :except => [:generar, :new, :ver_pedido]
 
   def index
-    @pedidos = Pedido.where(user_id: current_user.id).order(id: :desc)
     usuario = ConfigUser.find_by(user_id: current_user.id)
+    @pedidos = Pedido.where(user_id: usuario.id).order(id: :desc)
     @vencimiento = vencimiento_cuenta(usuario)
     @pedidos_restantes = usuario.pedidos_restantes
     @suspendida = cuenta_suspendida()
