@@ -13,12 +13,16 @@ Paloma.controller 'Productos', new: ->
     console.log "Select foto new"
     readURL this
     return
+  $('.numeros').numeric
+    negative: false
 
 Paloma.controller 'Productos', edit: ->
   $('#producto_foto').change ->
     console.log "Select foto edit"
     readURL this
     return
+  $('.numeros').numeric
+    negative: false
 
 readURL = (input) ->
   if input.files and input.files[0]
