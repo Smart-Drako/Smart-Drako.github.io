@@ -164,11 +164,13 @@ class PedidosController < ApplicationController
           item.precio = p["precio"]
           item.subtotal = p["subtotal"]
           item.unidad = p["unidad"]
-          item.save
+          if item.save
+            descontar_inventario(item)
+          end
         end
         empresa  = ConfigUser.find(negocio_id)
         restar_creditos(empresa)
-        enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
+        # enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
         render json: {error: false, mensaje: "Pedido procesado correctamente"} and return
       else
         render json: {error: true, mensaje: "Ocurrio un error al procesar el pedido"} and return
@@ -182,6 +184,15 @@ class PedidosController < ApplicationController
   def restar_creditos(empresa)
     empresa.pedidos_restantes = empresa.pedidos_restantes - 1
     empresa.save!
+  end
+
+  def descontar_inventario(item)
+    cant = item.cantidad.to_i
+    prod = Producto.find(item.producto_id)
+    if prod.present? && prod.inventario.present?
+      prod.inventario = prod.inventario.to_i - cant
+      prod.save
+    end
   end
 
   def enviar_correo(email, pedido, empresa)
