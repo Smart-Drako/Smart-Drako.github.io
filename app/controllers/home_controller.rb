@@ -3,21 +3,30 @@ class HomeController < ApplicationController
   before_action :authenticate_user!, :except => [:index, :error]
 
   def index
+
+
+    usuario = ConfigUser.find_by(user_id: current_user.id) if current_user.present?
+
+    if usuario.present? && usuario.admin == true
+      activo = [0,1]
+    else
+      activo = [1]
+    end
     @negocios = Array.new
-    @ciudades_negocios = ConfigUser.where(activo: 1).distinct.pluck(:ciudad)
+    @ciudades_negocios = ConfigUser.where(activo: activo).distinct.pluck(:ciudad)
     @ciudad = params[:city] if params[:city].present?
     if @ciudad.present?
-      cats = ConfigUser.where(activo: 1, ciudad: @ciudad).distinct.pluck(:category_id)
+      cats = ConfigUser.where(activo: activo, ciudad: @ciudad).distinct.pluck(:category_id)
     else
-      cats = ConfigUser.where(activo: 1).distinct.pluck(:category_id)
+      cats = ConfigUser.where(activo: activo).distinct.pluck(:category_id)
     end
     @categorias = Category.where(id: cats)
     
     @categorias.each do |cat|
       if @ciudad.present?
-        negocios = ConfigUser.where(category_id: cat.id, activo: 1, ciudad: @ciudad)
+        negocios = ConfigUser.where(category_id: cat.id, activo: activo, ciudad: @ciudad)
       else
-        negocios = ConfigUser.where(category_id: cat.id, activo: 1)
+        negocios = ConfigUser.where(category_id: cat.id, activo: activo)
       end
       item = {
         id: cat.id,
