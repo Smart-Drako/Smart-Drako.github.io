@@ -17,9 +17,10 @@ class PedidosController < ApplicationController
     pedido_id = params[:pedido_id].to_i
     estatus = params[:estatus]
     pedido = Pedido.find(pedido_id)
+    usuario = ConfigUser.find_by(user_id: current_user.id)
 
     if pedido.present?
-      render json: {error: true, mensaje: "No tiene permiso para editar ese pedido"} and return if pedido.user_id != current_user.id
+      render json: {error: true, mensaje: "No tiene permiso para editar ese pedido"} and return if pedido.user_id != usuario.id
       pedido.estatus = estatus
       if pedido.save!
         render json: {error: false, mensaje: "Pedido actualizado correctamente"} and return
