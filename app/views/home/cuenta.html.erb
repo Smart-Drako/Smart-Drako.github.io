@@ -153,25 +153,21 @@
       </div>
       <%end%>
 
-      <% if current_user.present? && (current_user.email == "manrobless@gmail.com" || current_user.email == "gustavomartinezserna47@hotmail.com" ) %>
-        <div class="text-center form-row">
-          <div class="col-0 col-md-4"></div>
-          <div class="col-12 col-md-4">
-            <p>Comparte tu link para recomendados:</p>
-            <input type="text" class="form-control" value="<%=@link_recomendado%>" id="link_recomendado" disabled> <br>
-            <button type="button" class="btn btn-sm btn-secondary" id="copiar_recomendado" onclick="copyRef()" onmouseout="outFuncRef()">Copiar link</button>
-          </div>
+      
+      <div class="text-center form-row">
+        <div class="col-md-2"></div>
+        <div class="col-12 col-md-4">
+          <p>Link para clientes <span data-toggle="popover" title="Link Clientes" data-html="true" data-content="Comparte con tus clientes el link de tu tienda en línea para que comiences a recibir pedidos en línea. <br><br>PRO Tip: Incluye este link en cada una de las publicaciones que hagas en tus redes sociales." data-trigger="hover"><i class="fas fa-question-circle"></i></span></p>
+          <input type="text" class="form-control" value="<%=@link_compartir%>" id="link_cliente" disabled> <br>
+          <button type="button" class="btn btn-sm btn-secondary" id="copiar_cliente" onclick="copyRef2()" onmouseout="outFuncRef2()">Copiar link</button>
         </div>
-      <% else %>
-        <div class="text-center form-row">
-          <div class="col-0 col-md-4"></div>
-          <div class="col-12 col-md-4">
-            <p>Comparte tu link con tus clientes:</p>
-            <input type="text" class="form-control" value="<%=@link_compartir%>" id="link_recomendado" disabled> <br>
-            <button type="button" class="btn btn-sm btn-secondary" id="copiar_recomendado" onclick="copyRef()" onmouseout="outFuncRef()">Copiar link</button>
-          </div>
+        <div class="col-12 col-md-4">
+          <p>Link programa embajadores <span data-toggle="popover" title="Programa Embajadores" data-html="true" data-content="Gana dinero recomendando pideloencasa.mx a tus conocidos. <br><br>PRO Tip: Comparte tu link personalizado para que podamos relacionar tus recomendados a tu cuenta." data-trigger="hover"><i class="fas fa-question-circle"></i></span></p>
+          <input type="text" class="form-control" value="<%=@link_recomendado%>" id="link_recomendado" disabled> <br>
+          <button type="button" class="btn btn-sm btn-secondary" id="copiar_recomendado" onclick="copyRef(1)" onmouseout="outFuncRef()">Copiar link</button>
         </div>
-      <%end%>
+        <div class="col-md-2"></div>
+      </div>
     </div>
   </div>
 

@@ -116,6 +116,8 @@ Paloma.controller 'Home', index: ->
 
 Paloma.controller 'Home', cuenta: ->
 
+  $('[data-toggle="popover"]').popover()
+
   cargar_selects()
   eventos_selects()
   $("#btn-cart_float").removeClass("d-md-block")
