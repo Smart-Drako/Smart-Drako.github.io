@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/me", to: "home#cuenta"
   get "/plan", to: "home#plan"
   get "socios/:id", to: "productos#tienda"
+  get "/admin_efra", to: "home#admin_efra"
   
   post "/generar_pedido", to:"pedidos#generar"
   get "/pedidos", to: "pedidos#index"

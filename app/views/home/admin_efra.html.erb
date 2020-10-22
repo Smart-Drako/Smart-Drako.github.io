@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Fecha Registro</th>
+        <th>Correo</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Nombre Empresa</th>
+        <th>ID Empresa</th>
+        <th>Papá</th>
+        <th>Abuelo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @lista.each do |u|%>
+        <tr>
+          <td><%= u[:fecha_registro].strftime("%d/%m/%Y") %></td>
+          <td><%= u[:correo] %></td>
+          <td><%= u[:nombre] %></td>
+          <td><%= u[:apellido] %></td>
+          <td><%= u[:nombre_empresa] %></td>
+          <td><%= u[:id_empresa] %></td>
+          <td><%= u[:papa] %></td>
+          <td><%= u[:abuelo] %></td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>

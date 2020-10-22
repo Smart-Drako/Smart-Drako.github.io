@@ -45,6 +45,40 @@ class HomeController < ApplicationController
     end
   end
 
+  def admin_efra
+    usuario = ConfigUser.find_by(user_id: current_user.id) if current_user.present?
+    if usuario.present? && usuario.admin == false
+      redirect_to me_path and return
+    end
+
+    @usuarios = User.find_by_sql("SELECT 
+      U.email AS correo,U.created_at as fecha_registro, U.nombre, U.apellido, E.nombre AS negocio, E.id as negocio_id
+  FROM
+      pideloencasa.users AS U
+          INNER JOIN
+      config_users AS E ON U.id = E.user_id order by U.id desc")
+
+    @lista = Array.new
+
+    @usuarios.each do |u|
+
+      rec = Recomendado.find_by(id_usuario: u.negocio_id)
+
+      item = {
+        "fecha_registro": u.fecha_registro,
+        "correo": u.correo,
+        "nombre": u.nombre,
+        "apellido": u.apellido,
+        "nombre_empresa": u.negocio,
+        "id_empresa": u.negocio_id,
+        "papa": (rec.present? ? rec.id_padre : ""),
+        "abuelo": (rec.present? ? rec.id_abuelo : ""),
+      }
+      @lista.push(item)
+    end
+
+  end
+
   def cuenta
     @config_user = ConfigUser.find_or_create_by(user_id: current_user.id)
     @categorias = Category.all.order("name")

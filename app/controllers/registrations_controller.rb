@@ -30,7 +30,7 @@ class RegistrationsController < Devise::RegistrationsController
     rec.id_padre = padre_id
     abuelo = Recomendado.buscar_abuelo(padre_id)
     if abuelo.present?
-      rec.id_abuelo = abuelo.id_padre.present?
+      rec.id_abuelo = abuelo.id_padre if abuelo.id_padre.present?
     end
     rec.save!
   end
