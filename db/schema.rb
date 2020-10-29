@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_29_040359) do
+ActiveRecord::Schema.define(version: 2020_10_29_043214) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_040359) do
     t.string "fecha"
     t.string "estatus"
     t.string "total"
+    t.string "pago_con"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_pedidos_on_user_id"

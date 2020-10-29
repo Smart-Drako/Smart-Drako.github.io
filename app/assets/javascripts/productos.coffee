@@ -73,6 +73,11 @@ Paloma.controller 'Pedidos', new: ->
 
   $("#btn-cart_float").removeClass("d-md-block")
 
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+
+  $(".btn-calcular-envio").unbind("click").click ->
+    calcular_envio()
+
   negocio_factura = localStorage.getItem("negocio_factura")
   negocio_anuncio = localStorage.getItem("negocio_anuncio")
 
@@ -604,3 +609,24 @@ actualizar_link_wa = ->
   link_wa_base = $("#link_wa_base").val()
   link = "#{link_wa_base}#{texto}. #{link_pedido}"
   $("#link_wa").attr("href", link)
+
+calcular_envio = ->
+
+  origen = "Av del pirul ejido choropo, mexicali" #Dirreccion del proveedor
+  
+  dir = $("#cliente_direccion").val()
+  colonia = $("#cliente_area").val()
+  ciudad = "mexicali"
+  destino = "#{dir} #{colonia}, #{ciudad}"
+  if dir == "" || colonia == ""
+    alert("Debes ingresar tu dirección y colonia")
+    return
+  $.ajax
+    type: 'POST'
+    url: '/pedido/calcular_envio'
+    data: { origen: origen, destino: destino}
+    beforeSend: ->
+      console.log "calculando envío.."
+    success: (data) ->
+      console.log data
+

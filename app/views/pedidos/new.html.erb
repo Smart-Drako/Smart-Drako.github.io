@@ -14,6 +14,9 @@
       </h4>
       <ul class="list-group mb-3" id="carrito_items_detalle">
       </ul>
+      <div class="text-center d-none d-md-block">
+        <a href="#" class="btn btn-sm btn-outline-primary btn-calcular-envio">Calcular Envío</a>
+      </div>
     </div>
     <div class="col-md-8 order-md-1">
       <div class="alert alert-warning" role="alert" id="alert_aviso" style="display:none;"></div>
@@ -41,21 +44,36 @@
           </div>
         </div>
 
+        <div class="row d-block d-md-none">
+          <div class="col-md-12 text-right">
+            <a href="#" class="text-primary btn-calcular-envio">Calcular Envío</a>
+          </div>
+        </div>
+
         <div class="row">
-          <div class="col-md-4 mb-3">
+          <div class="col-md-3 mb-3">
             <label for="cliente_horario">Tipo de Envío</label>
             <select class="custom-select d-block w-100" id="cliente_tipo_envio" name="tipo_envio">
               <option value="A Domicilio">A Domicilio</option>
               <option value="Para Recoger">Para Recoger</option>
             </select>
           </div>
-          <div class="col-md-4 mb-3">
+          <div class="col-md-3 mb-3">
             <label for="cliente_pago">Forma de Pago</label>
             <select class="custom-select d-block w-100" id="cliente_pago" name="pago">
               <option value="Efectivo">Efectivo</option>
               <option value="Tarjeta">Tarjeta</option>
               <option value="Transferencia">Transferencia</option>
             </select>
+          </div>
+          <div class="col-md-2 mb-3">
+            <label for="cliente_pago">Pagarás Con</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">$</div>
+              </div>
+              <input id="cliente_paga_con" name="paga_con" type="text" class="form-control positive-integer" maxLength="5" id="inlineFormInputGroup">
+            </div>
           </div>
           <div class="col-md-4 mb-3">
             <label for="cliente_correo">Correo Electrónico</label>

@@ -1,5 +1,5 @@
 class PedidosController < ApplicationController
-  before_action :authenticate_user!, :except => [:generar, :new, :ver_pedido]
+  before_action :authenticate_user!, :except => [:generar, :new, :ver_pedido, :calcular_envio]
 
   def index
     usuario = ConfigUser.find_by(user_id: current_user.id)
@@ -129,6 +129,27 @@ class PedidosController < ApplicationController
     end
   end
 
+  def calcular_envio
+    origen = params["origen"]
+    destino = params["destino"]
+
+    url = URI.parse("https://maps.googleapis.com")
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new("/maps/api/directions/json?origin=#{URI.escape(origen)}&destination=#{URI.escape(destino)}&key=AIzaSyBqc9wkluIeSqtMa2mPeMPpmpCqo-Dj1yI")
+    request["content-type"] = 'application/json'
+
+    response = http.request(request)
+    json = JSON.parse(response.body)
+
+    distancia_valor = ((json["routes"][0]["legs"][0]["distance"]["value"]).to_f / 1000 ).round
+    distancia_texto = json["routes"][0]["legs"][0]["distance"]["text"]
+    reparto = calcular_reparto(distancia_valor)
+    
+    render json: {distancia: distancia_valor, distancia_texto: distancia_texto, reparto: reparto} and return
+  
+  end
+
   def generar
     params.permit(:negocio_id, :productos, :total, :cliente)
     cliente = JSON.parse(params[:cliente])
@@ -154,6 +175,7 @@ class PedidosController < ApplicationController
       pedido.cliente_uso_cfdi = cliente["uso_cfdi"] if cliente["uso_cfdi"].present?
       pedido.cliente_email = cliente["correo"] if cliente["correo"].present?
       pedido.comentario = cliente["comentario"] if cliente["comentario"].present?
+      pedido.pago_con = cliente["paga_con"] if cliente["paga_con"].present?
 
       if pedido.save
         productos.each do |p|
@@ -181,7 +203,38 @@ class PedidosController < ApplicationController
     end
   end
   private
+  
+  def calcular_reparto(distancia_valor) # 14.4
+    case distancia_valor.to_i
+    when 0..4
+      40
+    when 5
+      45
+    when 6
+      50
+    when 7
+      55
+    when 8
+      60
+    when 9
+      65
+    when 10
+      70
+    when 11
+      75
+    when 12
+      80
+    when 13
+      85
+    when 14
+      90
+    when 15
+      95
+    else
+      100
+    end
 
+  end
   def restar_creditos(empresa)
     empresa.pedidos_restantes = empresa.pedidos_restantes - 1
     empresa.save!

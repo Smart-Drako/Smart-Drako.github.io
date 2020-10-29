@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "/admin_efra", to: "home#admin_efra"
   
   post "/generar_pedido", to:"pedidos#generar"
+  post "/pedido/calcular_envio", to:"pedidos#calcular_envio"
   get "/pedidos", to: "pedidos#index"
   get "/pedido/:id", to: "pedidos#show"
   post "/pedido/actualizar_estatus", to: "pedidos#actualizar_estatus"
