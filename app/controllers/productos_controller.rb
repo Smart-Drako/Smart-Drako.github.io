@@ -68,6 +68,16 @@ class ProductosController < ApplicationController
       description: @negocio.descripcion
     }
 
+    reparto = (@negocio.reparto.present? && @negocio.reparto == "ZAS Reparto") ? true : false
+    direccion = "#{@negocio.direccion}, #{@negocio.ciudad}"
+
+    @datos_empresa = {
+      reparto: reparto,
+      direccion: direccion,
+      metodo_pago: @negocio.metodo_pago,
+      tipo_envio: @negocio.tipo_entrega
+    }
+
     @prods = Array.new
     
     @categorias = @productos.pluck(:categoria).uniq.compact

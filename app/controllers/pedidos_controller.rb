@@ -1,6 +1,6 @@
 class PedidosController < ApplicationController
   before_action :authenticate_user!, :except => [:generar, :new, :ver_pedido, :calcular_envio]
-
+  include ActionView::Helpers::NumberHelper
   def index
     usuario = ConfigUser.find_by(user_id: current_user.id)
     @pedidos = Pedido.where(user_id: usuario.id).order(id: :desc)
@@ -44,10 +44,22 @@ class PedidosController < ApplicationController
     if @pedido.present?
       @productos = ProductoPedido.where(pedido_id: @pedido.id)
       @negocio = ConfigUser.find(@pedido.user_id)
-      @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
       redirect_to pedidos_path and return if @pedido.user_id != @negocio.id
-      @mensaje_wa = mensaje_whatsapp(@pedido, false)
-      @mensaje_wa_link = mensaje_whatsapp(@pedido, true)
+      
+      if @negocio.reparto == "ZAS Reparto" && @pedido.reparto.present? && @pedido.reparto.to_f > 0
+        @estatus_list = ["Nuevo", "Confirmado","ZAS Reparto", "Entregado", "Cancelado"]
+      else
+        @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
+      end
+
+      # if @pedido.reparto.present? && @pedido.estatus == "ZAS Reparto" && @pedido.reparto.to_f > 0
+      #   @mensaje_wa = mensaje_whatsapp(@pedido, false, true)
+      #   @mensaje_wa_link = mensaje_whatsapp(@pedido, true, true)
+      # else
+      @mensaje_wa = mensaje_whatsapp(@pedido, false, @negocio)
+      @mensaje_wa_link = mensaje_whatsapp(@pedido, true, @negocio)
+      # end
+
       @link_pedido = link_pedido(@pedido)
       @link_wa_base = "https://api.whatsapp.com/send?phone=52#{@pedido.cliente_telefono}&text="
       @link_wa = "https://api.whatsapp.com/send?phone=52#{@pedido.cliente_telefono}&text=#{@mensaje_wa_link}"
@@ -68,7 +80,7 @@ class PedidosController < ApplicationController
     return link
   end
 
-  def mensaje_whatsapp(pedido, link = false)
+  def mensaje_whatsapp(pedido, link = false, negocio)
     b64_id = Base64.encode64("#{pedido.id}-pideloencasa.mx")
     if link == true
       if Rails.env.production?
@@ -80,13 +92,17 @@ class PedidosController < ApplicationController
       link = ""
     end
 
+    paga_con = pedido.pago_con.present?  ? number_to_currency(pedido.pago_con, :precision => 2) :  "N/A"
+
     case pedido.estatus
     when "Confirmado"
       "Hola *#{pedido.cliente_nombre}* te confirmamos que hemos recibido tu pedido *#{pedido.numero.to_s.rjust(4, "0")}*. En breve te lo tendremos listo. #{link}"
     when "Entregado"
-      "Hola *#{pedido.cliente_nombre}* te informamos que tu pedido *#{pedido.numero.to_s.rjust(4, "0")}* ha sido Entregado, muchas gracias por tu compra.. #{link}"
+      "Hola *#{pedido.cliente_nombre}* te informamos que tu pedido *#{pedido.numero.to_s.rjust(4, "0")}* ha sido Entregado, muchas gracias por tu compra. #{link}"
     when "Cancelado"
       "Hola *#{pedido.cliente_nombre}* lamentamos la cancelación de tu pedido, seguimos a tus órdenes. #{link}"
+    when "ZAS Reparto"
+      "*#{negocio.nombre}* %0A #{negocio.direccion} %0A #{negocio.telefono} %0A * * * * * * %0A FAVOR DE REPARTIR A: %0A *#{pedido.cliente_nombre}* %0A #{pedido.cliente_telefono} %0A #{pedido.cliente_direccion}, #{pedido.area_entrega} %0A %0A Pedido: #{number_to_currency(pedido.total, :precision => 2)} %0A Reparto: #{number_to_currency(pedido.reparto, :precision => 2)} %0A Total: #{number_to_currency(pedido.total.to_f + pedido.reparto.to_f, :precision => 2)} %0A Paga con: #{paga_con}  %0A%0A #{link}"
     end
   end
 
@@ -155,6 +171,7 @@ class PedidosController < ApplicationController
     cliente = JSON.parse(params[:cliente])
     negocio_id = params[:negocio_id].to_i
     total = params[:total].to_f
+    reparto = params[:reparto].to_f
     productos = JSON.parse(params[:productos])
     if negocio_id.present? && productos.present?
       pedido = Pedido.new
@@ -176,6 +193,7 @@ class PedidosController < ApplicationController
       pedido.cliente_email = cliente["correo"] if cliente["correo"].present?
       pedido.comentario = cliente["comentario"] if cliente["comentario"].present?
       pedido.pago_con = cliente["paga_con"] if cliente["paga_con"].present?
+      pedido.reparto = reparto if (reparto.present? && reparto > 0)
 
       if pedido.save
         productos.each do |p|
@@ -193,7 +211,7 @@ class PedidosController < ApplicationController
         end
         empresa  = ConfigUser.find(negocio_id)
         restar_creditos(empresa)
-        enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
+        #enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
         render json: {error: false, mensaje: "Pedido procesado correctamente"} and return
       else
         render json: {error: true, mensaje: "Ocurrio un error al procesar el pedido"} and return

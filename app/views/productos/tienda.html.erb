@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-6 col-md-2 align-self-center">
       <img src="<%=@negocio.logo%>" class="img-thumbnail img-fluid">
+      <input type="hidden" id="datos_empresa" value="<%=@datos_empresa.to_json%>">
     </div>
     <div class="col-6 col-md-10 align-self-center">
       <h5><%=@negocio.nombre%></h5>

@@ -12,10 +12,20 @@
         <span class="text-muted">Tu pedido</span>
         <span class="badge btn-pink total-items"></span>
       </h4>
-      <ul class="list-group mb-3" id="carrito_items_detalle">
+      <ul class="list-group mb-0" id="carrito_items_detalle">
+      </ul>
+      <ul class="list-group mb-0" id="totales_reparto">
+        <li class='list-group-item d-flex justify-content-between' style='padding: 1.0rem 0.5rem;'>
+          <span style='font-size: 1.1rem;'>Reparto</span>
+          <strong><span class='total-reparto' style='font-size: 1.1rem;'></span></strong>
+        </li>
+        <li class='list-group-item d-flex justify-content-between' style='padding: 1.0rem 0.5rem;'>
+          <strong><span style='font-size: 1.3rem;'>Total + Reparto</span></strong>
+          <strong><span class='total-final' style='font-size: 1.3rem;'></span></strong>
+        </li>
       </ul>
       <div class="text-center d-none d-md-block">
-        <a href="#" class="btn btn-sm btn-outline-primary btn-calcular-envio">Calcular Envío</a>
+        <a href="#" class="btn btn-sm btn-outline-primary btn-calcular-envio mt-3">Calcular Envío</a>
       </div>
     </div>
     <div class="col-md-8 order-md-1">
@@ -63,7 +73,7 @@
             <select class="custom-select d-block w-100" id="cliente_pago" name="pago">
               <option value="Efectivo">Efectivo</option>
               <option value="Tarjeta">Tarjeta</option>
-              <option value="Transferencia">Transferencia</option>
+              <%# <option value="Transferencia">Transferencia</option> %>
             </select>
           </div>
           <div class="col-md-2 mb-3">

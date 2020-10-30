@@ -18,8 +18,16 @@
         <input type="hidden" id="link_pedido" value="<%=@link_pedido%>">
         <input type="hidden" id="link_wa_base" value="<%=@link_wa_base%>">
         <%if @pedido.estatus != "Nuevo"%>
-          <textarea class="form-control" id="texto_wa" cols="50" rows="5"><%=@mensaje_wa%></textarea>
-          <a href="<%=@link_wa%>" id="link_wa" target="_blank" class="btn btn-outline-pink no-hover mt-10">Avisar a Cliente <i class="fab btn-wa fa-whatsapp fa-lg"></i></a>
+          
+          <%if @pedido.estatus == "ZAS Reparto" && @pedido.reparto.present? && @pedido.reparto.to_f > 0%>
+            <textarea class="form-control d-none" id="texto_wa" cols="50" disabled rows="5"><%=@mensaje_wa%></textarea>
+            <textarea class="form-control" id="texto_nota" cols="50" rows="3" placeholder="Agrega una nota o instrucción especial al repartidor (opcional)"></textarea>
+            <a href="<%=@link_wa%>" id="link_wa" target="_blank" class="btn btn-outline-pink no-hover mt-10">Solicitar Reparto <i class="fab btn-wa fa-whatsapp fa-lg"></i></a>
+          <%else%>
+            <textarea class="form-control" id="texto_wa" cols="50" rows="5"><%=@mensaje_wa%></textarea>
+            <a href="<%=@link_wa%>" id="link_wa" target="_blank" class="btn btn-outline-pink no-hover mt-10">Avisar a Cliente <i class="fab btn-wa fa-whatsapp fa-lg"></i></a>
+          <%end%>
+        
         <%end%>
         </div>
         <div class="col-md-3 d-none d-md-block text-right align-self-center">
@@ -101,6 +109,18 @@
                   <td class="text-right ped-total"><strong>Total:</strong></td>
                   <td class="text-right ped-total"><%= number_to_currency(@pedido.total, :precision => 2) %></td>
                 </tr>
+                <%if @pedido.reparto.present? && @pedido.reparto.to_f > 0%>
+                <tr>
+                  <td colspan="3"></td>
+                  <td class="text-right ped-total"><strong>Reparto:</strong></td>
+                  <td class="text-right ped-total"><%= number_to_currency(@pedido.reparto, :precision => 2) %></td>
+                </tr>
+                <tr>
+                  <td colspan="3"></td>
+                  <td class="text-right ped-total"><strong>Gran Total:</strong></td>
+                  <td class="text-right ped-total"><%= number_to_currency((@pedido.total.to_f+@pedido.reparto.to_f), :precision => 2) %></td>
+                </tr>
+                <%end%>
               </tfoot>
             </table>
           </div>

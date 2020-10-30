@@ -51,6 +51,8 @@ Paloma.controller 'Pedidos', show: ->
   $(".carbar").removeClass("d-block").hide()
   $("#texto_wa").keyup (e)->
     actualizar_link_wa()
+  $("#texto_nota").keyup (e)->
+    actualizar_link_wa_reparto()
   $("#pedido_estatus").change ->
     pedido_id = $(this).data("pedido-id")
     estatus = $(this).val()
@@ -71,12 +73,51 @@ Paloma.controller 'Pedidos', index: ->
 
 Paloma.controller 'Pedidos', new: ->
 
+  localStorage.setItem("reparto", 0)
+  localStorage.setItem("reparto_distancia", 0)
+
   $("#btn-cart_float").removeClass("d-md-block")
 
   $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
 
+  $("#totales_reparto").hide()
+
+  datos_empresa = JSON.parse(localStorage.getItem("datos_empresa"))
+  if datos_empresa == null
+    $(".btn-calcular-envio").hide()
+  else
+    reparto = datos_empresa.reparto
+    tipo_envio = parseInt(datos_empresa.tipo_envio)
+    metodo_pago = parseInt(datos_empresa.metodo_pago)
+    if reparto == true && (tipo_envio == 1 || tipo_envio == 3) #1=domicilio 2=recoger 3=domicilio  yrecoger  
+      $(".btn-calcular-envio").show()
+    else
+      $(".btn-calcular-envio").hide()
+    if tipo_envio == 1
+      $("#cliente_tipo_envio option[value='Para Recoger']").hide()
+      $("#cliente_tipo_envio").val("A Domicilio")
+    if tipo_envio == 2
+      $("#cliente_tipo_envio option[value='A Domicilio']").hide().blur()
+      $("#cliente_tipo_envio").val("Para Recoger")
+    if metodo_pago == 1
+      $("#cliente_pago option[value='Tarjeta']").hide()
+      $("#cliente_pago").val("Efectivo")
+    if metodo_pago == 2
+      $("#cliente_tipo_envio option[value='Efectivo']").hide().blur()
+      $("#cliente_pago").val("Tarjeta")
+  
+
+
   $(".btn-calcular-envio").unbind("click").click ->
     calcular_envio()
+  
+  $("#cliente_tipo_envio").change ->
+    if $(this).val() == "A Domicilio"
+      datos_empresa = JSON.parse(localStorage.getItem("datos_empresa"))
+      if datos_empresa.reparto == true
+        calcular_envio()
+    else
+      cancelar_envio()
 
   negocio_factura = localStorage.getItem("negocio_factura")
   negocio_anuncio = localStorage.getItem("negocio_anuncio")
@@ -370,8 +411,10 @@ eventos = ->
   
   $('#btn_vaciar_agregar').unbind("click").click ->
     localStorage.removeItem("total_pedido");
+    localStorage.removeItem("reparto");
     localStorage.removeItem("productos");
     localStorage.removeItem("negocio_id");
+    localStorage.removeItem("datos_empresa");
     localStorage.removeItem("negocio_factura");
     localStorage.removeItem("negocio_anuncio");
     $("#negocio_nombre_carrito").val("")
@@ -509,6 +552,7 @@ agregar_producto = (producto) ->
   localStorage.setItem("total_pedido", total_pedido)
   localStorage.setItem("negocio_id", negocio)
   localStorage.setItem("productos", JSON.stringify(productos))
+  localStorage.setItem( "datos_empresa", $("#datos_empresa").val() )
   animate($(".total-items"), "wobble")
   cargar_productos()
 
@@ -517,11 +561,12 @@ procesar_pedido = ->
   productos = localStorage.getItem("productos") || "[]"
   negocio_id = localStorage.getItem("negocio_id") || 0
   total= localStorage.getItem("total_pedido") || 0
+  reparto= localStorage.getItem("reparto") || 0
   cliente = JSON.stringify( objectifyForm($("#datos_cliente_form").serializeArray()) )
   $.ajax
     type: 'POST'
     url: '/generar_pedido'
-    data: { negocio_id: negocio_id, productos: productos, total: total, cliente: cliente } 
+    data: { negocio_id: negocio_id, productos: productos, total: total, cliente: cliente, reparto: reparto } 
     dataType: 'json'
     beforeSend: ->
       console.log "Generando pedido"
@@ -536,10 +581,12 @@ procesar_pedido = ->
 #Borrar el pedido
 borrar_pedido = ->
   localStorage.removeItem("total_pedido")
+  localStorage.removeItem("reparto")
   localStorage.removeItem("productos")
   localStorage.removeItem("negocio_id")
-  localStorage.removeItem("negocio_factura");
-  localStorage.removeItem("negocio_anuncio");
+  localStorage.removeItem("datos_empresa")
+  localStorage.removeItem("negocio_factura")
+  localStorage.removeItem("negocio_anuncio")
   $("#negocio_nombre_carrito").val("")
   cargar_productos()
 
@@ -610,9 +657,20 @@ actualizar_link_wa = ->
   link = "#{link_wa_base}#{texto}. #{link_pedido}"
   $("#link_wa").attr("href", link)
 
+
+actualizar_link_wa_reparto = ->
+  texto = $("#texto_wa").val()
+  link_wa_base = $("#link_wa_base").val()
+  link_pedido = $("#link_pedido").val()
+  nota_repartidor = $("#texto_nota").val()
+  nota = "Nota Repartidor:%0A #{nota_repartidor}%0A%0A"
+  link = "#{link_wa_base}#{texto}#{nota} #{link_pedido}"
+  $("#link_wa").attr("href", link)
+
 calcular_envio = ->
 
-  origen = "Av del pirul ejido choropo, mexicali" #Dirreccion del proveedor
+  empresa = JSON.parse(localStorage.getItem("datos_empresa"))
+  origen = empresa.direccion
   
   dir = $("#cliente_direccion").val()
   colonia = $("#cliente_area").val()
@@ -628,5 +686,14 @@ calcular_envio = ->
     beforeSend: ->
       console.log "calculando envío.."
     success: (data) ->
-      console.log data
+      $("#totales_reparto").show()
+      total_pedido = parseFloat(localStorage.getItem("total_pedido"))
+      total_final = total_pedido + data.reparto
+      localStorage.setItem("reparto", data.reparto);
+      $(".total-reparto").text("+ " + number_to_currency(data.reparto))
+      $(".total-final").text(number_to_currency(total_final))
+cancelar_envio = ->
+  $("#totales_reparto").hide()
+  localStorage.setItem("reparto", 0)
+  localStorage.setItem("reparto_distancia", 0)
 
