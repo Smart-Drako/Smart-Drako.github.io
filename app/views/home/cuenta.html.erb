@@ -106,7 +106,7 @@
               <label for="inputZip">Tipo de entrega</label>
               <%= f.select(:tipo_entrega, options_for_select(@tipos_entrega,@config_user.tipo_entrega), {:include_blank => 'Seleccionar...' }, :class => 'form-control') %>
             </div>
-            <%if @config_user.ciudad == "Mexicali"%>
+            <%if @config_user.ciudad == "Mexicali" && @config_user.reparto_activo == true%>
               <div class="form-group col-md-4">
                 <label for="inputZip">Proveedor envío a domicilio</label>
                 <%= f.select(:reparto, options_for_select(@repartos,@config_user.reparto), {:include_blank => '' }, :class => 'form-control') %>

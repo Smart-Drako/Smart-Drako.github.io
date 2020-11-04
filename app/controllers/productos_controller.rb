@@ -68,7 +68,7 @@ class ProductosController < ApplicationController
       description: @negocio.descripcion
     }
 
-    reparto = (@negocio.reparto.present? && @negocio.reparto == "ZAS Reparto") ? true : false
+    reparto = (@negocio.reparto.present? && @negocio.reparto == "ZAS Reparto" && @negocio.reparto_activo == true) ? true : false
     direccion = "#{@negocio.direccion}, #{@negocio.ciudad}"
 
     @datos_empresa = {
