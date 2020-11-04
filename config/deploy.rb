@@ -2,7 +2,7 @@
 lock "~> 3.13.0"
 
 set :application, "pideloencasa"
-set :repo_url, "git@bitbucket.org:manrobless/pideloencasa.git"
+set :repo_url, "git@github.com:Smart-Drako/pideloencasa.git"
 
 # Deploy to the user's home directory
 set :deploy_to, "/home/deploy/#{fetch :application}"
