@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 2020_11_04_205142) do
     t.string "logo"
     t.boolean "activo", default: true
     t.string "slug"
-    t.boolean "tipo_card", default: false
     t.boolean "vista_card", default: false, null: false
     t.integer "estatus"
     t.datetime "fecha_registro"
@@ -109,14 +108,6 @@ ActiveRecord::Schema.define(version: 2020_11_04_205142) do
     t.boolean "ilimitado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "producto_fotos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "producto_id"
-    t.string "imagen"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["producto_id"], name: "index_producto_fotos_on_producto_id"
   end
 
   create_table "producto_pedidos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

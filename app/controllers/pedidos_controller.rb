@@ -47,17 +47,20 @@ class PedidosController < ApplicationController
       redirect_to pedidos_path and return if @pedido.user_id != @negocio.id
       
       if @negocio.reparto == "ZAS Reparto" && @pedido.reparto.present? && @pedido.reparto.to_f > 0
-        @estatus_list = ["Nuevo", "Confirmado","ZAS Reparto", "Entregado", "Cancelado"]
+        @estatus_list = ["Nuevo", "Confirmado","ZAS Reparto","Enviada a ZAS","Entregado", "Cancelado"]
       else
         @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
       end
+
+      @estatus_list = ["Enviada a ZAS", "Entregado"] if @pedido.estatus == "Enviada a ZAS"
+    
 
       # if @pedido.reparto.present? && @pedido.estatus == "ZAS Reparto" && @pedido.reparto.to_f > 0
       #   @mensaje_wa = mensaje_whatsapp(@pedido, false, true)
       #   @mensaje_wa_link = mensaje_whatsapp(@pedido, true, true)
       # else
-      @mensaje_wa = mensaje_whatsapp(@pedido, false, @negocio)
-      @mensaje_wa_link = mensaje_whatsapp(@pedido, true, @negocio)
+      @mensaje_wa = mensaje_whatsapp(@pedido, false, @negocio, nil)
+      @mensaje_wa_link = mensaje_whatsapp(@pedido, true, @negocio, nil)
       # end
 
       @link_pedido = link_pedido(@pedido)
@@ -80,7 +83,7 @@ class PedidosController < ApplicationController
     return link
   end
 
-  def mensaje_whatsapp(pedido, link = false, negocio)
+  def mensaje_whatsapp(pedido, link = false, negocio, nota)
     b64_id = Base64.encode64("#{pedido.id}-pideloencasa.mx")
     if link == true
       if Rails.env.production?
@@ -93,6 +96,7 @@ class PedidosController < ApplicationController
     end
 
     paga_con = pedido.pago_con.present?  ? number_to_currency(pedido.pago_con, :precision => 2) :  "N/A"
+    nota_rep = nota.present?  ? nota :  "N/A"
 
     case pedido.estatus
     when "Confirmado"
@@ -102,7 +106,7 @@ class PedidosController < ApplicationController
     when "Cancelado"
       "Hola *#{pedido.cliente_nombre}* lamentamos la cancelación de tu pedido, seguimos a tus órdenes. #{link}"
     when "ZAS Reparto"
-      "*#{negocio.nombre}* %0A #{negocio.direccion} %0A #{negocio.whatsapp} %0A * * * * * * %0A FAVOR DE REPARTIR A: %0A *#{pedido.cliente_nombre}* %0A #{pedido.cliente_telefono} %0A #{pedido.cliente_direccion}, #{pedido.area_entrega} %0A %0A Pedido: #{number_to_currency(pedido.total, :precision => 2)} %0A Reparto: #{number_to_currency(pedido.reparto, :precision => 2)} %0A Total: #{number_to_currency(pedido.total.to_f + pedido.reparto.to_f, :precision => 2)} %0A Paga con: #{paga_con}  %0A%0A #{link}"
+      "<b>#{negocio.nombre}</b> \n #{negocio.direccion} \n #{negocio.whatsapp} \n * * * * * * \n FAVOR DE REPARTIR A: \n <b>#{pedido.cliente_nombre}</b> \n #{pedido.cliente_telefono} \n #{pedido.cliente_direccion}, #{pedido.area_entrega} \n \n Pedido: #{number_to_currency(pedido.total, :precision => 2)} \n Reparto: #{number_to_currency(pedido.reparto, :precision => 2)} \n Total: #{number_to_currency(pedido.total.to_f + pedido.reparto.to_f, :precision => 2)} \n Paga con: #{paga_con}\n\n Nota Repartidor:\n #{nota_rep}\n\n <a href='#{link}'>Ver Pedido</a>"
     end
   end
 
@@ -147,11 +151,39 @@ class PedidosController < ApplicationController
 
   def solicitar_reparto
     pedido = Pedido.find_by(id: params[:pedido_id].to_i)
+    nota = params[:nota]
+    
     if pedido.present?
       negocio = ConfigUser.find(pedido.user_id)
-      mensaje_wa_link = mensaje_whatsapp(pedido, true, negocio)
+      mensaje = mensaje_whatsapp(pedido, true, negocio, nota)
+      #Request
+      url = URI.parse("https://api.telegram.org")
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
+      #Params api telegram
+      bot = "1438829600:AAH_Ugi1iOgjcM1TeGteVzCKfiPI4vwI4kY"
+      chat_id = "466231810"
+
+      request = Net::HTTP::Get.new("/bot#{bot}/sendMessage?chat_id=-#{chat_id}&text=#{URI.escape(mensaje)}&parse_mode=html")
+      request["content-type"] = 'application/json'
+  
+      response = http.request(request)
+      json = JSON.parse(response.body)
+
+      if json["ok"] == true
+        pedido.estatus = "Enviada a ZAS"
+        pedido.save!
+        render json: {error: false, mensaje: "Solicitud enviada a ZAS Reparto existosamente, en breve te avisarán cuando vayan en camino."} and return
+      else
+        render json: {error: true, mensaje:"No se pudo enviar la solicitud a ZAS Reparto"} and return
+      end
+      
+    else
+      render json: {error: true, mensaje:"No se pudo enviar la solicitud a ZAS Reparto"} and return
     end
-    render json: {params: params, mensaje: mensaje_wa_link} and return
+
+
+    
     
   end
 
@@ -221,7 +253,7 @@ class PedidosController < ApplicationController
         end
         empresa  = ConfigUser.find(negocio_id)
         restar_creditos(empresa)
-        #enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
+        enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
         render json: {error: false, mensaje: "Pedido procesado correctamente"} and return
       else
         render json: {error: true, mensaje: "Ocurrio un error al procesar el pedido"} and return

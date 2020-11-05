@@ -24,6 +24,8 @@
             <textarea class="form-control" id="texto_nota" cols="50" rows="3" placeholder="Agrega una nota o instrucción especial al repartidor (opcional)"></textarea>
             <a href="<%=@link_wa%>" id="link_wa" target="_blank" class="btn btn-outline-pink no-hover mt-10 d-none">Solicitar Reparto <i class="fab btn-wa fa-whatsapp fa-lg"></i></a>
             <button type="button" id="btn_solicitar_reparto" data-empresa-id="<%=@negocio.id%>" data-pedido-id="<%=@pedido.id%>" class="btn btn-outline-pink no-hover mt-10" class="">Solicitar Reparto</button>
+          <%elsif @pedido.estatus == "Enviada a ZAS" %>
+            <p>Solicitud enviada a ZAS Reparto existosamente, en breve te avisarán cuando vayan en camino.</p>
           <%else%>
             <textarea class="form-control" id="texto_wa" cols="50" rows="5"><%=@mensaje_wa%></textarea>
             <a href="<%=@link_wa%>" id="link_wa" target="_blank" class="btn btn-outline-pink no-hover mt-10">Avisar a Cliente <i class="fab btn-wa fa-whatsapp fa-lg"></i></a>

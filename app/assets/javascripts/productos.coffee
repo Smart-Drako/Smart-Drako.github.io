@@ -684,9 +684,13 @@ enviar_solicitud_reparto = (pedido_id, nota) ->
     url: '/pedido/solicitar_reparto'
     data: { pedido_id: pedido_id, nota: nota}
     beforeSend: ->
-      console.log "enviando solicitud de reparto."
+      $("#btn_solicitar_reparto").text("Solicitando Reparto...")
     success: (data) ->
-      console.log data
+      if data.error == false
+        window.location.reload(true)
+      else
+        $("#btn_solicitar_reparto").text("Solicitar Reparto")
+        alert("Ocurrió un error el enviar la peticion a ZAS Reparto")
 
 calcular_envio = ->
 
