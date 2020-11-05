@@ -47,7 +47,11 @@ class PedidosController < ApplicationController
       redirect_to pedidos_path and return if @pedido.user_id != @negocio.id
       
       if @negocio.reparto == "ZAS Reparto" && @pedido.reparto.present? && @pedido.reparto.to_f > 0
-        @estatus_list = ["Nuevo", "Confirmado","ZAS Reparto","Enviada a ZAS","Entregado", "Cancelado"]
+        if @pedido.estatus == "ZAS Reparto"
+          @estatus_list = ["Nuevo", "Confirmado","ZAS Reparto","Enviada a ZAS","Entregado", "Cancelado"]
+        else
+          @estatus_list = ["Nuevo", "Confirmado","ZAS Reparto","Entregado", "Cancelado"]
+        end
       else
         @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
       end
