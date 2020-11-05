@@ -53,10 +53,16 @@ Paloma.controller 'Pedidos', show: ->
     actualizar_link_wa()
   $("#texto_nota").keyup (e)->
     actualizar_link_wa_reparto()
+  
   $("#pedido_estatus").change ->
     pedido_id = $(this).data("pedido-id")
     estatus = $(this).val()
     cambiar_estatus_pedido(pedido_id, estatus, true)
+  
+  $("#btn_solicitar_reparto").unbind("click").click ->
+    pedido_id = $(this).data("pedido-id")
+    nota_repartidor = $("#texto_nota").val()
+    enviar_solicitud_reparto(pedido_id, nota_repartidor)
 
 Paloma.controller 'Pedidos', ver_pedido: ->
   $(".carbar").removeClass("d-block").hide()
@@ -110,7 +116,7 @@ Paloma.controller 'Pedidos', new: ->
 
   $(".btn-calcular-envio").unbind("click").click ->
     calcular_envio()
-  
+
   $("#cliente_tipo_envio").change ->
     if $(this).val() == "A Domicilio"
       datos_empresa = JSON.parse(localStorage.getItem("datos_empresa"))
@@ -168,6 +174,10 @@ Paloma.controller 'Home', cuenta: ->
   eventos_selects()
   $("#btn-cart_float").removeClass("d-md-block")
   $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+
+  $('.positive-integer').numeric
+    decimal: false
+    negative: false
 
 Paloma.controller 'Home', plan: ->
   $("#btn-cart_float").removeClass("d-md-block")
@@ -666,6 +676,17 @@ actualizar_link_wa_reparto = ->
   nota = "Nota Repartidor:%0A #{nota_repartidor}%0A%0A"
   link = "#{link_wa_base}#{texto}#{nota} #{link_pedido}"
   $("#link_wa").attr("href", link)
+
+
+enviar_solicitud_reparto = (pedido_id, nota) ->
+  $.ajax
+    type: 'POST'
+    url: '/pedido/solicitar_reparto'
+    data: { pedido_id: pedido_id, nota: nota}
+    beforeSend: ->
+      console.log "enviando solicitud de reparto."
+    success: (data) ->
+      console.log data
 
 calcular_envio = ->
 

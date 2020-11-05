@@ -102,7 +102,7 @@ class PedidosController < ApplicationController
     when "Cancelado"
       "Hola *#{pedido.cliente_nombre}* lamentamos la cancelación de tu pedido, seguimos a tus órdenes. #{link}"
     when "ZAS Reparto"
-      "*#{negocio.nombre}* %0A #{negocio.direccion} %0A #{negocio.telefono} %0A * * * * * * %0A FAVOR DE REPARTIR A: %0A *#{pedido.cliente_nombre}* %0A #{pedido.cliente_telefono} %0A #{pedido.cliente_direccion}, #{pedido.area_entrega} %0A %0A Pedido: #{number_to_currency(pedido.total, :precision => 2)} %0A Reparto: #{number_to_currency(pedido.reparto, :precision => 2)} %0A Total: #{number_to_currency(pedido.total.to_f + pedido.reparto.to_f, :precision => 2)} %0A Paga con: #{paga_con}  %0A%0A #{link}"
+      "*#{negocio.nombre}* %0A #{negocio.direccion} %0A #{negocio.whatsapp} %0A * * * * * * %0A FAVOR DE REPARTIR A: %0A *#{pedido.cliente_nombre}* %0A #{pedido.cliente_telefono} %0A #{pedido.cliente_direccion}, #{pedido.area_entrega} %0A %0A Pedido: #{number_to_currency(pedido.total, :precision => 2)} %0A Reparto: #{number_to_currency(pedido.reparto, :precision => 2)} %0A Total: #{number_to_currency(pedido.total.to_f + pedido.reparto.to_f, :precision => 2)} %0A Paga con: #{paga_con}  %0A%0A #{link}"
     end
   end
 
@@ -143,6 +143,16 @@ class PedidosController < ApplicationController
     else
       redirect_to root_path and return
     end
+  end
+
+  def solicitar_reparto
+    pedido = Pedido.find_by(id: params[:pedido_id].to_i)
+    if pedido.present?
+      negocio = ConfigUser.find(pedido.user_id)
+      mensaje_wa_link = mensaje_whatsapp(pedido, true, negocio)
+    end
+    render json: {params: params, mensaje: mensaje_wa_link} and return
+    
   end
 
   def calcular_envio
