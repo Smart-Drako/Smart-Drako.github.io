@@ -187,9 +187,12 @@ class PedidosController < ApplicationController
     
   end
 
-  def calcular_envio
-    origen = params["origen"]
-    destino = params["destino"]
+  def calcular_envio(origen = nil ,destino = nil, local = false)
+    
+    if local == false
+      origen = params["origen"]
+      destino = params["destino"]
+    end
 
     url = URI.parse("https://maps.googleapis.com")
     http = Net::HTTP.new(url.host, url.port)
@@ -204,7 +207,11 @@ class PedidosController < ApplicationController
     distancia_texto = json["routes"][0]["legs"][0]["distance"]["text"]
     reparto = calcular_reparto(distancia_valor)
     
-    render json: {distancia: distancia_valor, distancia_texto: distancia_texto, reparto: reparto} and return
+    if local == true
+      return reparto.to_f
+    else
+      render json: {distancia: distancia_valor, distancia_texto: distancia_texto, reparto: reparto} and return
+    end
   
   end
 
@@ -216,6 +223,15 @@ class PedidosController < ApplicationController
     reparto = params[:reparto].to_f
     productos = JSON.parse(params[:productos])
     if negocio_id.present? && productos.present?
+      
+      empresa  = ConfigUser.find(negocio_id)
+      #Calcular el reparto si el cliente no lo calculo (solo si esta activo y es a domicilio)
+      if empresa.reparto_activo == true && cliente["tipo_envio"] == "A Domicilio" && reparto == 0.0
+        origen = "#{empresa.direccion}, #{empresa.ciudad}"
+        destino = "#{cliente["direccion"]} #{cliente["area"]}, Mexicali"
+        reparto = calcular_envio(origen, destino, true)
+      end
+
       pedido = Pedido.new
       pedido.user_id = negocio_id
       pedido.numero = Pedido.proximo_pedido(negocio_id)
@@ -251,7 +267,6 @@ class PedidosController < ApplicationController
             descontar_inventario(item)
           end
         end
-        empresa  = ConfigUser.find(negocio_id)
         restar_creditos(empresa)
         enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
         render json: {error: false, mensaje: "Pedido procesado correctamente"} and return
