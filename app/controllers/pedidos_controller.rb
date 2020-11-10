@@ -162,7 +162,8 @@ class PedidosController < ApplicationController
       http.use_ssl = true
       #Params api telegram
       bot = "1438829600:AAH_Ugi1iOgjcM1TeGteVzCKfiPI4vwI4kY"
-      chat_id = "466231810"
+      chat_id = "1001235715682" #Prod (superchat pideloencasa)
+      #chat_id = "466231810" #Pruebas
 
       request = Net::HTTP::Get.new("/bot#{bot}/sendMessage?chat_id=-#{chat_id}&text=#{URI.escape(mensaje)}&parse_mode=html")
       request["content-type"] = 'application/json'
