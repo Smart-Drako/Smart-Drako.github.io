@@ -4,7 +4,7 @@
       <img src="<%=@negocio.logo%>" class="img-thumbnail img-fluid">
       <input type="hidden" id="datos_empresa" value="<%=@datos_empresa.to_json%>">
     </div>
-    <div class="col-6 col-md-10 align-self-center">
+    <div class="col-6 col-md-4 align-self-center">
       <h5><%=@negocio.nombre%></h5>
       <p><%=@negocio.direccion%></p>
       <input type="hidden" id="negocio_factura" value="<%=@negocio.factura%>">
@@ -20,6 +20,9 @@
       <div class="row mt-10 d-none d-md-block">
         <a href="#cat-nav" id="ver_prod_web" class="btn btn-pink bg-pica">Realizar Pedido</a>
       </div>
+    </div>
+    <div class="col-12 col-md-6 align-self-center">
+      <p class="text-secondary"><%= @negocio.descripcion %></p>
     </div>
   </div>
   <div class="row">
