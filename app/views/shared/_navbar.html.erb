@@ -38,12 +38,12 @@
   <%end%>
   <div class="form-inline bg-white ml-auto"  id="form-botones">
     <%if user_signed_in?%>
-    <span class="navbar-text text-dark">
-      <strong>Bienvenido <%= "#{current_user.nombre}" %></strong>
-    </span>
-    <%= link_to destroy_user_session_path , :method => :delete, :class => "btn btn-outline-danger my-2 my-sm-0 ml-10" do %>
-      <i class="fas fa-sign-out-alt"></i>
-    <% end %>
+      <span class="navbar-text text-dark">
+        <strong>Bienvenido <%= "#{current_user.nombre}" %></strong>
+      </span>
+      <%= link_to destroy_user_session_path , :method => :delete, :class => "btn btn-outline-danger my-2 my-sm-0 ml-10" do %>
+        <i class="fas fa-sign-out-alt"></i>
+      <% end %>
     <%else%>
     <a data-turbolinks="false" id="btn_login" class="btn btn-outline-pink my-2 my-sm-0 ml-10" href="/login">Inicia
       Sesión</a>
