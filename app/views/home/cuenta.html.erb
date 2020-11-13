@@ -9,7 +9,7 @@
     <div class="col-12 col-lg-12 mb-100">
       <%= form_for @config_user, url: "/config_users/#{@config_user.id}", html: { id: "config_cliente_form", class:"" }, method: :put do |f| %>
         <div class="row mb-4">
-          <h5 class="col-md-12">Datos Generales</h5>
+          <h5 class="col-md-12">Datos Generales <span class="text-danger text-small">(Campos obligatorios *)</span></h5>
 
           <!-- Logo preview and input -->
           <div class="col-12 col-md-6 col-lg-3">
@@ -22,7 +22,7 @@
             </div>
             <div class="row">
               <div class="form-group col-md-12">
-                <label for="logo">Logo</label>
+                <label for="logo">Logo<span class="text-danger">*</span></label>
                 <%= f.file_field :logo, class: "" %>
               </div>
             </div>
@@ -32,17 +32,17 @@
           <div class="col-12 col-md-6 col-lg-4">
             <div class="row">
               <div class="form-group col-md-8">
-                <label for="inputEmail4">Categoría</label>
+                <label for="inputEmail4">Categoría<span class="text-danger">*</span></label>
                 <%= f.select(:category_id, options_from_collection_for_select(@categorias, "id", "name", @config_user.category_id), {:include_blank => 'Seleccionar...'}, :class => 'form-control', ) %>
               </div>
               <div class="form-group col-md-4">
-                <label for="inputPassword4">Vista Cards</label>
+                <label for="inputPassword4">Vista Cards<span class="text-danger">*</span></label>
                 <%= f.select(:vista_card, options_for_select(@vista,@config_user.vista_card), {:include_blank => nil }, :class => 'form-control') %>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-md-12">
-                <label for="inputAddress">Descripción</label>
+                <label for="inputAddress">Descripción<span class="text-danger">*</span></label>
                 <%= f.text_area :descripcion, class:"form-control", maxLength: "100", rows: 5 %>
               </div>
             </div>
@@ -52,17 +52,17 @@
           <div class="col-12 col-md-12 col-lg-5">
             <div class="row">
               <div class="form-group col-md-12">
-                <label for="inputPassword4">Nombre Comercial</label>
+                <label for="inputPassword4">Nombre Comercial<span class="text-danger">*</span></label>
                 <%= f.text_field :nombre, class:"form-control", maxLength: "50" %>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-md-6">
-                <label for="inputCity">Estado</label>
+                <label for="inputCity">Estado<span class="text-danger">*</span></label>
                 <%= f.select(:estado, options_from_collection_for_select(@estados, "estado", "estado", @config_user.estado),{:include_blank => true}, {  :class => "form-control", :required => "required"}) %>
               </div>
               <div class="form-group col-md-6">
-                <label for="inputState">Ciudad</label>
+                <label for="inputState">Ciudad<span class="text-danger">*</span></label>
                 <select name="config_user[ciudad]" id="config_user_ciudad" class="form-control" required>
                   <option value=""></option>
                   <% @ciudades.each do |ci| %>
@@ -73,7 +73,7 @@
             </div>
             <div class="row">
               <div class="form-group col-md-12">
-                <label for="inputAddress2">Dirección</label>
+                <label for="inputAddress2">Dirección<span class="text-danger">*</span></label>
                 <%= f.text_field :direccion, class:"form-control" %>
               </div>
             </div>
@@ -88,7 +88,7 @@
             <%= f.text_field :facebook, class:"form-control" %>
           </div>
           <div class="col-12 col-md-6 col-lg-3 mb-2">
-            <label for="inputZip">Whatsapp <i class="fab fa-whatsapp"></i></label>
+            <label for="inputZip">Whatsapp<span class="text-danger">*</span> <i class="fab fa-whatsapp"></i></label>
             <%= f.text_field :whatsapp, class:"form-control positive-integer", maxLength:"10" %>
           </div>
           <div class="col-12 col-md-6 col-lg-3 mb-2">
@@ -96,7 +96,7 @@
             <%= f.text_field :pagina, class:"form-control" %>
           </div>
           <div class="col-12 col-md-6 col-lg-3 mb-2">
-            <label for="inputZip">Horario <i class="far fa-clock"></i></label>
+            <label for="inputZip">Horario<span class="text-danger">*</span> <i class="far fa-clock"></i></label>
             <%= f.text_field :horario, class:"form-control" %>
           </div>
         </div>
@@ -107,7 +107,7 @@
             <div class="row">
               <h5 class="col-md-12">Medidas de Higiene</h5>
               <div class="form-group col-md-12">
-                <label for="inputZip">Condiciones de Higiene</label>
+                <label for="inputZip">Condiciones de Higiene<span class="text-danger">*</span></label>
                 <%= f.text_area :condiciones_higiene, class:"form-control" %>
               </div>
             </div>
@@ -118,12 +118,12 @@
               <h5 class="col-md-12">Condiciones de Entrega</h5>
 
               <div class="col-md-12 mb-3">
-                <label for="inputZip" class="">Tipo de entrega: </label>
+                <label for="inputZip" class="">Tipo de entrega:<span class="text-danger">*</span> </label>
                 <%= f.select(:tipo_entrega, options_for_select(@tipos_entrega,@config_user.tipo_entrega), {:include_blank => 'Seleccionar...' }, :class => 'form-control') %>
               </div>
 
               <div class="col-md-12">
-                <label for="inputZip">Costo de envío</label>
+                <label for="inputZip">Costo de envío<span class="text-danger">*</span></label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">$</span>
@@ -148,7 +148,7 @@
             <div class="row">
               <h5 class="col-md-12">Condiciones de Compra</h5>
               <div class="col-md-12">
-                <label for="inputZip">Compra mínima</label>
+                <label for="inputZip">Compra mínima<span class="text-danger">*</span></label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">$</span>
@@ -158,7 +158,7 @@
               </div>
 
               <div class="col-md-12 mb-3">
-                <label for="inputZip">Forma de pago</label>
+                <label for="inputZip">Forma de pago<span class="text-danger">*</span></label>
                 <%= f.select(:metodo_pago, options_for_select(@formas_pago,@config_user.metodo_pago), {:include_blank => 'Seleccionar...' }, :class => 'form-control') %>
               </div>
 
