@@ -443,7 +443,8 @@ eventos = ->
     localStorage.removeItem("negocio_anuncio");
     $("#negocio_nombre_carrito").val("")
     $("#notifModal").modal('hide')
-    cargar_productos()
+    # cargar_productos()
+    location.reload()
     
   #Scroolspy y Side cart
   $('[data-toggle="offcanvas"]').on 'click', ->
