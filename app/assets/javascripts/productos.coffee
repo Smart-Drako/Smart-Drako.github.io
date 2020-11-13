@@ -163,6 +163,8 @@ Paloma.controller 'Pedidos', new: ->
 Paloma.controller 'Home', index: ->
   cargar_productos()
   eventos()
+  search = $('#btn_busqueda')
+  search.remove()
   ciudad = $("#ciudad_seleccionada").val()
   if ciudad
     $("#buscar_ciudad_select").val(ciudad)
