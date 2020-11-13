@@ -167,7 +167,7 @@ Paloma.controller 'Home', index: ->
   if ciudad
     $("#buscar_ciudad_select").val(ciudad)
   else
-    if navigator.geolocation
+    if navigator.geolocation and ciudad == ''
       navigator.geolocation.getCurrentPosition (position) ->
         latitude = position.coords.latitude
         longitude = position.coords.longitude
