@@ -19,8 +19,6 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <%if user_signed_in?%>
-    <%end%>
   </div>
   <div class="collapse navbar-collapse bg-white" id="navbarSupportedContent">
     <%if user_signed_in?%>
@@ -47,7 +45,7 @@
         </li>
       </ul>
     <% else %>
-      <ul class="navbar-nav ml-2 mr-2 w-100 justify-content-end">
+      <ul class="navbar-nav ml-2 mr-2 w-100 justify-content-end pr-3">
         <li class="nav-link">
           <%if @ciudades_negocios.present?%>
             <%if !user_signed_in?%>
