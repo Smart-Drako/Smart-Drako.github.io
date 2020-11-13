@@ -1,5 +1,5 @@
 # server-based syntax
-set :branch, 'feature/reparto'
+set :branch, 'hotfix/spooky-bugs'
 # ======================
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
