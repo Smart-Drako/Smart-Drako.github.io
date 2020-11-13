@@ -23,7 +23,7 @@
   </div>
   <%if @ciudades_negocios.present?%>
     <%if !user_signed_in?%>
-    <form class="form-inline">
+    <form class="form-inline" id="city" onsubmit="prevent()">
       <input type="hidden" id="ciudad_seleccionada" value="<%= @ciudad%>">
       <select id="buscar_ciudad_select" class="form-control mr-sm-2">
         <option value="">Elige tu Ciudad</option>

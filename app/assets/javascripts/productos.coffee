@@ -164,7 +164,19 @@ Paloma.controller 'Home', index: ->
   cargar_productos()
   eventos()
   ciudad = $("#ciudad_seleccionada").val()
-  $("#buscar_ciudad_select").val(ciudad)
+  if ciudad
+    $("#buscar_ciudad_select").val(ciudad)
+  else
+    if navigator.geolocation
+      navigator.geolocation.getCurrentPosition (position) ->
+        latitude = position.coords.latitude
+        longitude = position.coords.longitude
+        fetch('https://geocode.xyz/' + latitude + ',' + longitude + '?json=1')
+          .then((response) -> response.json()).then((data) ->
+            city = data.region.split(',')[0]
+            $("#buscar_ciudad_select").val(city)
+            window.location.href = "/?city=#{city}"
+          )
 
 Paloma.controller 'Home', cuenta: ->
 
