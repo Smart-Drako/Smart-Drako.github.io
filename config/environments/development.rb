@@ -60,24 +60,24 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   
   #config mail devise
-  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   #Configuracion Mailer
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = {from: 'no-reply@pideloencasa.mx'}
-
-  config.action_mailer.delivery_method = :smtp
-
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'google.com',
-    user_name:            'pideloencasamx@gmail.com',
-    password:             'pidelo2020',
-    authentication:       'plain',
-    enable_starttls_auto: true
-  }
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.default_options = {from: 'no-reply@pideloencasa.mx'}
+  #
+  # config.action_mailer.delivery_method = :smtp
+  #
+  # config.action_mailer.smtp_settings = {
+  #   address:              'smtp.gmail.com',
+  #   port:                 587,
+  #   domain:               'google.com',
+  #   user_name:            'pideloencasamx@gmail.com',
+  #   password:             'pidelo2020',
+  #   authentication:       'plain',
+  #   enable_starttls_auto: true
+  # }
 
   config.action_mailer.perform_caching = false
 end

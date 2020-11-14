@@ -7,6 +7,8 @@ Paloma.controller 'Productos', tienda: ->
   eventos()
   eventos_negocio()
   eventos_buscador()
+  login = $("#btn_login")
+  login.remove()
 
 Paloma.controller 'Productos', new: ->
   $('#producto_foto').change ->
