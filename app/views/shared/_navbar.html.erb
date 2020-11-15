@@ -8,8 +8,23 @@
       <span class="navbar-text text-dark pr-2">
         <strong>Bienvenido <%= "#{current_user.nombre}" %></strong>
       </span>
+    <% else %>
+      <%if @ciudades_negocios.present?%>
+        <%if !user_signed_in?%>
+          <form class="form-inline" id="city" onsubmit="prevent()">
+            <input type="hidden" id="ciudad_seleccionada" value="<%= @ciudad%>">
+            <select id="buscar_ciudad_select" class="form-control mr-2 mr-sm-2">
+              <option value="">Elige tu Ciudad</option>
+              <% @ciudades_negocios.each do |ci| %>
+                <%if ci.present?%>
+                  <option value="<%=ci%>"><%=ci%></option>
+                <%end%>
+              <%end%>
+            </select>
+          </form>
+        <%end%>
+      <%end%>
     <%end%>
-
     <button data-toggle="offcanvas" title="Ver Pedido" type="button"
       class="btn btn-cart box-shadow-btn my-2 my-sm-0 ml-10 d-none">
       <span class="total-pedido"></span>
@@ -47,21 +62,6 @@
     <% else %>
       <ul class="navbar-nav ml-2 mr-2 w-100 justify-content-end pr-3">
         <li class="nav-link">
-          <%if @ciudades_negocios.present?%>
-            <%if !user_signed_in?%>
-              <form class="form-inline" id="city" onsubmit="prevent()">
-                <input type="hidden" id="ciudad_seleccionada" value="<%= @ciudad%>">
-                <select id="buscar_ciudad_select" class="form-control mr-sm-2">
-                  <option value="">Elige tu Ciudad</option>
-                  <% @ciudades_negocios.each do |ci| %>
-                    <%if ci.present?%>
-                      <option value="<%=ci%>"><%=ci%></option>
-                    <%end%>
-                  <%end%>
-                </select>
-              </form>
-            <%end%>
-          <%end%>
         </li>
         <li class="nav-link">
           <a data-turbolinks="false" id="btn_login" class="btn btn-outline-pink my-2 my-sm-0 ml-10" href="/login">Inicia
