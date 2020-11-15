@@ -226,6 +226,7 @@ class PedidosController < ApplicationController
     if negocio_id.present? && productos.present?
       
       empresa  = ConfigUser.find(negocio_id)
+      render json: {error: true, mensaje: "Ocurrio un error al procesar el pedido"} and return if empresa.pedidos_restantes <= 0
       #Calcular el reparto si el cliente no lo calculo (solo si esta activo y es a domicilio)
       if empresa.reparto_activo == true && cliente["tipo_envio"] == "A Domicilio" && reparto == 0.0
         origen = "#{empresa.direccion}, #{empresa.ciudad}"
