@@ -11,6 +11,8 @@ Paloma.controller 'Productos', tienda: ->
   login.remove()
 
 Paloma.controller 'Productos', new: ->
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+  $("#btn-cart_float").removeClass("d-md-block")
   $('#producto_foto').change ->
     console.log "Select foto new"
     readURL this
@@ -19,6 +21,8 @@ Paloma.controller 'Productos', new: ->
     negative: false
 
 Paloma.controller 'Productos', edit: ->
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+  $("#btn-cart_float").removeClass("d-md-block")
   $('#producto_foto').change ->
     console.log "Select foto edit"
     readURL this
@@ -49,6 +53,8 @@ Paloma.controller 'Productos', index: ->
       $("#btn_importar").prop("disabled",true)
 
 Paloma.controller 'Pedidos', show: ->
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+  $("#btn-cart_float").removeClass("d-md-block")
   $("#nav-link-pedidos").addClass("active")
   $(".carbar").removeClass("d-block").hide()
   $("#texto_wa").keyup (e)->
@@ -200,10 +206,15 @@ Paloma.controller 'Home', plan: ->
   $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
 
 Paloma.controller 'Devise/Sessions', new: ->
+  $("#btn_login").removeClass("d-lg-block").hide()
   $("#btn-cart_float").removeClass("d-md-block")
   $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
 
 Paloma.controller 'Devise/Registrations', new: ->
+  $("#btn_login").removeClass("d-lg-block").hide()
+  $('.positive-integer').numeric
+    decimal: false
+    negative: false
   $("#btn-cart_float").removeClass("d-md-block")
   $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
 

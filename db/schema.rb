@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_04_205142) do
+ActiveRecord::Schema.define(version: 2020_11_17_061450) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2020_11_04_205142) do
     t.string "logo"
     t.boolean "activo", default: true
     t.string "slug"
+    t.boolean "tipo_card", default: false
     t.boolean "vista_card", default: false, null: false
     t.integer "estatus"
     t.datetime "fecha_registro"
@@ -110,6 +111,14 @@ ActiveRecord::Schema.define(version: 2020_11_04_205142) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "producto_fotos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "producto_id"
+    t.string "imagen"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["producto_id"], name: "index_producto_fotos_on_producto_id"
+  end
+
   create_table "producto_pedidos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "pedido_id"
     t.integer "producto_id"
@@ -155,10 +164,12 @@ ActiveRecord::Schema.define(version: 2020_11_04_205142) do
     t.datetime "remember_created_at"
     t.string "nombre"
     t.string "apellido"
+    t.string "telefono"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["telefono"], name: "index_users_on_telefono", unique: true
   end
 
 end
