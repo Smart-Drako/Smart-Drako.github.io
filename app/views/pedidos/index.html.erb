@@ -4,7 +4,7 @@
       <%= @vencimiento %>
     </div>
   <%end%>
-  <%if @pedidos_restantes.present? && @pedidos_restantes < 30 %>
+  <%if @pedidos_restantes.present? && @pedidos_restantes < 30 && @usuario.estatus == 1%>
     <div class="alert alert-warning" role="alert">
         Número de pedidos restantes: <b><%= @pedidos_restantes %></b>
     </div>

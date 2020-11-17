@@ -3,10 +3,10 @@ class PedidosController < ApplicationController
   include ActionView::Helpers::NumberHelper
   def index
     @page_title = "Pedidos"
-    usuario = ConfigUser.find_by(user_id: current_user.id)
-    @pedidos = Pedido.where(user_id: usuario.id).order(id: :desc)
-    @vencimiento = vencimiento_cuenta(usuario)
-    @pedidos_restantes = usuario.pedidos_restantes
+    @usuario = ConfigUser.find_by(user_id: current_user.id)
+    @pedidos = Pedido.where(user_id: @usuario.id).order(id: :desc)
+    @vencimiento = vencimiento_cuenta(@usuario)
+    @pedidos_restantes = @usuario.pedidos_restantes
     @suspendida = cuenta_suspendida()
     @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
   end
