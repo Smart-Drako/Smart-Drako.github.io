@@ -82,6 +82,7 @@ class HomeController < ApplicationController
   def cuenta
     @page_title = "Configuración"
     @config_user = ConfigUser.find_or_create_by(user_id: current_user.id)
+    @vencimiento = vencimiento_cuenta(@config_user)
     @categorias = Category.all.order("name")
     @link_recomendado = generar_link_recomendado(@config_user)
     @link_compartir = generar_link_compartir(@config_user)

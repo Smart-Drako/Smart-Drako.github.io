@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
     hoy = Time.now.to_date
     dias_restantes = (fecha_vence - hoy).to_i
     if dias_restantes <= 0
+      user.estatus = 2
+      user.save
       vencimiento = "Hola, tu cuenta está Suspendida. Favor de realizar tu pago para que sigas recibiendo pedidos en línea."
     elsif dias_restantes < 16
       vencimiento = "Aviso, tu cuenta vence en #{dias_restantes} día(s)."
