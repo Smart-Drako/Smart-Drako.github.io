@@ -122,6 +122,13 @@
                 <%= f.select(:tipo_entrega, options_for_select(@tipos_entrega,@config_user.tipo_entrega), {:include_blank => 'Seleccionar...' }, :class => 'form-control') %>
               </div>
 
+              <%if @config_user.ciudad == "Mexicali" && @config_user.reparto_activo == true%>
+              <div class="form-group col-md-12">
+                <label for="inputZip">Proveedor envío a domicilio</label>
+                <%= f.select(:reparto, options_for_select(@repartos,@config_user.reparto), {:include_blank => '' }, :class => 'form-control') %>
+              </div>
+              <%end%>
+
               <div class="col-md-12">
                 <label for="inputZip">Costo de envío<span class="text-danger">*</span></label>
                 <div class="input-group mb-3">
@@ -184,19 +191,6 @@
             </div>
           </div>
         </div>
-
-      <div class="form-row">
-        <div class="col-md-6">
-          <div class="form-row">
-            <%if @config_user.ciudad == "Mexicali" && @config_user.reparto_activo == true%>
-              <div class="form-group col-md-4">
-                <label for="inputZip">Proveedor envío a domicilio</label>
-                <%= f.select(:reparto, options_for_select(@repartos,@config_user.reparto), {:include_blank => '' }, :class => 'form-control') %>
-              </div>
-            <%end%>
-          </div>
-        </div>
-      </div>
 
       <div class="text-center form-group">
         <button class="btn btn-success btn-lg" type="submit">Actualizar</button>
