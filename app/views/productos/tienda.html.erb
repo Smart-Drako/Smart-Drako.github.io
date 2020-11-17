@@ -211,7 +211,7 @@
                   <div class="row">
                     <div class="col-9 col-md-9" style="padding-right:0px;">
                       <%if prod.inventario.present? && prod.inventario.to_i == 0%>
-                      <button type="button" disabled class="btn btn-sm btn-secondary agotado btn-block">Agotado</button>
+                        <button type="button" disabled class="btn btn-sm btn-secondary agotado btn-block">Agotado</button>
                       <%else%>
                         <% if @negocio.pedidos_restantes > 0 %>
                           <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>"
@@ -291,11 +291,11 @@
                   <p class="card-text"><%=prod.descripcion2.titleize%></p>
                   <div class="card-text text-center">
                   <%if prod.inventario.present? && prod.inventario.to_i == 0%>
-                      <button type="button" disabled class="btn btn-sm btn-secondary agotado">Agotado</button>
-                    <%else%>
+                    <button type="button" disabled class="btn btn-sm btn-secondary agotado">Agotado</button>
+                  <%else%>
                       <% if @negocio.pedidos_restantes > 0 %>
                         <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>"
-                                data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>"
+                                data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-inventario="<%=prod.inventario%>" data-nombre="<%=prod.descripcion%>"
                                 class="btn btn-sm btn-aqua btn-cart-item">Agregar</button>
                       <% end %>
                   <%end%>

@@ -387,6 +387,27 @@ cantidad_producto = (id, valor) ->
   cantidad = null
   productos.forEach (prod) ->
     if prod.id == id
+      if valor > prod.inventario && prod.inventario != null
+        cantidad = prod.cantidad
+        toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": true,
+          "positionClass": "toast-top-center",
+          "preventDuplicates": true,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": "3000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
+        toastr.warning("Solo hay #{prod.inventario} disponibles")
+        return false
       prod.cantidad = parseFloat(valor).round(2)
       prod.subtotal = parseFloat(prod.cantidad * prod.precio)
       total_pedido = parseFloat(total_pedido + prod.precio)
@@ -410,6 +431,27 @@ sumar_restar_producto = (id, sumar) ->
   productos.forEach (prod) ->
     if prod.id == id
       if sumar == true
+        if prod.cantidad == prod.inventario
+          cantidad = prod.cantidad
+          toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+          }
+          toastr.warning("Solo hay #{prod.inventario} disponibles")
+          return false
         prod.cantidad = parseFloat(prod.cantidad + 1).round(2)
       else
         prod.cantidad = parseFloat(prod.cantidad - 1).round(2)
@@ -553,6 +595,7 @@ agregar_producto = (producto) ->
   unidad = producto.data("unidad")
   productos = JSON.parse(localStorage.getItem("productos") || "[]")
   total_pedido = parseFloat(localStorage.getItem("total_pedido") || 0 )
+  inventario = parseInt(producto.data("inventario")) || null
 
   if productos.length == 0 
     total_pedido = precio
@@ -565,7 +608,7 @@ agregar_producto = (producto) ->
       precio_format = "#{number_to_currency(precio)}/"
       subtotal_format = number_to_currency(precio)
 
-    productos.push({id: id, nombre: nombre, precio: precio, unidad: unidad, cantidad: 1 , subtotal: precio, precio_string: precio_format, subtotal_string: subtotal_format})
+    productos.push({id: id, nombre: nombre, precio: precio, unidad: unidad, cantidad: 1, inventario: inventario, subtotal: precio, precio_string: precio_format, subtotal_string: subtotal_format})
   else
     existe = false
     productos.forEach (prod) ->
@@ -585,7 +628,7 @@ agregar_producto = (producto) ->
       else
         precio_format = "#{number_to_currency(precio)}/"
         subtotal_format = number_to_currency(precio)
-      productos.push({id: id, nombre: nombre, precio: precio, unidad: unidad, cantidad: 1 , subtotal: precio, precio_string: precio_format, subtotal_string: subtotal_format})
+      productos.push({id: id, nombre: nombre, precio: precio, unidad: unidad, cantidad: 1, inventario: inventario, subtotal: precio, precio_string: precio_format, subtotal_string: subtotal_format})
       total_pedido = parseFloat(total_pedido + precio)
   localStorage.setItem("total_pedido", total_pedido)
   localStorage.setItem("negocio_id", negocio)
