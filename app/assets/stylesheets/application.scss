@@ -300,7 +300,7 @@ li.ilb {
   margin: auto;
 }
 
-.card {
+.card-rounded{
   border-radius: 1rem !important;
 }
 
@@ -498,8 +498,13 @@ body {
 }
 
 .btn-aqua {
-  background-color: #3E0F49 !important;
+  background-color: #3caaee !important;
   color: #ffffff;
+}
+
+.btn-aqua:hover {
+  background-color: #4966a8 !important;
+  color: #ffffff !important;
 }
 
 .btn-pink:hover {
