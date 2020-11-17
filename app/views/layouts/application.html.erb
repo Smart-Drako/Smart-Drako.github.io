@@ -18,7 +18,11 @@
                    src="https://www.facebook.com/tr?id=693734871554498&ev=PageView&noscript=1"
       /></noscript>
     <!-- End Facebook Pixel Code -->
-    <title>Pidelo en Casa</title>
+    <%if @page_title.present?%>
+      <title>Pidelo en Casa | <%=@page_title%></title>
+    <%else%>
+      <title>Pidelo en Casa</title>
+    <%end%>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

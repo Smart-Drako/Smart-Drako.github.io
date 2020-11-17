@@ -5,6 +5,7 @@ class ProductosController < ApplicationController
   # GET /productos
   # GET /productos.json
   def index
+    @page_title = "Productos"
     @productos = Producto.where(user_id: current_user.id).order(categoria: :asc, descripcion: :asc)
   end
   
@@ -46,6 +47,7 @@ class ProductosController < ApplicationController
 
   # GET /productos/1/edit
   def edit
+    @page_title = "Editar #{@producto.descripcion}"
   end
 
   def tienda
@@ -63,6 +65,8 @@ class ProductosController < ApplicationController
 
     redirect_to '/' and return if @negocio.nil?
     redirect_to '/' and return if @negocio.activo == 0
+
+    @page_title = "#{@negocio.nombre}"
 
     @tags = {
       title: @negocio.nombre,

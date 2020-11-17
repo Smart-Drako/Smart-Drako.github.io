@@ -2,6 +2,7 @@ class PedidosController < ApplicationController
   before_action :authenticate_user!, :except => [:generar, :new, :ver_pedido, :calcular_envio]
   include ActionView::Helpers::NumberHelper
   def index
+    @page_title = "Pedidos"
     usuario = ConfigUser.find_by(user_id: current_user.id)
     @pedidos = Pedido.where(user_id: usuario.id).order(id: :desc)
     @vencimiento = vencimiento_cuenta(usuario)
@@ -43,6 +44,7 @@ class PedidosController < ApplicationController
     end
     @pedido = Pedido.find_by(id: id)
     if @pedido.present?
+      @page_title = "Pedido ##{@pedido.numero.to_s.rjust(4, "0")}"
       @productos = ProductoPedido.where(pedido_id: @pedido.id)
       @negocio = ConfigUser.find(@pedido.user_id)
       redirect_to pedidos_path and return if @pedido.user_id != @negocio.id

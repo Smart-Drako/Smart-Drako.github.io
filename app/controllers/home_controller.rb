@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 
   def index
 
-
+    @page_title = "Inicio"
     usuario = ConfigUser.find_by(user_id: current_user.id) if current_user.present?
 
     if usuario.present? && usuario.admin == true
@@ -80,6 +80,7 @@ class HomeController < ApplicationController
   end
 
   def cuenta
+    @page_title = "Configuración"
     @config_user = ConfigUser.find_or_create_by(user_id: current_user.id)
     @categorias = Category.all.order("name")
     @link_recomendado = generar_link_recomendado(@config_user)
@@ -95,6 +96,7 @@ class HomeController < ApplicationController
   end
 
   def plan
+    @page_title = "Mi Plan"
     @config_user = ConfigUser.find_by(user_id: current_user.id)
     @suspendida = cuenta_suspendida()
     if @config_user.present?
