@@ -14,6 +14,12 @@ class PedidoMailer < ApplicationMailer
       else
         @link = "https://pideloencasa.mx/ver_pedido/#{b64_id}"
       end
+    elsif Rails.env.staging?
+      if vendedor == true
+        @link = "https://staging.pideloencasa.mx/pedido/#{pedido.id}"
+      else
+        @link = "https://staging.pideloencasa.mx/ver_pedido/#{b64_id}"
+      end
     else
       if vendedor == true
         @link = "http://localhost:3000/pedido/#{pedido.id}"
