@@ -394,6 +394,7 @@ li.ilb {
 body {
   font-family: "Roboto";
   background-color: #eeeeee;
+  color: #3E0F49;
 }
 
 @media (min-width: 1200px) {
@@ -463,11 +464,11 @@ body {
 .btn-pink-alt {
   background-color: #ef2275 !important;
   color: #ffffff;
-  background: #ec008c;
+  background: #FF6C1A;
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #fc6767, #ec008c);
+  background: -webkit-linear-gradient(to right, #FF1749, #FF6C1A);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #fc6767, #ec008c);
+  background: linear-gradient(to right, #FF1749, #FF6C1A);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -493,7 +494,7 @@ body {
 }
 
 .btn-aqua {
-  background-color: #1ad4d8 !important;
+  background-color: #3E0F49 !important;
   color: #ffffff;
 }
 
@@ -693,7 +694,7 @@ input[type="number"] {
 .btn-wa:focus,
 .btn-wa:active {
   text-decoration: none;
-  color: #00bb2d;
+  color: #3E0F49;
   margin-right: 5px;
 }
 
@@ -702,7 +703,7 @@ input[type="number"] {
 .btn-fb:focus,
 .btn-fb:active {
   text-decoration: none;
-  color: #3b5998;
+  color: #3E0F49;
   margin-right: 5px;
 }
 
@@ -711,7 +712,7 @@ input[type="number"] {
 .btn-ph:focus,
 .btn-ph:active {
   text-decoration: none;
-  color: #e91e63;
+  color: #3E0F49;
 }
 
 .pl-0 {
@@ -724,7 +725,7 @@ input[type="number"] {
 
 #ver_prod_movil {
   width: 100%;
-  background: linear-gradient(90deg, #C4C4C4 -45%, #FFA450 -44.99%, #EC2976 98.97%);
+  background: linear-gradient(90deg, rgba(255, 22, 72, 0.9) 0%, rgba(255, 108, 26, 0.9) 100%);
 }
 
 #info_proveedor {
@@ -794,12 +795,9 @@ div.pedido {
 }
 
 li.nav-item.active {
-  background: #ec008c;
+  background: #FF6C1A;
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #fc6767, #ec008c);
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #fc6767, #ec008c);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(90deg, rgba(255, 22, 72, 0.9) 0%, rgba(255, 108, 26, 0.9) 100%);
 
   color: #fff !important;
   border-radius: 5px;
@@ -991,7 +989,7 @@ li.nav-item.active>.nav-link {
 }
 
 .bg-pica {
-  background: linear-gradient(90deg, #C4C4C4 -45%, #FFA450 -44.99%, #EC2976 98.97%);
+  background: linear-gradient(90deg, rgba(255, 22, 72, 0.9) 0%, rgba(255, 108, 26, 0.9) 100%);
 }
 
 .carrito_mini {
@@ -1062,8 +1060,8 @@ li.nav-item.active>.nav-link {
 
 @media only screen and (max-width: 600px) {
   .logo-nav {
-    width: 60px;
-    height: 25px;
+    width: 91px;
+    height: 30px;
   }
 
   #btn_login {
