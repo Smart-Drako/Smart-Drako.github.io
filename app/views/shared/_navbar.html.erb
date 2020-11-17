@@ -30,10 +30,13 @@
       <span class="total-pedido"></span>
       <i class="fas fa-shopping-cart"></i> <span class="badge btn-pink total-items">0</span>
     </button>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <% if @ocultar_menu.present? && @ocultar_menu == true%>
+      <%else%>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <%end%>
   </div>
   <div class="collapse navbar-collapse bg-white" id="navbarSupportedContent">
     <%if user_signed_in?%>
@@ -60,14 +63,17 @@
         </li>
       </ul>
     <% else %>
-      <ul class="navbar-nav ml-2 mr-2 w-100 justify-content-end pr-3">
-        <li class="nav-link">
-          <a data-turbolinks="false" id="btn_login" class="btn btn-outline-pink my-2 my-sm-0 ml-10 d-none d-lg-block" href="/login">Inicia
-            Sesión</a>
-          <a data-turbolinks="false" id="btn_login" class="nav-link my-2 my-sm-0 ml-10 d-block d-lg-none" href="/login">Inicia
-            Sesión</a>
-        </li>
-      </ul>
+      <% if @ocultar_menu.present? && @ocultar_menu == true%>
+      <%else%>
+        <ul class="navbar-nav ml-2 mr-2 w-100 justify-content-end pr-3">
+          <li class="nav-link">
+            <a data-turbolinks="false" id="btn_login" class="btn btn-outline-pink my-2 my-sm-0 ml-10 d-none d-lg-block" href="/login">Inicia
+              Sesión</a>
+            <a data-turbolinks="false" id="btn_login" class="nav-link my-2 my-sm-0 ml-10 d-block d-lg-none" href="/login">Inicia
+              Sesión</a>
+          </li>
+        </ul>
+      <%end%>
     <%end%>
   </div>
 </nav>

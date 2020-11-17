@@ -11,6 +11,7 @@ class PedidosController < ApplicationController
   end
 
   def new
+    @ocultar_menu = true
   end
 
   def actualizar_estatus

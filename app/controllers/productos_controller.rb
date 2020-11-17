@@ -49,6 +49,7 @@ class ProductosController < ApplicationController
   end
 
   def tienda
+    @ocultar_menu = true
     id = params[:id].to_i
     slug = params[:id]
     #Buscar por slug unico
