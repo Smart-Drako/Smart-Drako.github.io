@@ -173,7 +173,7 @@
     <% @categorias.each_with_index do |cat,i|%>
     <li class="nav-item ilb">
       <a data-turbolinks="false" class="<%=i == 0 ? 'nav-link active' : 'nav-link' %>"
-        href="#cat_<%= I18n.transliterate(cat).delete(' ') %>"><%= cat.upcase %></a>
+        href="#cat_<%= I18n.transliterate(cat).delete(' ').remove(".") %>"><%= cat.upcase %></a>
     </li>
     <%end%>
   </ul>
@@ -181,7 +181,7 @@
 
 <% @prods.each do |cat|%>
   <%if @negocio.vista_card == false%>
-    <div class="container cont-cat div-cat" id="cat_<%=I18n.transliterate(cat[:id]).delete(' ')%>">
+    <div class="container cont-cat div-cat" id="cat_<%=I18n.transliterate(cat[:id]).delete(' ').remove(".")%>">
       <h4><%= cat[:nombre].capitalize%></h4>
       <% cat[:productos].each do |prod|%>
           <div class="lista-item row borders-item <%= prod.inventario.present? && prod.inventario.to_i == 0 ? "agotado" : ""%>">
@@ -246,7 +246,7 @@
       <%end%>
     </div>
   <%else%>
-      <div class="container cont-cat div-cat" id="cat_<%=I18n.transliterate(cat[:id]).delete(' ')%>">
+      <div class="container cont-cat div-cat" id="cat_<%=I18n.transliterate(cat[:id]).delete(' ').remove(".")%>">
         <h3><%= cat[:nombre].capitalize%></h3>
         <hr>
         <div class="row">
