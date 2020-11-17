@@ -10,13 +10,13 @@ class PedidoMailer < ApplicationMailer
     b64_id = Base64.encode64("#{pedido.id}-pideloencasa.mx")
     if Rails.env.production?
       if vendedor == true
-        @link = "https://pideloencasa.mx/pedido/#{b64_id}"
+        @link = "https://pideloencasa.mx/pedido/#{pedido.id}"
       else
-        @link = "https://pideloencasa.mx/ver_pedido/#{pedido.id}"
+        @link = "https://pideloencasa.mx/ver_pedido/#{b64_id}"
       end
     else
       if vendedor == true
-        @link = "http://localhost:3000/pedido/#{b64_id}"
+        @link = "http://localhost:3000/pedido/#{pedido.id}"
       else
         @link = "http://localhost:3000/ver_pedido/#{b64_id}"
       end
