@@ -81,14 +81,16 @@
 
         <div class="row">
 
-          <div class="col-12 mt-20 d-none">
+          <div class="col-12 mt-20">
             <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 1%>
             <div class="col-12">
               <div class="row">
                 <div class="col-12 align-self-center text-center">
                   <h5 class="mb-0">Entrega a domicilio <i class="fas fa-car-side fa-xs color-pink"></i></h5>
+                  <% if @negocio.costo_envio.present?%>
                   <h6 class="mb-0" style="color:#333"> Costo de envío:
                     <%= number_to_currency(@negocio.costo_envio, :precision => 2) %></h6>
+                  <%end%>
                 </div>
               </div>
             </div>
