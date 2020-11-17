@@ -135,6 +135,7 @@ class PedidosController < ApplicationController
   end
 
   def ver_pedido
+    @ocultar_menu = true
     id = Base64.decode64(params[:id]).to_i
     @pedido = Pedido.find_by(id: id)
     if @pedido.present?

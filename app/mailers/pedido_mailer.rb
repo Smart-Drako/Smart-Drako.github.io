@@ -5,15 +5,23 @@ class PedidoMailer < ApplicationMailer
     @info_empresa = empresa
     @pedido = pedido
     usuario = User.find(empresa.user_id)
+    @es_proveedor = vendedor
 
     b64_id = Base64.encode64("#{pedido.id}-pideloencasa.mx")
     if Rails.env.production?
-      @link = "https://pideloencasa.mx/ver_pedido/#{b64_id}"
+      if vendedor == true
+        @link = "https://pideloencasa.mx/pedido/#{b64_id}"
+      else
+        @link = "https://pideloencasa.mx/ver_pedido/#{pedido.id}"
+      end
     else
-      @link = "http://localhost:3000/ver_pedido/#{b64_id}"
+      if vendedor == true
+        @link = "http://localhost:3000/pedido/#{b64_id}"
+      else
+        @link = "http://localhost:3000/ver_pedido/#{b64_id}"
+      end
     end
     
-    @es_proveedor = vendedor
     if vendedor == true
       @destinatario_mensaje = "Tienes un nuevo pedido."
       @destinatario_nombre = @empresa
