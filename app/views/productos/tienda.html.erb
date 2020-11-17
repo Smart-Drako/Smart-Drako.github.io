@@ -146,15 +146,15 @@
           <p class="mb-0">Métodos de pago aceptados:</p>
           <ul style="list-style-type: none;">
             <% if @negocio.metodo_pago.to_i == 3%>
-            <li>Efectivo <i class="fas fa-money-bill color-wa"></i></li>
-            <li>Tarjeta <i class="far fa-credit-card color-pink"></i></li>
+            <li>Efectivo <img src="/images/icono_money.png" alt=""></li>
+            <li>Tarjeta <img src="/images/icono_card.png" alt=""></li>
             <%elsif @negocio.metodo_pago.to_i == 2%>
-            <li>Tarjeta <i class="far fa-credit-card color-pink"></i></li>
+            <li>Tarjeta <img src="/images/icono_card.png" alt=""></li>
             <%else%>
-            <li>Efectivo <i class="fas fa-money-bill color-wa"></i></li>
+            <li>Efectivo <img src="/images/icono_money.png" alt=""></li>
             <%end%>
             <% if @negocio.beneficiario.present? && @negocio.cuenta.present? && @negocio.banco.present?%>
-            <li>Transferencia <i class="fas fa-wallet color-wa"></i></li>
+            <li>Transferencia <img src="/images/icono_transfer.png" alt=""></li>
             <%end%>
           </ul>
           <% if @negocio.factura == "Si"%>
