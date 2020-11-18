@@ -82,7 +82,7 @@
               <div class="input-group-prepend">
                 <div class="input-group-text">$</div>
               </div>
-              <input id="cliente_paga_con" name="paga_con" type="text" class="form-control positive-integer" maxLength="5" id="inlineFormInputGroup">
+              <input id="cliente_paga_con" name="paga_con" type="number" class="form-control positive-integer" maxLength="5" onKeyPress="if(this.value.length==5) return false;" id="inlineFormInputGroup">
             </div>
           </div>
           <div class="col-md-4 mb-3">
