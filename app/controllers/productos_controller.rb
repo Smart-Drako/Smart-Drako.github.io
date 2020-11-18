@@ -63,6 +63,8 @@ class ProductosController < ApplicationController
       @productos = Producto.where(user_id: @negocio.user_id).order('categoria, descripcion') if @negocio.present?
     end
 
+    vencimiento = vencimiento_cuenta(@negocio) if @negocio.present?
+
     redirect_to '/' and return if @negocio.nil?
     redirect_to '/' and return if @negocio.activo == 0
 
