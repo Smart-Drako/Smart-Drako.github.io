@@ -149,7 +149,8 @@ Paloma.controller 'Pedidos', new: ->
   $('.positive-integer').keyup (e) ->
     max = $(this).attr('maxlength')
     if $(this).val().length > max
-      $(this).val = $(this).val().substr(0, max)
+      console.log "se pasa"
+      $(this).val $(this).val().substr(0, max)
     return
 
   productos = JSON.parse(localStorage.getItem("productos") || "[]")

@@ -39,7 +39,7 @@
           </div>
           <div class="col-md-6 mb-3">
             <label for="cliente_telefono">Número Celular <span class="required"><i class="fas fa-asterisk fa-xs"></i></span></label>
-            <input type="number" class="form-control positive-integer" id="cliente_telefono" name="telefono" onKeyPress="if(this.value.length==10) return false;" required>
+            <input type="number" class="form-control positive-integer" id="cliente_telefono" name="telefono" maxLength="10" onKeyPress="if(this.value.length==10) return false;" required>
           </div>
         </div>
 
