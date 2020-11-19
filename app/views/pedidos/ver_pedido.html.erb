@@ -104,6 +104,18 @@
                   <td class="text-right ped-total"><%= number_to_currency((@pedido.total.to_f+@pedido.reparto.to_f), :precision => 2) %></td>
                 </tr>
                 <%end%>
+                <%if @pedido.envio.present? && @pedido.envio.to_f > 0%>
+                  <tr>
+                    <td colspan="3"></td>
+                    <td class="text-right ped-total"><strong>Envío:</strong></td>
+                    <td class="text-right ped-total"><%= number_to_currency(@pedido.envio, :precision => 2) %></td>
+                  </tr>
+                  <tr>
+                    <td colspan="3"></td>
+                    <td class="text-right ped-total"><strong>Gran Total:</strong></td>
+                    <td class="text-right ped-total"><%= number_to_currency((@pedido.total.to_f+@pedido.envio.to_f), :precision => 2) %></td>
+                  </tr>
+                <%end%>
               </tfoot>
             </table>
           </div>

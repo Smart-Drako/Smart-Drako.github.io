@@ -94,7 +94,7 @@ Paloma.controller 'Pedidos', new: ->
 
   $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
 
-  $("#totales_reparto").hide()
+  $("#totales_reparto, #totales_envio").hide()
 
   datos_empresa = JSON.parse(localStorage.getItem("datos_empresa"))
   if datos_empresa == null
@@ -105,8 +105,13 @@ Paloma.controller 'Pedidos', new: ->
     metodo_pago = parseInt(datos_empresa.metodo_pago)
     if reparto == true && (tipo_envio == 1 || tipo_envio == 3) #1=domicilio 2=recoger 3=domicilio  yrecoger  
       $(".btn-calcular-envio").show()
+      quitar_envio()
     else
       $(".btn-calcular-envio").hide()
+      #Si NO es zas y tiene envio a domicilio, calcular envio
+      if $("#cliente_tipo_envio").val() == "A Domicilio"
+        agregar_envio()
+    
     if tipo_envio == 1
       $("#cliente_tipo_envio option[value='Para Recoger']").hide()
       $("#cliente_tipo_envio").val("A Domicilio")
@@ -119,19 +124,22 @@ Paloma.controller 'Pedidos', new: ->
     if metodo_pago == 2
       $("#cliente_tipo_envio option[value='Efectivo']").hide().blur()
       $("#cliente_pago").val("Tarjeta")
-  
-
-
+    
   $(".btn-calcular-envio").unbind("click").click ->
     calcular_envio()
-
+  
   $("#cliente_tipo_envio").change ->
     if $(this).val() == "A Domicilio"
       datos_empresa = JSON.parse(localStorage.getItem("datos_empresa"))
       if datos_empresa.reparto == true
         calcular_envio()
+        quitar_envio()
+      else
+        if datos_empresa.envio > 0
+          agregar_envio()
     else
       cancelar_envio()
+      quitar_envio()
 
   negocio_factura = localStorage.getItem("negocio_factura")
   negocio_anuncio = localStorage.getItem("negocio_anuncio")
@@ -651,10 +659,11 @@ procesar_pedido = ->
   total= localStorage.getItem("total_pedido") || 0
   reparto= localStorage.getItem("reparto") || 0
   cliente = JSON.stringify( objectifyForm($("#datos_cliente_form").serializeArray()) )
+  envio = localStorage.getItem("envio") || 0
   $.ajax
     type: 'POST'
     url: '/generar_pedido'
-    data: { negocio_id: negocio_id, productos: productos, total: total, cliente: cliente, reparto: reparto } 
+    data: { negocio_id: negocio_id, productos: productos, total: total, cliente: cliente, reparto: reparto, envio: envio } 
     dataType: 'json'
     beforeSend: ->
       console.log "Generando pedido"
@@ -800,3 +809,16 @@ cancelar_envio = ->
   localStorage.setItem("reparto", 0)
   localStorage.setItem("reparto_distancia", 0)
 
+agregar_envio = ->
+  empresa = JSON.parse(localStorage.getItem("datos_empresa"))
+  if empresa.envio > 0
+    $("#totales_envio").show()
+    total_pedido = parseFloat(localStorage.getItem("total_pedido"))
+    total_final = total_pedido + empresa.envio
+    localStorage.setItem("envio", empresa.envio);
+    $(".total-reparto").text("+ " + number_to_currency(empresa.envio))
+    $(".total-final").text(number_to_currency(total_final))
+
+quitar_envio = ->
+  $("#totales_envio").hide()
+  localStorage.setItem("envio", 0)

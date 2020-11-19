@@ -82,7 +82,8 @@ class ProductosController < ApplicationController
       reparto: reparto,
       direccion: direccion,
       metodo_pago: @negocio.metodo_pago,
-      tipo_envio: @negocio.tipo_entrega
+      tipo_envio: @negocio.tipo_entrega,
+      envio: @negocio.costo_envio.to_i
     }
 
     @prods = Array.new

@@ -226,13 +226,14 @@ class PedidosController < ApplicationController
     negocio_id = params[:negocio_id].to_i
     total = params[:total].to_f
     reparto = params[:reparto].to_f
+    envio = params[:envio].to_f
     productos = JSON.parse(params[:productos])
     if negocio_id.present? && productos.present?
       
       empresa  = ConfigUser.find(negocio_id)
       render json: {error: true, mensaje: "Ocurrio un error al procesar el pedido"} and return if empresa.pedidos_restantes <= 0
       #Calcular el reparto si el cliente no lo calculo (solo si esta activo y es a domicilio)
-      if empresa.reparto_activo == true && cliente["tipo_envio"] == "A Domicilio" && reparto == 0.0
+      if empresa.reparto_activo == true && cliente["tipo_envio"] == "A Domicilio" && reparto == 0.0 && envio == 0.0
         origen = "#{empresa.direccion}, #{empresa.ciudad}"
         destino = "#{cliente["direccion"]} #{cliente["area"]}, Mexicali"
         reparto = calcular_envio(origen, destino, true)
@@ -258,6 +259,7 @@ class PedidosController < ApplicationController
       pedido.comentario = cliente["comentario"] if cliente["comentario"].present?
       pedido.pago_con = cliente["paga_con"] if cliente["paga_con"].present?
       pedido.reparto = reparto if (reparto.present? && reparto > 0)
+      pedido.envio = envio if (envio.present? && envio > 0)
 
       if pedido.save
         productos.each do |p|
