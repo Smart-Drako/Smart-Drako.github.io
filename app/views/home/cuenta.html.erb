@@ -147,12 +147,12 @@
               </div>
 
               <div class="col-md-12 mb-3">
-                <label for="inputZip">Aviso para clientes <span data-toggle="popover" title="Aviso clientes" data-html="true" data-content="Muestra algún mensaje a tus clientes PREVIO a que te hagan un pedido. Este lo puedes estar cambiando constantemente según lo requieras." data-trigger="hover"><i class="fas fa-question-circle"></i></span></label>
+                <label for="inputZip">Aviso para clientes <span data-toggle="popover" title="Aviso clientes" data-html="true" data-content="Muestra algún mensaje a tus clientes PREVIO a que te hagan un pedido. Este lo puedes estar cambiando constantemente según lo requieras." data-trigger="focus"><i class="fas fa-question-circle"></i></span></label>
                 <%= f.text_area :aviso, class:"form-control", placeholder:"Ejemplo: \"Las órdenes se entregarán el día de mañana.\"" %>
               </div>
 
               <div class="col-md-12">
-                <label for="inputZip">Comentarios en pedidos <span data-toggle="popover" title="Comentarios pedidos" data-html="true" data-content="Muestra algún mensaje que quieras incluir en la vista o PDF del pedido, DESPUÉS de que te hagan un pedido." data-trigger="hover"><i class="fas fa-question-circle"></i></span></label>
+                <label for="inputZip">Comentarios en pedidos <span data-toggle="popover" title="Comentarios pedidos" data-html="true" data-content="Muestra algún mensaje que quieras incluir en la vista o PDF del pedido, DESPUÉS de que te hagan un pedido." data-trigger="focus"><i class="fas fa-question-circle"></i></span></label>
                 <%= f.text_area :comentario, class:"form-control", placeholder: "Ejemplo: \"Precios sujetos a cambios sin previo aviso.\"" %>
               </div>
             </div>
@@ -208,12 +208,12 @@
       <div class="text-center form-row">
         <div class="col-md-2"></div>
         <div class="col-12 col-md-12 col-lg-4 mb-3">
-          <p>Link para clientes <span data-toggle="popover" title="Link Clientes" data-html="true" data-content="Comparte con tus clientes el link de tu tienda en línea para que comiences a recibir pedidos en línea. <br><br>PRO Tip: Incluye este link en cada una de las publicaciones que hagas en tus redes sociales." data-trigger="hover"><i class="fas fa-question-circle"></i></span></p>
+          <p>Link para clientes <span data-toggle="popover" title="Link Clientes" data-html="true" data-content="Comparte con tus clientes el link de tu tienda en línea para que comiences a recibir pedidos en línea. <br><br>PRO Tip: Incluye este link en cada una de las publicaciones que hagas en tus redes sociales." data-trigger="focus"><i class="fas fa-question-circle"></i></span></p>
           <input type="text" class="form-control" value="<%=@link_compartir%>" id="link_cliente" disabled> <br>
           <button type="button" class="btn btn-sm btn-secondary" id="copiar_cliente" onclick="copyRef2()" onmouseout="outFuncRef2()">Copiar link</button>
         </div>
         <div class="col-12 col-md-12 col-lg-4 mb-3">
-          <p>Link programa embajadores <span data-toggle="popover" title="Programa Embajadores" data-html="true" data-content="Gana dinero recomendando pideloencasa.mx a tus conocidos. <br><br>PRO Tip: Comparte tu link personalizado para que podamos relacionar tus recomendados a tu cuenta." data-trigger="hover"><i class="fas fa-question-circle"></i></span></p>
+          <p>Link programa embajadores <span data-toggle="popover" title="Programa Embajadores" data-html="true" data-content="Gana dinero recomendando pideloencasa.mx a tus conocidos. <br><br>PRO Tip: Comparte tu link personalizado para que podamos relacionar tus recomendados a tu cuenta." data-trigger="focus"><i class="fas fa-question-circle"></i></span></p>
           <input type="text" class="form-control" value="<%=@link_recomendado%>" id="link_recomendado" disabled> <br>
           <button type="button" class="btn btn-sm btn-secondary" id="copiar_recomendado" onclick="copyRef(1)" onmouseout="outFuncRef()">Copiar link</button>
         </div>
