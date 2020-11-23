@@ -219,6 +219,12 @@ Paloma.controller 'Home', cuenta: ->
 Paloma.controller 'Home', plan: ->
   $("#btn-cart_float").removeClass("d-md-block")
   $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+  $("#btn_instrucciones").unbind("click").click ->
+    if $("#icon_inst").hasClass("fas fa-caret-down")
+      $("#icon_inst").removeClass("fas fa-caret-down").addClass("fas fa-caret-up")
+    else
+      $("#icon_inst").removeClass("fas fa-caret-up").addClass("fas fa-caret-down")
+    $("#texto_instrucciones").toggleClass("d-none")
 
 Paloma.controller 'Devise/Sessions', new: ->
   $("#btn_login").removeClass("d-lg-block").hide()

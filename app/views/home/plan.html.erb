@@ -3,10 +3,10 @@
   <div class="row mt-20 mb-20">
     <h2>Mi Plan</h2>
   </div>
-  <div class="class row">
+  <div class="row">
     <div class="col-12 col-md-4">
       <ul class="list-group">
-        <li class="list-group-item active"><b><%=@plan.nombre%></b></li>
+        <li class="list-group-item active bg-secondary">Plan Actual: <b><%=@plan.nombre%></b></li>
         <%if @config_user.estatus == 1%>
           <li class="list-group-item">Estatus: <span class="badge badge-success"><%=@estatus%></span></li>
         <%else%>
@@ -25,21 +25,33 @@
         <%end%>
       </ul>
     </div>
+
     <div class="col-12 col-md-6">
-      <p>
-        Instrucciones para Contratar <b>Plan Visionario</b>: <br>
+      <div class="plan border mt-10">
+        <h5 class="text-center">¿Te gustó la plataforma?</h5>
+        <h5 class="text-center">Contrata el</h5>
+        <h4 class="text-center"><strong>Plan Emprendedor</strong></h4> <br>
+        <h6 class="text-center">Incluye:</h6>
+        <h5 class="text-center">Pedidos Ilimitados</h5><br>
+        <h6 class="text-center">
+          <button type="button" id="btn_instrucciones" class="btn">Instrucciones para contratar <i id="icon_inst" class="fas fa-caret-down"></i></button>
+        </h6>
+        <p id="texto_instrucciones" class="d-none"> <strong>Depósito o transferencia bancaria</strong> <br><br>
 
-        Depositar a la cuenta BBVA:<br>
-        Smart Drako Global Tech SAPI de CV <br>
-        CLABE:  012020001158463582<br>
-        Cuenta: 0115846358<br><br>
+          Banco BBVA, <br>
+          Smart Drako Global Tech SAPI de CV <br>
+          CLABE: 012 020 0011 5846 3582 <br>
+          Cuenta: 0115846358 <br> <br>
 
-        Para 1 mes, $299.00 + IVA <br>
+          Si deseas 1 mes, deposita: <br>
+          $299.00 + IVA <br> <br>
 
-        Para 1 año, $3,229.2 + IVA (10% Descuento) <br><br>
+          Si deseas 1 año (10% descuento), deposita: <br>
+          $3,229.20 + IVA  mxn <br> <br>
 
-        Mandar comprobante al whatsapp 686-262-3441 y se activará inmediatamente.
+          Para activación inmediata, favor de mandar comprobante al whatsapp 686-262-3441 junto con tus datos de facturación.
       </p>
+      </div>
     </div>
   </div>
 </div>

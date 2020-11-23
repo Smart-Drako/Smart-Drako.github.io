@@ -33,37 +33,6 @@
 </div>
 <hr>
 
-<div class="container cont-cat d-none">
-  <div class="owl-carousel owl-theme">
-    <div class="card condiciones">
-      <div class="row" style="margin:0px;height:100%;">
-        <div class="col-4 cond-dibujo-compra">
-          <img src="" class="cond-ilustracion">
-        </div>
-      <div class="col-8">
-        <h6 class="card-title mb-0">Condiciones de Compra</h6>
-      </div>
-      </div>
-    </div>
-    <div class="card condiciones">
-      <div class="row" style="margin:0px;height:100%;">
-        <div class="col-4 cond-dibujo-higiene">
-          <img src="" class="cond-ilustracion">
-        </div>
-      <div class="col-8">
-        <h6 class="card-title mb-0">Medidas de Higiene</h6>
-        <br>
-        <ol class="list-higiene">
-          <% @higiene.each do |h|%>
-          <li><%= h %>.</li>
-          <%end%>
-        </ol>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="container cont-cat" id="info_proveedor">
   <div class="card-deck">
     <div class="card card-rounded">
@@ -76,8 +45,6 @@
             <h5 class="card-title mb-0 color-pink">Condiciones de Entrega</h5>
           </div>
         </div>
-
-
 
         <div class="row">
 
@@ -124,11 +91,7 @@
         </div>
         <div class="row">
           <div class="col-12 mt-20">
-            <ol>
-              <% @higiene.each do |h|%>
-              <li><%= h %>.</li>
-              <%end%>
-            </ol>
+            <p class="text-center"><%= @negocio.condiciones_higiene.gsub("\n","<br>\n").html_safe %></p>
           </div>
         </div>
       </div>
