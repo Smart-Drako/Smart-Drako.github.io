@@ -147,13 +147,13 @@
               </div>
 
               <div class="col-md-12 mb-3">
-                <label for="inputZip">Aviso para clientes</label>
-                <%= f.text_area :aviso, class:"form-control" %>
+                <label for="inputZip">Aviso para clientes <span data-toggle="popover" title="Aviso clientes" data-html="true" data-content="Muestra algún mensaje a tus clientes PREVIO a que te hagan un pedido. Este lo puedes estar cambiando constantemente según lo requieras." data-trigger="hover"><i class="fas fa-question-circle"></i></span></label>
+                <%= f.text_area :aviso, class:"form-control", placeholder:"Ejemplo: \"Las órdenes se entregarán el día de mañana.\"" %>
               </div>
 
               <div class="col-md-12">
-                <label for="inputZip">Comentarios en pedidos</label>
-                <%= f.text_area :comentario, class:"form-control" %>
+                <label for="inputZip">Comentarios en pedidos <span data-toggle="popover" title="Comentarios pedidos" data-html="true" data-content="Muestra algún mensaje que quieras incluir en la vista o PDF del pedido, DESPUÉS de que te hagan un pedido." data-trigger="hover"><i class="fas fa-question-circle"></i></span></label>
+                <%= f.text_area :comentario, class:"form-control", placeholder: "Ejemplo: \"Precios sujetos a cambios sin previo aviso.\"" %>
               </div>
             </div>
           </div>
