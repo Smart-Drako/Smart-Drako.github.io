@@ -1110,3 +1110,11 @@ li.nav-item.active>.nav-link {
 #toast-container > .toast-warning {
   background-image: none !important;
 }
+
+.carousel-inner a img{
+  cursor: pointer;
+}
+
+.carousel-inner img{
+  cursor: auto;
+}
