@@ -1,7 +1,7 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'form-signin', autocomplete: "off"} )  do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-  <h1 class="h3 mb-3 font-weight-normal">Registro</h1>
+  <h1 class="h3 mb-3 font-weight-normal text-center">Registra tu Negocio</h1>
   <input type="hidden" name="ref" value="<%= params[:ref]%>">
   <div class="form-group">
     <label for="user_nombre" class="label">Nombre</label>
