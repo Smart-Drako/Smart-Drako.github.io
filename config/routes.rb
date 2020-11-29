@@ -27,5 +27,6 @@ Rails.application.routes.draw do
   get "descargar_pdf/:id/", to: "pedidos#descargar_pdf", as: "descargar_pdf"
   post "/borrar_imagen", to: "productos#borrar_imagen", as: "borrar_imagen"
   get "/recrear_fotos", to: "productos#recrear_fotos", as: "recrear_fotos"
+  get "/reportes", to: "reportes#index", as: "reportes"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
