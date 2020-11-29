@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_devise_params, if: :devise_controller?
+  before_action :set_empresa
 
   def configure_devise_params
     devise_parameter_sanitizer.permit(:sign_up) do |user|
@@ -9,6 +10,12 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     stored_location_for(resource) || me_path
+  end
+
+  def set_empresa
+    if user_signed_in?
+      @negocio = ConfigUser.find_by(user_id: current_user.id)
+    end
   end
 
   def vencimiento_cuenta(user)

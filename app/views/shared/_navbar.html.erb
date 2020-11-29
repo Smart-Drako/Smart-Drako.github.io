@@ -5,15 +5,12 @@
   </a>
   <div class="form-inline bg-white ml-auto"  id="form-botones">
     <%if user_signed_in?%>
-      <span class="navbar-text text-dark pr-2">
-        <strong>Bienvenido <%= "#{current_user.nombre}" %></strong>
-      </span>
     <% else %>
       <%if @ciudades_negocios.present?%>
         <%if !user_signed_in?%>
           <form class="form-inline" id="city" onsubmit="prevent()">
-            <input type="hidden" id="ciudad_seleccionada" value="<%= @ciudad%>">
-            <select id="buscar_ciudad_select" class="form-control mr-2 mr-sm-2">
+            <input type="hidden" id="ciudad_seleccionada" class="input-sm" value="<%= @ciudad%>">
+            <select id="buscar_ciudad_select" class="form-control mr-2 mr-sm-2 input-sm">
               <option value="">Elige tu Ciudad</option>
               <% @ciudades_negocios.each do |ci| %>
                 <%if ci.present?%>
@@ -30,52 +27,36 @@
       <span class="total-pedido"></span>
       <i class="fas fa-shopping-cart"></i> <span class="badge btn-pink total-items">0</span>
     </button>
-      <% if @ocultar_menu.present? && @ocultar_menu == true%>
-      <%else%>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <%end%>
   </div>
-  <div class="collapse navbar-collapse bg-white" id="navbarSupportedContent">
+    <div class="form-inline search-form">
     <%if user_signed_in?%>
-      <ul class="navbar-nav ml-2 mr-2 w-100">
-        <li id="nav-link-pedidos"class="nav-item <%=current_class?("/pedidos")%>">
-          <a class="nav-link" href="/pedidos">Pedidos de Clientes</a>
-        </li>
-        <li class="nav-item <%=current_class?("/productos")%>">
-          <a class="nav-link" href="/productos">Productos</a>
-        </li>
-        <li class="nav-item <%=current_class?("/me")%>">
-          <a class="nav-link" href="/me">Configuración</a>
-        </li>
-        <li class="nav-item <%=current_class?("/plan")%>">
-          <a class="nav-link" href="/plan">Mi Plan</a>
-        </li>
-        <li class="nav-item">
-          <% if user_signed_in? %>
-            <%= link_to destroy_user_session_path , :method => :delete, :class => "btn btn-outline-danger my-2 my-sm-0 ml-10 d-none d-md-none d-lg-block" do %>
-              <i class="fas fa-sign-out-alt"></i>
-            <% end %>
-            <%= link_to "Cerrar Sesion", destroy_user_session_path , :method => :delete, :class => "d-block d-md-block d-lg-none nav-link" %>
-          <% end %>
-        </li>
-      </ul>
-    <% else %>
+      <div class="btn-group">
+        <a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" class="nav-link"><img src="<%=@negocio.logo%>" alt="Andy Leverenz" class="rounded-circle navbar-avatar"></a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="/me">Configuración</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/pedidos">Pedidos de Clientes</a>
+          <a class="dropdown-item" href="/productos">Productos</a>
+          <a class="dropdown-item" href="/reportes">Reportes</a>
+          <a class="dropdown-item" href="/plan">Mi Plan</a>
+          <div class="dropdown-divider"></div>
+          <%= link_to "Cerrar Sesion", destroy_user_session_path , :method => :delete, :class => "dropdown-item" %>
+        </div>
+      </div>
+    <%else%>
       <% if @ocultar_menu.present? && @ocultar_menu == true%>
       <%else%>
         <ul class="navbar-nav ml-2 mr-2 w-100 justify-content-end pr-3">
           <li class="nav-link">
-            <a data-turbolinks="false" id="btn_login" class="btn btn-outline-pink my-2 my-sm-0 ml-10 d-none d-lg-block" href="/login">Inicia
+            <a data-turbolinks="false" id="btn_login" class="btn btn-outline-pink my-2 my-sm-0 ml-10 <%=hide_class_web?("/login")%>" href="/login">Inicia
               Sesión</a>
-            <a data-turbolinks="false" id="btn_login" class="nav-link my-2 my-sm-0 ml-10 d-block d-lg-none" href="/login">Inicia
+            <a data-turbolinks="false" id="btn_login" class="nav-link my-2 my-sm-0 ml-10 <%=hide_class_movil?("/login")%>" href="/login">Inicia
               Sesión</a>
           </li>
         </ul>
       <%end%>
     <%end%>
-  </div>
+    </div>
 </nav>
 
 <!-- Navbar Movil -->

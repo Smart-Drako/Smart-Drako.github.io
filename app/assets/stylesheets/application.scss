@@ -1067,7 +1067,24 @@ li.nav-item.active>.nav-link {
   filter: grayscale(100%);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 410px) {
+  .logo-nav {
+    width: 70px;
+    height: 23px;
+  }
+  #btn_login{
+    font-size: 0.8rem;
+  }
+  #buscar_ciudad_select{
+    height: calc(1.5em + .5rem + 2px);
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+  }
+}
+
+@media only screen and (min-width: 411px) and (max-width: 600px) {
   .logo-nav {
     width: 91px;
     height: 30px;
@@ -1122,4 +1139,14 @@ li.nav-item.active>.nav-link {
 .plan{
   padding: 45px;
   border-radius: 25px;
+}
+
+.navbar-avatar{
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid transparent;
+}
+
+.nav-link{
+  padding: 0;
 }
