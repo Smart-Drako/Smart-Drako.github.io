@@ -9,6 +9,7 @@ Paloma.controller 'Reportes', index: ->
   
   #Mostrar los pickers y botones de generar reportes cuando seleccionan una opcuon
   $("#periodo_reporte").unbind("change").change ->
+    $(".gj-picker").hide()
     if $(this).val() == "5" #Personalizado -> mostrar pickers
       $(".pickers").show()
     else
