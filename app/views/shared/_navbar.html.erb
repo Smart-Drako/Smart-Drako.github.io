@@ -4,8 +4,7 @@
     <img src="/images/logo4.png" width="151" height="50" class="d-inline-block align-top logo-nav" alt="">
   </a>
   <div class="form-inline bg-white ml-auto"  id="form-botones">
-    <%if user_signed_in?%>
-    <% else %>
+    <%if !user_signed_in?%>
       <%if @ciudades_negocios.present?%>
         <%if !user_signed_in?%>
           <form class="form-inline" id="city" onsubmit="prevent()">
@@ -22,13 +21,30 @@
         <%end%>
       <%end%>
     <%end%>
-    <button data-toggle="offcanvas" title="Ver Pedido" type="button"
-      class="btn btn-cart box-shadow-btn my-2 my-sm-0 ml-10 d-none">
-      <span class="total-pedido"></span>
-      <i class="fas fa-shopping-cart"></i> <span class="badge btn-pink total-items">0</span>
-    </button>
   </div>
-    <div class="form-inline search-form">
+
+  <%if user_signed_in?%>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-2 mr-2 w-100">
+        <li id="nav-link-pedidos"class="nav-item <%=current_class?("/pedidos")%>">
+          <a class="nav-link" href="/pedidos">Pedidos de Clientes</a>
+        </li>
+        <li class="nav-item <%=current_class?("/productos")%>">
+          <a class="nav-link" href="/productos">Productos</a>
+        </li>
+        <li class="nav-item <%=current_class?("/me")%>">
+          <a class="nav-link" href="/me">Configuración</a>
+        </li>
+        <li class="nav-item <%=current_class?("/reportes")%>">
+          <a class="nav-link" href="/reportes">Reportes</a>
+        </li>
+        <li class="nav-item <%=current_class?("/plan")%>">
+          <a class="nav-link" href="/plan">Mi Plan</a>
+        </li>
+      </ul>
+    </div>
+  <%end%>
+  <div class="form-inline search-form">
     <%if user_signed_in?%>
       <div class="btn-group">
         <a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" class="nav-link"><img src="<%=@negocio.logo%>" alt="Andy Leverenz" class="rounded-circle navbar-avatar"></a>
@@ -56,7 +72,7 @@
         </ul>
       <%end%>
     <%end%>
-    </div>
+  </div>
 </nav>
 
 <!-- Navbar Movil -->

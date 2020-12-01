@@ -1,6 +1,6 @@
 module ApplicationHelper
   def current_class?(test_path)
-    return request.path == test_path ? 'active' : 'asd'
+    return request.path == test_path ? "active" : ""
   end
   def hide_class_movil?(test_path)
     return request.path == test_path ? 'd-none' : 'd-block d-lg-none'
