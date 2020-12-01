@@ -13,6 +13,7 @@ Paloma.controller 'Reportes', index: ->
     if $(this).val() == "5" #Personalizado -> mostrar pickers
       $(".pickers").show()
     else
+      $('#picker_desde, #picker_hasta').val("")
       $(".pickers").hide()
     
     if $(this).val() == ""
