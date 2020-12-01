@@ -36,11 +36,13 @@ Paloma.controller 'Reportes', index: ->
     calcular_reportes()
   
   calcular_reportes = ->
-    periodo = $("#periodo_reporte").val()
+    periodo = parseInt($("#periodo_reporte").val())
     fecha_ini = $("#picker_desde").val()
     fecha_fin = $("#picker_hasta").val()
-    
-    #reporte_pedidos
-    params = "periodo=#{periodo}&fecha_ini=#{fecha_ini}&fecha_fin=#{fecha_fin}"
+
+    if periodo == 5 && fecha_ini != "" && fecha_fin != ""
+      params = "periodo=#{periodo}&fecha_ini=#{fecha_ini}&fecha_fin=#{fecha_fin}"
+    else
+      params = "periodo=#{periodo}"
     $('#generar_reporte_pedidos').attr("href", '/reportes/pedidos.xlsx?'+params)
     $('#generar_reporte_productos').attr("href", '/reportes/productos.xlsx?'+params)
