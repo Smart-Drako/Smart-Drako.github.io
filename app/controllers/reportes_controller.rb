@@ -63,9 +63,35 @@ class ReportesController < ApplicationController
     else
       @pedidos = Pedido.where(user_id: @usuario.id).order(id: :desc)
     end
+
+    @productos = []
+
+    if @pedidos.present?
+      @pedidos.each do |ped|
+        ped.producto_pedido.each do |pp|
+          producto = Producto.find(pp.producto_id)
+          item = {
+            pedido: ped.numero,
+            fecha: ped.fecha,
+            cliente: ped.cliente_nombre,
+            correo: ped.cliente_email,
+            telefono: ped.cliente_telefono,
+            categoria: producto.categoria,
+            producto: pp.nombre,
+            descripcion: producto.descripcion2,
+            proveedor: producto.proveedor,
+            precio: pp.precio,
+            cantidad: pp.cantidad,
+            unidad: pp.unidad,
+            subtotal: pp.subtotal
+          }
+          @productos.push(item)
+        end
+      end
+    end
     respond_to do |format|
       format.html
-      format.xlsx { response.headers['Content-Disposition'] = 'attachment; filename="reporte_productos.xlsx"' }
+      format.xlsx { response.headers['Content-Disposition'] = 'attachment; filename="reporte_productos_pedidos.xlsx"' }
     end
   end
 
