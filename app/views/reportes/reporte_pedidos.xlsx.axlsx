@@ -1,0 +1,17 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Reporte_Pedidos") do |sheet|
+
+  req = sheet.styles.add_style(b: true, fg_color: 'dc3545', sz: 14)
+  titulo = sheet.styles.add_style(b: true, sz: 14)
+  default = sheet.styles.add_style(b: false, sz: 12)
+  sheet.add_row ["No.","Fecha","Cliente","Teléfono","Dirección","Método Pago","Envío","Correo","Estatus","Total Pedido"], style: titulo
+  sheet.sheet_view.pane do |pane|
+    pane.top_left_cell = "B2"
+    pane.state = :frozen_split
+    pane.y_split = 1
+    pane.active_pane = :bottom_right
+  end
+  @pedidos.each do |ped|
+    sheet.add_row [ped.numero,ped.fecha,ped.cliente_nombre,ped.cliente_telefono,"#{ped.cliente_direccion}, #{ped.area_entrega}",ped.cliente_metodo_pago, ped.cliente_tipo_envio, ped.cliente_email, ped.estatus, ped.total], style: default
+  end
+end

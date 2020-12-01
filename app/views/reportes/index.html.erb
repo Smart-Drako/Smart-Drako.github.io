@@ -28,8 +28,12 @@
     <div class="col-md-4 text-center">
     </div>
     <div class="col-md-4 col-12 text-center">
-      <button type="button" id="generar_reporte_pedidos" class="btn btn-aqua" disabled>Reporte de Pedidos</button>
-      <button type="button" id="generar_reporte_productos" class="btn btn-aqua" disabled>Productos por Pedidos</button>
+      <%= link_to(reportes_pedidos_url(format: "xlsx"), :class => 'btn btn-sm btn-aqua disabled', :id => "generar_reporte_pedidos") do %>
+        Reporte de Pedidos <i class="far fa-file-excel"></i>
+      <% end %>
+      <%= link_to(reportes_pedidos_url(format: "xlsx"), :class => 'btn btn-sm btn-aqua disabled', :id => "generar_reporte_productos") do %>
+        Productos por Pedidos <i class="far fa-file-excel"></i>
+      <% end %>
     </div>
   </div>
 </div>

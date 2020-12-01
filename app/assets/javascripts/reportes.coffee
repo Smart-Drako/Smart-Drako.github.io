@@ -8,16 +8,17 @@ Paloma.controller 'Reportes', index: ->
   $(".pickers").hide()
   
   #Mostrar los pickers y botones de generar reportes cuando seleccionan una opcuon
-  $("#periodo_reporte").change ->
+  $("#periodo_reporte").unbind("change").change ->
     if $(this).val() == "5" #Personalizado -> mostrar pickers
       $(".pickers").show()
     else
       $(".pickers").hide()
     
     if $(this).val() == ""
-      $("#generar_reporte_pedidos, #generar_reporte_productos").prop("disabled", true)
+      $("#generar_reporte_pedidos, #generar_reporte_productos").addClass("disabled").val("")
     else
-      $("#generar_reporte_pedidos, #generar_reporte_productos").prop("disabled", false)
+      $("#generar_reporte_pedidos, #generar_reporte_productos").removeClass("disabled").val("")
+    calcular_reportes()
   
   #Pickers
   $('#picker_desde').datepicker
@@ -29,17 +30,15 @@ Paloma.controller 'Reportes', index: ->
     locale: 'es-es'
     format: 'dd/mm/yy'
   
-  #Eventos botones generar reporte
-  $("#generar_reporte_pedidos").unbind("click").click ->
-    console.log "Generar Reporte Pedidos"
-    generar_reporte_pedidos()
+  $('#picker_desde, #picker_hasta').change ->
+    calcular_reportes()
   
-  $("#generar_reporte_productos").unbind("click").click ->
-    generar_reporte_productos()
-
-  #Funciones generar reportes
-  generar_reporte_pedidos =  ->
-    alert("Generando Reporte de Pedidos...")
-
-  generar_reporte_productos = ->
-    alert("Generando Reporte de Productos...")
+  calcular_reportes = ->
+    periodo = $("#periodo_reporte").val()
+    fecha_ini = $("#picker_desde").val()
+    fecha_fin = $("#picker_hasta").val()
+    
+    #reporte_pedidos
+    params = "periodo=#{periodo}&fecha_ini=#{fecha_ini}&fecha_fin=#{fecha_fin}"
+    $('#generar_reporte_pedidos').attr("href", '/reportes/pedidos.xlsx?'+params)
+    $('#generar_reporte_productos').attr("href", '/reportes/productos.xlsx?'+params)

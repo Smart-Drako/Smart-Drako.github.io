@@ -28,5 +28,7 @@ Rails.application.routes.draw do
   post "/borrar_imagen", to: "productos#borrar_imagen", as: "borrar_imagen"
   get "/recrear_fotos", to: "productos#recrear_fotos", as: "recrear_fotos"
   get "/reportes", to: "reportes#index", as: "reportes"
+  get  "/reportes/pedidos", to: "reportes#reporte_pedidos"
+  get  "/reportes/productos", to: "reportes#reporte_productos"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
