@@ -46,6 +46,9 @@
   <%end%>
   <div class="form-inline search-form">
     <%if user_signed_in?%>
+      <span class="navbar-text color-pink" style="margin-right:5px;">
+        <%= current_user.nombre%>
+      </span>
       <div class="btn-group">
         <a href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" class="nav-link"><img src="<%=@negocio.logo%>" alt="Andy Leverenz" class="rounded-circle navbar-avatar"></a>
         <div class="dropdown-menu dropdown-menu-right">
