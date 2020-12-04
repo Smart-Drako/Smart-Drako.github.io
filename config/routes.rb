@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get "/plan", to: "home#plan"
   get "socios/:id", to: "productos#tienda"
   get "/admin_efra", to: "home#admin_efra"
+  # Programas y recomendados
+  get "/programas", to: "programas#index"
+  get "/recomendados", to: "recomendados#index"
   
   post "/generar_pedido", to:"pedidos#generar"
   post "/pedido/calcular_envio", to:"pedidos#calcular_envio"
