@@ -1,3 +1,5 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+Paloma.controller 'Programas', index: ->
+
+  #Ocultar buscador y navbar inferior
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+  $("#btn-cart_float").removeClass("d-md-block")
