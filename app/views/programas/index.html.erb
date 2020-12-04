@@ -2,4 +2,53 @@
   <div class="row">
     <h2 class="col-md-12">Programas</h2>
   </div>
+  <div class="row">
+    <div class="col-12 col-md-6 mt-20">
+      <h5>Embajador</h5>
+      <p>¿Quieres ayudar a otro emprendedor como tu para que tenga su tienda en línea y ganar dinero a la vez?</p>
+      <p>Comparte tu link único de embajador para que se registren y sepamos que son tus recomendados</p>
+      <div class="text-center">
+        <button type="button" class="btn btn-aqua">Copiar Link</button>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mt-20">
+      <h5>Aumenta tus ventas</h5>
+      <p>¿Quieres aumentar tus ventas mediante embajadores externos que recomiendan tus productos?</p>
+      <p>Ofrece una comisión fija a cada embajador externo por cada pedido que logre generarte</p>
+      <p>Activa y configura el programa “Aumenta tus ventas” </p>
+      <div class="text-center">
+        <input type="checkbox" data-toggle="toggle" data-on="Activado" data-off="Desactivado" data-onstyle="success" data-offstyle="danger">
+      </div>
+      <br>
+      <form class="col-md-8 offset-md-2">
+        <div class="form-group">
+          <label for="comision_programa">Comisión por cada pedido externo (MXN)</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">$</div>
+            </div>
+            <input type="number" class="form-control" id="comision_programa">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="duracion_programa">Duración del programa</label>
+          <select class="form-control" id="duracion_programa">
+            <option>Seleccionar...</option>
+            <option>1 Día</option>
+            <option>1 Semana</option>
+            <option>1 Mes</option>
+            <option>Indefinido</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="duracion_programa">Cantidad de pedidos a recibir</label>
+          <select class="form-control" id="duracion_programa">
+            <option>Seleccionar...</option>
+            <option>Según inventario</option>
+            <option>Indefinido</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
