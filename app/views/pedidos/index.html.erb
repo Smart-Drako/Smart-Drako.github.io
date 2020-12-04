@@ -1,4 +1,4 @@
-<div class="container cont-cat">
+<div class="container p-4">
   <% if @vencimiento.present? %>
     <div class="alert alert-warning" role="alert">
       <%= @vencimiento %>
@@ -9,7 +9,9 @@
         Número de pedidos restantes: <b><%= @pedidos_restantes %></b>
     </div>
   <%end%>
-  <h2>Pedidos</h2>
+  <div class="row">
+    <h2 class="col-md-12">Pedidos</h2>
+  </div>
   <div class="table-responsive">
     <table class="table table-sm" style="width:100%;">
       <thead>
