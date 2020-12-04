@@ -7,6 +7,7 @@
         <th>Nombre</th>
         <th>Apellido</th>
         <th>Nombre Empresa</th>
+        <th>Links</th>
         <th>ID Empresa</th>
         <th>Papá</th>
         <th>Abuelo</th>
@@ -20,6 +21,8 @@
           <td><%= u[:nombre] %></td>
           <td><%= u[:apellido] %></td>
           <td><%= u[:nombre_empresa] %></td>
+          <!--Links-->
+          <td> <a targer="_blank" class="link-color" href="<%= u[:link_recomendado] %>">Embajador</a> | <a targer="_blank" class="link-color" href="<%= u[:link_compartir] %>">Tienda</a></td>
           <td><%= u[:id_empresa] %></td>
           <td><%= u[:papa] %></td>
           <td><%= u[:abuelo] %></td>

@@ -51,7 +51,7 @@ class HomeController < ApplicationController
       redirect_to me_path and return
     end
 
-    @usuarios = User.find_by_sql("SELECT 
+    @usuarios = User.find_by_sql("SELECT E.id, E.slug,
       U.email AS correo,U.created_at as fecha_registro, U.nombre, U.apellido, E.nombre AS negocio, E.id as negocio_id
   FROM
       pideloencasa.users AS U
@@ -64,12 +64,17 @@ class HomeController < ApplicationController
 
       rec = Recomendado.find_by(id_usuario: u.negocio_id)
 
+      link_recomendado = generar_link_recomendado(u)
+      link_compartir = generar_link_compartir(u)
+
       item = {
         "fecha_registro": u.fecha_registro,
         "correo": u.correo,
         "nombre": u.nombre,
         "apellido": u.apellido,
         "nombre_empresa": u.negocio,
+        "link_recomendado": link_recomendado,
+        "link_compartir": link_compartir,
         "id_empresa": u.negocio_id,
         "papa": (rec.present? ? rec.id_padre : ""),
         "abuelo": (rec.present? ? rec.id_abuelo : ""),
@@ -111,6 +116,8 @@ class HomeController < ApplicationController
     b64_id = Base64.encode64("#{user.id}-pideloencasa.mx")
     if Rails.env.production?
       link = "https://pideloencasa.mx/registro?ref=#{b64_id}"
+    elsif Rails.env.staging?
+      link = "https://staging.pideloencasa.mx/registro?ref=#{b64_id}"
     else
       link = "http://localhost:3000/registro?ref=#{b64_id}"
     end
@@ -124,6 +131,8 @@ class HomeController < ApplicationController
     end
     if Rails.env.production?
       link = "https://pideloencasa.mx/socios/#{socio}"
+    elsif Rails.env.staging?
+      link = "https://staging.pideloencasa.mx/socios/#{socio}"
     else
       link = "http://localhost:3000/socios/#{socio}"
     end
