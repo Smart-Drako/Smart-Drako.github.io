@@ -41,12 +41,12 @@
         <li class="nav-item <%=current_class?("/plan")%>">
           <a class="nav-link" href="/plan">Mi Plan</a>
         </li>
-        <li class="nav-item <%=current_class?("/programas")%>">
+        <!--<li class="nav-item <%=current_class?("/programas")%>">
           <a class="nav-link" href="/programas">Programas</a>
         </li>
         <li class="nav-item <%=current_class?("/recomendados")%>">
           <a class="nav-link" href="/recomendados">Recomendados</a>
-        </li>
+        </li>-->
       </ul>
     </div>
   <%end%>
@@ -64,8 +64,8 @@
           <a class="dropdown-item" href="/productos">Productos</a>
           <a class="dropdown-item" href="/reportes">Reportes</a>
           <a class="dropdown-item" href="/plan">Mi Plan</a>
-          <a class="dropdown-item" href="/programas">Programas</a>
-          <a class="dropdown-item" href="/recomendados">Recomendados</a>
+          <!--<a class="dropdown-item" href="/programas">Programas</a>
+          <a class="dropdown-item" href="/recomendados">Recomendados</a>-->
           <div class="dropdown-divider"></div>
           <%= link_to "Cerrar Sesion", destroy_user_session_path , :method => :delete, :class => "dropdown-item" %>
         </div>
