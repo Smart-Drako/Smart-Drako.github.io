@@ -75,6 +75,8 @@ class ProductosController < ApplicationController
       description: @negocio.descripcion
     }
 
+    @tag_image = @negocio.logo if @negocio.logo.present?
+
     reparto = (@negocio.reparto.present? && @negocio.reparto == "ZAS Reparto" && @negocio.reparto_activo == true) ? true : false
     direccion = "#{@negocio.direccion}, #{@negocio.ciudad}"
 

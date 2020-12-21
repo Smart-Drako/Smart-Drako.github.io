@@ -35,7 +35,11 @@
       <meta property="og:url" content="https://pideloencasa.mx" />
     <%end%>
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/images/logo.png" />
+    <%if @tag_image.present?%>
+      <meta property="og:image" content="<%=@tag_image%>" />
+    <%else%>
+      <meta property="og:image" content="/images/logo.png" />
+    <%end%>
     <link rel="shortcut icon" href="/images/favicon-64x64.png">
     <!-- Bootstrap, FontAwesome, Animate -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
