@@ -98,7 +98,7 @@ class HomeController < ApplicationController
     @repartos = [["ZAS Reparto", "ZAS Reparto"]]
     @estados = Estado.select(:estado).distinct.order(:estado)
     @ciudades = Estado.all.order(:ciudad)
-    @bancos = [["Banco Azteca", "Banco Azteca"] , ["Banorte", "Banorte"], ["Bancoppel", "Bancoppel"], ["Banregio", "Banregio"], ["BBVA Bancomer", "BBVA Bancomer"], ["Citibanamex", "Citibanamex"], ["HSBC", "HSBC"], ["Santander", "Santander"], ["Scotiabank", "Scotiabank"]]
+    @bancos = [["Banbajío", "Banbajío"],["Banco Azteca", "Banco Azteca"] , ["Banorte", "Banorte"], ["Bancoppel", "Bancoppel"], ["Banregio", "Banregio"], ["BBVA Bancomer", "BBVA Bancomer"], ["Citibanamex", "Citibanamex"], ["HSBC", "HSBC"],["Inbursa","Inbursa"], ["Santander", "Santander"], ["Scotiabank", "Scotiabank"]]
   end
 
   def plan
