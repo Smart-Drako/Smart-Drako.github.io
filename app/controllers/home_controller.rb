@@ -94,6 +94,7 @@ class HomeController < ApplicationController
     @formas_pago = [["Efectivo", "1"] , ["Tarjetas", "2"], ["Efectivo y Tarjetas", "3"]]
     @tipos_entrega = [["A domicilio", "1"] , ["Para recoger", "2"], ["A domicilio y recoger", "3"]]
     @facturacion = [["Si", "Si"] , ["No", "No"]]
+    @mostrar_dir = [["Si", "true"] , ["No", "false"]]
     @vista = [["Tipo Cards", "true"] , ["Tipo Lista", "false"]]
     @repartos = [["ZAS Reparto", "ZAS Reparto"]]
     @estados = Estado.select(:estado).distinct.order(:estado)

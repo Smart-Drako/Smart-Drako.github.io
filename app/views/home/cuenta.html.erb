@@ -42,7 +42,7 @@
                 <label for="inputEmail4">Categoría<span class="text-danger">*</span></label>
                 <%= f.select(:category_id, options_from_collection_for_select(@categorias, "id", "name", @config_user.category_id), {:include_blank => 'Seleccionar...'}, :class => 'form-control', ) %>
               </div>
-              <div class="form-group col-md-4 pl-0">
+              <div class="form-group col-md-4">
                 <label for="inputPassword4">Vista Catálogo<span class="text-danger">*</span></label>
                 <%= f.select(:vista_card, options_for_select(@vista,@config_user.vista_card), {:include_blank => nil }, :class => 'form-control') %>
               </div>
@@ -82,6 +82,12 @@
               <div class="form-group col-md-12">
                 <label for="inputAddress2">Dirección<span class="text-danger">*</span></label>
                 <%= f.text_field :direccion, class:"form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label for="inputZip">Mostrar Tu Dirección a Clientes</label>
+                <%= f.select(:mostrar_direccion, options_for_select(@mostrar_dir,@config_user.mostrar_direccion), {:include_blank => nil }, :class => 'form-control') %>
               </div>
             </div>
           </div>
