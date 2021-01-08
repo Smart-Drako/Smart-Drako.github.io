@@ -56,46 +56,46 @@ class ProductosController < ApplicationController
     slug = params[:id]
     #Buscar por slug unico
     if id == 0
-      @negocio = ConfigUser.find_by(slug: slug)
-      @productos = Producto.where(user_id: @negocio.user_id).order('categoria, descripcion') if @negocio.present?
+      @tienda = ConfigUser.find_by(slug: slug)
+      @productos = Producto.where(user_id: @tienda.user_id).order('categoria, descripcion') if @tienda.present?
     else
-      @negocio = ConfigUser.find_by(id: id)
-      @productos = Producto.where(user_id: @negocio.user_id).order('categoria, descripcion') if @negocio.present?
+      @tienda= ConfigUser.find_by(id: id)
+      @productos = Producto.where(user_id: @tienda.user_id).order('categoria, descripcion') if @tienda.present?
     end
 
-    vencimiento = vencimiento_cuenta(@negocio) if @negocio.present?
+    vencimiento = vencimiento_cuenta(@tienda) if @tienda.present?
 
-    redirect_to '/' and return if @negocio.nil?
-    redirect_to '/' and return if @negocio.activo == 0
+    redirect_to '/' and return if @tienda.nil?
+    redirect_to '/' and return if @tienda.activo == 0
 
-    @page_title = "#{@negocio.nombre}"
+    @page_title = "#{@tienda.nombre}"
 
     @tags = {
-      title: @negocio.nombre,
-      description: @negocio.descripcion
+      title: @tienda.nombre,
+      description: @tienda.descripcion
     }
 
-    @tag_image = @negocio.logo if @negocio.logo.present?
+    @tag_image = @tienda.logo if @tienda.logo.present?
 
-    reparto = (@negocio.reparto.present? && @negocio.reparto == "ZAS Reparto" && @negocio.reparto_activo == true) ? true : false
-    direccion = "#{@negocio.direccion}, #{@negocio.ciudad}"
+    reparto = (@tienda.reparto.present? && @tienda.reparto == "ZAS Reparto" && @tienda.reparto_activo == true) ? true : false
+    direccion = "#{@tienda.direccion}, #{@tienda.ciudad}"
 
     @datos_empresa = {
       reparto: reparto,
       direccion: direccion,
-      metodo_pago: @negocio.metodo_pago,
-      tipo_envio: @negocio.tipo_entrega,
-      envio: @negocio.costo_envio.to_i
+      metodo_pago: @tienda.metodo_pago,
+      tipo_envio: @tienda.tipo_entrega,
+      envio: @tienda.costo_envio.to_i
     }
 
     @prods = Array.new
     
     @categorias = @productos.pluck(:categoria).uniq.compact
-    @higiene = @negocio.condiciones_higiene.split(/\s*,\s*/)
-    @horario = @negocio.horario.split(/\s*,\s*/)
+    @higiene = @tienda.condiciones_higiene.split(/\s*,\s*/)
+    @horario = @tienda.horario.split(/\s*,\s*/)
     
     @categorias.each_with_index do |cat, index|
-      productos = @productos.where(user_id: @negocio.user_id, categoria: cat)
+      productos = @productos.where(user_id: @tienda.user_id, categoria: cat)
       item = {
         id: cat,
         nombre: cat,

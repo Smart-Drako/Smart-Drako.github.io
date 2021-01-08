@@ -1,22 +1,22 @@
 <div class="col-12 pt-20">
   <div class="row">
     <div class="col-6 col-md-2 align-self-center">
-      <img src="<%=@negocio.logo%>" class="img-thumbnail img-fluid">
+      <img src="<%=@tienda.logo%>" class="img-thumbnail img-fluid">
       <input type="hidden" id="datos_empresa" value="<%=@datos_empresa.to_json%>">
     </div>
     <div class="col-6 col-md-4 align-self-center">
-      <h5><%=@negocio.nombre%></h5>
-      <%if @negocio.mostrar_direccion == true %>
-        <p><%=@negocio.direccion%></p>
+      <h5><%=@tienda.nombre%></h5>
+      <%if @tienda.mostrar_direccion == true %>
+        <p><%=@tienda.direccion%></p>
       <%end%>
-      <input type="hidden" id="negocio_factura" value="<%=@negocio.factura%>">
-      <input type="hidden" id="negocio_anuncio" value="<%=@negocio.aviso%>">
-      <input type="hidden" id="negocio_nombre" value="<%=@negocio.nombre%>">
+      <input type="hidden" id="negocio_factura" value="<%=@tienda.factura%>">
+      <input type="hidden" id="negocio_anuncio" value="<%=@tienda.aviso%>">
+      <input type="hidden" id="negocio_nombre" value="<%=@tienda.nombre%>">
       <div class="align-self-bottom">
-        <a href="<%=@negocio.facebook%>" class="btn-fb" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
-        <a href="https://api.whatsapp.com/send?phone=52<%=@negocio.whatsapp%>" class="btn-wa" target="_blank"><i
+        <a href="<%=@tienda.facebook%>" class="btn-fb" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
+        <a href="https://api.whatsapp.com/send?phone=52<%=@tienda.whatsapp%>" class="btn-wa" target="_blank"><i
             class="fab fa-whatsapp-square fa-2x"></i></a>
-        <a href="tel:+52<%=@negocio.whatsapp%>" class="btn-ph" targer="_blank"><i
+        <a href="tel:+52<%=@tienda.whatsapp%>" class="btn-ph" targer="_blank"><i
             class="fas fa-phone-square fa-2x"></i></a>
       </div>
       <div class="row mt-10 d-none d-md-block">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="col-12 col-md-6 align-self-center">
-      <p class=""><%= @negocio.descripcion %></p>
+      <p class=""><%= @tienda.descripcion %></p>
     </div>
   </div>
   <div class="row">
@@ -51,20 +51,20 @@
         <div class="row">
 
           <div class="col-12 mt-20">
-            <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 1%>
+            <% if @tienda.tipo_entrega.to_i == 3 || @tienda.tipo_entrega.to_i == 1%>
             <div class="col-12">
               <div class="row">
                 <div class="col-12 align-self-center text-center">
                   <h5 class="mb-0">Entrega a domicilio <i class="fas fa-car-side fa-xs color-pink"></i></h5>
-                  <% if @negocio.costo_envio.present?%>
+                  <% if @tienda.costo_envio.present?%>
                   <h6 class="mb-0" style="color:#333"> Costo de envío:
-                    <%= number_to_currency(@negocio.costo_envio, :precision => 2) %></h6>
+                    <%= number_to_currency(@tienda.costo_envio, :precision => 2) %></h6>
                   <%end%>
                 </div>
               </div>
             </div>
             <%end%>
-            <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 2%>
+            <% if @tienda.tipo_entrega.to_i == 3 || @tienda.tipo_entrega.to_i == 2%>
             <div class="col-12 mt-10">
               <div class="row">
                 <div class="col-12 align-self-center text-center">
@@ -76,7 +76,7 @@
           </div>
           <div class="col-12 text-center mt-20">
             <h6><strong>Horario de atención:</strong></h6>
-            <p><%= @negocio.horario%></p>
+            <p><%= @tienda.horario%></p>
           </div>
         </div>
       </div>
@@ -93,7 +93,7 @@
         </div>
         <div class="row">
           <div class="col-12 mt-20">
-            <p class="text-center"><%= @negocio.condiciones_higiene.gsub("\n","<br>\n").html_safe %></p>
+            <p class="text-center"><%= @tienda.condiciones_higiene.gsub("\n","<br>\n").html_safe %></p>
           </div>
         </div>
       </div>
@@ -109,22 +109,22 @@
           </div>
         </div>
         <div class="mt-20 text-center">
-          <p>Compra mínima: <%= number_to_currency(@negocio.compra_minima, :precision => 2) %></p>
+          <p>Compra mínima: <%= number_to_currency(@tienda.compra_minima, :precision => 2) %></p>
           <p class="mb-0">Métodos de pago aceptados:</p>
           <ul style="list-style-type: none;">
-            <% if @negocio.metodo_pago.to_i == 3%>
+            <% if @tienda.metodo_pago.to_i == 3%>
             <li>Efectivo <img src="/images/icono_money.png" alt=""></li>
             <li>Tarjeta <img src="/images/icono_card.png" alt=""></li>
-            <%elsif @negocio.metodo_pago.to_i == 2%>
+            <%elsif @tienda.metodo_pago.to_i == 2%>
             <li>Tarjeta <img src="/images/icono_card.png" alt=""></li>
             <%else%>
             <li>Efectivo <img src="/images/icono_money.png" alt=""></li>
             <%end%>
-            <% if @negocio.beneficiario.present? && @negocio.cuenta.present? && @negocio.banco.present?%>
+            <% if @tienda.beneficiario.present? && @tienda.cuenta.present? && @tienda.banco.present?%>
             <li>Transferencia <img src="/images/icono_transfer.png" alt=""></li>
             <%end%>
           </ul>
-          <% if @negocio.factura == "Si"%>
+          <% if @tienda.factura == "Si"%>
           <p>Facturación disponible <i class="far fa-file-alt color-pink"></i></p>
           <%end%>
         </div>
@@ -145,7 +145,7 @@
 </nav>
 
 <% @prods.each do |cat|%>
-  <%if @negocio.vista_card == false%>
+  <%if @tienda.vista_card == false%>
     <div class="container cont-cat div-cat" id="cat_<%=I18n.transliterate(cat[:id]).delete(' ').remove(".")%>">
       <h4><%= cat[:nombre].titleize%></h4>
       <% cat[:productos].each do |prod|%>
@@ -178,8 +178,8 @@
                       <%if prod.inventario.present? && prod.inventario.to_i == 0%>
                         <button type="button" disabled class="btn btn-sm btn-secondary agotado btn-block">Agotado</button>
                       <%else%>
-                        <% if @negocio.pedidos_restantes > 0 && @negocio.estatus == 1%>
-                          <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>"
+                        <% if @tienda.pedidos_restantes > 0 && @tienda.estatus == 1%>
+                          <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@tienda.id%>" data-id="<%=prod.id%>"
                                   data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-nombre="<%=prod.descripcion%>"
                                   class="btn btn-sm btn-aqua btn-cart-item btn-block">Agregar</button>
                         <% end %>
@@ -258,8 +258,8 @@
                   <%if prod.inventario.present? && prod.inventario.to_i == 0%>
                     <button type="button" disabled class="btn btn-sm btn-secondary agotado">Agotado</button>
                   <%else%>
-                      <% if @negocio.pedidos_restantes > 0 && @negocio.estatus == 1%>
-                        <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@negocio.id%>" data-id="<%=prod.id%>"
+                      <% if @tienda.pedidos_restantes > 0 && @tienda.estatus == 1%>
+                        <button id="btn_add_<%=prod.id%>" type="button" data-negocio-id="<%=@tienda.id%>" data-id="<%=prod.id%>"
                                 data-unidad="<%=prod.unidad%>" data-precio="<%=prod.precio%>" data-inventario="<%=prod.inventario%>" data-nombre="<%=prod.descripcion%>"
                                 class="btn btn-sm btn-aqua btn-cart-item">Agregar</button>
                       <% end %>
