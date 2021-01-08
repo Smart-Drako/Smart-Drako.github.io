@@ -152,8 +152,6 @@ class ProductosController < ApplicationController
     @prods = Array.new
     
     @categorias = @productos.pluck(:categoria).uniq.compact
-    @higiene = @negocio.condiciones_higiene.split(/\s*,\s*/)
-    @horario = @negocio.horario.split(/\s*,\s*/)
     
     @categorias.each_with_index do |cat, index|
       productos = @productos.where(user_id: @negocio.user_id, categoria: cat)

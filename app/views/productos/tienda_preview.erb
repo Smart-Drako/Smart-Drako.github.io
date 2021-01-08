@@ -98,7 +98,9 @@
         </div>
         <div class="row">
           <div class="col-12 mt-20">
-            <p class="text-center"><%= @negocio.condiciones_higiene.gsub("\n","<br>\n").html_safe %></p>
+            <%if @negocio.condiciones_higiene.present?%>
+              <p class="text-center"><%= @negocio.condiciones_higiene.gsub("\n","<br>\n").html_safe %></p>
+            <%end>
           </div>
         </div>
       </div>
