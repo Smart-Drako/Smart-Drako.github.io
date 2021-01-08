@@ -111,6 +111,61 @@ class ProductosController < ApplicationController
     # end
   end
 
+
+  def tienda_preview
+    @ocultar_menu = true
+    if current_user.present?
+      id = current_user.id
+    else
+      redirect_to me_path and return
+    end
+    
+    @negocio = ConfigUser.find_by(id: id)
+    @productos = Producto.where(user_id: @negocio.user_id).order('categoria, descripcion') if @negocio.present?
+
+
+    vencimiento = vencimiento_cuenta(@negocio) if @negocio.present?
+
+    redirect_to '/' and return if @negocio.nil?
+    redirect_to '/' and return if @negocio.activo == 0
+
+    @page_title = "#{@negocio.nombre}"
+
+    @tags = {
+      title: @negocio.nombre,
+      description: @negocio.descripcion
+    }
+
+    @tag_image = @negocio.logo if @negocio.logo.present?
+
+    reparto = (@negocio.reparto.present? && @negocio.reparto == "ZAS Reparto" && @negocio.reparto_activo == true) ? true : false
+    direccion = "#{@negocio.direccion}, #{@negocio.ciudad}"
+
+    @datos_empresa = {
+      reparto: reparto,
+      direccion: direccion,
+      metodo_pago: @negocio.metodo_pago,
+      tipo_envio: @negocio.tipo_entrega,
+      envio: @negocio.costo_envio.to_i
+    }
+
+    @prods = Array.new
+    
+    @categorias = @productos.pluck(:categoria).uniq.compact
+    @higiene = @negocio.condiciones_higiene.split(/\s*,\s*/)
+    @horario = @negocio.horario.split(/\s*,\s*/)
+    
+    @categorias.each_with_index do |cat, index|
+      productos = @productos.where(user_id: @negocio.user_id, categoria: cat)
+      item = {
+        id: cat,
+        nombre: cat,
+        productos: productos
+      }
+      @prods.push(item)
+    end
+  end
+
   # POST /productos
   # POST /productos.json
   def create

@@ -10,6 +10,17 @@ Paloma.controller 'Productos', tienda: ->
   login = $("#btn_login")
   login.remove()
 
+Paloma.controller 'Productos', tienda_preview: ->
+  # $("#cat-nav").hide()
+  # $(".div-cat").hide()
+  $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
+  $("#btn-cart_float").removeClass("d-md-block")
+  $(".item-cantidades, .span-unidad").hide()
+  #Cargarlos si estan ya en localStorage
+  cargar_productos()
+  login = $("#btn_login")
+  login.remove()
+
 Paloma.controller 'Productos', new: ->
   $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
   $("#btn-cart_float").removeClass("d-md-block")

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/me", to: "home#cuenta"
   get "/plan", to: "home#plan"
   get "socios/:id", to: "productos#tienda"
+  get "preview", to: "productos#tienda_preview"
   get "/admin_efra", to: "home#admin_efra"
   # Programas y recomendados
   get "/programas", to: "programas#index"

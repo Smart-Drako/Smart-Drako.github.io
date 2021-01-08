@@ -1,0 +1,284 @@
+<div class="col-12 pt-20">
+  <div class="row">
+    <div class="col-12 mb-10 text-left text-sm-right">
+    <a href="/me" class="btn btn-sm btn-aqua">Cerrar Vista Previa</a>
+    </div>
+    </div>
+  <div class="row">
+    <div class="col-6 col-md-2 align-self-center">
+      <img src="<%=@negocio.logo%>" class="img-thumbnail img-fluid">
+      <input type="hidden" id="datos_empresa" value="<%=@datos_empresa.to_json%>">
+    </div>
+    <div class="col-6 col-md-4 align-self-center">
+      <h5><%=@negocio.nombre%></h5>
+      <%if @negocio.mostrar_direccion == true %>
+        <p><%=@negocio.direccion%></p>
+      <%end%>
+      <input type="hidden" id="negocio_factura" value="<%=@negocio.factura%>">
+      <input type="hidden" id="negocio_anuncio" value="<%=@negocio.aviso%>">
+      <input type="hidden" id="negocio_nombre" value="<%=@negocio.nombre%>">
+      <div class="align-self-bottom">
+        <a href="<%=@negocio.facebook%>" class="btn-fb" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
+        <a href="https://api.whatsapp.com/send?phone=52<%=@negocio.whatsapp%>" class="btn-wa" target="_blank"><i
+            class="fab fa-whatsapp-square fa-2x"></i></a>
+        <a href="tel:+52<%=@negocio.whatsapp%>" class="btn-ph" targer="_blank"><i
+            class="fas fa-phone-square fa-2x"></i></a>
+      </div>
+      <div class="row mt-10 d-none d-md-block">
+        <a href="#cat-nav" id="ver_prod_web" class="btn btn-pink bg-pica">Realizar Pedido</a>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 align-self-center">
+      <p class=""><%= @negocio.descripcion %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <a href="#cat-nav" id="ver_prod_movil" class="btn btn-pink-alt mt-10 d-block d-md-none">Realizar Pedido</a>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="container cont-cat" id="info_proveedor">
+  <div class="card-deck">
+    <div class="card card-rounded">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-2 align-self-center">
+            <img src="/images/icono_entrega.png" class="img-fluid">
+          </div>
+          <div class="col-10 align-self-center">
+            <h5 class="card-title mb-0 color-pink">Condiciones de Entrega</h5>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-12 mt-20">
+            <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 1%>
+            <div class="col-12">
+              <div class="row">
+                <div class="col-12 align-self-center text-center">
+                  <h5 class="mb-0">Entrega a domicilio <i class="fas fa-car-side fa-xs color-pink"></i></h5>
+                  <% if @negocio.costo_envio.present?%>
+                  <h6 class="mb-0" style="color:#333"> Costo de envío:
+                    <%= number_to_currency(@negocio.costo_envio, :precision => 2) %></h6>
+                  <%end%>
+                </div>
+              </div>
+            </div>
+            <%end%>
+            <% if @negocio.tipo_entrega.to_i == 3 || @negocio.tipo_entrega.to_i == 2%>
+            <div class="col-12 mt-10">
+              <div class="row">
+                <div class="col-12 align-self-center text-center">
+                  <h5 class="mb-0">Pasar y recoger <i class="fas fa-store fa-xs color-pink"></i></h5>
+                </div>
+              </div>
+            </div>
+            <%end%>
+          </div>
+          <div class="col-12 text-center mt-20">
+            <h6><strong>Horario de atención:</strong></h6>
+            <p><%= @negocio.horario%></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-rounded">
+      <div class="card-body">
+        <div class="row ">
+          <div class="col-2 align-self-center">
+            <img src="/images/icono_higiene.png" class="img-fluid">
+          </div>
+          <div class="col-10 align-self-center">
+            <h5 class="card-title mb-0 color-pink">Medidas de Higiene</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 mt-20">
+            <p class="text-center"><%= @negocio.condiciones_higiene.gsub("\n","<br>\n").html_safe %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-rounded">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-2 align-self-center">
+            <img src="/images/icono_compra.png" class="img-fluid">
+          </div>
+          <div class="col-10 align-self-center">
+            <h5 class="card-title mb-0 color-pink">Condiciones de Compra</h5>
+          </div>
+        </div>
+        <div class="mt-20 text-center">
+          <p>Compra mínima: <%= number_to_currency(@negocio.compra_minima, :precision => 2) %></p>
+          <p class="mb-0">Métodos de pago aceptados:</p>
+          <ul style="list-style-type: none;">
+            <% if @negocio.metodo_pago.to_i == 3%>
+            <li>Efectivo <img src="/images/icono_money.png" alt=""></li>
+            <li>Tarjeta <img src="/images/icono_card.png" alt=""></li>
+            <%elsif @negocio.metodo_pago.to_i == 2%>
+            <li>Tarjeta <img src="/images/icono_card.png" alt=""></li>
+            <%else%>
+            <li>Efectivo <img src="/images/icono_money.png" alt=""></li>
+            <%end%>
+            <% if @negocio.beneficiario.present? && @negocio.cuenta.present? && @negocio.banco.present?%>
+            <li>Transferencia <img src="/images/icono_transfer.png" alt=""></li>
+            <%end%>
+          </ul>
+          <% if @negocio.factura == "Si"%>
+          <p>Facturación disponible <i class="far fa-file-alt color-pink"></i></p>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand <%=  browser.platform.ios? ? '' : 'sticky-top'%>" id="cat-nav">
+  <ul class="navbar-nav scrollable-content d-flex h-100">
+    <% @categorias.each_with_index do |cat,i|%>
+    <li class="nav-item ilb">
+      <a data-turbolinks="false" class="<%=i == 0 ? 'nav-link active' : 'nav-link' %>"
+        href="#cat_<%= I18n.transliterate(cat).delete(' ').remove(".") %>"><%= cat.upcase %></a>
+    </li>
+    <%end%>
+  </ul>
+</nav>
+
+<% @prods.each do |cat|%>
+  <%if @negocio.vista_card == false%>
+    <div class="container cont-cat div-cat" id="cat_<%=I18n.transliterate(cat[:id]).delete(' ').remove(".")%>">
+      <h4><%= cat[:nombre].titleize%></h4>
+      <% cat[:productos].each do |prod|%>
+          <div class="lista-item row borders-item <%= prod.inventario.present? && prod.inventario.to_i == 0 ? "agotado" : ""%>">
+            <div class="col-2 align-self-center text-center" style="padding:0px">
+              <%if prod.foto.present?%>
+              <img src="<%= prod.foto[0].thumb %>" class="img-responsive img-prod">
+              <%end%>
+            </div>
+            <div class="col-10 align-self-center pad-5">
+              <div class="col-12 no-padding">
+                <p class="mb-0 prod-descr"><%=prod.descripcion.titleize%></p>
+                <%if prod.descripcion2.present?%>
+                <p class="mb-0 prod-descr-2 text-muted"><%=prod.descripcion2.downcase%></p>
+                <%end%>
+              </div>
+              <div class="row">
+                <div class="col-5 col-md-8 align-self-end" style="padding-right:0px;">
+                  <%if prod.precio.to_f <= 0%>
+                  <p class="mb-0 precio"><strong><%=prod.unidad%></span></strong></p>
+                  <%else%>
+                  <p class="mb-0 precio"><strong><%=number_to_currency(prod.precio)%><span class=""> /
+                        <%=prod.unidad%></span></strong>
+                  </p>
+                  <%end%>
+                </div>
+                <div class="col-7 col-md-4">
+                  <div class="row">
+                    <div class="col-9 col-md-9" style="padding-right:0px;">
+                          <button id="btn_add_<%=prod.id%>" type="button" class="btn btn-sm btn-aqua btn-block">Agregar</button>
+                      <div class="item-cantidades input-group input-group-sm" style="width: auto;">
+                      </div>
+                    </div>
+                    <div class="col-3 col-md-3 align-self-center" style="padding: 2px;">
+                      <div class="align-self-center" style="padding-left: 2px; font-size: 0.8rem;">
+                        <span id="span_unidad_<%=prod.id%>" class="span-unidad"> <%=prod.unidad[0..2]%></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+      <%end%>
+    </div>
+  <%else%>
+      <div class="container cont-cat div-cat" id="cat_<%=I18n.transliterate(cat[:id]).delete(' ').remove(".")%>">
+        <h3><%= cat[:nombre].titleize%></h3>
+        <hr>
+        <div class="row">
+          <% cat[:productos].each_with_index do |prod,ind_prod|%>
+            <div class="col-12 col-md-3">
+              <div class="card mb-40">
+                <div id="<%= "#{cat[:nombre].capitalize}_#{ind_prod}"%>" class="carousel slide card-img-top" data-ride="carousel">
+
+                  <!-- Indicators -->
+                  <ul class="carousel-indicators">
+                    <% prod.foto.each_with_index do |fot, fot_inx|%>
+                      <li data-target="#<%= "#{cat[:nombre].capitalize}_#{ind_prod}"%>" data-slide-to="<%=fot_inx%>"></li>
+                    <%end%>
+                  </ul>
+                  
+                  <!-- The slideshow -->
+                  <div class="carousel-inner">
+                    <% prod.foto.each_with_index do |fot, fot_inx|%>
+                      <%if fot_inx == 0%>
+                        <div class="carousel-item active">
+                      <%else%>
+                        <div class="carousel-item">
+                      <%end%>
+                        <a href="#" class="pop">
+                          <img src="<%= fot %>" class="img-responsive">
+                        </a>
+                      </div>
+                    <%end%>
+                  </div>
+                  
+                  <!-- Left and right controls -->
+                  <a class="carousel-control-prev" href="#<%= "#{cat[:nombre].capitalize}_#{ind_prod}"%>" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                  </a>
+                  <a class="carousel-control-next" href="#<%= "#{cat[:nombre].capitalize}_#{ind_prod}"%>" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"><%=prod.descripcion.titleize%></h5>
+                  <p class="card-text"><%=number_to_currency(prod.precio)%>/<%=prod.unidad%></p>
+                  <p class="card-text"><%=prod.descripcion2.titleize%></p>
+                  <div class="card-text text-center">
+                        <button id="btn_add_<%=prod.id%>" type="button"
+                                class="btn btn-sm btn-aqua">Agregar</button>
+
+                  </div>
+                  <div class="item-cantidades input-group input-group-sm mx-auto" style="width: 40%">
+                  </div>
+                </div>
+              </div>
+            </div>
+          <%end%>
+        </div>
+      </div>
+  <%end%>
+<%end%>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="imagemodal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <img src="" id="imagepreview">
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,11 +4,16 @@
       <%= @vencimiento %>
     </div>
   <%end%>
+
+  <div class="row">
+    <div class="col-12">
+      <a href="/preview" class="btn btn-sm btn-aqua float-right">Vista Previa</a>
+    </div>
+  </div>
   
   <div class="row">
-    <h2 class="col-md-12">Configuración</h2>
+    <h2 class="col-12">Configuración</h2>
   </div>
-
 
   <input type="hidden" id="ciudad_user" value="<%=@config_user.ciudad%>">
 
