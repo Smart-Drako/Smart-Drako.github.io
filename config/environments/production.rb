@@ -104,7 +104,7 @@ Rails.application.configure do
     port:                 587,
     domain:               'google.com',
     user_name:            'pideloencasamx@gmail.com',
-    password:             ENV['PIDELOENCASA_MAIL_PASSWORD'],
+    password:             'n$tnBe#H2k50',
     authentication:       'plain',
     enable_starttls_auto: true
   }
