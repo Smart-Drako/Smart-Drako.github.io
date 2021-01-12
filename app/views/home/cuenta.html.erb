@@ -90,9 +90,13 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <label for="inputZip">Mostrar Tu Dirección a Clientes</label>
                 <%= f.select(:mostrar_direccion, options_for_select(@mostrar_dir,@config_user.mostrar_direccion), {:include_blank => nil }, :class => 'form-control') %>
+              </div>
+              <div class="col-md-6">
+                <label for="inputZip">Recibir pedidos por Whatsapp</label>
+                <%= f.select(:recibir_whatsapp, options_for_select(@mostrar_dir,@config_user.recibir_whatsapp), {:include_blank => nil }, :class => 'form-control') %>
               </div>
             </div>
           </div>

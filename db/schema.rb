@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_23_174349) do
+ActiveRecord::Schema.define(version: 2021_01_12_042929) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2020_12_23_174349) do
     t.string "reparto"
     t.boolean "reparto_activo", default: false
     t.boolean "mostrar_direccion", default: false
+    t.boolean "recibir_whatsapp", default: false
     t.boolean "pago_activo", default: false
     t.boolean "pago_linea", default: false
     t.datetime "created_at", null: false
@@ -74,6 +75,16 @@ ActiveRecord::Schema.define(version: 2020_12_23_174349) do
     t.string "ciudad"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pagos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "pedido_id"
+    t.datetime "fecha_pago"
+    t.string "cliente_email"
+    t.json "info_pago"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pedido_id"], name: "index_pagos_on_pedido_id"
   end
 
   create_table "pedidos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
