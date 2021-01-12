@@ -688,7 +688,10 @@ procesar_pedido = ->
       $("#submit_pedido").attr("disabled", false).html("Confirmar Pedido")
       if data.error == false
         borrar_pedido()
-        $("#notifPedidoModal").modal()
+        if data.link_wa != undefined
+          window.location.replace(data.link_wa);
+        else
+          $("#notifPedidoModal").modal()
       else
         console.log "Ocurrió un error al generar el pedido"
 

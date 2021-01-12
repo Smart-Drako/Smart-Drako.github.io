@@ -187,9 +187,6 @@ class PedidosController < ApplicationController
       render json: {error: true, mensaje:"No se pudo enviar la solicitud a ZAS Reparto"} and return
     end
 
-
-    
-    
   end
 
   def calcular_envio(origen = nil ,destino = nil, local = false)
@@ -276,8 +273,15 @@ class PedidosController < ApplicationController
           end
         end
         restar_creditos(empresa)
-        enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
-        render json: {error: false, mensaje: "Pedido procesado correctamente"} and return
+        # enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
+
+        if empresa.recibir_whatsapp == true
+          mensaje = "*Nuevo Pedido: #{pedido.numero}* %0D%0A%0D%0A Cliente: #{pedido.cliente_nombre} %0D%0A Total Pedido: #{number_to_currency(pedido.total, :precision => 2)} %0D%0A%0D%0A Ver pedido: %0D%0A #{link_pedido(pedido)}"
+          link_wa = "https://api.whatsapp.com/send?phone=52#{empresa.whatsapp}&text=#{mensaje}"
+          render json: {error: false, mensaje: "Pedido procesado correctamente", link_wa: link_wa} and return
+        else
+          render json: {error: false, mensaje: "Pedido procesado correctamente"} and return
+        end
       else
         render json: {error: true, mensaje: "Ocurrio un error al procesar el pedido"} and return
       end
