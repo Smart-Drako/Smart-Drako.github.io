@@ -273,7 +273,7 @@ class PedidosController < ApplicationController
           end
         end
         restar_creditos(empresa)
-        # enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
+        enviar_correo(cliente["correo"], pedido, empresa) if empresa.present?
 
         if empresa.recibir_whatsapp == true
           mensaje = "*Nuevo Pedido: #{pedido.numero}* %0D%0A%0D%0A Cliente: #{pedido.cliente_nombre} %0D%0A Total Pedido: #{number_to_currency(pedido.total, :precision => 2)} %0D%0A%0D%0A Ver pedido: %0D%0A #{link_pedido(pedido)}"
