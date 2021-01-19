@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get  "/exportar", to: "productos#exportar"
   get "/ver_pedido/:id", to: "pedidos#ver_pedido"
   get "descargar_pdf/:id/", to: "pedidos#descargar_pdf", as: "descargar_pdf"
+  get "descargar_qr/:id/", to: "home#descargar_qr", as: "descargar_qr" 
   post "/borrar_imagen", to: "productos#borrar_imagen", as: "borrar_imagen"
   get "/recrear_fotos", to: "productos#recrear_fotos", as: "recrear_fotos"
   get "/reportes", to: "reportes#index", as: "reportes"
