@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS only -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+  body{
+    width: 1125px;
+    height: 1400px;
+  }
+  .qr{
+    width: 60%;
+    box-shadow: 0px 5px 50px rgba(0,0,0,.9);
+  
+  
+  min-height: 200px;
+  width: 50vw;
+  margin: 50px auto;
+  background: white;
+  border-radius: 5px;
+}
+  
+  .titulo{
+    font-size: 4rem;
+    margin-top: 0px;
+  }
+  .descripcion{
+    font-size: 2.6rem;
+  }
+  .big{
+    font-size: 5.7rem;
+    margin-bottom: 2px;
+    padding-bottom: 0px;
+  }
+  .mt-90{
+    margin-top: 90px;
+  }
+  body{
+    /* background: #c8c8c8; */
+    color: #282828 !important;
+    font-family: 'Poppins', sans-serif;
+
+  }
+  .flecha{
+    position: absolute;
+    right: 140px;
+    top: 420px;
+  }
+  .bg-pica{
+    background: #8A2387;  /* fallback for old browsers */
+    background: -webkit-linear-gradient( #E94057, #8A2387);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient( #E94057, #8A2387); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+</style>
+</head>
+<body >
+  <div class="container mt-90">
+    <div class="row">
+      <div class="col-3 col-xs-3">
+        <img src="<%=@empresa.logo.path%>" class="img-thumbnail img-fluid" style="width:200px; height:200px;">
+      </div>
+      <div class="col-9 col-xs-9">
+        <h1 class="titulo"><strong><%=@empresa.nombre%></strong></h1> <br>
+        <p class="descripcion"><%=@empresa.descripcion%></p> 
+      </div>
+    </div>
+    <img src="https://i.ibb.co/LCksYtX/flecha.png" class="flecha" alt="">
+    <div class="row"><br><br>
+      <div class="col-12 col-xs-12 text-center mt-20"><br>
+        <h1 class="big"> <strong>Escanea y pide en línea</strong></h1>
+      </div>
+    </div>
+    <div class="row mt-0">
+      <div class="col-12 text-center">
+        <%= image_tag @qr, :class => "qr" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 text-center">
+        <img src="https://i.ibb.co/NFrQhH9/instrucciones.png" alt="" style="width:100%;">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 text-center" style="margin-top:50px;">
+        <img src="https://i.ibb.co/dP8ZGgL/powerby.png" class="d-inline-block align-top" alt="">
+      </div>
+    </div>
+  </div>
+</body>
+</html>
