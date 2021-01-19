@@ -214,25 +214,29 @@
           </div>
         </div>
 
-      <div class="text-center form-group">
+      <div class="text-center form-group mb-5">
         <button class="btn btn-aqua btn-lg" type="submit">Actualizar</button>
       </div>
       <%end%>
 
       
-      <div class="text-center form-row">
-        <div class="col-md-2"></div>
-        <div class="col-12 col-md-12 col-lg-4 mb-3">
-          <p>Link para clientes <button class="btn" type="button" data-toggle="popover" title="Link Clientes" data-html="true" data-content="Comparte con tus clientes el link de tu tienda en línea para que comiences a recibir pedidos en línea. <br><br>PRO Tip: Incluye este link en cada una de las publicaciones que hagas en tus redes sociales." data-trigger="focus"><i class="fas fa-question-circle"></i></button></p>
-          <input type="text" class="form-control" value="<%=@link_compartir%>" id="link_cliente" disabled> <br>
+      <div class="text-center form-row ">
+        <div class="col-md-3"></div>
+        <div class="col-12 col-md-2 mb-3">
+          <p>Link de tu catálogo <button class="btn" type="button" data-toggle="popover" title="Link Clientes" data-html="true" data-content="Comparte con tus clientes el link de tu tienda en línea para que comiences a recibir pedidos en línea. <br><br>PRO Tip: Incluye este link en cada una de las publicaciones que hagas en tus redes sociales." data-trigger="focus"><i class="fas fa-question-circle"></i></button></p>
+          <input type="text" class="form-control d-none" value="<%=@link_compartir%>" id="link_cliente" disabled>
           <button type="button" class="btn btn-sm btn-secondary" id="copiar_cliente" onclick="copyRef2()" onmouseout="outFuncRef2()">Copiar link</button>
         </div>
-        <div class="col-12 col-md-12 col-lg-4 mb-3">
-          <p>Link programa embajadores <button class="btn" type="button" data-toggle="popover" title="Programa Embajadores" data-html="true" data-content="Gana dinero recomendando pideloencasa.mx a tus conocidos. <br><br>PRO Tip: Comparte tu link personalizado para que podamos relacionar tus recomendados a tu cuenta." data-trigger="focus"><i class="fas fa-question-circle"></i></button></p>
-          <input type="text" class="form-control" value="<%=@link_recomendado%>" id="link_recomendado" disabled> <br>
+        <div class="col-12 col-md-2 mb-3">
+          <p>QR de tu catálogo <button class="btn" type="button" data-toggle="popover" title="Código QR" data-html="true" data-content="Descarga el QR personalizado de tu catálogo digital para que lo publiques o lo imprimas para ser repartido con clientes prospectos." data-trigger="focus"><i class="fas fa-question-circle"></i></button></p>
+          <a href="/descargar_qr/<%=@config_user.id%>.png" target="_blank" class="btn btn-sm btn-secondary">Descargar QR</a>
+          
+        </div>
+        <div class="col-12 col-md-2 mb-3">
+          <p>Programa embajadores <button class="btn" type="button" data-toggle="popover" title="Programa Embajadores" data-html="true" data-content="Gana dinero recomendando pideloencasa.mx a tus conocidos. <br><br>PRO Tip: Comparte tu link personalizado para que podamos relacionar tus recomendados a tu cuenta." data-trigger="focus"><i class="fas fa-question-circle"></i></button></p>
+          <input type="text" class="form-control d-none" value="<%=@link_recomendado%>" id="link_recomendado" disabled>
           <button type="button" class="btn btn-sm btn-secondary" id="copiar_recomendado" onclick="copyRef(1)" onmouseout="outFuncRef()">Copiar link</button>
         </div>
-        <div class="col-md-2"></div>
       </div>
     </div>
   </div>
