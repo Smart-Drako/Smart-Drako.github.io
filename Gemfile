@@ -61,6 +61,12 @@ gem "mini_magick"
 # Gem for time difference
 gem 'time_difference'
 
+#QR
+gem 'rqrcode'
+gem 'rmagick'
+gem 'imgkit'
+gem 'wkhtmltoimage-binary', '0.12.5'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
