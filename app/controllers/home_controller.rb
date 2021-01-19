@@ -102,6 +102,72 @@ class HomeController < ApplicationController
     @bancos = [["Banbajío", "Banbajío"],["Banco Azteca", "Banco Azteca"] , ["Banorte", "Banorte"], ["Bancoppel", "Bancoppel"], ["Banregio", "Banregio"], ["BBVA Bancomer", "BBVA Bancomer"], ["Citibanamex", "Citibanamex"], ["HSBC", "HSBC"],["Inbursa","Inbursa"], ["Santander", "Santander"], ["Scotiabank", "Scotiabank"]]
   end
 
+  def codigo_qr(id = 0)
+    if id == 0
+      id = params[:id]
+    end
+    @empresa = ConfigUser.find(params[:id])
+    @qr =  generar_qr(@empresa)
+  end
+
+  def descargar_qr
+    @empresa = ConfigUser.find(params[:id])
+    @qr =  generar_qr(@empresa)
+    qr_pdf = crear_qr_pdf(@empresa) if params[:format] == "pdf"
+    qr_png = crear_qr_png(@empresa) if params[:format] == "png"
+    respond_to do |format|
+      format.html
+      format.png { send_data qr_png, :filename => 'qr.png', :disposition => "inline",:type => "image/png"}
+      format.pdf { send_data qr_pdf, :filename => 'qr.pdf', :disposition => "inline",:type => "application/pdf"}
+    end
+    # render :layout => nil
+  end
+
+  def crear_qr_png(empresa) 
+    codigo_qr(empresa)
+    kit = IMGKit.new(render_to_string('home/codigo_qr.html.erb', :layout => 'pedido.html.erb'),encoding: 'utf8')
+    kit.to_png
+  end
+
+  def crear_qr_pdf(empresa)
+    codigo_qr(empresa)
+    pdf = WickedPdf.new.pdf_from_string(
+      render_to_string('home/codigo_qr.html.erb', :layout => 'pedido.html.erb'), print_media_type: true,
+      margin:  { top: 1, bottom: 10, left: 2, right: 2},
+      page_size: "Letter",
+      disable_smart_shrinking: false,
+      encoding: 'utf8'
+        )
+    pdf
+  end
+
+  def generar_qr(empresa)
+
+    require 'rqrcode'
+
+    link = generar_link_compartir(empresa)
+    # link = "https://pideloencasa.mx/socios/Gustavo-Martinez-DeliFruitMercado"
+
+    qrcode = RQRCode::QRCode.new(link)
+
+    # NOTE: showing with default options specified explicitly
+    png = qrcode.as_png(
+      bit_depth: 1,
+      border_modules: 1,
+      color_mode: ChunkyPNG::Color,
+      color: '#282828',
+      file: nil,
+      fill: '#ffffff',
+      module_px_size: 6,
+      resize_exactly_to: false,
+      resize_gte_to: false,
+      size: 1024
+    )
+
+    png.to_data_url
+    
+  end
+
   def plan
     @page_title = "Mi Plan"
     @config_user = ConfigUser.find_by(user_id: current_user.id)
