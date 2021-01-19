@@ -1,3 +1,3 @@
 IMGKit.configure do |config|
-  config.wkhtmltoimage = '/home/deploy/.rbenv/shims/wkhtmltoimage'
+  config.wkhtmltoimage =   (Rails.env.production? ? '/usr/local/bin/wkhtmltoimage' : '/home/deploy/.rbenv/shims/wkhtmltoimage')
 end
