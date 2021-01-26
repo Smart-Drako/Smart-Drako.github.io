@@ -1154,3 +1154,9 @@ li.nav-item.active>.nav-link {
 .link-color{
   color: #007bff !important;
 }
+
+.requerido::before{
+  content: "* ";
+  color: #dc3545!important;
+  padding-right: 2px;
+}

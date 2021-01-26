@@ -1,43 +1,43 @@
-<div class="row">
+<div class="row mt-20">
   <div class="col-8 offset-2">
     <%= form_with(model: producto, local: true, html: {class: '', autocomplete: "off"}) do |form| %>
       <div class="form-row">
         <div class="form-group col-md-2">
-          <label for="producto_codigo">SKU</label>
+          <label for="producto_codigo">SKU <button class="btn btn-sm" type="button" data-toggle="popover" data-html="true" data-content="Número de identificación interna" data-trigger="focus"><i class="fas fa-question-circle"></i></button></label>
           <%= form.text_field :codigo, autofocus: true, class:"form-control" %>
         </div>
         <div class="form-group col-md-4">
-          <label for="producto_descripcion">Título</label>
-          <%= form.text_field :descripcion, class:"form-control" %>
+          <label for="producto_descripcion" class="requerido">Título <button class="btn btn-sm" type="button" data-toggle="popover" data-html="true" data-content=" Nombre o descripción general de tu producto" data-trigger="focus"><i class="fas fa-question-circle"></i></button></label>
+          <%= form.text_field :descripcion, class:"form-control", required:"required" %>
         </div>
         <div class="form-group col-md-4">
-          <label for="producto_descripcion2">Descripción</label>
+          <label for="producto_descripcion2">Descripción <button class="btn btn-sm" type="button" data-toggle="popover" data-html="true" data-content="Descripción mas detallada de tu producto" data-trigger="focus"><i class="fas fa-question-circle"></i></button></label>
           <%= form.text_field :descripcion2, class:"form-control" %>
         </div>
         <div class="form-group col-md-2">
-          <%= form.label :categoria %>
-          <%= form.text_field :categoria, class:"form-control" %>
+          <label class="requerido">Categoría <button class="btn btn-sm" type="button" data-toggle="popover" data-html="true" data-content="Divide los productos de tu catálogo en categorías para que tus clientes los identifiquen mas facilmente" data-trigger="focus"><i class="fas fa-question-circle"></i></button></label>
+          <%= form.text_field :categoria, class:"form-control", required:"required" %>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-2">
-          <%= form.label :unidad %>
-          <%= form.text_field :unidad, class:"form-control", maxLength: 3 %>
+          <label class="requerido">Unidad <button class="btn btn-sm" type="button" data-toggle="popover" data-html="true" data-content="Unidad de medida de tus productos (hasta 3 caracteres)" data-trigger="focus"><i class="fas fa-question-circle"></i></button></label>
+          <%= form.text_field :unidad, class:"form-control", maxLength: 3, required:"required" %>
         </div>
         <div class="form-group col-md-2">
-          <%= form.label :precio %>
-          <%= form.text_field :precio, class:"form-control numeros" %>
+          <label class="requerido">Precio <button style="cursor: default;" class="btn btn-sm" type="button" disabled><i class="fas fa-question-circle invisible"></i></button></label>
+          <%= form.text_field :precio, class:"form-control numeros", required:"required" %>
         </div>
         <div class="form-group col-md-2 d-none">
-          <%= form.label :impuesto %>
+          <label class="requerido">Impuesto</label>
           <%= form.text_field :impuesto, class:"form-control" %>
         </div>
         <div class="form-group col-md-2">
-          <%= form.label :inventario %>
+          <label>Inventario <button class="btn btn-sm" type="button" data-toggle="popover" data-html="true" data-content="Si deseas que se descuenten los productos a medida que te piden, pon el numero de inventario o stock de ese producto" data-trigger="focus"><i class="fas fa-question-circle"></i></button></label>
           <%= form.text_field :inventario, class:"form-control numeros" %>
         </div>
         <div class="form-group col-md-3">
-          <%= form.label :proveedor %>
+          <label>Proveedor <button class="btn btn-sm" type="button" data-toggle="popover" data-html="true" data-content="Si deseas hacer análisis de los pedidos de tus diferentes proveedores, escribe el proveedor" data-trigger="focus"><i class="fas fa-question-circle"></i></button></label>
           <%= form.text_field :proveedor, class:"form-control" %>
         </div>
       </div>
@@ -47,8 +47,12 @@
           <% producto.foto.each do |foto| %>
             <%= hidden_field :producto, :foto, multiple: true, value: foto.identifier, id: foto.identifier %>
           <% end %>
-          <%= form.label :foto %>
-          <%= form.file_field :foto, multiple: true , class:"form-control" %>
+          <label class="requerido">Foto <button class="btn btn-sm" type="button" data-toggle="popover" data-html="true" data-content="Puedes cargar mas de 1 imagen, haz click en guardar siempre que cargues una foto" data-trigger="focus"><i class="fas fa-question-circle"></i></button></label>
+          <%if producto.foto[0].present?%>
+            <%= form.file_field :foto, multiple: true , class:"form-control" %>
+          <%else%>
+            <%= form.file_field :foto, multiple: true , class:"form-control", required:"required" %>
+          <%end%>
         </div>
         <div class="from-group col-md-8 mb-20">
           <%if !producto.foto.nil?%>
