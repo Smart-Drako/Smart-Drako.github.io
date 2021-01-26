@@ -120,7 +120,7 @@ class ProductosController < ApplicationController
       redirect_to me_path and return
     end
     
-    @negocio = ConfigUser.find_by(id: id)
+    @negocio = ConfigUser.find_by(user_id: id)
     @productos = Producto.where(user_id: @negocio.user_id).order('categoria, descripcion') if @negocio.present?
 
 
