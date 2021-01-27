@@ -47,7 +47,7 @@
               <td><%= producto.descripcion %></td>
               <td><%= producto.descripcion2 %></td>
               <td><%= producto.unidad %></td>
-              <td><%= producto.precio %></td>
+              <td><%= producto.precio.to_f.round(2) %></td>
               <td><%= producto.inventario %></td>
               <%if producto.foto.present?%>
                 <td class="text-center"><img id="img_producto" src="<%= producto.foto[0].thumb %>" class="img-thumbnail foto-mini-lista"></td>
