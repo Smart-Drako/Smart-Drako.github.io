@@ -34,7 +34,6 @@
             <th>Unidad</th>
             <th>Precio</th>
             <th>Inventario</th>
-            <th>Proveedor</th>
             <th>Foto</th>
             <th></th>
           </tr>
@@ -50,7 +49,6 @@
               <td><%= producto.unidad %></td>
               <td><%= producto.precio %></td>
               <td><%= producto.inventario %></td>
-              <td><%= producto.proveedor %></td>
               <%if producto.foto.present?%>
                 <td class="text-center"><img id="img_producto" src="<%= producto.foto[0].thumb %>" class="img-thumbnail foto-mini-lista"></td>
               <%else%>
