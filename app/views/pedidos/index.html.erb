@@ -28,12 +28,13 @@
       <tbody>
         <% @pedidos.each do |p|%>
         <tr>
+          <% total = p.total.to_f + p.reparto.to_f + p.envio.to_f%>
           <td><a class="link" href="/pedido/<%=p.id%>"><%= "##{p.numero.to_s.rjust(4, "0")}" %></a></td>
           <td><%= "#{p.fecha.to_date.strftime("%d/%m/%y")} #{p.created_at.strftime("%I:%M %P")}" %></td>
           <td><%= p.cliente_nombre %></td>
           <td><%= p.area_entrega[0...25] %></td>
           <td><%= p.cliente_metodo_pago %></td>
-          <td><%= number_to_currency(p.total, :precision => 2) %></td>
+          <td><%= number_to_currency(total, :precision => 2) %></td>
           <td><%= select_tag("pedido_estatus", options_for_select(@estatus_list, p.estatus), { :include_blank => false, :class => 'form-control pedido_estatus',:id => nil, :data => {"pedido-id": p.id}}) %></td>
         </tr>
         <%end%>
