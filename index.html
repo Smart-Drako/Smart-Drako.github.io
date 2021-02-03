@@ -53,15 +53,15 @@
               <li><a href="nosotros.html">¿Cómo funciona?</a></li>
               <li><a href="#pricing">Precios</a></li>
               <li><a href="https://pideloencasa.mx">Comunidad</a></li>
-                <li><a href="#contact">Contacto</a></li>
-
-
+              <li><a href="#contact">Contacto</a></li>
+              <li> <a href="#about" class="d-block d-lg-none get-started-btn">Prueba gratis</a></li>
+              <li><a href="#about" class="d-block d-lg-none get-started-btn2">Iniciar sesión</a></li>
 
             </ul>
           </nav><!-- .nav-menu -->
 
-          <a href="#about" class="get-started-btn scrollto">Prueba gratis</a>
-            <a href="#about" class="get-started-btn2 scrollto ">Iniciar sesión</a>
+          <a href="#about" class="get-started-btn scrollto d-none d-lg-block">Prueba gratis</a>
+          <a href="#about" class="get-started-btn2 scrollto d-none d-lg-block">Iniciar sesión</a>
         </div>
       </div>
 
@@ -75,17 +75,20 @@
     <div class="container-fluid" data-aos="fade-up">
       <div class="row justify-content-center">
         <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>¡Sorprende a tus clientes
-recibiendo pedidos en línea!
-</h1>
-          <h2>Crea con nosotros y comparte con tus clientes,
-el catálogo digital de tu negocio.
-</h2>
+          <h1>¡Sorprende a tus clientes recibiendo pedidos en línea!</h1>
+          <h2>Crea con nosotros y comparte con tus clientes, el catálogo digital de tu negocio.</h2>
     <!-- ======= aqui va boton CTA ======= -->
 
-    <div class="input-group mb-3">
+    <div class="input-group input-group-sm mb-3 d-lg-none">
       <input type="email" class="form-control" name="email" id="email" placeholder="Correo electrónico" data-rule="email" data-msg="Ingrese un correo electrónico válido" />
-    <button type="button" class="btn rounded-end">Prueba 30 días gratis</button>
+      <button type="button" style="margin-left:5px;" class="btn btn-sm rounded-end">Prueba 30 días gratis</button>
+      <div class="validate"></div>
+    </div>
+
+    
+    <div class="input-group mb-3 d-none d-lg-flex">
+      <input type="email" class="form-control" name="email" id="email" placeholder="Correo electrónico" data-rule="email" data-msg="Ingrese un correo electrónico válido" />
+      <button type="button" style="margin-left:5px;" class="btn rounded-end">Prueba 30 días gratis</button>
       <div class="validate"></div>
     </div>
 
