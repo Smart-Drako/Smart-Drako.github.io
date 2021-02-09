@@ -54,6 +54,19 @@ class ProductosController < ApplicationController
     @ocultar_menu = true
     id = params[:id].to_i
     slug = params[:id]
+    ref_tracking = params[:ref]
+    if ref_tracking.present?
+      id_embajador = Base64.decode64(ref_tracking).to_i
+      usuario_embajador = ConfigUser.find_by(id: id_embajador)
+      if usuario_embajador.present
+        #Crear Cookie
+        cookies[:embajador_tracking] = {
+          value: ref_tracking,
+          expires: 2.weeks,
+          domain: %w(.pideloencasa.mx)
+        }
+      end
+    end
     #Buscar por slug unico
     if id == 0
       @tienda = ConfigUser.find_by(slug: slug)

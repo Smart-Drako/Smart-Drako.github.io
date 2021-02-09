@@ -531,6 +531,18 @@ eventos = ->
   $('#btn-procesar').unbind("click").click ->
     window.location.href = "/pedido"
   
+  $('.btn-recomendar-ps').unbind("click").click ->
+    base_url = $(this).data().page
+    link_ref = $(this).data().ref
+    link_ps = $(this).parent().find('a.stretched-link').attr('href')
+    link = "https://#{base_url}#{link_ps}?ref=#{link_ref}"
+    $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val(link).select();
+    document.execCommand("copy");
+    $temp.remove();
+
+  
   $('#btn_vaciar_agregar').unbind("click").click ->
     localStorage.removeItem("total_pedido");
     localStorage.removeItem("reparto");

@@ -61,6 +61,9 @@
             <p class="card-text"><%= neg.descripcion %></p>
             <p class="card-tex"></p>
           </div>
+          <%if @link_ref.present?%>
+            <button type="button" class="btn btn-sm btn-aqua btn-recomendar-ps" data-page="<%=@base_url%>" data-ref="<%=@link_ref%>">Recomendar PS</button>
+          <%end%>
         </div>
       <%end%>
     </div>

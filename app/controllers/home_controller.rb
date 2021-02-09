@@ -20,6 +20,12 @@ class HomeController < ApplicationController
     else
       cats = ConfigUser.where(activo: activo).distinct.pluck(:category_id)
     end
+
+    #Link para compartir si estoy logueado ver el compartir
+    if usuario.present?
+      @link_ref =  Base64.encode64("#{usuario.id}-pideloencasa.mx")
+      @base_url = Rails.env.production? ? "pideloencasa.mx" : "staging.pideloencasa.mx"
+    end
     @categorias = Category.where(id: cats)
     
     @categorias.each do |cat|
