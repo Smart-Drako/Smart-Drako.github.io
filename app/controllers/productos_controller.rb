@@ -58,7 +58,7 @@ class ProductosController < ApplicationController
     if ref_tracking.present?
       id_embajador = Base64.decode64(ref_tracking).to_i
       usuario_embajador = ConfigUser.find_by(id: id_embajador)
-      if usuario_embajador.present
+      if usuario_embajador.present?
         #Crear Cookie
         cookies[:embajador_tracking] = {
           value: ref_tracking,
