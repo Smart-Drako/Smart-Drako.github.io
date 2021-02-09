@@ -258,6 +258,16 @@ class PedidosController < ApplicationController
       pedido.reparto = reparto if (reparto.present? && reparto > 0)
       pedido.envio = envio if (envio.present? && envio > 0)
 
+      #Revisar si existe cookie
+      if cookies[:embajador_tracking].present?
+        tracking_data = cookies[:embajador_tracking].split('_')
+        proveedor = tracking_data[1].to_i
+        embajador = Base64.decode64(tracking_data[2]).to_i
+        if negocio_id.to_i == proveedor
+          pedido.id_embajador = embajador
+        end
+      end
+
       if pedido.save
         productos.each do |p|
           item = ProductoPedido.new
