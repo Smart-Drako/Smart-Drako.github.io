@@ -60,8 +60,9 @@ class ProductosController < ApplicationController
       usuario_embajador = ConfigUser.find_by(id: id_embajador)
       if usuario_embajador.present?
         #Crear Cookie
+        cookie = "#{id}|#{ref_tracking}" #PS|ID Embajador
         cookies[:embajador_tracking] = {
-          value: ref_tracking,
+          value: cookie,
           expires: 2.weeks,
           domain: %w(.pideloencasa.mx)
         }
