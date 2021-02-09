@@ -214,7 +214,16 @@ Paloma.controller 'Home', index: ->
             city = data.region.split(',')[0]
             $("#buscar_ciudad_select").val(city)
             window.location.href = "/?city=#{city}"
+            return
           )
+      if ciudad == ''
+        setTimeout (->
+          $("#seleccionModal").modal()
+          return
+        ), 2000
+  $('input[name="radioCiudad"]').change ->
+    ciudad = $(this).val()
+    $("#btn_redirect_ciudad").attr("href", "?city=#{ciudad}")
 
 Paloma.controller 'Home', cuenta: ->
 
