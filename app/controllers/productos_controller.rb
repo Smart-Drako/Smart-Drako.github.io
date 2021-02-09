@@ -54,20 +54,6 @@ class ProductosController < ApplicationController
     @ocultar_menu = true
     id = params[:id].to_i
     slug = params[:id]
-    ref_tracking = params[:ref]
-    if ref_tracking.present?
-      id_embajador = Base64.decode64(ref_tracking).to_i
-      usuario_embajador = ConfigUser.find_by(id: id_embajador)
-      if usuario_embajador.present?
-        #Crear Cookie
-        cookie = "ref_#{id}_#{ref_tracking}" #PS|ID Embajador
-        cookies[:embajador_tracking] = {
-          value: cookie,
-          expires: 2.weeks,
-          domain: %w(.pideloencasa.mx)
-        }
-      end
-    end
     #Buscar por slug unico
     if id == 0
       @tienda = ConfigUser.find_by(slug: slug)
@@ -75,6 +61,21 @@ class ProductosController < ApplicationController
     else
       @tienda= ConfigUser.find_by(id: id)
       @productos = Producto.where(user_id: @tienda.user_id).order('categoria, descripcion') if @tienda.present?
+    end
+
+    ref_tracking = params[:ref]
+    if ref_tracking.present?
+      id_embajador = Base64.decode64(ref_tracking).to_i
+      usuario_embajador = ConfigUser.find_by(id: id_embajador)
+      if usuario_embajador.present?
+        #Crear Cookie
+        cookie = "ref_#{@tienda.id}_#{ref_tracking}" #PS|ID Embajador
+        cookies[:embajador_tracking] = {
+          value: cookie,
+          expires: 2.weeks,
+          domain: %w(.pideloencasa.mx)
+        }
+      end
     end
 
     vencimiento = vencimiento_cuenta(@tienda) if @tienda.present?
