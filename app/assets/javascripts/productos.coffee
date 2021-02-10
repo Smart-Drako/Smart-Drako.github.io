@@ -91,6 +91,7 @@ Paloma.controller 'Pedidos', ver_pedido: ->
   $("#form-botones").hide()
 
 Paloma.controller 'Pedidos', index: ->
+  $('[data-toggle="popover"]').popover()
   $(".carbar, #btn_busqueda_movil").removeClass("d-block").hide()
   $("#btn-cart_float").removeClass("d-md-block")
   $(".pedido_estatus").change ->
