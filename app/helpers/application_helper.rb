@@ -12,7 +12,7 @@ module ApplicationHelper
     embajador = ConfigUser.find(id) if id.present?
     usuario = User.find(embajador.user_id) if embajador.present?
     if usuario.present?
-      return "Recibiste este pedido por recomendacion de #{usuario.nombre} #{usuario.apellido}"
+      return "Recibiste este pedido por recomendación de #{usuario.nombre} #{usuario.apellido}"
     else
       return ""
     end
