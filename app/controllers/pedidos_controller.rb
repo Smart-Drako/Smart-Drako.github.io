@@ -11,6 +11,16 @@ class PedidosController < ApplicationController
     @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
   end
 
+  def recomendados
+    @page_title = "Pedidos Recomendados"
+    @usuario = ConfigUser.find_by(user_id: current_user.id)
+    @pedidos_recomendados = Pedido.where(id_embajador: @usuario.id).order(id: :desc)
+    @vencimiento = vencimiento_cuenta(@usuario)
+    @pedidos_restantes = @usuario.pedidos_restantes
+    @suspendida = cuenta_suspendida()
+    @estatus_list = ["Nuevo", "Confirmado", "Entregado", "Cancelado"]
+  end
+
   def new
     @ocultar_menu = true
   end

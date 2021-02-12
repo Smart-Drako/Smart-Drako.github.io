@@ -1,0 +1,27 @@
+<div class="container p-4">
+  <div class="row">
+    <h2 class="col-md-12">Pedidos Recomendados</h2>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-sm" style="width:100%;">
+      <thead>
+        <tr>
+          <th>#Pedido</th>
+          <th>Fecha</th>
+          <th>Emprendedor</th>
+          <th>Total</th>
+      </thead>
+      <tbody>
+        <% @pedidos_recomendados.each do |p|%>
+        <tr>
+          <% total = p.total.to_f + p.reparto.to_f + p.envio.to_f%>
+          <td><%= "##{p.numero.to_s.rjust(4, "0")}" %></td>
+          <td><%= "#{p.fecha.to_date.strftime("%d/%m/%y")} #{p.created_at.strftime("%I:%M %P")}" %></td>
+          <td><%= pedido_recomendado_emprendedor(p.user_id) %></td>
+          <td><%= number_to_currency(total, :precision => 2) %></td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>

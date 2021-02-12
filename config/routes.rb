@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   post "/pedido/calcular_envio", to:"pedidos#calcular_envio"
   post "/pedido/solicitar_reparto", to:"pedidos#solicitar_reparto"
   get "/pedidos", to: "pedidos#index"
+  get "/pedidos_recomendados", to: "pedidos#recomendados"
   get "/pedido/:id", to: "pedidos#show"
   post "/pedido/actualizar_estatus", to: "pedidos#actualizar_estatus"
   get "/pedido", to: "pedidos#new"

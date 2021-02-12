@@ -35,6 +35,11 @@
         <li class="nav-item <%=current_class?("/me")%>">
           <a class="nav-link" href="/me">Configuración</a>
         </li>
+        <%if tiene_pedidos_recomendados()%>
+        <li class="nav-item <%=current_class?("/pedidos_recomendados")%>">
+          <a class="nav-link" href="/pedidos_recomendados">Pedidos Recomendados</a>
+        </li>
+        <%end%>
         <li class="nav-item <%=current_class?("/reportes")%>">
           <a class="nav-link" href="/reportes">Reportes</a>
         </li>
@@ -62,6 +67,9 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/pedidos">Pedidos de Clientes</a>
           <a class="dropdown-item" href="/productos">Productos</a>
+          <%if tiene_pedidos_recomendados()%>
+            <a class="dropdown-item" href="/pedidos_recomendados">Pedidos Recomendados</a>
+          <%end%>
           <a class="dropdown-item" href="/reportes">Reportes</a>
           <a class="dropdown-item" href="/plan">Mi Plan</a>
           <!--<a class="dropdown-item" href="/programas">Programas</a>

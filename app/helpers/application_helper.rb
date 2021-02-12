@@ -17,4 +17,23 @@ module ApplicationHelper
       return ""
     end
   end
+
+  def pedido_recomendado_emprendedor(id)
+    emprendedor = ConfigUser.find(id) if id.present?
+    return emprendedor.nombre if emprendedor.present?
+  end
+
+  def tiene_pedidos_recomendados
+    if current_user.present?
+      usuario = ConfigUser.find_by(user_id: current_user.id)
+      pedidos_recomendados = Pedido.find_by(id_embajador: usuario.id)
+      if pedidos_recomendados.present?
+        return true
+      else
+        return false
+      end
+    else
+      return false
+    end
+  end
 end
