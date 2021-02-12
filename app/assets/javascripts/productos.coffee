@@ -214,7 +214,7 @@ Paloma.controller 'Home', index: ->
           .then((response) -> response.json()).then((data) ->
             city = data.region.split(',')[0]
             $("#buscar_ciudad_select").val(city)
-            window.location.href = "/?city=#{city}"
+            window.location.href = "?city=#{city}"
             return
           )
       if ciudad == ''
