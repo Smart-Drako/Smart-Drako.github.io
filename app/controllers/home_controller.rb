@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  before_action :authenticate_user!, :except => [:index, :error]
+  before_action :authenticate_user!, :except => [:index, :error, :landing]
 
   def index
 
@@ -59,7 +59,7 @@ class HomeController < ApplicationController
 
     @usuarios = User.find_by_sql("SELECT E.id, E.slug,
       U.email AS correo,U.created_at as fecha_registro, U.nombre, U.apellido, E.nombre AS negocio, E.id as negocio_id
-  FROM
+      FROM
       pideloencasa.users AS U
           INNER JOIN
       config_users AS E ON U.id = E.user_id order by U.id desc")
@@ -106,6 +106,10 @@ class HomeController < ApplicationController
     @estados = Estado.select(:estado).distinct.order(:estado)
     @ciudades = Estado.all.order(:ciudad)
     @bancos = [["Banbajío", "Banbajío"],["Banco Azteca", "Banco Azteca"] , ["Banorte", "Banorte"], ["Bancoppel", "Bancoppel"], ["Banregio", "Banregio"], ["BBVA Bancomer", "BBVA Bancomer"], ["Citibanamex", "Citibanamex"], ["HSBC", "HSBC"],["Inbursa","Inbursa"], ["Santander", "Santander"], ["Scotiabank", "Scotiabank"]]
+  end
+
+  def landing
+    render :layout => nil
   end
 
   def codigo_qr(id = 0)

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     collection {post :importar}
   end
   resources :config_users
-  root to: "home#index"
+  root to: "home#landing"
   devise_scope :user do
     get "/login" => "devise/sessions#new" # custom path to login/sign_in
     get "/registro" => "devise/registrations#new" # custom path to sign_up/registration
@@ -36,5 +36,8 @@ Rails.application.routes.draw do
   get "/reportes", to: "reportes#index", as: "reportes"
   get  "/reportes/pedidos", to: "reportes#reporte_pedidos"
   get  "/reportes/productos", to: "reportes#reporte_productos"
+
+  #Cambios con la landing
+  get "comunidad", to: "home#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
