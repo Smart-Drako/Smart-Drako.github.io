@@ -16,9 +16,14 @@ module Pideloencasa
     config.time_zone = "America/Tijuana"
     config.active_record.default_timezone = :local
 
+    config.to_prepare do
+      # Configure single controller layout
+      Devise::RegistrationsController.layout "registro"
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
   end
 end
+

@@ -295,7 +295,7 @@ li.ilb {
 
 .form-signin {
   width: 100%;
-  max-width: 330px;
+  max-width: 450px;
   padding: 15px;
   margin: auto;
 }
@@ -1167,4 +1167,25 @@ li.nav-item.active>.nav-link {
 
 .btn-recomendar-ps{
   z-index: 3;
+}
+
+.registro-nuevo{
+  width: 100%;
+  max-width: 500px;
+  padding: 15px;
+  margin: auto;
+  background-color: white;
+  border-radius: 25px;
+  margin-bottom: 50px;
+}
+
+.body-registro {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(
+45deg
+, rgba(212, 0, 107, 1) 0%, rgba(255, 108, 26, 1) 90%), center center no-repeat;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }

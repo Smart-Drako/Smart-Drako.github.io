@@ -299,6 +299,21 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+/* Get Startet Button */
+.get-started-grande {
+  /*background: linear-gradient(42deg, #d4006b 0%, #ff6c1a 100%);*/
+margin-left: 15px;
+color: #fff;
+border-radius: 20px;
+padding: 10px 50px 10px 50px;
+white-space: nowrap;
+transition: 0.3s;
+font-weight: 600;
+display: inline-block;
+background-color: rgba(62, 194, 255, 1);
+
+}
+
 .get-started-btn-burger{
   color: #fff;
   border-radius: 20px;
@@ -1885,4 +1900,13 @@ section {
   background: rgba(255, 255, 255, 0.2);
   color: #fff;
   text-decoration: none;
+}
+
+.lista-que{
+  margin: 0 0 24px 0;
+}
+
+.lista-bullet{
+  margin-right: 24px;
+  color: #ff6c1a;
 }

@@ -1,7 +1,16 @@
 
+<div class="text-center mb-3">
+  <img src="/images/logo4.png" width="151" height="50">
+</div>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'form-signin', autocomplete: "off"} )  do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-  <h1 class="h3 mb-3 font-weight-normal text-center">Registra tu Negocio</h1>
+  <p>Registra tu negocio y <b>prueba gratis 30 días</b>, donde podrás:
+  <ul>
+    <li>Crear tu catálogo digital</li>
+    <li>Compartirlo con tus clientes</li>
+    <li>Recibir pedidos ilimitados en tu cuenta.</li>
+  </ul>
+  </p>
   <input type="hidden" name="ref" value="<%= params[:ref]%>">
   <div class="form-group">
     <label for="user_nombre" class="label">Nombre</label>
@@ -60,8 +69,8 @@
   <div class="form-group">
     <div class="form-check">
       <input type="checkbox" class="form-check-input" required>
-      <label>Al registrarte, aceptas los <a target="_blank" href="/TerminosyCondiciones.pdf"><b>Términos</b> y <b>Condiciones</b></a>,  
-así como nuestro <a target="_blank" href="/AvisoDePrivacidad.pdf"><b>Aviso de privacidad</b></a> </label>
+      <small>Al registrarte, aceptas los <a target="_blank" href="/TerminosyCondiciones.pdf"><b>Términos</b> y <b>Condiciones</b></a>,  
+así como nuestro <a target="_blank" href="/AvisoDePrivacidad.pdf"><b>Aviso de privacidad</b></a> </small>
     </div>
   </div>
   <div class="form-group text-center">
