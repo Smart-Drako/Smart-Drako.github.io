@@ -251,9 +251,9 @@
                   </a>
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title"><%=prod.descripcion.titleize%></h5>
+                  <h5 class="card-title"><%=prod.descripcion.capitalize%></h5>
                   <p class="card-text"><%=number_to_currency(prod.precio)%>/<%=prod.unidad%></p>
-                  <p class="card-text"><%=prod.descripcion2.titleize%></p>
+                  <p class="card-text"><%=prod.descripcion2.capitalize%></p>
                   <div class="card-text text-center">
                   <%if prod.inventario.present? && prod.inventario.to_i == 0%>
                     <button type="button" disabled class="btn btn-sm btn-secondary agotado">Agotado</button>
