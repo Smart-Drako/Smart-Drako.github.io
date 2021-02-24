@@ -542,6 +542,7 @@ eventos = ->
     $temp.val(link).select();
     document.execCommand("copy");
     $temp.remove();
+    toastr.success("Se copió el link de recomendación: <br> <br> #{link}")
 
   
   $('#btn_vaciar_agregar').unbind("click").click ->
