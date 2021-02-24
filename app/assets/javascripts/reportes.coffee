@@ -17,9 +17,9 @@ Paloma.controller 'Reportes', index: ->
       $(".pickers").hide()
     
     if $(this).val() == ""
-      $("#generar_reporte_pedidos, #generar_reporte_productos").addClass("disabled").val("")
+      $("#generar_reporte_pedidos, #generar_reporte_productos, #generar_reporte_recomendados").addClass("disabled").val("")
     else
-      $("#generar_reporte_pedidos, #generar_reporte_productos").removeClass("disabled").val("")
+      $("#generar_reporte_pedidos, #generar_reporte_productos, #generar_reporte_recomendados").removeClass("disabled").val("")
     calcular_reportes()
   
   #Pickers
@@ -46,3 +46,4 @@ Paloma.controller 'Reportes', index: ->
       params = "periodo=#{periodo}"
     $('#generar_reporte_pedidos').attr("href", '/reportes/pedidos.xlsx?'+params)
     $('#generar_reporte_productos').attr("href", '/reportes/productos.xlsx?'+params)
+    $('#generar_reporte_recomendados').attr("href", '/reportes/recomendados.xlsx?'+params)

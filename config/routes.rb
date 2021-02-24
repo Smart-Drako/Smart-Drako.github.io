@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get "/reportes", to: "reportes#index", as: "reportes"
   get  "/reportes/pedidos", to: "reportes#reporte_pedidos"
   get  "/reportes/productos", to: "reportes#reporte_productos"
+  get  "/reportes/recomendados", to: "reportes#reporte_recomendados"
 
   #Cambios con la landing
   get "comunidad", to: "home#index"

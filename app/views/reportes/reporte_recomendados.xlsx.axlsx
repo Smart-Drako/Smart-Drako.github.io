@@ -1,0 +1,21 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Reporte_Pedidos_Recomendados") do |sheet|
+
+  req = sheet.styles.add_style(b: true, fg_color: 'dc3545', sz: 14)
+  titulo = sheet.styles.add_style(b: true, sz: 14)
+  default = sheet.styles.add_style(b: false, sz: 12)
+  sheet.add_row ["No. Pedido","Fecha","Emprendedor","Total"], style: titulo
+  sheet.sheet_view.pane do |pane|
+    pane.top_left_cell = "B2"
+    pane.state = :frozen_split
+    pane.y_split = 1
+    pane.active_pane = :bottom_right
+  end
+  @pedidos.each do |ped|
+    subtotal = ped.total.to_f.round(2)
+    envio = (ped.reparto.to_f + ped.envio.to_f).round(2)
+    total = (subtotal).round(2)
+    emprendedor = pedido_recomendado_emprendedor(ped.user_id)
+    sheet.add_row [ped.numero, ped.fecha, emprendedor, total], style: default
+  end
+end
