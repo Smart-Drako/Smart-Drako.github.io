@@ -37,9 +37,11 @@
       <%= link_to(reportes_pedidos_url(format: "xlsx"), :class => 'btn btn-sm btn-aqua disabled', :id => "generar_reporte_productos") do %>
         Productos por Pedidos <i class="far fa-file-excel"></i>
       <% end %>
-      <%= link_to(reportes_pedidos_url(format: "xlsx"), :class => 'btn btn-sm btn-aqua disabled', :id => "generar_reporte_recomendados") do %>
-        Pedidos Recomendados <i class="far fa-file-excel"></i>
-      <% end %>
+      <%if tiene_pedidos_recomendados()%>
+        <%= link_to(reportes_pedidos_url(format: "xlsx"), :class => 'btn btn-sm btn-aqua disabled', :id => "generar_reporte_recomendados") do %>
+          Pedidos Recomendados <i class="far fa-file-excel"></i>
+        <% end %>
+      <%end%>
     </div>
   </div>
 </div>
