@@ -14,7 +14,7 @@
       <tbody>
         <% @pedidos_recomendados.each do |p|%>
         <tr>
-          <% total = p.total.to_f + p.reparto.to_f + p.envio.to_f%>
+          <% total = p.total.to_f %>
           <td><%= "##{p.numero.to_s.rjust(4, "0")}" %></td>
           <td><%= "#{p.fecha.to_date.strftime("%d/%m/%y")} #{p.created_at.strftime("%I:%M %P")}" %></td>
           <td><%= pedido_recomendado_emprendedor(p.user_id) %></td>
