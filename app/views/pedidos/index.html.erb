@@ -36,7 +36,11 @@
           <%end%>
           <td><%= "#{p.fecha.to_date.strftime("%d/%m/%y")} #{p.created_at.strftime("%I:%M %P")}" %></td>
           <td><%= p.cliente_nombre %></td>
-          <td><%= p.area_entrega[0...25] %></td>
+          <%if p.area_entrega.present?%>
+            <td><%= p.area_entrega[0...25] %></td>
+          <%else%>
+            <td></td>
+          <%end%>
           <td><%= p.cliente_metodo_pago %></td>
           <td><%= number_to_currency(total, :precision => 2) %></td>
           <td><%= select_tag("pedido_estatus", options_for_select(@estatus_list, p.estatus), { :include_blank => false, :class => 'form-control pedido_estatus',:id => nil, :data => {"pedido-id": p.id}}) %></td>
