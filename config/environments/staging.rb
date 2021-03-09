@@ -116,7 +116,7 @@ Rails.application.configure do
   :email => {
     :email_prefix => "[ERROR #{Rails.env.upcase} PideloenCasa] ",
     :sender_address => %{"PideloenCasa" <pideloencasamx@gmail.com>},
-    :exception_recipients => "manrobless@gmail.com, soporte@pideloencasa.mx"
+    :exception_recipients => "efrain.pmc@gmail.com, soporte@pideloencasa.mx"
   }, ignore_exceptions: ExceptionNotifier.ignored_exceptions + ["ActionController::InvalidAuthenticityToken"]
 
 end
