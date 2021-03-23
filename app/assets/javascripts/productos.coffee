@@ -522,7 +522,7 @@ eventos = ->
   $("#buscar_ciudad_select").change ->
     ciudad = $(this).val()
     if ciudad != ""
-      window.location.href = "/?city=#{ciudad}"
+      window.location.href = "?city=#{ciudad}"
     else
       window.location.href = "/"
   
